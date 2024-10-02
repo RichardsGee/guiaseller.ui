@@ -6,13 +6,10 @@
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     margin: 20px auto;
-    width: 95%;
+    width: 100%;
     max-width: 1400px;
     min-height: 100vh; /* Garante que o container ocupe no mínimo 100% da altura da viewport */
 }
-
-
-
 
 .vendasTitle {
     text-align: center;

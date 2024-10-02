@@ -14,7 +14,7 @@ function Sidebar({ userPhoto, username, userEmail, userLevel }) {
         />
         <h2>{username}</h2>
         <p>{userEmail || "Nothing@gmail.com"}</p>
-        <span className={styles.userLevel}>{userLevel || "Membro Free"}</span>
+        <span className={styles.userLevel}>{userLevel || "Chief AI Officer"}</span>
       </div>
       <ul>
         <li><Link to="/dashboard"><span className={`material-icons ${styles.sidebarIcon}`}>dashboard</span>Dashboard</Link></li>
