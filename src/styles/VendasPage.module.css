@@ -1,0 +1,42 @@
+/* src/styles/VendasPage.module.css */
+.vendasContainer {
+    padding: 20px;
+    background-color: var(--background-color); /* Mantém o fundo consistente */
+    color: var(--text-color);
+  }
+  
+  .title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--primary-color); /* Destaque para o título */
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--secondary-color); 
+    color: var(--text-color); 
+  }
+  
+  .table th, .table td {
+    padding: 12px;
+    border: 1px solid #444; 
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: var(--third-color); 
+    font-weight: bold;
+  }
+  
+  .table tr:nth-child(even) {
+    background-color: var(--secondary-color); 
+  }
+  
+  .productImage {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  

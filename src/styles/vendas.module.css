@@ -1,0 +1,54 @@
+/* src/styles/vendas.module.css */
+
+.vendasContainer {
+    background-color: var(--third-color);
+    padding: var(--padding);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+    width: 90%; /* Largura ajustável conforme necessário */
+    max-width: 1200px; /* Limite máximo de largura */
+}
+
+.vendasTitle {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: var(--padding);
+}
+
+.vendasTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.vendasTable th, .vendasTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--background-color);
+}
+
+.vendasTable th {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.vendasTable tr:hover {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
+.vendasTable tr:nth-child(even) {
+    background-color: var(--secondary-color);
+}
+
+.vendasTable tr:nth-child(odd) {
+    background-color: var(--third-color);
+}
+
+.vendasTable td {
+    font-size: 14px;
+}

@@ -114,4 +114,60 @@
     border-radius: 50%; /* Tornar a imagem circular */
     margin-bottom: 10px;
 }
+/* Estilo para o nível de usuário */
+.userLevel {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 2px 8px;
+    background-color: var(--text2-color);
+    color: var(--text-color);
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+/* src/styles/sidebar.module.css */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: var(--sidebar-width);
+    background-color: var(--secondary-color);
+    padding: var(--padding);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.profileImage {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.userLevel {
+    font-size: 12px;
+    color: var(--userLevel-color);
+    background-color: var(--text2-color);
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-top: 5px;
+}
+
+.sidebarIcon {
+    margin-right: 8px;
+    color: var(--text-color);
+    font-size: 18px;
+}
 
