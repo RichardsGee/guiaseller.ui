@@ -1,8 +1,8 @@
 .sidebar {
     position: fixed;
-    top: var(--header-height);
+    top: 50px; /* Define o topo 50px abaixo */
     left: 0;
-    height: calc(100% - var(--header-height));
+    height: calc(100% - 50px); /* Ajusta a altura para o novo espaço */
     width: var(--sidebar-width);
     background-color: var(--secondary-color);
     padding: var(--padding);
@@ -10,7 +10,8 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    overflow-y: auto;
+    overflow-y: auto; /* Permite rolagem vertical */
+    overflow-x: hidden; /* Remove rolagem horizontal */
 }
 
 .sidebar::-webkit-scrollbar {
@@ -98,6 +99,7 @@
     color: var(--text-color);
     font-size: 18px;
 }
+
 /* Em sidebar.module.css */
 .userInfo {
     display: flex;
@@ -114,6 +116,7 @@
     border-radius: 50%; /* Tornar a imagem circular */
     margin-bottom: 10px;
 }
+
 /* Estilo para o nível de usuário */
 .userLevel {
     display: inline-block;
@@ -126,22 +129,8 @@
     font-weight: bold;
     text-align: center;
 }
-/* src/styles/sidebar.module.css */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: var(--sidebar-width);
-    background-color: var(--secondary-color);
-    padding: var(--padding);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    overflow-y: auto;
-}
 
+/* src/styles/sidebar.module.css */
 .userInfo {
     display: flex;
     flex-direction: column;
@@ -170,4 +159,3 @@
     color: var(--text-color);
     font-size: 18px;
 }
-
