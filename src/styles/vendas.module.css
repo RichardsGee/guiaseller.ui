@@ -1,29 +1,38 @@
 /* src/styles/vendas.module.css */
 
 .vendasContainer {
-    background-color: var(--third-color);
-    padding: var(--padding);
+    background-color: var(--third-color); /* Cor de fundo do container */
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     margin: 20px auto;
-    width: 90%; /* Largura ajustável conforme necessário */
-    max-width: 1200px; /* Limite máximo de largura */
+    width: 95%;
+    max-width: 1400px;
+    min-height: 100vh; /* Garante que o container ocupe no mínimo 100% da altura da viewport */
 }
+
+
+
 
 .vendasTitle {
     text-align: center;
-    color: var(--primary-color);
+    color: var(--text-color);
     margin-bottom: var(--padding);
+    font-size: 15px;
+
 }
 
 .vendasTable {
+    background-color: var(--third-color); /* Cor de fundo da tabela */
     width: 100%;
     border-collapse: collapse;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
     border-radius: 5px;
     overflow: hidden;
+    font-size: 10px;
+    padding: 20px; /* Expande o espaço dentro da tabela */
+    margin-top: 20px; /* Adiciona um espaço acima da tabela */
 }
+
 
 .vendasTable th, .vendasTable td {
     padding: 12px;
@@ -50,5 +59,13 @@
 }
 
 .vendasTable td {
-    font-size: 14px;
+    font-size: 10px;
+}
+
+/* Estilo para as imagens na tabela de vendas */
+.vendaImage {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
 }

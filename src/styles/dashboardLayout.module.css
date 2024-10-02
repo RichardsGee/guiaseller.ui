@@ -3,6 +3,7 @@
 .dashboardLayout {
     display: flex;
     height: 100vh; /* Garante que ocupe a altura total da tela */
+    
 }
 
 .sidebar {
