@@ -1,0 +1,67 @@
+/* Estilos principais para o container de configurações */
+.configContent {
+  background-color: var(--third-color); /* Cor de fundo do container */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  margin: 20px auto;
+  width: 100%;
+  max-width: 1500px;
+  min-height: 100vh; /* Garante que o container ocupe no mínimo 100% da altura da viewport */
+  color: #fff; /* Texto branco para contraste */
+  overflow-y: auto; /* Permitir a rolagem no container */
+}
+
+/* Customização da barra de rolagem para um estilo mais moderno */
+.configContent::-webkit-scrollbar {
+  width: 12px; /* Largura da barra de rolagem */
+}
+
+.configContent::-webkit-scrollbar-track {
+  background: #2b2b2b; /* Cor do fundo da trilha */
+  border-radius: 10px; /* Bordas arredondadas da trilha */
+}
+
+.configContent::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color); /* Cor da barra de rolagem */
+  border-radius: 10px; /* Bordas arredondadas da barra */
+  border: 3px solid #2b2b2b; /* Espaço entre a barra e a trilha */
+}
+
+.configContent::-webkit-scrollbar-thumb:hover {
+  background-color: var(--secondary-color); /* Cor ao passar o mouse sobre a barra */
+}
+
+/* Seções de Configurações Pessoais e Empresa */
+.settingsContainer {
+  margin-top: 20px;
+}
+
+/* Cada item de configuração */
+.settingItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #444; /* Bordas entre cada item */
+}
+
+/* Estilo dos campos de entrada */
+.inputField {
+  width: 60%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #2b2b2b; /* Fundo escuro para os inputs */
+  color: #fff;
+  outline: none;
+}
+
+/* Títulos das seções */
+.configContent h2 {
+  font-size: 20px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: #fff;
+}

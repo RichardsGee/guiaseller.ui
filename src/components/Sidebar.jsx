@@ -1,4 +1,3 @@
-// src/components/Sidebar.js
 import React from 'react';
 import { Link } from 'react-router-dom'; // Importando o Link do react-router-dom
 import styles from '../styles/sidebar.module.css'; // Certifique-se de importar corretamente
@@ -21,6 +20,7 @@ function Sidebar({ userPhoto, username, userEmail, userLevel }) {
         <li><Link to="/vendas"><span className={`material-icons ${styles.sidebarIcon}`}>shopping_bag</span>Vendas</Link></li>
         <li><Link to="/produtos"><span className={`material-icons ${styles.sidebarIcon}`}>inventory_2</span>Produtos</Link></li>
         <li><Link to="/anuncios"><span className={`material-icons ${styles.sidebarIcon}`}>campaign</span>Anúncios</Link></li>
+        {/* Configurações agora redireciona para ToolsPage (rota /configuracoes) */}
         <li><Link to="/configuracoes"><span className={`material-icons ${styles.sidebarIcon}`}>settings</span>Configurações</Link></li>
         <li><Link to="/perfil"><span className={`material-icons ${styles.sidebarIcon}`}>person</span>Perfil</Link></li>
         <li><Link to="/lojas"><span className={`material-icons ${styles.sidebarIcon}`}>store</span>Lojas</Link></li>

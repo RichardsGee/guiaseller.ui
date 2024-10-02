@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import { AuthContext } from '../context/AuthContext';
 import styles from '../styles/vendas.module.css'; // Importando o CSS Module
 
-function VendasPage() {
+const VendasPage = () => {
   const [vendas, setVendas] = useState([]);
 
   // Utilizando o contexto de autenticação para pegar informações do usuário
@@ -95,6 +95,6 @@ function VendasPage() {
       <Footer />
     </div>
   );
-}
+};
 
 export default VendasPage;
