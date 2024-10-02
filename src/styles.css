@@ -46,31 +46,29 @@ body.dark {
     box-sizing: border-box;
 }
 
-/* styles.css ou seu arquivo de estilos principal */
-/* styles.css ou seu arquivo de estilos principal */
+/* Estilos globais */
 body {
-    background-color: var(--background-color); /* Cor de fundo principal */
+    background-color: var(--background-color);
     color: var(--text-color);
     font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .container {
-    background-color: var(--third-color); /* Cor de fundo padrão para os containers */
+    background-color: var(--third-color);
     padding: var(--padding);
     margin: 0 auto;
     flex: 1;
     display: flex;
     width: 100%;
     overflow: hidden;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra opcional para destacar o contêiner */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-
+/* Header */
 .main-header {
     display: flex;
     justify-content: space-between;
@@ -85,16 +83,18 @@ body {
     left: 0;
     z-index: 1000;
 }
-.main-content {
-    margin-left: var(--sidebar-width);
-    margin-top: var(--header-height);
+/* Atualize o CSS de mainContent para que seja consistente */
+.mainContent {
+    margin: var(--padding) auto; /* Centraliza o conteúdo */
     padding: var(--padding);
-    width: calc(100% - var(--sidebar-width));
-    height: calc(100% - var(--header-height));
-    overflow-y: auto;
-    background-color: var(--third-color); /* Cor de fundo padronizada */
+    background-color: var(--third-color);
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1100px; /* Definindo o mesmo tamanho fixo para todas as páginas */
+    overflow: hidden; /* Evitar barras de rolagem */
+    height: auto; /* Permite que o conteúdo cresça */
 }
-
 
 .header-logo {
     display: flex;
@@ -111,11 +111,6 @@ body {
     font-size: 14px;
     color: var(--text-color);
     font-weight: 200;
-}
-
-.main-header h2 {
-    font-size: 22px;
-    color: var(--primary-color);
 }
 
 .header-actions {
@@ -164,6 +159,7 @@ body {
     background-color: #ffaa00;
 }
 
+/* Main content */
 .main-content {
     margin-left: var(--sidebar-width);
     margin-top: var(--header-height);
@@ -171,7 +167,7 @@ body {
     width: calc(100% - var(--sidebar-width));
     height: calc(100% - var(--header-height));
     overflow-y: auto;
-    background-color: var(--secondary-color);
+    background-color: var(--third-color); /* Cor de fundo padronizada */
 }
 
 .main-content::-webkit-scrollbar {
@@ -193,55 +189,7 @@ body {
     background: #ffaa00;
 }
 
-.chart-section {
-    background: var(--background-color);
-    padding: var(--padding);
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin-bottom: var(--margin);
-    height: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
-.chart-section canvas {
-    width: 100% !important;
-    height: 100% !important;
-}
-
-.additional-info {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: var(--margin);
-    width: 100%;
-}
-
-.info-item {
-    background: var(--secondary-color);
-    padding: var(--padding);
-    border-radius: 10px;
-    color: var(--text-color);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-}
-
-.info-item h3 {
-    margin-bottom: 10px;
-}
-
-.info-item ul {
-    list-style: none;
-    padding: 0;
-    text-align: center;
-}
-
+/* Footer */
 footer {
     background: var(--secondary-color);
     color: var(--text-color);
@@ -254,22 +202,7 @@ footer {
     font-size: 10px;
 }
 
-@media (max-width: 1200px) {
-    .sidebar {
-        width: 200px;
-    }
-
-    .main-content {
-        margin-left: 200px;
-        width: calc(100% - 200px);
-    }
-
-    footer {
-        width: calc(100% - 200px);
-        left: 200px;
-    }
-}
-
+/* Ajustes para diferentes resoluções */
 @media (max-width: 900px) {
     .top-bar {
         grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));

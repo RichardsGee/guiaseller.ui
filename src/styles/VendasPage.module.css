@@ -1,42 +1,68 @@
-/* src/styles/VendasPage.module.css */
+/* VendasPage.module.css */
 .vendasContainer {
-    padding: 20px;
-    background-color: var(--background-color); /* Mantém o fundo consistente */
-    color: var(--text-color);
-  }
-  
-  .title {
-    text-align: center;
-    margin-bottom: 20px;
-    color: var(--primary-color); /* Destaque para o título */
-  }
-  
-  .table {
+    margin: 0 auto;
+    padding: var(--padding);
+    background-color: var(--third-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     width: 100%;
+    max-width: 1100px; /* Definindo um tamanho fixo para alinhar com o mainContent */
+    height: 100%; /* Permite que o conteúdo cresça conforme necessário */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden; /* Evitar barras de rolagem */
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: var(--margin);
+    color: var(--primary-color);
+}
+
+.table {
+    width: 100%; /* Garantir que a tabela ocupe toda a largura do container */
     border-collapse: collapse;
-    background-color: var(--secondary-color); 
-    color: var(--text-color); 
-  }
-  
-  .table th, .table td {
-    padding: 12px;
-    border: 1px solid #444; 
+    margin: 0 auto;
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    table-layout: fixed; /* Garante que a tabela se ajuste ao container */
+}
+
+.table th, .table td {
+    padding: 10px;
     text-align: left;
-  }
-  
-  .table th {
-    background-color: var(--third-color); 
+    color: var(--text-color);
+    border-bottom: 1px solid #444;
+    word-wrap: break-word; /* Permite a quebra de texto longo */
+}
+
+.table th {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
     font-weight: bold;
-  }
-  
-  .table tr:nth-child(even) {
-    background-color: var(--secondary-color); 
-  }
-  
-  .productImage {
-    width: 60px;
-    height: 60px;
+}
+
+.table td {
+    background-color: var(--third-color);
+}
+
+.productImage {
+    width: 50px;
+    height: 50px;
     object-fit: cover;
     border-radius: 5px;
-  }
-  
+}
+
+.table tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.table thead, .table tbody {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}

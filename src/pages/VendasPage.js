@@ -1,14 +1,13 @@
 // src/pages/VendasPage.js
 import React from 'react';
-import DashboardLayout from '../layouts/DashboardLayout'; // Certifique-se de que o caminho está correto
-import styles from '../styles/VendasPage.module.css'; // Certifique-se de que o CSS está configurado corretamente
+import DashboardLayout from '../layouts/DashboardLayout'; 
+import styles from '../styles/VendasPage.module.css';
 
 const VendasPage = () => {
-  // Exemplo de dados de vendas - você pode substituir pelos seus dados reais
   const vendasData = [
     {
       numero: '9811',
-      imagem: 'https://via.placeholder.com/80', // Substitua pela URL da imagem
+      imagem: 'https://via.placeholder.com/80',
       sku: 'JARR027',
       marketplace: 'Kwai / Kwai',
       nome: 'Gislene Machado',
@@ -23,7 +22,7 @@ const VendasPage = () => {
   ];
 
   return (
-    <DashboardLayout> {/* Certifique-se de que o layout está configurado corretamente */}
+    <DashboardLayout>
       <div className={styles.vendasContainer}>
         <h1 className={styles.title}>Meus Pedidos</h1>
         <table className={styles.table}>

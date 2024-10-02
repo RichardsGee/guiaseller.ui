@@ -1,10 +1,12 @@
+/* sidebar.module.css */
 .sidebar {
-    position: fixed;
-    top: var(--header-height);
-    left: 0;
-    height: calc(100% - var(--header-height));
     width: var(--sidebar-width);
+    height: calc(100% - var(--header-height)); /* Ajusta para respeitar o header */
+    position: fixed;
+    left: 0;
+    top: var(--header-height); /* Define que o sidebar começa logo abaixo do header */
     background-color: var(--secondary-color);
+    z-index: 1000;
     padding: var(--padding);
     display: flex;
     flex-direction: column;
@@ -18,43 +20,36 @@
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-    background: #444444; 
+    background: #444444;
     border-radius: 10px;
 }
 
 .sidebar::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color); 
+    background: var(--primary-color);
 }
 
-.sidebar h1 {
-    color: var(--primary-color);
-    font-size: 22px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.sidebar .user-info {
+.userInfo {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 15px;
+    text-align: center;
 }
 
-.sidebar .user-info img {
+.userInfo img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
     margin-bottom: 10px;
 }
 
-.sidebar .user-info h2 {
-    font-size: 16px;
-    color: var(--text-color);
-}
-
-.sidebar .user-info p {
+.userLevel {
     font-size: 12px;
-    color: #aaaaaa;
+    color: var(--userLevel-color);
+    background-color: var(--text2-color);
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-top: 5px;
 }
 
 .sidebar ul {
@@ -63,11 +58,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Espaçamento consistente entre os itens */
-}
-
-.sidebar ul li {
-    width: 100%;
+    gap: 10px;
 }
 
 .sidebar ul li a {
@@ -88,86 +79,3 @@
     background: linear-gradient(135deg, #00d9ff, var(--primary-color));
     transform: scale(1.05);
 }
-
-.sidebar ul li a.ferramentas-ia {
-    color: var(--accent-color);
-}
-
-.sidebar ul li .sidebar-icon {
-    margin-right: 8px;
-    color: var(--text-color);
-    font-size: 18px;
-}
-/* Em sidebar.module.css */
-.userInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: center; /* Centraliza verticalmente se necessário */
-    margin-bottom: 15px;
-    text-align: center; /* Centraliza o texto */
-}
-
-.userInfo img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%; /* Tornar a imagem circular */
-    margin-bottom: 10px;
-}
-/* Estilo para o nível de usuário */
-.userLevel {
-    display: inline-block;
-    margin-top: 5px;
-    padding: 2px 8px;
-    background-color: var(--text2-color);
-    color: var(--text-color);
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: bold;
-    text-align: center;
-}
-/* src/styles/sidebar.module.css */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: var(--sidebar-width);
-    background-color: var(--secondary-color);
-    padding: var(--padding);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    overflow-y: auto;
-}
-
-.userInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.profileImage {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-
-.userLevel {
-    font-size: 12px;
-    color: var(--userLevel-color);
-    background-color: var(--text2-color);
-    padding: 3px 8px;
-    border-radius: 12px;
-    margin-top: 5px;
-}
-
-.sidebarIcon {
-    margin-right: 8px;
-    color: var(--text-color);
-    font-size: 18px;
-}
-

@@ -4,10 +4,10 @@ import Sidebar from '../components/Sidebar';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import styles from '../styles/dashboardLayout.module.css';
-import { useUser } from '../context/UserContext'; // Importando o hook do contexto
+import { useUser } from '../context/UserContext';
 
 function DashboardLayout({ children }) {
-  const { user } = useUser(); // Obtendo os dados do usuário do contexto
+  const { user } = useUser();
 
   return (
     <div className={styles.dashboardLayout}>
@@ -20,7 +20,9 @@ function DashboardLayout({ children }) {
       <div className={styles.content}>
         <Header username={user.username} />
         <div className={styles.mainContent}>
-          {children}
+          <div className={styles.fixedContainer}> {/* Container fixo centralizado */}
+            {children}
+          </div>
         </div>
         <Footer />
       </div>
