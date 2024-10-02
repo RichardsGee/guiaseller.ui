@@ -7,7 +7,6 @@ import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
 import styles from '../styles/settingsPage.module.css';
 
-
 function SettingsPage() {
   const { user, signOut } = useContext(AuthContext);
   const username = user ? user.displayName || user.email : "No User Logged";

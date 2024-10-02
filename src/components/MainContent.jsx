@@ -3,7 +3,7 @@ import styles from '../styles/maincontent.module.css'; // Importando o CSS Modul
 
 function MainContent({ children }) {
   return (
-    <div className={styles.mainBackground}>
+    <div className={styles.mainContent}> {/* Aplicando o estilo correto para o conteúdo principal */}
       {children}
     </div>
   );
