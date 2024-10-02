@@ -1,13 +1,13 @@
 import React from 'react';
 import styles from '../styles/sidebar.module.css'; // Certifique-se de importar corretamente
 
-function Sidebar() {
+function Sidebar({userPhoto, username, userEmail}) {
   return (
     <nav className={styles.sidebar}>
       <div className={styles.userInfo}> {/* Certifique-se de que userInfo está sendo usado corretamente */}
-        <img src="https://via.placeholder.com/80" alt="Foto do usuário" className={styles.profileImage} />
-        <h2>Fulano de Tal</h2>
-        <p>email@email.com</p>
+        <img src={userPhoto || "https://via.placeholder.com/80"} alt="Foto do usuário" className={styles.profileImage} />
+        <h2>{username}</h2>
+        <p>{userEmail || "Nothing@gmail.com"}</p>
       </div>
       <ul>
         <li><a href="#dashboard"><span className={`material-icons ${styles.sidebarIcon}`}>dashboard</span>Dashboard</a></li>

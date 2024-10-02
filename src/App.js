@@ -1,26 +1,19 @@
-// src/App.js
-import React from 'react';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import TopBar from './components/TopBar';
-import FilterSection from './components/FilterSection';
-import ChartSection from './components/ChartSection';
-import AdditionalInfo from './components/AdditionalInfo';
-import Footer from './components/Footer';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import SignIn from "./pages/SignIn/SignIn";
+import SignUp from "./pages/SignUp/SignUp";
+import { ToastContainer } from "react-toastify";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
-    <div className="container">
-      <Header />
-      <Sidebar />
-      <div className="main-content">
-        <TopBar />
-        <FilterSection />
-        <ChartSection />
-        <AdditionalInfo />
-      </div>
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+      <ToastContainer />
+    </Router>
   );
 }
 

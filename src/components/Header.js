@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../context/ThemeContext'; // Importando o contexto de tema
 
-function Header() {
+function Header({ username, logout }) {
   const { theme, toggleTheme } = useContext(ThemeContext); // Obtendo o tema atual e a função de alternância
 
   return (
@@ -16,8 +16,8 @@ function Header() {
           <span className="material-icons credits-icon">monetization_on</span>
           Tokens: 150
         </span>
-        <span className="username">Fulano de Tal</span>
-        <button className="logout-btn">Logout</button>
+        <span className="username">{username}</span>
+        <button className="logout-btn" onClick={logout}>Logout</button>
         {/* Adicionando o botão de alternância de tema */}
         <button className="theme-toggle-btn" onClick={toggleTheme}>
           {theme === 'light' ? '🌞 Light' : '🌜 Dark'}
