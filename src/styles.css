@@ -171,44 +171,6 @@ body {
     background: #ffaa00;
 }
 
-.filter-section {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin-bottom: var(--margin);
-    padding: 10px;
-    background-color: var(--secondary-color);
-    border-radius: 5px;
-}
-
-.filter-section label {
-    color: var(--text-color);
-}
-
-.filter-section input, .filter-section select, .filter-section button {
-    padding: 5px;
-    border-radius: 5px;
-    border: 1px solid #444444;
-    background-color: var(--background-color);
-    color: var(--text-color);
-}
-
-.filter-section button {
-    cursor: pointer;
-    background-color: var(--primary-color);
-    transition: background-color 0.3s;
-}
-
-.filter-section button:hover {
-    background-color: #ffaa00;
-}
-
-#customDateInputs {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
-
 .chart-section {
     background: var(--background-color);
     padding: var(--padding);

@@ -1,0 +1,41 @@
+/* filter.module.css */
+
+.filterSection {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: var(--margin);
+    padding: 10px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+}
+
+.filterSection label {
+    color: var(--text-color);
+}
+
+.filterSection input, 
+.filterSection select, 
+.filterSection button {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #444444;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.filterSection button {
+    cursor: pointer;
+    background-color: var(--primary-color);
+    transition: background-color 0.3s;
+}
+
+.filterSection button:hover {
+    background-color: #ffaa00;
+}
+
+#customDateInputs {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}

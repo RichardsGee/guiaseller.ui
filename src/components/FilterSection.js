@@ -1,5 +1,6 @@
 // src/components/FilterSection.js
 import React, { useState } from 'react';
+import styles from '../styles/filter.module.css'; // Importando o CSS Module
 
 function FilterSection() {
   const [showCustomDate, setShowCustomDate] = useState(false);
@@ -9,7 +10,7 @@ function FilterSection() {
   };
 
   return (
-    <div className="filter-section">
+    <div className={styles.filterSection}>
       <label htmlFor="filterSelect">Filtro:</label>
       <select id="filterSelect" onChange={handleSelectChange}>
         <option value="hoje">Hoje</option>
@@ -20,14 +21,14 @@ function FilterSection() {
       </select>
 
       {showCustomDate && (
-        <div id="customDateInputs">
+        <div id="customDateInputs" className={styles.customDateInputs}>
           <label htmlFor="startDate">Data Início:</label>
           <input type="date" id="startDate" />
           <label htmlFor="endDate">Data Fim:</label>
           <input type="date" id="endDate" />
         </div>
       )}
-      <button id="filterBtn">Filtrar</button>
+      <button id="filterBtn" className={styles.filterButton}>Filtrar</button>
     </div>
   );
 }
