@@ -11,6 +11,8 @@
     --primary-color: #ffd700;
     --secondary-color: #1e1e1e;
     --accent-color: #a020f0;
+    --icon-color: #fff400;
+    --third-color: #242424;
 }
 
 /* Definindo estilos para o tema claro */
@@ -20,6 +22,8 @@ body.light {
     --primary-color: #ffd700;
     --secondary-color: #eaeaea;
     --accent-color: #1e1e1e;
+    --third-color: #ffffff;
+    --icon-color: #202020;
 }
 
 /* Definindo estilos para o tema escuro */
@@ -165,36 +169,6 @@ body {
 
 .main-content::-webkit-scrollbar-thumb:hover {
     background: #ffaa00;
-}
-
-.top-bar {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--margin);
-    margin-bottom: var(--margin);
-    width: 100%;
-}
-
-.top-bar-item {
-    background: var(--secondary-color);
-    padding: var(--padding);
-    border-radius: 10px;
-    color: var(--text-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    height: 80px;
-}
-
-.top-bar-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.top-bar-icon .material-icons {
-    color: var(--primary-color);
-    font-size: 30px;
 }
 
 .filter-section {

@@ -1,0 +1,42 @@
+/* Estilos para o topbar */
+
+.topBar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--margin);
+    margin-bottom: var(--margin);
+    width: 100%;
+}
+
+.topBarItem {
+    background: var(--third-color);
+    padding: var(--padding);
+    border-radius: 10px;
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 80px;
+}
+
+.topBarItem:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.topBarIcon .material-icons {
+    color: var(--icon-color) !important; /* Usando !important para garantir a aplicação */
+    font-size: 30px;
+}
+
+
+.topBarContent {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.icon {
+    color: var(--topbar-color) !important;
+}
+
