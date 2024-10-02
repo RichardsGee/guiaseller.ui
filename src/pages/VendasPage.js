@@ -1,60 +1,41 @@
 // src/pages/VendasPage.js
-import React from 'react';
-import DashboardLayout from '../layouts/DashboardLayout'; 
-import styles from '../styles/VendasPage.module.css';
+import React, { useState, useEffect } from 'react';
+import DashboardLayout from '../layouts/DashboardLayout';
+import styles from '../styles/vendas.module.css'; // Importando o CSS Module
 
-const VendasPage = () => {
-  const vendasData = [
-    {
-      numero: '9811',
-      imagem: 'https://via.placeholder.com/80',
-      sku: 'JARR027',
-      marketplace: 'Kwai / Kwai',
-      nome: 'Gislene Machado',
-      venda: 'R$ 109.90',
-      custo: 'R$ 10.99',
-      imposto: 'R$ 8.79',
-      lucro: 'R$ 90.12',
-      margem: '82.00%',
-      status: 'Aguardando Pagamento'
-    },
-    // Adicione mais itens conforme necessário
-  ];
+function VendasPage() {
+  const [vendas, setVendas] = useState([]);
+
+  useEffect(() => {
+    const vendasData = [
+      { id: 1, produto: 'Produto A', cliente: 'Cliente 1', valor: 'R$ 100,00', data: '01/10/2024' },
+      { id: 2, produto: 'Produto B', cliente: 'Cliente 2', valor: 'R$ 200,00', data: '02/10/2024' },
+    ];
+    setVendas(vendasData);
+  }, []);
 
   return (
     <DashboardLayout>
       <div className={styles.vendasContainer}>
-        <h1 className={styles.title}>Meus Pedidos</h1>
-        <table className={styles.table}>
+        <h1 className={styles.vendasTitle}>Lista de Vendas</h1>
+        <table className={styles.vendasTable}>
           <thead>
             <tr>
-              <th>Número</th>
-              <th>Imagem</th>
-              <th>SKU</th>
-              <th>Marketplace/Envio</th>
-              <th>Nome</th>
-              <th>Venda</th>
-              <th>Custo</th>
-              <th>Imposto</th>
-              <th>Lucro</th>
-              <th>Margem</th>
-              <th>Status</th>
+              <th>ID</th>
+              <th>Produto</th>
+              <th>Cliente</th>
+              <th>Valor</th>
+              <th>Data</th>
             </tr>
           </thead>
           <tbody>
-            {vendasData.map((venda, index) => (
-              <tr key={index}>
-                <td>{venda.numero}</td>
-                <td><img src={venda.imagem} alt="Produto" className={styles.productImage} /></td>
-                <td>{venda.sku}</td>
-                <td>{venda.marketplace}</td>
-                <td>{venda.nome}</td>
-                <td>{venda.venda}</td>
-                <td>{venda.custo}</td>
-                <td>{venda.imposto}</td>
-                <td>{venda.lucro}</td>
-                <td>{venda.margem}</td>
-                <td>{venda.status}</td>
+            {vendas.map((venda) => (
+              <tr key={venda.id}>
+                <td>{venda.id}</td>
+                <td>{venda.produto}</td>
+                <td>{venda.cliente}</td>
+                <td>{venda.valor}</td>
+                <td>{venda.data}</td>
               </tr>
             ))}
           </tbody>
@@ -62,6 +43,6 @@ const VendasPage = () => {
       </div>
     </DashboardLayout>
   );
-};
+}
 
 export default VendasPage;

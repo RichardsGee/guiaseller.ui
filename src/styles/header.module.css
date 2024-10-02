@@ -1,83 +1,40 @@
-/* header.module.css */
-.header {
+/* Adicione ao seu arquivo CSS */
+.main-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: var(--secondary-color);
-    padding: 0 var(--padding);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    width: 100%;
+    background-color: var(--secondary-color);
+    padding: 10px 20px;
     height: var(--header-height);
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.headerLogo {
-    display: flex;
-    align-items: center;
-}
-
-.headerLogo img {
-    width: 70px;
-    height: 70px;
-}
-
-.headerLogo .slogan {
-    margin-left: 10px;
-    font-size: 14px;
-    color: var(--text-color);
-    font-weight: 200;
-}
-
-.headerActions {
+.header-actions {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.credits {
-    display: flex;
-    align-items: center;
-    background-color: var(--secondary-color);
-    padding: 5px 10px;
-    border-radius: 15px;
-    color: var(--accent-color);
-    font-size: 14px;
-    font-weight: bold;
-    border: 1px solid var(--accent-color);
-    box-shadow: 0 0 5px rgba(160, 32, 240, 0.5);
-}
-
-.creditsIcon {
-    margin-right: 5px;
-    font-size: 18px;
-    color: var(--primary-color);
-}
-
 .username {
-    font-weight: italic;
+    font-weight: bold;
     color: var(--text-color);
-    font-size: 10px;
 }
 
-.logoutBtn {
+.logout-btn {
     background-color: var(--primary-color);
     color: var(--text-color);
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 12px;
     transition: background-color 0.3s;
 }
 
-.logoutBtn:hover {
+.logout-btn:hover {
     background-color: #ffaa00;
 }
 
-.themeToggleBtn {
+.theme-toggle-btn {
     background-color: transparent;
     border: none;
     cursor: pointer;
