@@ -15,6 +15,8 @@
     --third-color: #242424;
     --userLevel-color: #fff700;
     --text2-color: #a020f0;
+    --btn-color: #ffd700;
+
 }
 
 /* Definindo estilos para o tema claro */
@@ -29,6 +31,7 @@ body.light {
     --userLevel-color: #fff700;
     --text2-color: #fff700;
     --text3-color: #000000;
+    --btn-color: #ffd700;
 }
 
 /* Definindo estilos para o tema escuro */

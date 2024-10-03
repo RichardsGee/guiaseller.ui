@@ -7,7 +7,8 @@ import SettingsPage from "./pages/SettingsPage";
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./context/UserContext"; 
 import ProdutosPage from './pages/ProdutosPage'; 
-import FerramentasIA from './pages/FerramentasIA'; // Certifique-se de adicionar esta linha
+import FerramentasIA from './pages/FerramentasIA'; 
+import MessagesPage from './pages/MessagesPage'; // Adicione a importação da página de mensagens
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
           <Route path="/vendas" element={<VendasPage />} /> 
           <Route path="/produtos" element={<ProdutosPage />} /> 
           <Route path="/configuracoes" element={<SettingsPage />} /> 
-          <Route path="/ferramentas-ia" element={<FerramentasIA />} /> {/* Adicionada a rota corretamente */}
+          <Route path="/ferramentas-ia" element={<FerramentasIA />} /> 
+          <Route path="/mensagens" element={<MessagesPage />} /> {/* Adicionando a rota de mensagens */}
         </Routes>
         <ToastContainer />
       </Router>

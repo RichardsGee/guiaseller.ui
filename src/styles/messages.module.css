@@ -1,0 +1,91 @@
+.messagesContainer {
+    background-color: var(--third-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+    width: 100%;
+    max-width: 1700px;
+    min-height: 79vh;
+}
+
+.title {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.messageList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.messageItem {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+.messageItem:hover {
+    background-color: var(--hover-color);
+}
+
+.messageHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.messageSender {
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.messageDate {
+    font-size: 14px;
+    color: var(--text-muted-color);
+}
+
+.messageSubject {
+    font-size: 16px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.messageContent {
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+/* Estilos para mensagens lidas e não lidas */
+.read {
+    opacity: 0.6; /* Mensagens lidas têm uma aparência mais opaca */
+}
+
+.unread {
+    font-weight: bold; /* Mensagens não lidas têm fonte em negrito */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .messageItem {
+        padding: 15px;
+    }
+
+    .messageSender {
+        font-size: 16px;
+    }
+
+    .messageSubject {
+        font-size: 14px;
+    }
+
+    .messageContent {
+        font-size: 12px;
+    }
+}

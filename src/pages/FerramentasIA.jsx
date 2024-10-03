@@ -3,11 +3,11 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
 import Footer from '../components/Footer';
-import styles from '../styles/ferramentasIa.module.css'; // Corrigido para o nome correto
-import MainContent from '../components/MainContent'; // Importando o MainContent
+import styles from '../styles/ferramentasIa.module.css';
+import MainContent from '../components/MainContent'; 
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
-import { Lock } from '@mui/icons-material'; // Ícone de cadeado
+import { Lock, LockOpen } from '@mui/icons-material'; // Importando cadeado fechado e aberto
 
 const FerramentasIA = () => {
   const { user, signOut } = useContext(AuthContext);
@@ -15,6 +15,7 @@ const FerramentasIA = () => {
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
 
+  const [hovered, setHovered] = useState(null); // Estado para controlar o hover do botão
   const [ferramentas, setFerramentas] = useState([
     { nome: 'Gerador de Títulos', descricao: 'Crie títulos de alta conversão.', ativo: true, custo: 'R$ 29,90' },
     { nome: 'Gerador de Descrições', descricao: 'Gere descrições otimizadas para SEO.', ativo: false, custo: 'R$ 39,90' },
@@ -40,24 +41,26 @@ const FerramentasIA = () => {
                 <h3 className={styles.toolName}>{ferramenta.nome}</h3>
                 <p className={styles.toolDesc}>{ferramenta.descricao}</p>
 
-                {/* Ícone de cadeado no canto superior direito, apenas se inativo */}
+                {/* Ícone de cadeado no canto superior direito, alternando com hover */}
                 {!ferramenta.ativo && (
                   <div className={styles.lockIcon}>
-                    <Lock className={styles.iconInativo} />
+                    {hovered === index ? <LockOpen className={styles.iconInativo} /> : <Lock className={styles.iconInativo} />}
                   </div>
                 )}
 
                 <div className={styles.bottomSection}>
                   {/* Botão de adquirir ou assinar */}
-                  <button className={ferramenta.ativo ? styles.adquiridoButton : styles.assinarButton}>
+                  <button 
+                    className={ferramenta.ativo ? styles.adquiridoButton : styles.assinarButton}
+                    onMouseEnter={() => setHovered(index)} 
+                    onMouseLeave={() => setHovered(null)}
+                  >
                     {ferramenta.ativo ? 'Usar' : 'Assinar'} 
+                    {!ferramenta.ativo && (
+                      <span className={styles.custoDentro}>{ferramenta.custo}</span>
+                    )}
                   </button>
                 </div>
-
-                {/* Custo da ferramenta abaixo do botão */}
-                {!ferramenta.ativo && (
-                  <p className={styles.custo}>{ferramenta.custo}</p>
-                )}
               </div>
             ))}
           </div>
