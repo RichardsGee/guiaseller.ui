@@ -70,7 +70,7 @@ body {
     align-items: center;
     background: var(--secondary-color);
     padding: 0 var(--padding);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
     width: 100%;
     height: var(--header-height);
     position: fixed;

@@ -5,9 +5,11 @@ import TopBar from '../components/TopBar';
 import Footer from '../components/Footer';
 import { AuthContext } from '../context/AuthContext';
 import styles from '../styles/vendas.module.css'; // Importando o CSS Module
+import filterStyles from '../styles/filter.module.css'; // Importando o CSS do filtro
 
 const VendasPage = () => {
   const [vendas, setVendas] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(''); // Estado para armazenar o termo de busca
 
   // Utilizando o contexto de autenticação para pegar informações do usuário
   const { user, signOut } = useContext(AuthContext);
@@ -48,6 +50,18 @@ const VendasPage = () => {
     setVendas(vendasData);
   }, []);
 
+  // Função para lidar com a alteração no campo de busca
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  // Função para filtrar as vendas com base no termo de busca
+  const filteredVendas = vendas.filter(venda =>
+    venda.nome.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    venda.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    venda.marketplaceEnvio.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="container">
       <Header username={username} logout={signOut} />
@@ -56,6 +70,20 @@ const VendasPage = () => {
         <TopBar userPhoto={userPhoto} />
         <div className={styles.vendasContainer}>
           <h1 className={styles.vendasTitle}>Meus Pedidos</h1>
+
+          {/* Campo de busca dentro da seção de filtro */}
+          <div className={filterStyles.filterSection}>
+            <label htmlFor="search">Buscar Venda:</label>
+            <input
+              id="search"
+              type="text"
+              placeholder="Digite o nome, SKU ou marketplace/envio..."
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
+            <button type="button">Filtrar</button>
+          </div>
+
           <table className={styles.vendasTable}>
             <thead>
               <tr>
@@ -73,10 +101,10 @@ const VendasPage = () => {
               </tr>
             </thead>
             <tbody>
-              {vendas.map((venda) => (
+              {filteredVendas.map((venda) => (
                 <tr key={venda.id}>
                   <td>{venda.id}</td>
-                  <td><img src={venda.imagem} alt="Produto" className={styles.vendaImage}/></td>
+                  <td><img src={venda.imagem} alt="Produto" className={styles.vendaImage} /></td>
                   <td>{venda.sku}</td>
                   <td>{venda.marketplaceEnvio}</td>
                   <td>{venda.nome}</td>

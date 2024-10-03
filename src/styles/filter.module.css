@@ -1,5 +1,3 @@
-/* filter.module.css */
-
 .filterSection {
     display: flex;
     gap: 10px;
@@ -12,30 +10,28 @@
 
 .filterSection label {
     color: var(--text-color);
+    font-weight: 600;
 }
 
-.filterSection input, 
-.filterSection select, 
-.filterSection button {
-    padding: 5px;
+.filterSection input {
+    padding: 8px;
     border-radius: 5px;
     border: 1px solid #444444;
     background-color: var(--background-color);
     color: var(--text-color);
+    flex-grow: 1; /* Faz o input crescer para ocupar o máximo de espaço possível */
 }
 
 .filterSection button {
-    cursor: pointer;
+    padding: 8px 15px;
+    border-radius: 5px;
+    border: 1px solid #444444;
     background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
 .filterSection button:hover {
     background-color: #ffaa00;
-}
-
-#customDateInputs {
-    display: flex;
-    gap: 5px;
-    align-items: center;
 }

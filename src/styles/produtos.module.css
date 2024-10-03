@@ -1,0 +1,68 @@
+.produtosContainer {
+    background-color: var(--third-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+    width: 100%;
+    max-width: 1700px;
+    min-height: 100vh;
+  }
+  
+  .produtosTitle {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: var(--padding);
+    font-size: 18px;
+  }
+  
+  .searchInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+    font-size: 16px;
+  }
+  
+  .produtosTable {
+    background-color: var(--third-color);
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 5px;
+    overflow: hidden;
+    font-size: 12px;
+    margin-top: 20px;
+  }
+  
+  .produtosTable th, .produtosTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--background-color);
+  }
+  
+  .produtosTable th {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+  }
+  
+  .produtosTable tr:hover {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+  }
+  
+  .produtosTable tr:nth-child(even) {
+    background-color: var(--secondary-color);
+  }
+  
+  .produtosTable tr:nth-child(odd) {
+    background-color: var(--third-color);
+  }
+  
+  .produtoImage {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  

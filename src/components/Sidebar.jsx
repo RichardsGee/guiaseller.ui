@@ -18,9 +18,9 @@ function Sidebar({ userPhoto, username, userEmail, userLevel }) {
       <ul>
         <li><Link to="/dashboard"><span className={`material-icons ${styles.sidebarIcon}`}>dashboard</span>Dashboard</Link></li>
         <li><Link to="/vendas"><span className={`material-icons ${styles.sidebarIcon}`}>shopping_bag</span>Vendas</Link></li>
+        {/* Aqui estamos adicionando o link para Produtos */}
         <li><Link to="/produtos"><span className={`material-icons ${styles.sidebarIcon}`}>inventory_2</span>Produtos</Link></li>
         <li><Link to="/anuncios"><span className={`material-icons ${styles.sidebarIcon}`}>campaign</span>Anúncios</Link></li>
-        {/* Configurações agora redireciona para ToolsPage (rota /configuracoes) */}
         <li><Link to="/configuracoes"><span className={`material-icons ${styles.sidebarIcon}`}>settings</span>Configurações</Link></li>
         <li><Link to="/perfil"><span className={`material-icons ${styles.sidebarIcon}`}>person</span>Perfil</Link></li>
         <li><Link to="/lojas"><span className={`material-icons ${styles.sidebarIcon}`}>store</span>Lojas</Link></li>
