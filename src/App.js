@@ -3,11 +3,11 @@ import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard";
 import VendasPage from "./pages/VendasPage"; 
-import SettingsPage from "./pages/SettingsPage"; // Importe a página ToolsPage
+import SettingsPage from "./pages/SettingsPage"; 
 import { ToastContainer } from "react-toastify";
-import { UserProvider } from "./context/UserContext"; // Importando o UserProvider
-import ProdutosPage from './pages/ProdutosPage'; // Certifique-se que o caminho esteja correto
-
+import { UserProvider } from "./context/UserContext"; 
+import ProdutosPage from './pages/ProdutosPage'; 
+import FerramentasIA from './pages/FerramentasIA'; // Certifique-se de adicionar esta linha
 
 function App() {
   return (
@@ -17,9 +17,10 @@ function App() {
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/vendas" element={<VendasPage />} /> {/* Rota para Vendas */}
-          <Route path="/produtos" element={<ProdutosPage />} /> {/* Rota para Vendas */}
-          <Route path="/configuracoes" element={<SettingsPage />} /> {/* Rota para Configurações redirecionando para ToolsPage */}
+          <Route path="/vendas" element={<VendasPage />} /> 
+          <Route path="/produtos" element={<ProdutosPage />} /> 
+          <Route path="/configuracoes" element={<SettingsPage />} /> 
+          <Route path="/ferramentas-ia" element={<FerramentasIA />} /> {/* Adicionada a rota corretamente */}
         </Routes>
         <ToastContainer />
       </Router>

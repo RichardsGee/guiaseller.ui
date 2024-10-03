@@ -1,0 +1,112 @@
+.iaContainer {
+    background-color: var(--third-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+    width: 100%;
+    max-width: 1700px;
+    min-height: 100vh;
+  }
+  
+  .title {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 24px;
+  }
+  
+  .toolsGrid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .toolCard {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    width: 300px;
+  }
+  
+  .toolName {
+    font-size: 18px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+  }
+  
+  .toolDesc {
+    font-size: 14px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+  }
+  
+  .lockIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .iconInativo {
+    color: red;
+    font-size: 24px;
+  }
+  
+  .adquiridoButton, .assinarButton {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* Agora ocupa toda a largura */
+    margin-bottom: 10px; /* Espaçamento antes do custo */
+  }
+  
+  .adquiridoButton {
+    background-color: green;
+    color: white;
+    border: none;
+  }
+  
+  .assinarButton {
+    background-color: red;
+    color: white;
+    border: none;
+  }
+  
+  .assinarButton:hover {
+    background-color: darkred;
+  }
+  
+  .adquiridoButton:hover {
+    background-color: darkgreen;
+  }
+  
+  /* Adicionando transparência para ferramentas inativas */
+  .inactive {
+    opacity: 0.5;
+  }
+  
+  .bottomSection {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: auto; /* Empurra o conteúdo para o final */
+  }
+  
+  /* Estilo do custo da ferramenta */
+  .custo {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 10px; /* Espaçamento entre o botão e o custo */
+  }
+  
