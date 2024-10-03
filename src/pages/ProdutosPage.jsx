@@ -75,8 +75,7 @@ function ProdutosPage() {
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <button type="button">Buscar Produto</button> {/* Botão de filtro visualmente atrativo */}
-          </div>
+            </div>
 
           <table className={styles.produtosTable}>
             <thead>

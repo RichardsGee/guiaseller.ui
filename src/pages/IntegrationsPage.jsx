@@ -14,27 +14,26 @@ const IntegrationsPage = () => {
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
 
+  // Definindo o estado de integrações: Disponíveis e Em breve
   const [integrations, setIntegrations] = useState([
-    { nome: 'Bling', logo: 'bling_logo_url', ativo: true, integrado: true, loja: 'Loja A' },
-    { nome: 'Mercado Livre', logo: 'mercado_livre_logo_url', ativo: false, integrado: true, loja: 'Loja B' },
-    { nome: 'Shopee', logo: 'shopee_logo_url', ativo: false, integrado: false, loja: '' },
-    { nome: 'Amazon', logo: 'amazon_logo_url', ativo: true, integrado: false, loja: '' },
+    { nome: 'Mercado Livre', loja: '', integrado: false, ativo: false, disponivel: true },
+    { nome: 'Bling', loja: '', integrado: false, ativo: false, disponivel: false },
+    { nome: 'Shopee', loja: '', integrado: false, ativo: false, disponivel: false },
+    { nome: 'Amazon', loja: '', integrado: false, ativo: false, disponivel: false },
   ]);
 
-  const toggleActiveStatus = (index) => {
+  const handleIntegrate = (index) => {
     const updatedIntegrations = [...integrations];
-    updatedIntegrations[index].ativo = !updatedIntegrations[index].ativo;
+    updatedIntegrations[index].integrado = !updatedIntegrations[index].integrado;
     setIntegrations(updatedIntegrations);
   };
 
-  const toggleIntegrationStatus = (index) => {
+  const handleToggleActive = (index) => {
     const updatedIntegrations = [...integrations];
-    if (!updatedIntegrations[index].integrado) {
-      // Se ainda não estiver integrado, ao clicar ele vai integrar
-      updatedIntegrations[index].integrado = true;
-      updatedIntegrations[index].ativo = true; // Assim que integrar, ele se torna ativo automaticamente
+    if (updatedIntegrations[index].integrado) {
+      updatedIntegrations[index].ativo = !updatedIntegrations[index].ativo;
+      setIntegrations(updatedIntegrations);
     }
-    setIntegrations(updatedIntegrations);
   };
 
   return (
@@ -46,53 +45,66 @@ const IntegrationsPage = () => {
         <div className={styles.integrationsContainer}>
           <h1 className={styles.title}>Integrações</h1>
 
+          {/* Seção de integrações disponíveis */}
+          <h2 className={styles.subTitle}>Disponíveis</h2>
           <ul className={styles.integrationsList}>
-            {integrations.map((integration, index) => (
+            {integrations.filter(integration => integration.disponivel).map((integration, index) => (
               <li key={index} className={styles.integrationItem}>
                 <div className={styles.integrationInfo}>
-                  <img src={integration.logo} alt={integration.nome} className={styles.integrationLogo} />
+                  <img
+                    src={`/${integration.nome.toLowerCase().replace(' ', '_')}.png`} 
+                    alt={`${integration.nome} logo`}
+                    className={styles.integrationLogo}
+                  />
                   <div>
-                    <h3 className={styles.integrationName}>{integration.nome}</h3>
-                    {integration.integrado && (
-                      <p className={styles.lojaInfo}>Loja Integrada: {integration.loja || "Nenhuma loja"}</p>
-                    )}
+                    <p className={styles.integrationName}>{integration.nome}</p>
+                    <p className={styles.lojaInfo}>
+                      {integration.integrado ? `Loja: ${integration.loja || 'Minha Loja'}` : 'Nenhuma loja integrada'}
+                    </p>
                   </div>
                 </div>
-
                 <div className={styles.integrationControls}>
-                  {/* Switch controlando o status ativo/inativo */}
-                  {integration.integrado && (
-                    <label className={styles.switch}>
-                      <input 
-                        type="checkbox" 
-                        checked={integration.ativo} 
-                        onChange={() => toggleActiveStatus(index)} 
-                      />
-                      <span className={`${styles.slider} ${styles.round}`}></span>
-                    </label>
-                  )}
-                  
-                  {/* Botão de Integrar/Ativar/Ativado */}
-                  {!integration.integrado ? (
-                    <button 
-                      className={styles.integrateButton}
-                      onClick={() => toggleIntegrationStatus(index)}
-                    >
-                      Integrar
-                    </button>
-                  ) : (
-                    <button 
-                      className={integration.ativo ? styles.activatedButton : styles.activateButton}
-                      onClick={() => toggleActiveStatus(index)}
-                    >
-                      {integration.ativo ? 'Ativado' : 'Ativar'}
-                    </button>
-                  )}
+                  {/* Switch para Ativar/Desativar */}
+                  <label className={styles.switch}>
+                    <input
+                      type="checkbox"
+                      checked={integration.ativo}
+                      onChange={() => handleToggleActive(index)}
+                      disabled={!integration.integrado} /* Desativa se não estiver integrado */
+                    />
+                    <span className={styles.slider}></span>
+                  </label>
 
-                  {/* Bolinha verde/vermelha indicando status de integração */}
-                  <span 
-                    className={`${styles.integrationStatus} ${integration.integrado ? (integration.ativo ? styles.statusAtivado : styles.statusNaoAtivado) : styles.statusNaoIntegrado}`}
-                  ></span>
+                  {/* Status de integração */}
+                  <div className={`${styles.integrationStatus} ${integration.integrado ? (integration.ativo ? styles.statusAtivado : styles.statusNaoAtivado) : styles.statusNaoIntegrado}`} />
+
+                  {/* Botão de Integração */}
+                  <button
+                    className={integration.integrado ? (integration.ativo ? styles.activatedButton : styles.activateButton) : styles.integrateButton}
+                    onClick={() => handleIntegrate(index)}
+                  >
+                    {integration.integrado ? (integration.ativo ? 'Ativado' : 'Ativar') : 'Integrar'}
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          {/* Seção de integrações em breve */}
+          <h2 className={styles.subTitle}>Em Breve</h2>
+          <ul className={styles.integrationsList}>
+            {integrations.filter(integration => !integration.disponivel).map((integration, index) => (
+              <li key={index} className={`${styles.integrationItem} ${styles.inactive}`}>
+                <div className={styles.integrationInfo}>
+                  <img
+                    src={`/${integration.nome.toLowerCase().replace(' ', '_')}.png`} 
+                    alt={`${integration.nome} logo`}
+                    className={styles.integrationLogo}
+                  />
+                  <div>
+                    <p className={styles.integrationName}>{integration.nome}</p>
+                    <p className={styles.lojaInfo}>Em breve</p>
+                  </div>
                 </div>
               </li>
             ))}

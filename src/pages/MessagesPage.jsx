@@ -3,9 +3,9 @@ import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
 import Footer from '../components/Footer';
-import MainContent from '../components/MainContent';
-import styles from '../styles/messages.module.css'; // Certifique-se de criar o arquivo CSS
 import { AuthContext } from '../context/AuthContext';
+import styles from '../styles/messages.module.css'; // Certifique-se de criar o arquivo CSS
+import filterStyles from '../styles/messagesfilter.module.css'; // Importando o novo CSS do filtro
 
 const MessagesPage = () => {
   const { user, signOut } = useContext(AuthContext);
@@ -46,14 +46,27 @@ const MessagesPage = () => {
     setMessages(exampleMessages);
   }, []);
 
+  // Função para contar as mensagens lidas e não lidas
+  const totalMessages = messages.length;
+  const readMessages = messages.filter(message => message.isRead).length;
+
   return (
-    <MainContent>
+    <div className="container">
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
+
         <div className={styles.messagesContainer}>
           <h1 className={styles.title}>Minhas Mensagens</h1>
+
+          {/* Contador de mensagens lidas e não lidas, abaixo do título */}
+          <div className={filterStyles.filterWrapper}>
+            <div className={filterStyles.filterSection}>
+              <p><strong>Total de Mensagens:</strong> {totalMessages}</p>
+              <p><strong>Mensagens Lidas:</strong> {readMessages}</p>
+            </div>
+          </div>
 
           <ul className={styles.messageList}>
             {messages.map(message => (
@@ -70,7 +83,7 @@ const MessagesPage = () => {
         </div>
       </div>
       <Footer />
-    </MainContent>
+    </div>
   );
 };
 
