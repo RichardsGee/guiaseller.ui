@@ -29,7 +29,7 @@
 /* Estilo dos rótulos (Nome, Email, Celular) */
 .settingItem span {
   font-size: 14px; /* Diminui o tamanho da fonte dos rótulos */
-  color: #ccc; /* Altera a cor dos rótulos */
+  color: var(--text-color); /* Altera a cor dos rótulos */
   font-weight: 500; /* Ajusta o peso da fonte */
   font-family: 'Arial', sans-serif; /* Define a fonte usada */
 }

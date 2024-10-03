@@ -128,11 +128,11 @@
     display: inline-block;
     margin-top: 5px;
     padding: 2px 8px;
-    background-color: var(--text2-color);
-    color: var(--text-color);
+    background-color: var(--primary-color);
+    color: var(--text3-color);
     border-radius: 12px;
-    font-size: 12px;
-    font-weight: 800;
+    font-size: 14px;
+    font-weight: 600;
     text-align: center;
     
 }
@@ -152,17 +152,6 @@
     height: 70px;
     border-radius: 50%;
     margin-bottom: 10px;
-}
-
-.userLevel {
-    font-size: 10px;
-    color: var(--text2-color);
-    background-color: var(--text-color);
-    padding: 3px 8px;
-    border-radius: 12px;
-    margin-top: 5px;
-    
-    
 }
 
 .sidebarIcon {

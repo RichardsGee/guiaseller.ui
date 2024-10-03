@@ -28,7 +28,7 @@ body.light {
     --accent-color: #1e1e1e;
     --third-color: #ffffff;
     --icon-color: #202020;
-    --userLevel-color: #fff700;
+    --userLevel-color: #d8d100;
     --text2-color: #fff700;
     --text3-color: #000000;
     --btn-color: #ffd700;
@@ -41,6 +41,7 @@ body.dark {
     --primary-color: #a020f0;
     --secondary-color: #2a2d30;
     --accent-color: #ffd700;
+    --userLevel-color: #d8d100;
 }
 
 /* Resetando estilos padrão do navegador */
