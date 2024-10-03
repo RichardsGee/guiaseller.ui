@@ -6,7 +6,7 @@
     margin: 20px auto;
     width: 100%;
     max-width: 1700px;
-    min-height: 100vh;
+    min-height: 79vh;
   }
   
   .title {
@@ -49,12 +49,12 @@
   
   .lockIcon {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 5px;
+    right: 5px;
   }
   
   .iconInativo {
-    color: red;
+    color: rgb(255, 255, 255);
     font-size: 24px;
   }
   

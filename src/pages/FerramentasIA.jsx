@@ -50,7 +50,7 @@ const FerramentasIA = () => {
                 <div className={styles.bottomSection}>
                   {/* Botão de adquirir ou assinar */}
                   <button className={ferramenta.ativo ? styles.adquiridoButton : styles.assinarButton}>
-                    {ferramenta.ativo ? 'Adquirido' : 'Assinar'}
+                    {ferramenta.ativo ? 'Usar' : 'Assinar'} 
                   </button>
                 </div>
 
