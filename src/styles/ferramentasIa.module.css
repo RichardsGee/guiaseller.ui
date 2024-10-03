@@ -119,3 +119,29 @@
     font-size: 12px;
     margin-left: auto;
 }
+.categoriaButtons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.categoriaButton {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.categoriaButton:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.categoriaAtiva {
+    background-color: var(--primary-color);
+    color: white;
+}

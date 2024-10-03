@@ -23,7 +23,7 @@ function Sidebar({ userPhoto, username, userEmail, userLevel }) {
         <li><Link to="/anuncios"><span className={`material-icons ${styles.sidebarIcon}`}>campaign</span>Anúncios</Link></li>
         <li><Link to="/configuracoes"><span className={`material-icons ${styles.sidebarIcon}`}>settings</span>Configurações</Link></li>
         <li><Link to="/perfil"><span className={`material-icons ${styles.sidebarIcon}`}>person</span>Perfil</Link></li>
-        <li><Link to="/lojas"><span className={`material-icons ${styles.sidebarIcon}`}>store</span>Lojas</Link></li>
+        <li><Link to="/Integrações"><span className={`material-icons ${styles.sidebarIcon}`}>store</span>Integrações</Link></li>
         <li><Link to="/mensagens"><span className={`material-icons ${styles.sidebarIcon}`}>notifications</span>Mensagens</Link></li>
         <li><Link to="/ferramentas-ia" className={styles.ferramentasIa}><span className={`material-icons ${styles.sidebarIcon}`}>smart_toy</span>Ferramentas IA</Link></li>
       </ul>

@@ -4,7 +4,7 @@ import React from 'react';
 function Footer() {
   return (
     <footer>
-      <p>&copy; 2024 ESCALLA IA. Todos os direitos reservados.</p>
+      <p>&copy; 2024 ESCALLA AI. Todos os direitos reservados.</p>
     </footer>
   );
 }
