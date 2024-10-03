@@ -1,14 +1,12 @@
-/* src/styles/vendas.module.css */
-
 .vendasContainer {
-    background-color: var(--third-color); /* Cor de fundo do container */
+    background-color: var(--third-color);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     margin: 20px auto;
     width: 100%;
     max-width: 1700px;
-    min-height: 100vh; /* Garante que o container ocupe no mínimo 100% da altura da viewport */
+    min-height: 100vh;
 }
 
 .vendasTitle {
@@ -16,20 +14,17 @@
     color: var(--text-color);
     margin-bottom: var(--padding);
     font-size: 15px;
-
 }
 
 .vendasTable {
-    background-color: var(--third-color); /* Cor de fundo da tabela */
+    background-color: var(--third-color);
     width: 100%;
     border-collapse: collapse;
     border-radius: 5px;
     overflow: hidden;
-    font-size: 10px;
-    padding: 20px; /* Expande o espaço dentro da tabela */
-    margin-top: 20px; /* Adiciona um espaço acima da tabela */
+    font-size: 14px;
+    margin-top: 20px;
 }
-
 
 .vendasTable th, .vendasTable td {
     padding: 12px;
@@ -43,26 +38,71 @@
 }
 
 .vendasTable tr:hover {
-    background-color: var(--accent-color);
+    background-color: var(--hover-color);
     color: var(--text-color);
 }
 
-.vendasTable tr:nth-child(even) {
+.vendaRow {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.vendaRow:hover {
+    background-color: var(--hover-color); /* Uma cor mais clara para o hover */
+}
+
+.vendaDetails {
     background-color: var(--secondary-color);
+    animation: slideDown 0.3s ease-in-out;
 }
 
-.vendasTable tr:nth-child(odd) {
-    background-color: var(--third-color);
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.vendasTable td {
-    font-size: 10px;
+.detailsContainer {
+    padding: 10px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* Estilo para as imagens na tabela de vendas */
 .vendaImage {
     width: 50px;
     height: 50px;
     object-fit: cover;
     border-radius: 5px;
+}
+
+/* Ícones */
+.icon {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.iconPositive {
+    color: green;
+}
+
+.iconNegative {
+    color: red;
+}
+
+/* Lucro positivo e negativo */
+.lucroPositivo {
+    color: green;
+}
+
+.lucroNegativo {
+    color: red;
 }

@@ -6,10 +6,12 @@ import Footer from '../components/Footer';
 import { AuthContext } from '../context/AuthContext';
 import styles from '../styles/vendas.module.css'; // Importando o CSS Module
 import filterStyles from '../styles/filter.module.css'; // Importando o CSS do filtro
+import { ArrowUpward, ArrowDownward, AttachMoney, PriceCheck, LocalShipping } from '@mui/icons-material'; // Ícones
 
 const VendasPage = () => {
   const [vendas, setVendas] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(''); // Estado para armazenar o termo de busca
+  const [searchTerm, setSearchTerm] = useState('');
+  const [expandedVendaId, setExpandedVendaId] = useState(null); // Estado para armazenar o ID da venda expandida
 
   // Utilizando o contexto de autenticação para pegar informações do usuário
   const { user, signOut } = useContext(AuthContext);
@@ -21,7 +23,7 @@ const VendasPage = () => {
     const vendasData = [
       {
         id: 9811,
-        imagem: 'img_url_1', // URL da imagem do produto
+        imagem: 'img_url_1',
         sku: 'JARR027',
         marketplaceEnvio: 'Kwai / Kwai',
         nome: 'Gislene Machado',
@@ -55,12 +57,22 @@ const VendasPage = () => {
     setSearchTerm(e.target.value);
   };
 
+  // Função para alternar a expansão de uma venda
+  const toggleExpandVenda = (id) => {
+    setExpandedVendaId(expandedVendaId === id ? null : id);
+  };
+
   // Função para filtrar as vendas com base no termo de busca
   const filteredVendas = vendas.filter(venda =>
     venda.nome.toLowerCase().includes(searchTerm.toLowerCase()) || 
     venda.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
     venda.marketplaceEnvio.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Formatação para valores financeiros
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+  };
 
   return (
     <div className="container">
@@ -73,48 +85,65 @@ const VendasPage = () => {
 
           {/* Campo de busca dentro da seção de filtro */}
           <div className={filterStyles.filterSection}>
-            <label htmlFor="search">Buscar Venda:</label>
+            <label htmlFor="search"></label>
             <input
               id="search"
               type="text"
-              placeholder="Digite o nome, SKU ou marketplace/envio..."
+              placeholder="Digite o nome, SKU ou marketplace..."
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <button type="button">Filtrar</button>
+            <button type="button">Buscar Venda</button>
           </div>
 
           <table className={styles.vendasTable}>
             <thead>
               <tr>
-                <th>Número</th>
                 <th>Imagem</th>
                 <th>SKU</th>
                 <th>Marketplace/Envio</th>
                 <th>Nome</th>
                 <th>Venda</th>
-                <th>Custo</th>
-                <th>Imposto</th>
-                <th>Lucro</th>
-                <th>Margem</th>
-                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               {filteredVendas.map((venda) => (
-                <tr key={venda.id}>
-                  <td>{venda.id}</td>
-                  <td><img src={venda.imagem} alt="Produto" className={styles.vendaImage} /></td>
-                  <td>{venda.sku}</td>
-                  <td>{venda.marketplaceEnvio}</td>
-                  <td>{venda.nome}</td>
-                  <td>{venda.venda}</td>
-                  <td>{venda.custo}</td>
-                  <td>{venda.imposto}</td>
-                  <td>{venda.lucro}</td>
-                  <td>{venda.margem}</td>
-                  <td>{venda.status}</td>
-                </tr>
+                <React.Fragment key={venda.id}>
+                  <tr onClick={() => toggleExpandVenda(venda.id)} className={styles.vendaRow}>
+                    <td><img src={venda.imagem} alt="Produto" className={styles.vendaImage} /></td>
+                    <td>{venda.sku}</td>
+                    <td>{venda.marketplaceEnvio}</td>
+                    <td>{venda.nome}</td>
+                    <td>{formatCurrency(venda.venda)}</td>
+                  </tr>
+                  {expandedVendaId === venda.id && (
+                    <tr className={styles.vendaDetails}>
+                      <td colSpan="5">
+                        <div className={styles.detailsContainer}>
+                          <p>
+                            <PriceCheck className={styles.icon} />
+                            <strong>Custo:</strong> {formatCurrency(venda.custo)}
+                          </p>
+                          <p>
+                            <LocalShipping className={styles.icon} />
+                            <strong>Imposto:</strong> {formatCurrency(venda.imposto)}
+                          </p>
+                          <p className={venda.lucro > 0 ? styles.lucroPositivo : styles.lucroNegativo}>
+                            {venda.lucro > 0 ? <ArrowUpward className={styles.iconPositive} /> : <ArrowDownward className={styles.iconNegative} />}
+                            <strong>Lucro:</strong> {formatCurrency(venda.lucro)}
+                          </p>
+                          <p>
+                            <AttachMoney className={styles.icon} />
+                            <strong>Margem:</strong> {venda.margem}
+                          </p>
+                          <p>
+                            <strong>Status:</strong> {venda.status}
+                          </p>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
               ))}
             </tbody>
           </table>

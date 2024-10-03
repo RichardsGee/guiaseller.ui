@@ -67,7 +67,7 @@ function ProdutosPage() {
           
           {/* Campo de pesquisa dentro da seção de filtro */}
           <div className={filterStyles.filterSection}>
-            <label htmlFor="search">Produto:</label>
+            <label htmlFor="search"></label>
             <input
               id="search"
               type="text"
@@ -75,7 +75,7 @@ function ProdutosPage() {
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <button type="button">Buscar</button> {/* Botão de filtro visualmente atrativo */}
+            <button type="button">Buscar Produto</button> {/* Botão de filtro visualmente atrativo */}
           </div>
 
           <table className={styles.produtosTable}>
