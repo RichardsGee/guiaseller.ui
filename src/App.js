@@ -10,6 +10,7 @@ import ProdutosPage from './pages/ProdutosPage';
 import FerramentasIA from './pages/FerramentasIA'; 
 import MessagesPage from './pages/MessagesPage'; // Adicione a importação da página de mensagens
 import IntegrationsPage from './pages/IntegrationsPage';
+import GeradorTitulos from './pages/GeradorTitulos'; // Nova página
 
 function App() {
   return (
@@ -24,8 +25,9 @@ function App() {
           <Route path="/configuracoes" element={<SettingsPage />} /> 
           <Route path="/ferramentas-ia" element={<FerramentasIA />} /> 
           <Route path="/mensagens" element={<MessagesPage />} /> {/* Adicionando a rota de mensagens */}
-          <Route path="/integrações" element={<IntegrationsPage />} /> 
-
+          <Route path="/integrações" element={<IntegrationsPage />} />
+          <Route path="/ferramentas-ia/gerador-titulos" element={<GeradorTitulos />} />
+          
         </Routes>
         <ToastContainer />
       </Router>

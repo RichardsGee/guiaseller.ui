@@ -8,22 +8,24 @@ import MainContent from '../components/MainContent';
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
 import { Lock, LockOpen } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom'; // Importando o hook para navegação
 
 const FerramentasIA = () => {
   const { user, signOut } = useContext(AuthContext);
   const username = user ? user.displayName || user.email : "No User Logged";
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
+  const navigate = useNavigate(); // Inicializa o hook de navegação
 
   const [hovered, setHovered] = useState(null);
   const [categoriaAtiva, setCategoriaAtiva] = useState('Todas'); // Categoria ativa
 
   const ferramentasData = [
-    { nome: 'Gerador de Títulos', descricao: 'Crie títulos de alta conversão.', ativo: true, custo: 'R$ 29,90', categoria: 'Geradores' },
+    { nome: 'Gerador de Títulos', descricao: 'Crie títulos de alta conversão.', ativo: true, custo: 'R$ 29,90', route: '/ferramentas-ia/gerador-titulos', categoria: 'Geradores' },
     { nome: 'Gerador de Descrições', descricao: 'Gere descrições otimizadas para SEO.', ativo: false, custo: 'R$ 39,90', categoria: 'Geradores' },
     { nome: 'Gerador de Palavras-chave', descricao: 'Encontre palavras-chave estratégicas.', ativo: true, custo: 'R$ 19,90', categoria: 'Análise' },
     { nome: 'Analisador de Concorrência', descricao: 'Compare sua concorrência em tempo real.', ativo: false, custo: 'R$ 49,90', categoria: 'Análise' },
-    { nome: 'Análise de anúncio', descricao: 'Analise seu anúncio.', ativo: false, custo: 'R$ 49,90', categoria: 'Análise' },
+    { nome: 'Análise de Anúncio', descricao: 'Analise seu anúncio.', ativo: false, custo: 'R$ 49,90', categoria: 'Análise' },
   ];
 
   // Filtros de categorias
@@ -33,6 +35,13 @@ const FerramentasIA = () => {
   const ferramentasFiltradas = categoriaAtiva === 'Todas'
     ? ferramentasData
     : ferramentasData.filter(ferramenta => ferramenta.categoria === categoriaAtiva);
+
+  // Função para ativar a navegação para a ferramenta ativa
+  const handleUseTool = (route) => {
+    if (route) {
+      navigate(route);
+    }
+  };
 
   return (
     <MainContent>
@@ -74,6 +83,7 @@ const FerramentasIA = () => {
                 <div className={styles.bottomSection}>
                   <button 
                     className={ferramenta.ativo ? styles.adquiridoButton : styles.assinarButton}
+                    onClick={() => ferramenta.ativo && handleUseTool(ferramenta.route)} // Se ativo, navega para a página
                     onMouseEnter={() => setHovered(index)} 
                     onMouseLeave={() => setHovered(null)}
                   >

@@ -32,6 +32,7 @@ body.light {
     --text2-color: #fff700;
     --text3-color: #000000;
     --btn-color: #ffd700;
+    
 }
 
 /* Definindo estilos para o tema escuro */
@@ -42,6 +43,7 @@ body.dark {
     --secondary-color: #2a2d30;
     --accent-color: #ffd700;
     --userLevel-color: #d8d100;
+    
 }
 
 /* Resetando estilos padrão do navegador */

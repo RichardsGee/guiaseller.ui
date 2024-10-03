@@ -41,8 +41,8 @@
   font-size: 14px; /* Diminui o tamanho da fonte */
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #2b2b2b;
-  color: #fff;
+  background-color: var(--background-color);
+  color: var(--text-color);
   outline: none;
   font-family: 'Arial', sans-serif;
   font-weight: 400;
