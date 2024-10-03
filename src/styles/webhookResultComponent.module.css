@@ -1,58 +1,61 @@
 .webhookContainer {
-    background-color: var(--third-color); /* Usa a variável de cor definida no projeto */
+    background-color: var(--third-color);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     margin: 20px auto;
     width: 100%;
-    max-width: 1000px; /* Limita a largura */
-    min-height: 50px; /* Altura mínima */
-  }
-  
-  .webhookTitle {
+    max-width: 1000px;
+    min-height: 50px;
+}
+
+.titleContainer {
+    display: flex;
+    justify-content: space-between; /* Alinha o título à esquerda e o botão à direita */
+    align-items: center;
+}
+
+.webhookTitle {
     font-size: 24px;
     color: var(--text-color);
     margin-bottom: 15px;
-    text-align: center;
-    
-  }
-  
-  .webhookText {
+}
+
+.copyButton {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.copyButton:hover {
+    background-color: darkgreen;
+}
+
+.webhookText {
     font-size: 16px;
     color: var(--text-color);
-    background-color: var(--secondary-color); /* Cor de fundo para destacar a área de resultado */
+    background-color: var(--secondary-color);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     padding: 10px;
     width: 100%;
     height: 50px;
-    resize: none; /* Desabilita o redimensionamento do textarea */
-    overflow-y: auto; /* Permite rolagem vertical quando o conteúdo exceder */
+    resize: none;
+    overflow-y: auto;
     text-align: center;
-  }
-  
-  .webhookText:focus {
-    outline: none; /* Remove o outline padrão quando o textarea é focado */
-  }
-  
-  .textareaContainer {
+}
+
+.textareaContainer {
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-  
-  .refreshButton {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .refreshButton:hover {
-    background-color: darkgreen; /* Cor mais escura ao passar o mouse */
-  }
-  
+}
+
+.webhookText:focus {
+    outline: none;
+}

@@ -3,6 +3,7 @@ import styles from '../styles/webhookResultComponent.module.css'; // Certifique-
 
 const WebhookResultComponent = ({ webhookUrl }) => {
   const [webhookResult, setWebhookResult] = useState('Nenhum resultado recebido ainda.');
+  const [copySuccess, setCopySuccess] = useState(''); // Estado para o feedback de cópia
 
   useEffect(() => {
     const fetchWebhookResult = async () => {
@@ -23,9 +24,23 @@ const WebhookResultComponent = ({ webhookUrl }) => {
     return () => clearInterval(intervalId); // Limpa o intervalo quando o componente desmontar
   }, [webhookUrl]);
 
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(webhookResult).then(() => {
+      setCopySuccess('Copiado!');
+      setTimeout(() => setCopySuccess(''), 2000); // Remove o feedback após 2 segundos
+    }).catch(err => {
+      console.error('Erro ao copiar texto: ', err);
+    });
+  };
+
   return (
     <div className={styles.webhookContainer}>
-      <h2 className={styles.webhookTitle}>Título Mercado Livre</h2>
+      <div className={styles.titleContainer}>
+        <h2 className={styles.webhookTitle}>Título Mercado Livre</h2>
+        <button className={styles.copyButton} onClick={copyToClipboard}>
+          {copySuccess ? copySuccess : 'Copiar'}
+        </button>
+      </div>
       <div className={styles.textareaContainer}>
         <textarea
           value={webhookResult}

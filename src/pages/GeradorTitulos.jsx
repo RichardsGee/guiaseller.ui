@@ -55,7 +55,7 @@ const GeradorTitulos = () => {
         <div className={styles.geradorContainer}>
           <h1 className={styles.title}>Gerador de Títulos</h1>
           <p className={styles.description}>
-            Bem-vindo ao Gerador de Títulos! Insira os detalhes do seu produto e gere títulos de alta conversão.
+            Insira os detalhes do seu produto e gere títulos de alta conversão.
           </p>
           
           <div className={styles.inputSection}>
