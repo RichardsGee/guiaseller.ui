@@ -1,37 +1,65 @@
+.filterWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .filterSection {
     display: flex;
     gap: 10px;
     align-items: center;
-    margin-bottom: var(--margin);
-    padding: 10px;
-    background-color: var(--secondary-color);
-    border-radius: 5px;
-}
-
-.filterSection label {
-    color: var(--text-color);
-    font-weight: 600;
+    width: 100%;
 }
 
 .filterSection input {
     padding: 8px;
     border-radius: 5px;
-    border: 1px solid #444444;
+    border: 1px solid #ccc;
     background-color: var(--background-color);
     color: var(--text-color);
-    flex-grow: 1; /* Faz o input crescer para ocupar o máximo de espaço possível */
+    width: 70%;
+    max-width: 800px;
 }
 
-.filterSection button {
-    padding: 8px 15px;
+.searchResults {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 6px 15px;
     border-radius: 5px;
-    border: 1px solid #444444;
-    background-color: var(--primary-color);
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    background-color: rgba(255, 255, 255, 0.1); /* Inicialmente transparente */
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: bold;
+    width: 70%;
+    max-width: 400px;
+    border: 0px solid #ccc;
+    transition: background-color 0.3s ease, opacity 0.3s ease; /* Suaviza a transição */
+    opacity: 0.5; /* Transparente quando sem busca */
 }
 
-.filterSection button:hover {
-    background-color: #ffaa00;
+.searchResults.active {
+    background-color: var(--background-color); /* Cor sólida quando ativo */
+    opacity: 1; /* Totalmente opaco com busca ativa */
+}
+
+.searchResultsIcon {
+    color: var(--primary-color); /* Cor principal para ícones */
+    font-size: 20px;
+}
+
+.resultCount {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: var(--accent-color);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.searchResults:hover {
+    background-color: var(--secondary-color);
 }

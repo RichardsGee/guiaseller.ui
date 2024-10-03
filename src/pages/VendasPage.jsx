@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import { AuthContext } from '../context/AuthContext';
 import styles from '../styles/vendas.module.css'; // Importando o CSS Module
 import filterStyles from '../styles/filter.module.css'; // Importando o CSS do filtro
-import { ArrowUpward, ArrowDownward, AttachMoney, PriceCheck, LocalShipping } from '@mui/icons-material'; // Ícones
+import { ArrowUpward, ArrowDownward, AttachMoney, PriceCheck, LocalShipping, Person, Store, Tag } from '@mui/icons-material'; // Ícones
 
 const VendasPage = () => {
   const [vendas, setVendas] = useState([]);
@@ -16,7 +16,7 @@ const VendasPage = () => {
   // Utilizando o contexto de autenticação para pegar informações do usuário
   const { user, signOut } = useContext(AuthContext);
   const username = user ? user.displayName || user.email : "No User Logged";
-  const userPhoto = user ? user.photoURL : null; 
+  const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
 
   useEffect(() => {
@@ -27,10 +27,10 @@ const VendasPage = () => {
         sku: 'JARR027',
         marketplaceEnvio: 'Kwai / Kwai',
         nome: 'Gislene Machado',
-        venda: 'R$ 109,90',
-        custo: 'R$ 10,99',
-        imposto: 'R$ 8,79',
-        lucro: 'R$ 90,12',
+        venda: 109.90, // Como número
+        custo: 10.99,
+        imposto: 8.79,
+        lucro: 90.12,
         margem: '82,00%',
         status: 'Aguardando Pagamento',
       },
@@ -40,14 +40,13 @@ const VendasPage = () => {
         sku: 'CO691486',
         marketplaceEnvio: 'Magalu / Coleta',
         nome: 'Rosany Vescovi',
-        venda: 'R$ 29,93',
-        custo: 'R$ 16,99',
-        imposto: 'R$ 2,39',
-        lucro: 'R$ 10,55',
+        venda: 29.93,
+        custo: 16.99,
+        imposto: 2.39,
+        lucro: 10.55,
         margem: '35,29%',
         status: 'Aguardando Pagamento',
       },
-      // Adicione mais vendas conforme necessário
     ];
     setVendas(vendasData);
   }, []);
@@ -64,14 +63,32 @@ const VendasPage = () => {
 
   // Função para filtrar as vendas com base no termo de busca
   const filteredVendas = vendas.filter(venda =>
-    venda.nome.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    venda.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
     venda.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
     venda.marketplaceEnvio.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   // Formatação para valores financeiros
   const formatCurrency = (value) => {
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+    const numberValue = parseFloat(value); // Converte o valor para número
+    if (isNaN(numberValue)) {
+      return 'R$ 0,00'; // Se não for um número, retorna 0
+    }
+    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(numberValue);
+  };
+
+  // Função para determinar o tipo de ícone com base no campo filtrado
+  const getSearchIcon = () => {
+    if (filteredVendas.some(venda => venda.nome.toLowerCase().includes(searchTerm.toLowerCase()))) {
+      return <Person className={filterStyles.searchResultsIcon} />;
+    }
+    if (filteredVendas.some(venda => venda.marketplaceEnvio.toLowerCase().includes(searchTerm.toLowerCase()))) {
+      return <Store className={filterStyles.searchResultsIcon} />;
+    }
+    if (filteredVendas.some(venda => venda.sku.toLowerCase().includes(searchTerm.toLowerCase()))) {
+      return <Tag className={filterStyles.searchResultsIcon} />;
+    }
+    return null; // Sem ícone se nenhum critério for atendido
   };
 
   return (
@@ -83,17 +100,24 @@ const VendasPage = () => {
         <div className={styles.vendasContainer}>
           <h1 className={styles.vendasTitle}>Meus Pedidos</h1>
 
-          {/* Campo de busca dentro da seção de filtro */}
-          <div className={filterStyles.filterSection}>
-            <label htmlFor="search"></label>
-            <input
-              id="search"
-              type="text"
-              placeholder="Digite o nome, SKU ou marketplace..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-            <button type="button">Buscar Venda</button>
+          {/* Filtro de busca e resultados dentro do mesmo container */}
+          <div className={filterStyles.filterWrapper}>
+            <div className={filterStyles.filterSection}>
+              <label htmlFor="search"></label>
+              <input
+                id="search"
+                type="text"
+                placeholder="Digite o nome, SKU ou marketplace..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+            </div>
+            {/* Exibindo o termo de busca e a quantidade de resultados */}
+            <div className={`${filterStyles.searchResults} ${searchTerm ? filterStyles.active : ''}`}>
+              {getSearchIcon()}
+              <p><strong>Busca:</strong> {searchTerm || 'N/A'}</p>
+              <p><strong>Resultado:</strong> {filteredVendas.length}</p>
+            </div>
           </div>
 
           <table className={styles.vendasTable}>

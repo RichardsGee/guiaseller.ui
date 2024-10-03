@@ -1,10 +1,10 @@
-import React, { useState } from 'react'; // Importando o useState junto com o React
+import React, { useState, useContext } from 'react'; // Importando o useState junto com o React
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
+import TopBar from '../components/TopBar'; // Importando o TopBar
 import Footer from '../components/Footer';
-import MainContent from '../components/MainContent'; 
+import MainContent from '../components/MainContent';
 import { AuthContext } from '../context/AuthContext';
-import { useContext } from 'react';
 import styles from '../styles/settingsPage.module.css';
 
 function SettingsPage() {
@@ -27,7 +27,10 @@ function SettingsPage() {
     <MainContent> {/* MainContent deve envolver todo o conteúdo */}
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
-      <div className="main-content"> {/* Certifique-se de que o container principal tem a classe main-content */}
+      
+      {/* Adicionando o TopBar */}
+      <div className="main-content">
+        <TopBar userPhoto={userPhoto} />
         <div className={styles.configContent}>
           <h1>Configurações</h1>
           <p>Aqui você pode ajustar as suas configurações de perfil e preferências.</p>

@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
-import FilterSection from '../components/FilterSection';
+import DashboardFilterSection from '../components/DashboardFilterSection'; // Importando o novo filtro
 import ChartSection from '../components/ChartSection';
 import AdditionalInfo from '../components/AdditionalInfo';
 import Footer from '../components/Footer';
@@ -22,7 +22,7 @@ function Dashboard() {
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
-        <FilterSection />
+        <DashboardFilterSection /> {/* Usando o novo componente de filtro */}
         <ChartSection />
         <AdditionalInfo />
       </div>
