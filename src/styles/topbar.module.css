@@ -39,22 +39,3 @@
 .icon {
     color: var(--icon-color) !important;
 }
-
-@media (max-width: 768px) {
-    .topBar {
-        grid-template-columns: 1fr;
-    }
-
-    .topBarItem {
-        padding: 10px;
-        height: auto;
-    }
-
-    .topBarContent {
-        text-align: center;
-    }
-
-    .topBarIcon {
-        display: none;
-    }
-}

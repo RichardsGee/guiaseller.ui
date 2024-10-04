@@ -29,22 +29,3 @@
 .sidebar {
     overflow-y: hidden; /* Impedir rolagem no sidebar */
 }
-
-
-.mainContent {
-    padding: 20px;
-    margin-left: 250px;
-    background-color: #f9f9f9;
-    transition: margin-left 0.3s ease-in-out;
-}
-
-.expanded {
-    margin-left: 0;
-}
-
-@media (max-width: 768px) {
-    .mainContent {
-        margin-left: 0;
-        padding: 10px;
-    }
-}
