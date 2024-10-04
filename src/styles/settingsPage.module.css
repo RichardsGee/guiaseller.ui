@@ -1,57 +1,101 @@
-/* Estilos principais para o container de configurações */
+/* Container principal de configurações */
 .configContent {
   background-color: var(--third-color);
-  padding: 10px;
+  padding: 15px; /* Reduzi o padding geral */
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  margin: 8px auto;
+  margin: 15px auto; /* Reduzi o espaçamento externo */
   width: 100%;
-  max-width: 1700px;
-  min-height: 79vh;
-  color: #fff;
+  max-width: 1400px;
+  color: var(--text-color);
   overflow-y: auto;
 }
 
-/* Seções de Configurações Pessoais e Empresa */
-.settingsContainer {
-  margin-top: 8px;
+/* Título principal */
+.mainTitle {
+  font-size: 28px;
+  margin-bottom: 10px; /* Reduzi o espaçamento */
+  color: var(--text-color);
+  text-align: center;
 }
 
-/* Cada item de configuração */
+/* Descrição */
+.description {
+  font-size: 16px;
+  margin-bottom: 15px; /* Reduzi o espaçamento */
+  text-align: center;
+  color: var(--text-muted-color);
+}
+
+/* Título de seções (Conta e Empresa) */
+.sectionTitle {
+  font-size: 20px;
+  margin: 20px 0 15px; /* Reduzi o espaçamento */
+  color: var(--text-color);
+  font-weight: bold;
+  border-bottom: 1px solid var(--primary-color);
+  padding-bottom: 5px;
+}
+
+/* Container de cada bloco de configurações */
+.settingsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Reduzi o gap entre os itens */
+}
+
+/* Item de configuração */
 .settingItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 0;
+  padding: 8px 0; /* Reduzi o padding vertical */
   border-bottom: 1px solid #444;
+  font-size: 14px;
 }
 
-/* Estilo dos rótulos (Nome, Email, Celular) */
-.settingItem span {
-  font-size: 14px; /* Diminui o tamanho da fonte dos rótulos */
-  color: var(--text-color); /* Altera a cor dos rótulos */
-  font-weight: 500; /* Ajusta o peso da fonte */
-  font-family: 'Arial', sans-serif; /* Define a fonte usada */
+/* Estilo dos rótulos (Nome, Email, Celular, etc.) */
+.settingItem label {
+  font-size: 16px;
+  color: var(--text-color);
+  font-weight: 600;
+  width: 30%;
 }
 
 /* Estilo dos campos de entrada */
 .inputField {
-  width: 50%;
-  padding: 5px;
-  font-size: 14px; /* Diminui o tamanho da fonte */
+  width: 65%;
+  padding: 6px; /* Reduzi o padding interno dos campos */
+  font-size: 14px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
   background-color: var(--background-color);
   color: var(--text-color);
   outline: none;
-  font-family: 'Arial', sans-serif;
-  font-weight: 400;
 }
 
-/* Títulos das seções */
-.configContent h2 {
-  font-size: 15px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  color: #fff;
+/* Estilo de foco para os campos de entrada */
+.inputField:focus {
+  border-color: var(--text-color);
+}
+
+/* Estilo responsivo */
+@media (max-width: 768px) {
+  .configContent {
+    padding: 10px;
+  }
+
+  .settingItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .settingItem label {
+    width: 100%;
+    margin-bottom: 5px; /* Reduzi o espaçamento */
+  }
+
+  .inputField {
+    width: 100%;
+  }
 }

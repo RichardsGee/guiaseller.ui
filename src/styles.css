@@ -6,7 +6,7 @@
     --footer-height: 40px;
     
     /* Variáveis de tema */
-    --background-color: #2a2d30;
+    --background-color: #171717;
     --text-color: #ffffff;
     --primary-color: #ffd700;
     --secondary-color: #1e1e1e;
@@ -16,6 +16,7 @@
     --userLevel-color: #fff700;
     --text2-color: #a020f0;
     --btn-color: #ffd700;
+    --container-color: #3f3f3f;
 
 }
 
@@ -32,17 +33,19 @@ body.light {
     --text2-color: #fff700;
     --text3-color: #000000;
     --btn-color: #ffd700;
+    --container-color: #eaeaea;
     
 }
 
 /* Definindo estilos para o tema escuro */
 body.dark {
-    --background-color: #1e1e1e;
+    --background-color: #171717;
     --text-color: #ffffff;
     --primary-color: #a020f0;
     --secondary-color: #2a2d30;
     --accent-color: #ffd700;
     --userLevel-color: #d8d100;
+    --container-color: #3f3f3f;
     
 }
 

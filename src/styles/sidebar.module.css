@@ -161,3 +161,11 @@
     
 }
 
+.sidebarIconIA {
+    width: 18px; /* Tamanho da imagem */
+    height: 18px; /* Tamanho da imagem */
+    margin-left: 10px; /* Espaço entre o texto e o ícone */
+    vertical-align: middle; /* Alinhamento vertical com o texto */
+  }
+  
+  

@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react'; // Importando o useState junto com o React
+import React, { useState, useContext } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
-import TopBar from '../components/TopBar'; // Importando o TopBar
+import TopBar from '../components/TopBar';
 import Footer from '../components/Footer';
 import MainContent from '../components/MainContent';
 import { AuthContext } from '../context/AuthContext';
@@ -24,22 +24,20 @@ function SettingsPage() {
   const [taxRate, setTaxRate] = useState('15%');
 
   return (
-    <MainContent> {/* MainContent deve envolver todo o conteúdo */}
+    <MainContent>
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
-      
-      {/* Adicionando o TopBar */}
+
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
         <div className={styles.configContent}>
-          <h1>Configurações</h1>
-          <p>Aqui você pode ajustar as suas configurações de perfil e preferências.</p>
-
+          <h1 className={styles.mainTitle}>Configurações</h1>
+          
           {/* Configurações da Conta */}
-          <h2>Configurações da Conta</h2>
+          <h2 className={styles.sectionTitle}>Configurações da Conta</h2>
           <div className={styles.settingsContainer}>
             <div className={styles.settingItem}>
-              <span>Nome:</span>
+              <label>Nome:</label>
               <input
                 type="text"
                 value={name}
@@ -49,7 +47,7 @@ function SettingsPage() {
             </div>
 
             <div className={styles.settingItem}>
-              <span>Email:</span>
+              <label>Email:</label>
               <input
                 type="email"
                 value={email}
@@ -59,7 +57,7 @@ function SettingsPage() {
             </div>
 
             <div className={styles.settingItem}>
-              <span>Celular:</span>
+              <label>Celular:</label>
               <input
                 type="tel"
                 value={phone}
@@ -70,7 +68,7 @@ function SettingsPage() {
             </div>
 
             <div className={styles.settingItem}>
-              <span>Nível do Usuário:</span>
+              <label>Nível do Usuário:</label>
               <input
                 type="text"
                 value={userLevel}
@@ -81,10 +79,10 @@ function SettingsPage() {
           </div>
 
           {/* Configurações da Empresa */}
-          <h2>Configurações da Empresa</h2>
+          <h2 className={styles.sectionTitle}>Configurações da Empresa</h2>
           <div className={styles.settingsContainer}>
             <div className={styles.settingItem}>
-              <span>Nome da Empresa:</span>
+              <label>Nome da Empresa:</label>
               <input
                 type="text"
                 value={companyName}
@@ -94,7 +92,7 @@ function SettingsPage() {
             </div>
 
             <div className={styles.settingItem}>
-              <span>CNPJ:</span>
+              <label>CNPJ:</label>
               <input
                 type="text"
                 value={cnpj}
@@ -104,7 +102,7 @@ function SettingsPage() {
             </div>
 
             <div className={styles.settingItem}>
-              <span>Nome Fantasia:</span>
+              <label>Nome Fantasia:</label>
               <input
                 type="text"
                 value={fantasyName}
@@ -114,7 +112,7 @@ function SettingsPage() {
             </div>
 
             <div className={styles.settingItem}>
-              <span>Taxa de Imposto Paga Atualmente:</span>
+              <label>Taxa de Imposto Paga Atualmente:</label>
               <input
                 type="text"
                 value={taxRate}
