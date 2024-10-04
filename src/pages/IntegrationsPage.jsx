@@ -14,12 +14,12 @@ const IntegrationsPage = () => {
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
 
-  // Definindo o estado de integrações: Disponíveis e Em breve
+  // Definindo o estado de integrações: Disponíveis e Em breve com logos específicas
   const [integrations, setIntegrations] = useState([
-    { nome: 'Mercado Livre', loja: '', integrado: false, ativo: false, disponivel: true },
-    { nome: 'Bling', loja: '', integrado: false, ativo: false, disponivel: false },
-    { nome: 'Shopee', loja: '', integrado: false, ativo: false, disponivel: false },
-    { nome: 'Amazon', loja: '', integrado: false, ativo: false, disponivel: false },
+    { nome: 'Mercado Livre', loja: '', integrado: false, ativo: false, disponivel: true, logo: 'https://i.imgur.com/yRascr7.png' },
+    { nome: 'Bling', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/YXoGxGm.png' },
+    { nome: 'Shopee', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/h2d84rv.png' },
+    { nome: 'Amazon', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/IHDjUqS.png' },
   ]);
 
   const handleIntegrate = (index) => {
@@ -52,7 +52,7 @@ const IntegrationsPage = () => {
               <li key={index} className={styles.integrationItem}>
                 <div className={styles.integrationInfo}>
                   <img
-                    src="https://www.imagensempng.com.br/wp-content/uploads/2023/05/124-1.png" 
+                    src={integration.logo} 
                     alt={`${integration.nome} logo`}
                     className={styles.integrationLogo}
                   />
@@ -97,7 +97,7 @@ const IntegrationsPage = () => {
               <li key={index} className={`${styles.integrationItem} ${styles.inactive}`}>
                 <div className={styles.integrationInfo}>
                   <img
-                    src={`/${integration.nome.toLowerCase().replace(' ', '_')}.png`} 
+                    src={integration.logo} 
                     alt={`${integration.nome} logo`}
                     className={styles.integrationLogo}
                   />
