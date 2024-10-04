@@ -5,7 +5,7 @@ import TopBar from '../components/TopBar';
 import Footer from '../components/Footer';
 import { AuthContext } from '../context/AuthContext';
 import styles from '../styles/produtos.module.css';
-import filterStyles from '../styles/filter.module.css'; // Importando o CSS do filtro
+import filterStyles from '../styles/filter.module.css';
 
 function ProdutosPage() {
   const [produtos, setProdutos] = useState([]);

@@ -5,7 +5,7 @@ import TopBar from '../components/TopBar';
 import Footer from '../components/Footer';
 import { AuthContext } from '../context/AuthContext';
 import styles from '../styles/vendas.module.css'; // Importando o CSS Module
-import filterStyles from '../styles/filter.module.css'; // Importando o CSS do filtro
+import filterStyles from '../styles/filter.module.css';
 import { ArrowUpward, ArrowDownward, AttachMoney, PriceCheck, LocalShipping, Person, Store, Tag } from '@mui/icons-material'; // Ícones
 
 const VendasPage = () => {
