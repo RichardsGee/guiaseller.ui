@@ -52,7 +52,7 @@ const IntegrationsPage = () => {
               <li key={index} className={styles.integrationItem}>
                 <div className={styles.integrationInfo}>
                   <img
-                    src={`/${integration.nome.toLowerCase().replace(' ', '_')}.png`} 
+                    src="https://www.imagensempng.com.br/wp-content/uploads/2023/05/124-1.png" 
                     alt={`${integration.nome} logo`}
                     className={styles.integrationLogo}
                   />

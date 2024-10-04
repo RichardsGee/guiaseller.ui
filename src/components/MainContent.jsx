@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from '../styles/maincontent.module.css'; // Importando o CSS Module
+import styles from '../styles/maincontent.module.css';
 
-function MainContent({ children }) {
+function MainContent({ children, isSidebarOpen }) {
   return (
-    <div className={styles.mainContent}> {/* Aplicando o estilo correto para o conteúdo principal */}
+    <div className={`${styles.mainContent} ${!isSidebarOpen ? styles.expanded : ''}`}>
       {children}
     </div>
   );

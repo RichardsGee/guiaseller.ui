@@ -40,3 +40,20 @@
     cursor: pointer;
     font-size: 18px;
 }
+
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .logout-btn,
+    .theme-toggle-btn {
+        padding: 5px 8px;
+    }
+}
