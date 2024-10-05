@@ -1,0 +1,72 @@
+// /components/AccountSettings.jsx
+import React from 'react';
+import styles from '../styles/settingsPage.module.css';
+
+const AccountSettings = ({ name, setName, email, setEmail, phone, setPhone, userLevel, isEditing, handleEditClick, handleSave }) => {
+  return (
+    <div className={styles.settingsColumn}>
+      <h2 className={styles.sectionTitle}>Configurações da Conta</h2>
+      <button 
+        className={styles.editButton} 
+        onClick={handleEditClick}
+      >
+        {isEditing ? 'Cancelar' : 'Editar'}
+      </button>
+
+      <div className={styles.settingsContainer}>
+        <div className={styles.settingItem}>
+          <label>Nome:</label>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
+            disabled={!isEditing}
+          />
+        </div>
+
+        <div className={styles.settingItem}>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
+            disabled={!isEditing}
+          />
+        </div>
+
+        <div className={styles.settingItem}>
+          <label>Celular:</label>
+          <input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
+            disabled={!isEditing}
+            placeholder="(xx) xxxx-xxxx"
+          />
+        </div>
+
+        <div className={styles.settingItem}>
+          <label>Nível do Usuário:</label>
+          <input
+            type="text"
+            value={userLevel}
+            readOnly
+            className={styles.inputField}
+          />
+        </div>
+
+        {/* Exibir o botão de salvar se estiver em modo de edição */}
+        {isEditing && (
+          <button className={styles.saveButton} onClick={handleSave}>
+            Salvar
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default AccountSettings;
