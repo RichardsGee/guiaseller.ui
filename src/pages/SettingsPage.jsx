@@ -30,95 +30,106 @@ function SettingsPage() {
 
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
+
         <div className={styles.configContent}>
           <h1 className={styles.mainTitle}>Configurações</h1>
           
-          {/* Configurações da Conta */}
-          <h2 className={styles.sectionTitle}>Configurações da Conta</h2>
-          <div className={styles.settingsContainer}>
-            <div className={styles.settingItem}>
-              <label>Nome:</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className={styles.inputField}
-              />
+          {/* Organizando as seções lado a lado */}
+          <div className={styles.settingsGrid}>
+
+            {/* Coluna de Configurações da Conta */}
+            <div className={styles.settingsColumn}>
+              <h2 className={styles.sectionTitle}>Configurações da Conta</h2>
+              <button className={styles.editButton}>Editar</button> {/* Botão de Editar no topo direito */}
+              <div className={styles.settingsContainer}>
+                <div className={styles.settingItem}>
+                  <label>Nome:</label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className={styles.inputField}
+                  />
+                </div>
+
+                <div className={styles.settingItem}>
+                  <label>Email:</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={styles.inputField}
+                  />
+                </div>
+
+                <div className={styles.settingItem}>
+                  <label>Celular:</label>
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className={styles.inputField}
+                    placeholder="(xx) xxxx-xxxx"
+                  />
+                </div>
+
+                <div className={styles.settingItem}>
+                  <label>Nível do Usuário:</label>
+                  <input
+                    type="text"
+                    value={userLevel}
+                    readOnly
+                    className={styles.inputField}
+                  />
+                </div>
+              </div>
             </div>
 
-            <div className={styles.settingItem}>
-              <label>Email:</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className={styles.inputField}
-              />
-            </div>
+            {/* Coluna de Configurações da Empresa */}
+            <div className={styles.settingsColumn}>
+              <h2 className={styles.sectionTitle}>Configurações da Empresa</h2>
+              <button className={styles.editButton}>Editar</button> {/* Botão de Editar no topo direito */}
+              <div className={styles.settingsContainer}>
+                <div className={styles.settingItem}>
+                  <label>Nome da Empresa:</label>
+                  <input
+                    type="text"
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    className={styles.inputField}
+                  />
+                </div>
 
-            <div className={styles.settingItem}>
-              <label>Celular:</label>
-              <input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className={styles.inputField}
-                placeholder="(xx) xxxx-xxxx"
-              />
-            </div>
+                <div className={styles.settingItem}>
+                  <label>CNPJ:</label>
+                  <input
+                    type="text"
+                    value={cnpj}
+                    onChange={(e) => setCnpj(e.target.value)}
+                    className={styles.inputField}
+                  />
+                </div>
 
-            <div className={styles.settingItem}>
-              <label>Nível do Usuário:</label>
-              <input
-                type="text"
-                value={userLevel}
-                readOnly
-                className={styles.inputField}
-              />
-            </div>
-          </div>
+                <div className={styles.settingItem}>
+                  <label>Nome Fantasia:</label>
+                  <input
+                    type="text"
+                    value={fantasyName}
+                    onChange={(e) => setFantasyName(e.target.value)}
+                    className={styles.inputField}
+                  />
+                </div>
 
-          {/* Configurações da Empresa */}
-          <h2 className={styles.sectionTitle}>Configurações da Empresa</h2>
-          <div className={styles.settingsContainer}>
-            <div className={styles.settingItem}>
-              <label>Nome da Empresa:</label>
-              <input
-                type="text"
-                value={companyName}
-                onChange={(e) => setCompanyName(e.target.value)}
-                className={styles.inputField}
-              />
-            </div>
-
-            <div className={styles.settingItem}>
-              <label>CNPJ:</label>
-              <input
-                type="text"
-                value={cnpj}
-                onChange={(e) => setCnpj(e.target.value)}
-                className={styles.inputField}
-              />
-            </div>
-
-            <div className={styles.settingItem}>
-              <label>Nome Fantasia:</label>
-              <input
-                type="text"
-                value={fantasyName}
-                onChange={(e) => setFantasyName(e.target.value)}
-                className={styles.inputField}
-              />
-            </div>
-
-            <div className={styles.settingItem}>
-              <label>Taxa de Imposto Paga Atualmente:</label>
-              <input
-                type="text"
-                value={taxRate}
-                onChange={(e) => setTaxRate(e.target.value)}
-                className={styles.inputField}
-              />
+                <div className={styles.settingItem}>
+                  <label>Taxa de Imposto Paga Atualmente:</label>
+                  <input
+                    type="text"
+                    value={taxRate}
+                    onChange={(e) => setTaxRate(e.target.value)}
+                    className={styles.inputField}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

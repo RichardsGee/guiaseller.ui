@@ -35,6 +35,7 @@
     width: 300px;
     min-height: 200px;
     text-align: left;
+    
 }
 
 .toolName {
@@ -73,11 +74,13 @@
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    font-weight: bold;
+    
 }
 
 .adquiridoButton {
     background-color: green;
-    color: white;
+    color: var(--text-color);
     border: none;
     background-color: var(--third-color);
 }
