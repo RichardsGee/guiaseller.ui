@@ -33,7 +33,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: var(--background-color);
+  background-color: var(--secondary-color);
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   margin-bottom: 15px;
@@ -108,17 +108,18 @@
   width: 14px;
   left: 3px;
   bottom: 3px;
-  background-color: white;
+  background-color: var(--secondary-color);
   transition: 0.4s;
   border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color: var(--text-color); /* Active state */
+  background-color: var(--primary-color); /* Active state */
 }
 
 input:checked + .slider:before {
   transform: translateX(14px);
+  background-color: var(--text-color); /* Active state */
 }
 
 .integrationStatus {
@@ -150,7 +151,7 @@ input:checked + .slider:before {
 }
 
 .integrateButton {
-  background-color: var(--primary-color); /* Default button for integrating */
+  background-color: var(--container-color); /* Default button for integrating */
 }
 
 .activateButton {
@@ -158,7 +159,7 @@ input:checked + .slider:before {
 }
 
 .activatedButton {
-  background-color: green; /* Button when already activated */
+  background-color: var(--primary-color); /* Button when already activated */
 }
 
 .activateButton:hover, .integrateButton:hover, .activatedButton:hover {

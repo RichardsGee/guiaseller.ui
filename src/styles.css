@@ -19,7 +19,7 @@
     --container-color: #3f3f3f;
     --btn2-color: #2F2F2F;
     --tools-color: #02B075;
-    --ai-color: linear-gradient(135deg, #00d9ff, var(--primary-color));
+    --ai-color: #02B075;
 
 }
 
@@ -52,7 +52,7 @@ body.dark {
     --btn-color: #202020;
     --btn2-color: #2F2F2F;
     --tools-color: #02B075;
-    --ai-color: linear-gradient(135deg, #00d9ff, var(--primary-color));
+    --ai-color: #02B075;
 }
 
 /* Resetando estilos padrão do navegador */
