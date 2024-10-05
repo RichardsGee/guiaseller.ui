@@ -10,6 +10,8 @@
     min-height: 79vh;
     border-top-left-radius: 20px; /* Arredonda o canto superior direito */
     border-bottom-left-radius: 20px; /* Arredonda o canto inferior direito */
+    border-top-right-radius: 20px; /* Arredonda o canto superior direito */
+    border-bottom-right-radius: 20px; /* Arredonda o canto inferior direito */
 }
 
 .title {

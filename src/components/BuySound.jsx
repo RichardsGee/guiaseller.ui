@@ -35,7 +35,7 @@ const BuySound = ({ play, stop }) => {
     }
   };
 
-  // Função para parar som gradualmente
+  // Função para parar som gradualmente com fade-out mais rápido
   const stopSound = () => {
     if (loadingSoundRef.current) {
       clearTimeout(fadeOutTimeout.current); // Limpa qualquer fade anterior
@@ -43,16 +43,16 @@ const BuySound = ({ play, stop }) => {
 
       const fadeOut = () => {
         if (volume > 0.1) {
-          volume -= 0.1;
+          volume -= 0.2; // Reduz o volume em incrementos maiores
           loadingSoundRef.current.volume = volume;
-          fadeOutTimeout.current = setTimeout(fadeOut, 100);
+          fadeOutTimeout.current = setTimeout(fadeOut, 50); // Diminui o intervalo para fazer o fade-out mais rápido
         } else {
           loadingSoundRef.current.volume = 0;
           loadingSoundRef.current.pause();
         }
       };
 
-      fadeOut(); // Inicia o fade
+      fadeOut(); // Inicia o fade-out
     }
   };
 
@@ -61,4 +61,4 @@ const BuySound = ({ play, stop }) => {
   );
 };
 
-export default BuySound; // Certifique-se de exportar o componente corretamente
+export default BuySound;

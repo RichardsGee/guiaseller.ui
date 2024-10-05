@@ -6,6 +6,8 @@
     gap: var(--margin);
     margin-bottom: var(--margin);
     width: 100%;
+    
+    
 }
 
 .topBarItem {
@@ -18,17 +20,25 @@
     align-items: center;
     transition: transform 0.2s, box-shadow 0.2s;
     height: 80px;
+    border-top-left-radius: 20px; /* Arredonda o canto superior direito */
+    border-bottom-left-radius: 20px; /* Arredonda o canto inferior direito */
+    border-top-right-radius: 20px; /* Arredonda o canto superior direito */
+    border-bottom-right-radius: 20px; /* Arredonda o canto inferior direito */
+    
+    
 }
 
 .topBarItem:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    
 }
 
 .topBarIcon .material-icons {
     
     color: var(--icon-color) !important; /* Usando !important para garantir a aplicação */
     font-size: 30px;
+    
 }
 
 
@@ -37,9 +47,12 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    
+    
 }
 .icon {
     color: var(--tools-color) !important;
     font-size: 30px;
+    
     
 }
