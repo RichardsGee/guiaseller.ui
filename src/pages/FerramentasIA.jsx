@@ -111,8 +111,14 @@ const FerramentasIA = () => {
                   <button 
                     className={ferramenta.ativo ? styles.adquiridoButton : styles.assinarButton}
                     onClick={() => ferramenta.ativo && handleUseTool(ferramenta.route)} // Se ativo, navega para a página
-                    onMouseEnter={() => { setHovered(index); playSound(); }} 
-                    onMouseLeave={() => { setHovered(null); stopSound(); }}
+                    onMouseEnter={() => { 
+                      setHovered(index); 
+                      if (!ferramenta.ativo) playSound();  // Som apenas no botão "Assinar"
+                    }} 
+                    onMouseLeave={() => { 
+                      setHovered(null); 
+                      stopSound();  // Pausa o som quando o mouse sai do botão
+                    }}
                   >
                     {ferramenta.ativo ? 'Usar' : 'Assinar'} 
                     {!ferramenta.ativo && (
