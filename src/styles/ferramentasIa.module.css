@@ -35,7 +35,6 @@
     width: 300px;
     min-height: 200px;
     text-align: left;
-    
 }
 
 .toolName {
@@ -43,7 +42,6 @@
     color: var(--text-color);
     margin-bottom: 10px;
     text-align: left;
-    
 }
 
 .toolDesc {
@@ -58,23 +56,8 @@
     top: 10px; /* Distância do topo */
     right: 10px; /* Distância da direita */
     font-size: 24px;
-    color: rgb(255, 255, 255);
-    transition: color 0.3s ease, font-size 0.3s ease; /* Suaviza a transição de cor e tamanho */
-}
-
-.toolCard:hover .iconInativo {
-    color: #00ff00; /* Cor quando o mouse está sobre a ferramenta inativa */
-    font-size: 26px; /* Aumente o tamanho do ícone quando hover */
-}
-
-/* Adicionando hover para o botão Assinar */
-.toolCard:hover .assinarButton:hover .iconInativo {
-    color: #00ff00; /* Cor verde quando o botão Assinar é hover */
-    font-size: 26px; /* Tamanho maior do ícone quando hover */
-}
-
-.assinarButton:hover .iconInativo {
-    color: #00ff00; /* Quando o mouse está sobre Assinar */
+    color: gray; /* Cor inicial do cadeado */
+    transition: color 0.3s ease-in-out; /* Transição suave apenas na cor */
 }
 
 .adquiridoButton, .assinarButton {
@@ -90,7 +73,6 @@
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    
 }
 
 .adquiridoButton {
@@ -100,14 +82,38 @@
     background-color: var(--third-color);
 }
 
+/* Estilo inicial do botão Assinar */
 .assinarButton {
-    background-color: var(--third-color);
+    background-color: #202123; /* Cor inicial do background */
     color: white;
     border: none;
+    position: relative;
+    overflow: hidden; /* Para garantir que a barra de carregamento fique dentro do botão */
+    background-size: 200% 100%; /* Tamanho maior para o efeito de carregamento */
+    transition: background-position 2s ease-in-out, background-color 2s ease-in-out; /* Transição suave */
 }
 
+/* Efeito de hover para aplicar o degradê */
 .assinarButton:hover {
-    background-color: darkgreen;
+    animation: shake 0.5s infinite; /* Tremor no botão */
+    background-image: linear-gradient(135deg, #17181A, #02B075, var(--primary-color)); /* Degradê após a cor inicial */
+    background-position: 100% 0; /* Move o background para o lado direito ao iniciar hover */
+}
+
+/* Animação de tremor */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-2px);
+    }
+    50% {
+        transform: translateX(2px);
+    }
+    75% {
+        transform: translateX(-2px);
+    }
 }
 
 .adquiridoButton:hover {
@@ -125,6 +131,7 @@
     font-size: 12px;
     margin-left: auto;
 }
+
 .categoriaButtons {
     display: flex;
     justify-content: center;

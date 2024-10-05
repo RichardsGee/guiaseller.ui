@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
@@ -20,6 +20,8 @@ const FerramentasIA = () => {
   const [hovered, setHovered] = useState(null);
   const [categoriaAtiva, setCategoriaAtiva] = useState('Todas'); // Categoria ativa
 
+  const loadingSoundRef = useRef(null); // Referência para o som
+
   const ferramentasData = [
     { nome: 'Gerador de Títulos', descricao: 'Crie títulos de alta conversão.', ativo: true, custo: 'R$ 29,90', route: '/ferramentas-ia/gerador-titulos', categoria: 'Geradores' },
     { nome: 'Gerador de Descrições', descricao: 'Gere descrições otimizadas para SEO.', ativo: false, custo: 'R$ 39,90', categoria: 'Geradores' },
@@ -40,6 +42,31 @@ const FerramentasIA = () => {
   const handleUseTool = (route) => {
     if (route) {
       navigate(route);
+    }
+  };
+
+  // Função para tocar som ao passar o mouse sobre o botão
+  const playSound = () => {
+    if (loadingSoundRef.current) {
+      loadingSoundRef.current.currentTime = 0;
+
+      // Verifica se o navegador permite tocar o som
+      const playPromise = loadingSoundRef.current.play();
+
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          // Som tocando
+        }).catch(error => {
+          console.log("Som bloqueado: O usuário precisa interagir com a página primeiro.");
+        });
+      }
+    }
+  };
+
+  // Função para pausar som ao tirar o mouse do botão
+  const stopSound = () => {
+    if (loadingSoundRef.current) {
+      loadingSoundRef.current.pause();
     }
   };
 
@@ -84,8 +111,8 @@ const FerramentasIA = () => {
                   <button 
                     className={ferramenta.ativo ? styles.adquiridoButton : styles.assinarButton}
                     onClick={() => ferramenta.ativo && handleUseTool(ferramenta.route)} // Se ativo, navega para a página
-                    onMouseEnter={() => setHovered(index)} 
-                    onMouseLeave={() => setHovered(null)}
+                    onMouseEnter={() => { setHovered(index); playSound(); }} 
+                    onMouseLeave={() => { setHovered(null); stopSound(); }}
                   >
                     {ferramenta.ativo ? 'Usar' : 'Assinar'} 
                     {!ferramenta.ativo && (
@@ -96,6 +123,9 @@ const FerramentasIA = () => {
               </div>
             ))}
           </div>
+
+          {/* Elemento de áudio para som de carregamento */}
+          <audio ref={loadingSoundRef} src="/loading-sound.mp3" />
         </div>
       </div>
       <Footer />
