@@ -9,7 +9,7 @@
 }
 
 .topBarItem {
-    background: var(--third-color);
+    background: var(--background-color);
     padding: var(--padding);
     border-radius: 10px;
     color: var(--text-color);

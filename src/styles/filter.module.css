@@ -4,6 +4,7 @@
     align-items: center;
     margin-bottom: 20px;
     width: 100%;
+    
 }
 
 .filterSection {
@@ -11,16 +12,18 @@
     gap: 10px;
     align-items: center;
     width: 100%; /* Certifique-se que ambas as seções ocupem a largura completa */
+    
 }
 
 .filterSection input {
     padding: 10px; /* Padding consistente */
     border-radius: 5px;
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--backgroun-color);
     background-color: var(--background-color);
     color: var(--text-color);
     width: 100%; /* O input ocupa 100% da seção */
     max-width: 600px; /* Ajuste o valor de acordo com o layout desejado */
+    margin-left: -10px;
 }
 
 .searchResults {

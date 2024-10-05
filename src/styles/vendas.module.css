@@ -33,7 +33,7 @@
 }
 
 .vendasTable th {
-    background-color: var(--primary-color);
+    background-color: var(--background-color);
     color: var(--text-color);
 }
 

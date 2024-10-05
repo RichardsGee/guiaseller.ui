@@ -23,7 +23,7 @@
   
   .filterButton {
     padding: 8px 15px;
-    background-color: var(--primary-color);
+    background-color: var(--btn-color);
     border: none;
     border-radius: 5px;
     color: #fff;
@@ -32,6 +32,6 @@
   }
   
   .filterButton:hover {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
   }
   

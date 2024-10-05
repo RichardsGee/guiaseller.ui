@@ -12,11 +12,12 @@
     --secondary-color: #1e1e1e;
     --accent-color: #a020f0;
     --icon-color: #fff400;
-    --third-color: #242424;
+    --third-color: #202123;
     --userLevel-color: #fff700;
     --text2-color: #a020f0;
     --btn-color: #ffd700;
     --container-color: #3f3f3f;
+    --btn2-color: #2F2F2F;
 
 }
 
@@ -42,11 +43,12 @@ body.dark {
     --background-color: #171717;
     --text-color: #ffffff;
     --primary-color: #a020f0;
-    --secondary-color: #2a2d30;
+    --secondary-color: #202123;
     --accent-color: #ffd700;
     --userLevel-color: #d8d100;
     --container-color: #3f3f3f;
-    
+    --btn-color: #202020;
+    --btn2-color: #2F2F2F;
 }
 
 /* Resetando estilos padrão do navegador */
@@ -142,7 +144,7 @@ body {
 }
 
 .logout-btn {
-    background-color: var(--primary-color);
+    background-color: var(--background-color);
     color: var(--text-color);
     border: none;
     padding: 5px 10px;
@@ -153,7 +155,7 @@ body {
 }
 
 .logout-btn:hover {
-    background-color: #ffaa00;
+    background-color: var(--primary-color);
 }
 
 .main-content {

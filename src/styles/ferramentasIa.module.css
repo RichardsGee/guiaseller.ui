@@ -23,7 +23,7 @@
 }
 
 .toolCard {
-    background-color: var(--secondary-color);
+    background-color: var(--background-color);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -34,12 +34,16 @@
     position: relative;
     width: 300px;
     min-height: 200px;
+    text-align: left;
+    
 }
 
 .toolName {
     font-size: 18px;
     color: var(--text-color);
     margin-bottom: 10px;
+    text-align: left;
+    
 }
 
 .toolDesc {
@@ -86,16 +90,18 @@
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
+    
 }
 
 .adquiridoButton {
     background-color: green;
     color: white;
     border: none;
+    background-color: var(--third-color);
 }
 
 .assinarButton {
-    background-color: var(--primary-color);
+    background-color: var(--third-color);
     color: white;
     border: none;
 }
@@ -105,7 +111,7 @@
 }
 
 .adquiridoButton:hover {
-    background-color: darkgreen;
+    background-color: var(--primary-color);
 }
 
 .inactive {
@@ -129,7 +135,7 @@
 .categoriaButton {
     padding: 10px 20px;
     border-radius: 5px;
-    border: 1px solid var(--primary-color);
+    border: 0x solid var(--primary-color);
     background-color: var(--secondary-color);
     color: var(--text-color);
     cursor: pointer;
