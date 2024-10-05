@@ -1,6 +1,6 @@
 // /components/AccountSettings.jsx
 import React from 'react';
-import styles from '../styles/settingsPage.module.css';
+import styles from './accountsSettings.module.css';
 
 const AccountSettings = ({ name, setName, email, setEmail, phone, setPhone, userLevel, isEditing, handleEditClick, handleSave, isFieldEmpty }) => {
   return (

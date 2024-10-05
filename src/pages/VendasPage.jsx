@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import TopBar from '../components/TopBar';
-import Footer from '../components/Footer';
+import Header from '../components/Header/Header';
+import Sidebar from '../components/Sidebar/Sidebar';
+import TopBar from '../components/TopBar/TopBar';
+import Footer from '../components/Footer/Footer';
 import { AuthContext } from '../context/AuthContext';
 import styles from '../styles/vendas.module.css'; // Importando o CSS Module
 import filterStyles from '../styles/filter.module.css';

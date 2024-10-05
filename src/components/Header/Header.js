@@ -1,7 +1,7 @@
 // src/components/Header.js
 import React, { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext'; // Importando o contexto de tema
-import styles from '../styles/header.module.css'; // Importando o CSS Module
+import { ThemeContext } from '../../context/ThemeContext'; // Importando o contexto de tema
+import styles from './header.module.css'; // Importando o CSS Module
 
 function Header({ username, logout }) {
   const { theme, toggleTheme } = useContext(ThemeContext); // Obtendo o tema atual e a função de alternância

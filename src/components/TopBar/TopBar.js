@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/topbar.module.css'; // Certifique-se de que o caminho do CSS Module está correto
+import styles from './topbar.module.css'; // Certifique-se de que o caminho do CSS Module está correto
 
 function TopBar() {
   return (

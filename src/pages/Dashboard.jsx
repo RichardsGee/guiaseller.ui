@@ -1,12 +1,12 @@
 import React from 'react';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import TopBar from '../components/TopBar';
-import DashboardFilterSection from '../components/DashboardFilterSection'; // Importando o novo filtro
-import ChartSection from '../components/ChartSection';
-import AdditionalInfo from '../components/AdditionalInfo';
-import Footer from '../components/Footer';
-import MainContent from '../components/MainContent'; // Importando o MainContent
+import Header from '../components/Header/Header';
+import Sidebar from '../components/Sidebar/Sidebar';
+import TopBar from '../components/TopBar/TopBar';
+import DashboardFilterSection from '../components/DashboardFilterSection/DashboardFilterSection'; // Importando o novo filtro
+import ChartSection from '../components/ChartSection/ChartSection';
+import AdditionalInfo from '../components/AdditionalInfo/AdditionalInfo';
+import Footer from '../components/Footer/Footer';
+import MainContent from '../components/MainContent/MainContent'; // Importando o MainContent
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
 

@@ -3,7 +3,7 @@ import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/Dashboard";
 import VendasPage from "./pages/VendasPage"; 
-import SettingsPage from "./pages/SettingsPage"; 
+import SettingsPage from "./pages/SettingsPage/SettingsPage"; 
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./context/UserContext"; 
 import ProdutosPage from './pages/ProdutosPage'; 

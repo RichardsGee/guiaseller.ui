@@ -1,14 +1,14 @@
 // /pages/SettingsPage.jsx
 import React, { useState, useContext } from 'react';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import TopBar from '../components/TopBar';
-import Footer from '../components/Footer';
-import MainContent from '../components/MainContent';
-import AccountSettings from '../components/AccountSettings';
-import CompanySettings from '../components/CompanySettings';
-import { AuthContext } from '../context/AuthContext';
-import styles from '../styles/settingsPage.module.css';
+import Header from '../../components/Header/Header';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import TopBar from '../../components/TopBar/TopBar';
+import Footer from '../../components/Footer/Footer';
+import MainContent from '../../components/MainContent/MainContent';
+import AccountSettings from '../../components/AccountSettings/AccountSettings';
+import CompanySettings from '../../components/CompanySettings/CompanySettings';
+import { AuthContext } from '../../context/AuthContext';
+import styles from './settingsPage.module.css';
 
 function SettingsPage() {
   const { user, signOut } = useContext(AuthContext);

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Header from '../components/Header';
-import Sidebar from '../components/Sidebar';
-import TopBar from '../components/TopBar';
-import Footer from '../components/Footer';
+import Header from '../components/Header/Header';
+import Sidebar from '../components/Sidebar/Sidebar';
+import TopBar from '../components/TopBar/TopBar';
+import Footer from '../components/Footer/Footer';
 import styles from '../styles/ferramentasIa.module.css';
-import MainContent from '../components/MainContent'; 
+import MainContent from '../components/MainContent/MainContent'; 
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
 import { Lock, LockOpen } from '@mui/icons-material';

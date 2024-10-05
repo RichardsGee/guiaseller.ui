@@ -1,6 +1,6 @@
 // /components/Sidebar.jsx
 import { Link } from 'react-router-dom'; 
-import styles from '../styles/sidebar.module.css'; 
+import styles from './sidebar.module.css'; 
 import React from 'react';
 
 function Sidebar({ userPhoto, username, userEmail, userLevel, isComplete }) {

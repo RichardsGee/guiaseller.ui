@@ -1,6 +1,6 @@
 // /components/CompanySettings.jsx
 import React from 'react';
-import styles from '../styles/settingsPage.module.css';
+import styles from './settingsPage.module.css';
 
 const CompanySettings = ({ companyName, setCompanyName, cnpj, setCnpj, fantasyName, setFantasyName, taxRate, setTaxRate, isEditing, handleEditClick, handleSave, isFieldEmpty }) => {
   return (

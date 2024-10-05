@@ -1,0 +1,165 @@
+/* Container principal de configurações */
+.configContent {
+    background-color: var(--third-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin: 20px auto;
+    width: 100%;
+    max-width: 1700px;
+    color: var(--text-color);
+    overflow-y: auto;
+    min-height: 79vh;
+}
+
+/* Título principal */
+.mainTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    text-align: center;
+}
+
+/* Container para alinhar lado a lado as seções de Conta e Empresa */
+.settingsGrid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* Cada coluna de configuração (Conta e Empresa) */
+.settingsColumn {
+    flex: 1;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    position: relative;
+    /* Necessário para posicionar o botão no topo direito */
+}
+
+/* Botão de Editar no topo direito de cada container */
+.editButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 8px 15px;
+    font-size: 14px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.editButton:hover {
+    background-color: var(--primary-color);
+}
+
+/* Botão de Salvar */
+.saveButton {
+    margin-top: 20px;
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.saveButton:hover {
+    background-color: var(--primary-dark-color);
+}
+
+/* Título de seções (Conta e Empresa) */
+.sectionTitle {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    font-weight: bold;
+    border-bottom: 2px solid var(--background-color);
+    padding-bottom: 10px;
+}
+
+/* Container de cada bloco de configurações */
+.settingsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Item de configuração */
+.settingItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #444;
+    font-size: 14px;
+    gap: 20px;
+}
+
+/* Estilo dos rótulos (Nome, Email, Celular, etc.) */
+.settingItem label {
+    font-size: 16px;
+    color: var(--text-color);
+    font-weight: 600;
+    flex: 1;
+    max-width: 200px;
+}
+
+/* Estilo dos campos de entrada */
+.inputField {
+    flex: 2;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid var(--background-color);
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    outline: none;
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Estilo quando o campo de entrada está no modo de edição */
+.inputField.editing {
+    background-color: #ffffff;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    color: var(--primary-color);
+}
+
+/* Estilo de foco para os campos de entrada */
+.inputField:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .configContent {
+        padding: 10px;
+    }
+
+    .settingsGrid {
+        flex-direction: column;
+    }
+
+    .editButton {
+        top: 10px;
+        right: 10px;
+    }
+}
+
+/* Estilo para o ícone de alerta ao lado dos campos */
+.fieldAlert {
+    margin-left: 10px;
+    color: #cc0000;
+    font-size: 16px;
+    vertical-align: middle;
+}

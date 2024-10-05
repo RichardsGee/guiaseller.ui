@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/dashboardFilterSection.module.css'; // Importando o CSS específico para o Dashboard
+import styles from './dashboardFilterSection.module.css'; // Importando o CSS específico para o Dashboard
 
 function DashboardFilterSection() {
   return (
