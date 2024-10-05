@@ -26,16 +26,20 @@
 }
 
 .topBarIcon .material-icons {
+    
     color: var(--icon-color) !important; /* Usando !important para garantir a aplicação */
     font-size: 30px;
 }
 
 
 .topBarContent {
+    
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 .icon {
-    color: var(--icon-color) !important;
+    color: var(--tools-color) !important;
+    font-size: 30px;
+    
 }
