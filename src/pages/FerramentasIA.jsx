@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import Sidebar from '../components/Sidebar';
 import TopBar from '../components/TopBar';
@@ -8,19 +8,20 @@ import MainContent from '../components/MainContent';
 import { AuthContext } from '../context/AuthContext';
 import { useContext } from 'react';
 import { Lock, LockOpen } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom'; // Importando o hook para navegação
+import { useNavigate } from 'react-router-dom';
+import BuySound from '../components/BuySound'; // Certifique-se de importar corretamente o BuySound
 
 const FerramentasIA = () => {
   const { user, signOut } = useContext(AuthContext);
   const username = user ? user.displayName || user.email : "No User Logged";
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
-  const navigate = useNavigate(); // Inicializa o hook de navegação
+  const navigate = useNavigate();
 
   const [hovered, setHovered] = useState(null);
   const [categoriaAtiva, setCategoriaAtiva] = useState('Todas'); // Categoria ativa
-
-  const loadingSoundRef = useRef(null); // Referência para o som
+  const [playSound, setPlaySound] = useState(false); // Estado para controlar a reprodução do som
+  const [stopSound, setStopSound] = useState(false); // Estado para controlar o fade out do som
 
   const ferramentasData = [
     { nome: 'Gerador de Títulos', descricao: 'Crie títulos de alta conversão.', ativo: true, custo: 'R$ 29,90', route: '/ferramentas-ia/gerador-titulos', categoria: 'Geradores' },
@@ -42,31 +43,6 @@ const FerramentasIA = () => {
   const handleUseTool = (route) => {
     if (route) {
       navigate(route);
-    }
-  };
-
-  // Função para tocar som ao passar o mouse sobre o botão
-  const playSound = () => {
-    if (loadingSoundRef.current) {
-      loadingSoundRef.current.currentTime = 0;
-
-      // Verifica se o navegador permite tocar o som
-      const playPromise = loadingSoundRef.current.play();
-
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          // Som tocando
-        }).catch(error => {
-          console.log("Som bloqueado: O usuário precisa interagir com a página primeiro.");
-        });
-      }
-    }
-  };
-
-  // Função para pausar som ao tirar o mouse do botão
-  const stopSound = () => {
-    if (loadingSoundRef.current) {
-      loadingSoundRef.current.pause();
     }
   };
 
@@ -113,11 +89,15 @@ const FerramentasIA = () => {
                     onClick={() => ferramenta.ativo && handleUseTool(ferramenta.route)} // Se ativo, navega para a página
                     onMouseEnter={() => { 
                       setHovered(index); 
-                      if (!ferramenta.ativo) playSound();  // Som apenas no botão "Assinar"
+                      if (!ferramenta.ativo) {
+                        setPlaySound(true);  // Inicia o som no hover
+                        setStopSound(false); // Certifica-se de que o fade out está parado
+                      }
                     }} 
                     onMouseLeave={() => { 
                       setHovered(null); 
-                      stopSound();  // Pausa o som quando o mouse sai do botão
+                      setPlaySound(false); // Para de tocar o som
+                      setStopSound(true);  // Inicia o fade out
                     }}
                   >
                     {ferramenta.ativo ? 'Usar' : 'Assinar'} 
@@ -130,8 +110,8 @@ const FerramentasIA = () => {
             ))}
           </div>
 
-          {/* Elemento de áudio para som de carregamento */}
-          <audio ref={loadingSoundRef} src="/loading-sound.mp3" />
+          {/* Componente de som */}
+          <BuySound play={playSound} stop={stopSound} />
         </div>
       </div>
       <Footer />
