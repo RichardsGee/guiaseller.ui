@@ -1,8 +1,8 @@
 .sidebar {
     position: fixed;
-    top: 50px; /* Define o topo 50px abaixo */
+    top: 70px; /* Define o topo 70px abaixo */
     left: 0;
-    height: calc(100% - 50px); /* Ajusta a altura para o novo espaço */
+    height: calc(94% - 50px); /* Ajusta a altura para o novo espaço */
     width: var(--sidebar-width);
     background-color: var(--third-color);
     padding: var(--padding);
@@ -12,7 +12,10 @@
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
     overflow-y: auto; /* Permite rolagem vertical */
     overflow-x: hidden; /* Remove rolagem horizontal */
+    border-top-right-radius: 20px; /* Arredonda o canto superior direito */
+    border-bottom-right-radius: 20px; /* Arredonda o canto inferior direito */
 }
+
 
 .sidebar::-webkit-scrollbar {
     width: 8px;

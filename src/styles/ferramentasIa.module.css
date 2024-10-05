@@ -7,6 +7,8 @@
     width: 100%;
     max-width: 1700px;
     min-height: 79vh;
+    border-top-left-radius: 20px; /* Arredonda o canto superior direito */
+    border-bottom-left-radius: 20px; /* Arredonda o canto inferior direito */
 }
 
 .title {

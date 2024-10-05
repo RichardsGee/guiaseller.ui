@@ -19,7 +19,7 @@
     --container-color: #3f3f3f;
     --btn2-color: #2F2F2F;
     --tools-color: #02B075;
-    --ai-color: #02B075;
+    --ai-color: linear-gradient(135deg, #00d9ff, var(--primary-color));
 
 }
 
@@ -63,7 +63,7 @@ body.dark {
 }
 
 body {
-    background-color: var(--background-color);
+    background-color: var(--secondary-color);
     color: var(--text-color);
     font-family: 'Poppins', sans-serif;
     display: flex;
