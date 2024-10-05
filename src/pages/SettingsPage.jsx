@@ -12,7 +12,7 @@ function SettingsPage() {
   const username = user ? user.displayName || user.email : "No User Logged";
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
-  const userLevel = "Chief AI Officer"; // Exemplo de nível do usuário
+  const userLevel = "Admin"; // Exemplo de nível do usuário
 
   // Estados de edição de dados pessoais e da empresa
   const [name, setName] = useState(username);

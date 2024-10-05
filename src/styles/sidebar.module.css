@@ -4,7 +4,7 @@
     left: 0;
     height: calc(100% - 50px); /* Ajusta a altura para o novo espaço */
     width: var(--sidebar-width);
-    background-color: var(--secondary-color);
+    background-color: var(--third-color);
     padding: var(--padding);
     display: flex;
     flex-direction: column;

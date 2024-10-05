@@ -33,7 +33,7 @@
 }
 
 .produtosTable th {
-  background-color: var(--background-color);
+  background-color: var(--container-color);
   color: var(--text-color);
 }
 

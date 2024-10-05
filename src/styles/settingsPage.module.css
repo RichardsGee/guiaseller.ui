@@ -70,7 +70,7 @@
   font-size: 14px;
   border: 1px solid var(--background-color);
   border-radius: 6px;
-  background-color: var(--background-color);
+  background-color: var(--secondary-color);
   color: var(--text-color);
   outline: none;
 }

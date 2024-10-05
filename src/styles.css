@@ -18,6 +18,8 @@
     --btn-color: #ffd700;
     --container-color: #3f3f3f;
     --btn2-color: #2F2F2F;
+    --tools-color: #02B075;
+    --ai-color: linear-gradient(135deg, #00d9ff, var(--primary-color));
 
 }
 
@@ -40,15 +42,17 @@ body.light {
 
 /* Definindo estilos para o tema escuro */
 body.dark {
-    --background-color: #171717;
+    --background-color: #202123;
     --text-color: #ffffff;
     --primary-color: #a020f0;
-    --secondary-color: #202123;
+    --secondary-color: #17181A;
     --accent-color: #ffd700;
     --userLevel-color: #d8d100;
     --container-color: #3f3f3f;
     --btn-color: #202020;
     --btn2-color: #2F2F2F;
+    --tools-color: #02B075;
+    --ai-color: linear-gradient(135deg, #00d9ff, var(--primary-color));
 }
 
 /* Resetando estilos padrão do navegador */
@@ -213,7 +217,7 @@ body {
 }
 
 .info-item {
-    background: var(--secondary-color);
+    background: var(--background-color);
     padding: var(--padding);
     border-radius: 10px;
     color: var(--text-color);

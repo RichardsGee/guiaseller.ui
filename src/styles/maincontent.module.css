@@ -1,9 +1,11 @@
 /* Customização da barra de rolagem para um estilo mais moderno */
 .mainContent::-webkit-scrollbar {
     width: 12px; /* Largura da barra de rolagem */
+    
 }
 
 .mainContent::-webkit-scrollbar-track {
+    
     background: #2b2b2b; /* Cor do fundo da trilha */
     border-radius: 10px; /* Bordas arredondadas da trilha */
 }
@@ -23,9 +25,11 @@
     flex-grow: 1;
     overflow-y: auto; /* Permitir rolagem vertical no conteúdo */
     height: 100vh; /* Ocupa a altura da viewport */
+    
 }
 
 /* Garantir que o Sidebar não tenha rolagem */
 .sidebar {
     overflow-y: hidden; /* Impedir rolagem no sidebar */
+    
 }
