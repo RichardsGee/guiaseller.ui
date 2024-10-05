@@ -2,7 +2,7 @@
 import React from 'react';
 import styles from '../styles/settingsPage.module.css';
 
-const AccountSettings = ({ name, setName, email, setEmail, phone, setPhone, userLevel, isEditing, handleEditClick, handleSave }) => {
+const AccountSettings = ({ name, setName, email, setEmail, phone, setPhone, userLevel, isEditing, handleEditClick, handleSave, isFieldEmpty }) => {
   return (
     <div className={styles.settingsColumn}>
       <h2 className={styles.sectionTitle}>Configurações da Conta</h2>
@@ -23,6 +23,7 @@ const AccountSettings = ({ name, setName, email, setEmail, phone, setPhone, user
             className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
             disabled={!isEditing}
           />
+          {isFieldEmpty(name) && <span className={styles.fieldAlert}>⚠️</span>}
         </div>
 
         <div className={styles.settingItem}>
@@ -34,6 +35,7 @@ const AccountSettings = ({ name, setName, email, setEmail, phone, setPhone, user
             className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
             disabled={!isEditing}
           />
+          {isFieldEmpty(email) && <span className={styles.fieldAlert}>⚠️</span>}
         </div>
 
         <div className={styles.settingItem}>
@@ -46,6 +48,7 @@ const AccountSettings = ({ name, setName, email, setEmail, phone, setPhone, user
             disabled={!isEditing}
             placeholder="(xx) xxxx-xxxx"
           />
+          {isFieldEmpty(phone) && <span className={styles.fieldAlert}>⚠️</span>}
         </div>
 
         <div className={styles.settingItem}>

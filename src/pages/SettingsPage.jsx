@@ -45,17 +45,26 @@ function SettingsPage() {
     alert("Dados salvos com sucesso!"); // Feedback de exemplo
   };
 
+  // Funções para verificar se um campo específico está vazio
+  const isFieldEmpty = (field) => !field || field.trim() === '';
+
   return (
     <MainContent>
       <Header username={username} logout={signOut} />
-      <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
+      <Sidebar 
+        userPhoto={userPhoto} 
+        username={username} 
+        userEmail={userEmail} 
+        userLevel={userLevel}
+        isComplete={!isFieldEmpty(name) && !isFieldEmpty(email) && !isFieldEmpty(phone) && !isFieldEmpty(companyName) && !isFieldEmpty(cnpj) && !isFieldEmpty(fantasyName) && !isFieldEmpty(taxRate)}
+      />
 
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
 
         <div className={styles.configContent}>
           <h1 className={styles.mainTitle}>Configurações</h1>
-          
+
           <div className={styles.settingsGrid}>
             {/* Componente de Configurações da Conta */}
             <AccountSettings 
@@ -69,6 +78,7 @@ function SettingsPage() {
               isEditing={isEditingAccount}
               handleEditClick={handleEditClickAccount}
               handleSave={handleSave}
+              isFieldEmpty={isFieldEmpty} // Passando a função para verificar campos vazios
             />
 
             {/* Componente de Configurações da Empresa */}
@@ -84,6 +94,7 @@ function SettingsPage() {
               isEditing={isEditingCompany}
               handleEditClick={handleEditClickCompany}
               handleSave={handleSave}
+              isFieldEmpty={isFieldEmpty} // Passando a função para verificar campos vazios
             />
           </div>
         </div>

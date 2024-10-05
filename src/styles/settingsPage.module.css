@@ -154,3 +154,10 @@
     right: 10px;
   }
 }
+/* Estilo para o ícone de alerta ao lado dos campos */
+.fieldAlert {
+  margin-left: 10px;
+  color: #cc0000;
+  font-size: 16px;
+  vertical-align: middle;
+}

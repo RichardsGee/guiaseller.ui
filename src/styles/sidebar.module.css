@@ -171,4 +171,15 @@
     vertical-align: middle; /* Alinhamento vertical com o texto */
   }
   
+  /* Estilo para o alerta "Complete" */
+.completeAlert {
+    margin-left: 8px;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
   

@@ -2,7 +2,7 @@
 import React from 'react';
 import styles from '../styles/settingsPage.module.css';
 
-const CompanySettings = ({ companyName, setCompanyName, cnpj, setCnpj, fantasyName, setFantasyName, taxRate, setTaxRate, isEditing, handleEditClick, handleSave }) => {
+const CompanySettings = ({ companyName, setCompanyName, cnpj, setCnpj, fantasyName, setFantasyName, taxRate, setTaxRate, isEditing, handleEditClick, handleSave, isFieldEmpty }) => {
   return (
     <div className={styles.settingsColumn}>
       <h2 className={styles.sectionTitle}>Configurações da Empresa</h2>
@@ -23,6 +23,7 @@ const CompanySettings = ({ companyName, setCompanyName, cnpj, setCnpj, fantasyNa
             className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
             disabled={!isEditing}
           />
+          {isFieldEmpty(companyName) && <span className={styles.fieldAlert}>⚠️</span>}
         </div>
 
         <div className={styles.settingItem}>
@@ -34,6 +35,7 @@ const CompanySettings = ({ companyName, setCompanyName, cnpj, setCnpj, fantasyNa
             className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
             disabled={!isEditing}
           />
+          {isFieldEmpty(cnpj) && <span className={styles.fieldAlert}>⚠️</span>}
         </div>
 
         <div className={styles.settingItem}>
@@ -45,6 +47,7 @@ const CompanySettings = ({ companyName, setCompanyName, cnpj, setCnpj, fantasyNa
             className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
             disabled={!isEditing}
           />
+          {isFieldEmpty(fantasyName) && <span className={styles.fieldAlert}>⚠️</span>}
         </div>
 
         <div className={styles.settingItem}>
@@ -56,6 +59,7 @@ const CompanySettings = ({ companyName, setCompanyName, cnpj, setCnpj, fantasyNa
             className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
             disabled={!isEditing}
           />
+          {isFieldEmpty(taxRate) && <span className={styles.fieldAlert}>⚠️</span>}
         </div>
 
         {/* Exibir o botão de salvar se estiver em modo de edição */}
