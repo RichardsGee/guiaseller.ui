@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Header from '../components/Header/Header';
-import Sidebar from '../components/Sidebar/Sidebar';
-import TopBar from '../components/TopBar/TopBar';
-import Footer from '../components/Footer/Footer';
-import { AuthContext } from '../context/AuthContext';
-import styles from '../styles/produtos.module.css';
-import filterStyles from '../styles/filter.module.css';
+import Header from '../../components/Header/Header';  // Caminho ajustado
+import Sidebar from '../../components/Sidebar/Sidebar';  // Caminho ajustado
+import TopBar from '../../components/TopBar/TopBar';  // Caminho ajustado
+import Footer from '../../components/Footer/Footer';  // Caminho ajustado
+import { AuthContext } from '../../context/AuthContext';  // Caminho ajustado
+import styles from './produtos.module.css';  // Ajustado para a mesma pasta
+import filterStyles from '../../styles/filter.module.css';  // Caminho corrigido
 
 function ProdutosPage() {
   const [produtos, setProdutos] = useState([]);
@@ -75,7 +75,7 @@ function ProdutosPage() {
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            </div>
+          </div>
 
           <table className={styles.produtosTable}>
             <thead>

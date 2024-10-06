@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import Header from '../components/Header/Header';
-import Sidebar from '../components/Sidebar/Sidebar';
-import TopBar from '../components/TopBar/TopBar';
-import Footer from '../components/Footer/Footer';
-import styles from '../styles/integrations.module.css';
-import MainContent from '../components/MainContent/MainContent';
-import { AuthContext } from '../context/AuthContext';
-import { useContext } from 'react';
+import React, { useState, useContext } from 'react';
+import Header from '../../components/Header/Header';  // Caminho corrigido
+import Sidebar from '../../components/Sidebar/Sidebar';  // Caminho corrigido
+import TopBar from '../../components/TopBar/TopBar';  // Caminho corrigido
+import Footer from '../../components/Footer/Footer';  // Caminho corrigido
+import MainContent from '../../components/MainContent/MainContent';  // Caminho corrigido
+import { AuthContext } from '../../context/AuthContext';  // Caminho corrigido
+import styles from './integrations.module.css';  // Certifique-se que este caminho está correto
 
 const IntegrationsPage = () => {
   const { user, signOut } = useContext(AuthContext);

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import Header from '../components/Header/Header';
-import Sidebar from '../components/Sidebar/Sidebar';
-import TopBar from '../components/TopBar/TopBar';
-import Footer from '../components/Footer/Footer';
-import styles from '../styles/ferramentasIa.module.css';
-import MainContent from '../components/MainContent/MainContent'; 
-import { AuthContext } from '../context/AuthContext';
+import Header from '../../components/Header/Header';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import TopBar from '../../components/TopBar/TopBar';
+import Footer from '../../components/Footer/Footer';
+import styles from './AITools.module.css'; // Caminho ajustado
+import MainContent from '../../components/MainContent/MainContent'; 
+import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
 import { Lock, LockOpen } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import BuySound from '../components/BuySound'; // Certifique-se de importar corretamente o BuySound
+import BuySound from '../../components/BuySound'; // Certifique-se de importar corretamente o BuySound
 
 const FerramentasIA = () => {
   const { user, signOut } = useContext(AuthContext);

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Header from '../components/Header/Header';
-import Sidebar from '../components/Sidebar/Sidebar';
-import TopBar from '../components/TopBar/TopBar';
-import Footer from '../components/Footer/Footer';
-import { AuthContext } from '../context/AuthContext';
-import styles from '../styles/messages.module.css'; // Certifique-se de criar o arquivo CSS
-import filterStyles from '../styles/messagesfilter.module.css'; // Importando o novo CSS do filtro
+import Header from '../../components/Header/Header';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import TopBar from '../../components/TopBar/TopBar';
+import Footer from '../../components/Footer/Footer';
+import { AuthContext } from '../../context/AuthContext';
+import styles from './messages.module.css'; // Certifique-se de criar o arquivo CSS
+import filterStyles from './messagesfilter.module.css'; // Importando o novo CSS do filtro
 
 const MessagesPage = () => {
   const { user, signOut } = useContext(AuthContext);

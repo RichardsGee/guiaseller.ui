@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import Header from '../components/Header/Header';
-import Sidebar from '../components/Sidebar/Sidebar';
-import TopBar from '../components/TopBar/TopBar';
-import Footer from '../components/Footer/Footer';
-import MainContent from '../components/MainContent/MainContent';
-import { AuthContext } from '../context/AuthContext';
+import Header from '../../components/Header/Header';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import TopBar from '../../components/TopBar/TopBar';
+import Footer from '../../components/Footer/Footer';
+import MainContent from '../../components/MainContent/MainContent';
+import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
-import WebhookResultComponent from '../components/WebhookResultComponent'; // Importando o novo componente
-import styles from '../styles/geradorTitulos.module.css'; 
+import WebhookResultComponent from '../../components/WebhookResultComponent'; // Importando o novo componente
+import styles from './TittleGenerator.module.css'; 
 
 const GeradorTitulos = () => {
   const { user, signOut } = useContext(AuthContext);

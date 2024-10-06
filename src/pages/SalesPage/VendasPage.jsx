@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Header from '../components/Header/Header';
-import Sidebar from '../components/Sidebar/Sidebar';
-import TopBar from '../components/TopBar/TopBar';
-import Footer from '../components/Footer/Footer';
-import { AuthContext } from '../context/AuthContext';
-import styles from '../styles/vendas.module.css'; // Importando o CSS Module
-import filterStyles from '../styles/filter.module.css';
+import Header from '../../components/Header/Header';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import TopBar from '../../components/TopBar/TopBar';
+import Footer from '../../components/Footer/Footer';
+import { AuthContext } from '../../context/AuthContext';
+import styles from './vendas.module.css'; // Corrigido para usar o arquivo de estilo local
+import filterStyles from '../../styles/filter.module.css'; // Corrigido para apontar para a pasta de estilos global
 import { ArrowUpward, ArrowDownward, AttachMoney, PriceCheck, LocalShipping, Person, Store, Tag } from '@mui/icons-material'; // Ícones
 
 const VendasPage = () => {

@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
-import Dashboard from "./pages/Dashboard";
-import VendasPage from "./pages/VendasPage"; 
+import Dashboard from "./pages/DashboardPage/Dashboard";
+import VendasPage from "./pages/SalesPage/VendasPage";  // Caminho atualizado
 import SettingsPage from "./pages/SettingsPage/SettingsPage"; 
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./context/UserContext"; 
-import ProdutosPage from './pages/ProdutosPage'; 
-import FerramentasIA from './pages/FerramentasIA'; 
-import MessagesPage from './pages/MessagesPage'; 
-import IntegrationsPage from './pages/IntegrationsPage';
-import GeradorTitulos from './pages/GeradorTitulos';
+import ProdutosPage from './pages/ProductsPage/ProdutosPage'; 
+import FerramentasIA from './pages/AIToolsPage/AITools'; 
+import MessagesPage from './pages/MessagesPage/MessagesPage'; 
+import IntegrationsPage from './pages/IntegrationsPage/IntegrationsPage';
+import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
 import ProtectedRoute from './components/ProtectedRoute'; 
 
 function App() {
