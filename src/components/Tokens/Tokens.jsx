@@ -1,4 +1,3 @@
-// src/components/Tokens/Tokens.jsx
 import React, { useState } from 'react';
 import styles from './Tokens.module.css'; // Importando o CSS Module para Tokens
 import tokenIcon from '../../assets/tokens.png'; // Importando o arquivo PNG
@@ -15,7 +14,7 @@ const Tokens = ({ count }) => {
       className={styles.tokensContainer}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={() => alert("Redirecionando para a carteira...")} // Ação ao clicar no container
+      // Removi o alert aqui
     >
       <img src={tokenIcon} alt="Tokens" className={styles.tokenIcon} />
       {/* Alteração de texto ao passar o mouse */}

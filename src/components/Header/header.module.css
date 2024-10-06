@@ -14,13 +14,13 @@
 }
 
 .headerLogo img {
-    max-width: 50px; /* Reduzindo o tamanho da logo */
+    max-width: 80px; /* Reduzindo o tamanho da logo */
     height: auto; /* Mantendo a proporção da logo */
     margin-right: 10px; /* Espaço entre a logo e o texto */
 }
 
 .slogan {
-    font-size: 18px; /* Ajusta o tamanho do texto do slogan */
+    font-size: 10px; /* Ajusta o tamanho do texto do slogan */
     color: var(--text-color);
     font-weight: bold;
 }
@@ -55,4 +55,5 @@
     border: none;
     cursor: pointer;
     font-size: 18px;
+    color: var(--text-color);
 }
