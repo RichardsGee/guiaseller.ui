@@ -1,15 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Header from '../../components/Header/Header';  // Caminho ajustado
-import Sidebar from '../../components/Sidebar/Sidebar';  // Caminho ajustado
-import TopBar from '../../components/TopBar/TopBar';  // Caminho ajustado
-import Footer from '../../components/Footer/Footer';  // Caminho ajustado
-import { AuthContext } from '../../context/AuthContext';  // Caminho ajustado
-import styles from './produtos.module.css';  // Ajustado para a mesma pasta
-import filterStyles from '../../styles/filter.module.css';  // Caminho corrigido
+import Header from '../../components/Header/Header';  
+import Sidebar from '../../components/Sidebar/Sidebar';  
+import TopBar from '../../components/TopBar/TopBar';  
+import Footer from '../../components/Footer/Footer';  
+import { AuthContext } from '../../context/AuthContext';  
+import styles from './produtos.module.css';  
+import filterStyles from '../../styles/filter.module.css';
+import ProductsForm from '../../components/ProductsForm/ProductsForm'; // Importando o formulário de Produto Simples
+import KitsForm from '../../components/ProductsForm/KitsForm';
 
 function ProdutosPage() {
   const [produtos, setProdutos] = useState([]);
   const [searchTerm, setSearchTerm] = useState(''); // Estado para armazenar o termo de busca
+  const [showProductsModal, setShowProductsModal] = useState(false); // Estado para controlar o modal de Produto Simples
+  const [showKitsModal, setShowKitsModal] = useState(false); // Estado para controlar o modal de Kit
 
   // Utilizando o contexto de autenticação para pegar informações do usuário
   const { user, signOut } = useContext(AuthContext);
@@ -18,7 +22,6 @@ function ProdutosPage() {
   const userEmail = user ? user.email : null;
 
   useEffect(() => {
-    // Exemplo de dados de produtos
     const produtosData = [
       {
         id: 1,
@@ -44,17 +47,32 @@ function ProdutosPage() {
     setProdutos(produtosData);
   }, []);
 
-  // Função para lidar com a alteração no campo de busca
   const handleSearchChange = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  // Filtrar os produtos com base no termo de busca
   const filteredProdutos = produtos.filter(produto =>
     produto.nome.toLowerCase().includes(searchTerm.toLowerCase()) || 
     produto.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
     produto.ean.includes(searchTerm)
   );
+
+  // Funções para controlar a exibição dos modais
+  const handleCloseProductsModal = () => setShowProductsModal(false);
+  const handleOpenProductsModal = () => setShowProductsModal(true);
+
+  const handleCloseKitsModal = () => setShowKitsModal(false);
+  const handleOpenKitsModal = () => setShowKitsModal(true);
+
+  // Função para salvar um novo produto
+  const handleSaveProduct = (newProduct) => {
+    setProdutos([...produtos, newProduct]);
+  };
+
+  // Função para salvar um novo kit
+  const handleSaveKit = (newKit) => {
+    setProdutos([...produtos, newKit]); // Mesma lógica para salvar kits
+  };
 
   return (
     <div className="container">
@@ -64,9 +82,18 @@ function ProdutosPage() {
         <TopBar userPhoto={userPhoto} />
         <div className={styles.produtosContainer}>
           <h1 className={styles.produtosTitle}>Meus Produtos</h1>
-          
-          {/* Campo de pesquisa dentro da seção de filtro */}
-          <div className={filterStyles.filterSection}>
+
+          {/* Dois botões para Adicionar Produto Simples e Adicionar Kit */}
+          <div className={styles.buttonContainer}>
+            <button className={styles.addProductButton} onClick={handleOpenProductsModal}>
+              Adicionar Produto
+            </button>
+            <button className={styles.addKitButton} onClick={handleOpenKitsModal}>
+              Adicionar Kit
+            </button>
+          </div>
+
+          <div className={styles.filterSection}>
             <label htmlFor="search"></label>
             <input
               id="search"
@@ -105,6 +132,17 @@ function ProdutosPage() {
           </table>
         </div>
       </div>
+
+      {/* Exibindo o modal de adicionar produto simples */}
+      {showProductsModal && (
+        <ProductsForm onSaveProduct={handleSaveProduct} onClose={handleCloseProductsModal} />
+      )}
+
+      {/* Exibindo o modal de adicionar kit */}
+      {showKitsModal && (
+        <KitsForm onSaveKit={handleSaveKit} onClose={handleCloseKitsModal} />
+      )}
+
       <Footer />
     </div>
   );
