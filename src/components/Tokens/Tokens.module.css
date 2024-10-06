@@ -1,0 +1,21 @@
+.tokensContainer {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  background-color: var(--background-color); /* Defina uma cor de fundo */
+  padding: 8px 15px; /* Adicione preenchimento para o contorno */
+  border-radius: 20px; /* Bordas arredondadas */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border: 1px solid var(--primary-color); /* Cor de borda */
+}
+
+.tokenText {
+  font-weight: bold;
+  color: var(--primary-color); /* Cor do texto */
+}
+
+.tokenIcon {
+  margin-right: 8px;
+  width: 18px; /* Tamanho do ícone */
+  height: 18px; /* Tamanho do ícone */
+}

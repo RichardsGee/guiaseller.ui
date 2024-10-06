@@ -122,26 +122,6 @@ body {
     align-items: center;
     gap: 15px;
 }
-
-.credits {
-    display: flex;
-    align-items: center;
-    background-color: var(--container-color);
-    padding: 5px 10px;
-    border-radius: 15px;
-    color: var(--accent-color);
-    font-size: 14px;
-    font-weight: bold;
-    border: 0px solid var(--accent-color);
-    box-shadow: 0 0 0px rgba(160, 32, 240, 0.5);
-}
-
-.credits-icon {
-    margin-right: 5px;
-    font-size: 18px;
-    color: var(--primary-color);
-}
-
 .username {
     font-weight: italic;
     color: var(--text-color);
