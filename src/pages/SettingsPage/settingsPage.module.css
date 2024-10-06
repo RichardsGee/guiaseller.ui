@@ -9,14 +9,18 @@
     max-width: 1700px;
     color: var(--text-color);
     overflow-y: auto;
-    min-height: 79vh;
+    min-height: 76.5vh;
+    border-top-left-radius: 20px; /* Arredonda o canto superior direito */
+    border-bottom-left-radius: 20px; /* Arredonda o canto inferior direito */
+    border-top-right-radius: 20px; /* Arredonda o canto superior direito */
+    border-bottom-right-radius: 20px; /* Arredonda o canto inferior direito */
 }
 
 /* Título principal */
 .mainTitle {
     font-size: 24px;
     margin-bottom: 20px;
-    color: var(--text-color);
+    color: var(--p-color);
     text-align: center;
 }
 

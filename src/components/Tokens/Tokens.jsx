@@ -19,7 +19,7 @@ const Tokens = ({ count }) => {
       <img src={tokenIcon} alt="Tokens" className={styles.tokenIcon} />
       {/* Alteração de texto ao passar o mouse */}
       <span className={styles.tokenText}>
-        {isHovered ? 'Ver Carteira' : `Tokens: ${count}`}
+        {isHovered ? 'Comprar Tokens' : `Tokens: ${count}`}
       </span>
     </div>
   );
