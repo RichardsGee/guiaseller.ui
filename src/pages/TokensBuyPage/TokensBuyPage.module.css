@@ -1,65 +1,149 @@
-.tokensBuyContainer {
+/* Container principal ao fundo */
+.tokensContainer {
     background-color: var(--third-color);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     margin: 20px auto;
-    width: 100%;
     max-width: 1700px;
     color: var(--text-color);
     overflow-y: auto;
     min-height: 79vh;
   }
   
+  .tokensBuyContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .leftContent {
+    width: 58%; /* Ajustado para caber ao lado da sidebar */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .rightContent {
+    width: 38%; /* Ajustado para a proporção à direita */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
   .title {
-    font-size: 24px;
+    text-align: left;
     color: var(--text-color);
-    margin-bottom: 20px;
+    font-size: 24px;
   }
   
   .infoText {
     font-size: 18px;
     color: var(--text-color);
-    margin-bottom: 15px;
   }
   
-  .tokenInput {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    margin-bottom: 20px;
+  .selectButtons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
   }
   
+  .selectButtons button,
   .buyButton {
     background-color: var(--primary-color);
     color: white;
-    padding: 15px;
+    padding: 10px 15px;
     border: none;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
-  .buyButton:hover {
-    background-color: darkgreen;
-  }
-  
-  .pricingInfo {
+  .buyButton {
     margin-top: 20px;
-    color: var(--text-color);
   }
   
-  .pricingInfo ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .pricingInfo li {
-    margin-bottom: 10px;
+  .tokenInput {
+    padding: 10px;
     font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid var(--background-color);
+    background-color: var(--secondary-color);
     color: var(--text-color);
+    max-width: 300px;
+    margin-top: 10px;
+  }
+  
+  .priceDetails {
+    text-align: center;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    width: 400px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .discountPercentage {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: var(--primary-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .strikethrough {
+    text-decoration: line-through;
+    color: var(--text-muted-color);
+    font-size: 18px;
+  }
+  
+  .priceFinal {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    background-color: var(--primary-color);
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .tokensInfoItem {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .tokensBuyContainer {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .leftContent,
+    .rightContent {
+      width: 100%;
+    }
+  
+    .priceDetails {
+      max-width: 100%;
+    }
   }
   
