@@ -3,9 +3,9 @@ import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';  
 import TopBar from '../../components/TopBar/TopBar';  
 import Footer from '../../components/Footer/Footer';  
+import MainContent from '../../components/MainContent/MainContent';  // Adicionando o MainContent
 import { AuthContext } from '../../context/AuthContext';  
 import styles from './produtos.module.css';  
-import filterStyles from '../../styles/filter.module.css';
 import ProductsForm from '../../components/ProductsForm/ProductsForm'; // Importando o formulário de Produto Simples
 import KitsForm from '../../components/ProductsForm/KitsForm';
 
@@ -75,7 +75,7 @@ function ProdutosPage() {
   };
 
   return (
-    <div className="container">
+    <MainContent> {/* Envolvendo o conteúdo com MainContent */}
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
@@ -144,7 +144,7 @@ function ProdutosPage() {
       )}
 
       <Footer />
-    </div>
+    </MainContent>
   );
 }
 

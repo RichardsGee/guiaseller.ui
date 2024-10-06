@@ -3,6 +3,7 @@ import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TopBar from '../../components/TopBar/TopBar';
 import Footer from '../../components/Footer/Footer';
+import MainContent from '../../components/MainContent/MainContent'; // Adicionando o MainContent
 import { AuthContext } from '../../context/AuthContext';
 import styles from './messages.module.css'; // Certifique-se de criar o arquivo CSS
 import filterStyles from './messagesfilter.module.css'; // Importando o novo CSS do filtro
@@ -51,7 +52,7 @@ const MessagesPage = () => {
   const readMessages = messages.filter(message => message.isRead).length;
 
   return (
-    <div className="container">
+    <MainContent> {/* Envolvendo o conteúdo com MainContent */}
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
@@ -83,7 +84,7 @@ const MessagesPage = () => {
         </div>
       </div>
       <Footer />
-    </div>
+    </MainContent>
   );
 };
 

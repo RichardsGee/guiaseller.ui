@@ -6,20 +6,19 @@
     margin: 20px auto;
     width: 100%;
     max-width: 1700px;
+    color: var(--text-color);
+    overflow-y: auto;
     min-height: 79vh;
-    border-top-left-radius: 20px; /* Arredonda o canto superior direito */
-    border-bottom-left-radius: 20px; /* Arredonda o canto inferior direito */
-}
-
-.vendasTitle {
+  }
+  
+  .vendasTitle {
     text-align: center;
     color: var(--text-color);
-    margin-bottom: var(--padding);
+    margin-bottom: 20px;
     font-size: 24px;
-    
-}
-
-.vendasTable {
+  }
+  
+  .vendasTable {
     background-color: var(--third-color);
     width: 100%;
     border-collapse: collapse;
@@ -27,50 +26,50 @@
     overflow: hidden;
     font-size: 14px;
     margin-top: 20px;
-}
-
-.vendasTable th, .vendasTable td {
+  }
+  
+  .vendasTable th, .vendasTable td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid var(--background-color);
-}
-
-.vendasTable th {
+  }
+  
+  .vendasTable th {
     background-color: var(--container-color);
     color: var(--text-color);
-}
-
-.vendasTable tr:hover {
+  }
+  
+  .vendasTable tr:hover {
     background-color: var(--hover-color);
     color: var(--text-color);
-}
-
-.vendaRow {
+  }
+  
+  .vendaRow {
     cursor: pointer;
     transition: background-color 0.3s;
-}
-
-.vendaRow:hover {
+  }
+  
+  .vendaRow:hover {
     background-color: var(--hover-color); /* Uma cor mais clara para o hover */
-}
-
-.vendaDetails {
+  }
+  
+  .vendaDetails {
     background-color: var(--secondary-color);
     animation: slideDown 0.3s ease-in-out;
-}
-
-@keyframes slideDown {
+  }
+  
+  @keyframes slideDown {
     from {
-        opacity: 0;
-        transform: translateY(-10px);
+      opacity: 0;
+      transform: translateY(-10px);
     }
     to {
-        opacity: 1;
-        transform: translateY(0);
+      opacity: 1;
+      transform: translateY(0);
     }
-}
-
-.detailsContainer {
+  }
+  
+  .detailsContainer {
     padding: 10px;
     background-color: var(--secondary-color);
     border-radius: 5px;
@@ -78,34 +77,35 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.vendaImage {
+  }
+  
+  .vendaImage {
     width: 50px;
     height: 50px;
     object-fit: cover;
     border-radius: 5px;
-}
-
-/* Ícones */
-.icon {
+  }
+  
+  /* Ícones */
+  .icon {
     margin-right: 8px;
     vertical-align: middle;
-}
-
-.iconPositive {
+  }
+  
+  .iconPositive {
     color: green;
-}
-
-.iconNegative {
+  }
+  
+  .iconNegative {
     color: red;
-}
-
-/* Lucro positivo e negativo */
-.lucroPositivo {
+  }
+  
+  /* Lucro positivo e negativo */
+  .lucroPositivo {
     color: green;
-}
-
-.lucroNegativo {
+  }
+  
+  .lucroNegativo {
     color: red;
-}
+  }
+  

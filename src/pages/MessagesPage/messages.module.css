@@ -6,8 +6,10 @@
     margin: 20px auto;
     width: 100%;
     max-width: 1700px;
+    color: var(--text-color);
+    overflow-y: auto;
     min-height: 79vh;
-}
+  }
 
 .title {
     text-align: center;

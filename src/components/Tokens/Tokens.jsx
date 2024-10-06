@@ -1,14 +1,27 @@
 // src/components/Tokens/Tokens.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Tokens.module.css'; // Importando o CSS Module para Tokens
 import tokenIcon from '../../assets/tokens.png'; // Importando o arquivo PNG
 
 const Tokens = ({ count }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Função para alternar o estado de hover
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
   return (
-    <div className={styles.tokensContainer}>
-      {/* Usando a imagem PNG em vez do ícone Material */}
+    <div
+      className={styles.tokensContainer}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onClick={() => alert("Redirecionando para a carteira...")} // Ação ao clicar no container
+    >
       <img src={tokenIcon} alt="Tokens" className={styles.tokenIcon} />
-      <span className={styles.tokenText}>Tokens: {count}</span>
+      {/* Alteração de texto ao passar o mouse */}
+      <span className={styles.tokenText}>
+        {isHovered ? 'Ver Carteira' : `Tokens: ${count}`}
+      </span>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TopBar from '../../components/TopBar/TopBar';
 import Footer from '../../components/Footer/Footer';
+import MainContent from '../../components/MainContent/MainContent';  // Adicionando MainContent
 import { AuthContext } from '../../context/AuthContext';
 import styles from './vendas.module.css'; // Corrigido para usar o arquivo de estilo local
 import filterStyles from '../../styles/filter.module.css'; // Corrigido para apontar para a pasta de estilos global
@@ -92,7 +93,7 @@ const VendasPage = () => {
   };
 
   return (
-    <div className="container">
+    <MainContent> {/* Envolvendo o conteúdo com MainContent */}
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
@@ -174,7 +175,7 @@ const VendasPage = () => {
         </div>
       </div>
       <Footer />
-    </div>
+    </MainContent>
   );
 };
 

@@ -1,15 +1,31 @@
-/* Adicione ao seu arquivo CSS */
-.main-header {
+.mainHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: var(--secondary-color);
-    padding: 10px 20px;
+    padding: 30px 20px;
     height: var(--header-height);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.header-actions {
+.headerLogo {
+    display: flex;
+    align-items: center; /* Para alinhar verticalmente o logo e o texto */
+}
+
+.headerLogo img {
+    max-width: 50px; /* Reduzindo o tamanho da logo */
+    height: auto; /* Mantendo a proporção da logo */
+    margin-right: 10px; /* Espaço entre a logo e o texto */
+}
+
+.slogan {
+    font-size: 18px; /* Ajusta o tamanho do texto do slogan */
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.headerActions {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -20,7 +36,7 @@
     color: var(--text-color);
 }
 
-.logout-btn {
+.logoutBtn {
     background-color: var(--primary-color);
     color: var(--text-color);
     border: none;
@@ -30,30 +46,13 @@
     transition: background-color 0.3s;
 }
 
-.logout-btn:hover {
+.logoutBtn:hover {
     background-color: #ffaa00;
 }
 
-.theme-toggle-btn {
+.themeToggleBtn {
     background-color: transparent;
     border: none;
     cursor: pointer;
     font-size: 18px;
-}
-
-@media (max-width: 768px) {
-    .main-header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .header-actions {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .logout-btn,
-    .theme-toggle-btn {
-        padding: 5px 8px;
-    }
 }

@@ -11,6 +11,7 @@ import FerramentasIA from './pages/AIToolsPage/AITools';
 import MessagesPage from './pages/MessagesPage/MessagesPage'; 
 import IntegrationsPage from './pages/IntegrationsPage/IntegrationsPage';
 import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
+import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; // Importe o TokensBuyPage
 import ProtectedRoute from './components/ProtectedRoute'; 
 
 function App() {
@@ -52,6 +53,10 @@ function App() {
           <Route 
             path="/ferramentas-ia/gerador-titulos" 
             element={<ProtectedRoute><GeradorTitulos /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/comprar-tokens" 
+            element={<ProtectedRoute><TokensBuyPage /></ProtectedRoute>} // Adiciona a rota para a página de compra de tokens
           />
         </Routes>
         <ToastContainer />
