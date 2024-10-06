@@ -87,6 +87,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
   }
   
   .discountPercentage {
@@ -102,7 +103,7 @@
     align-items: center;
     border-radius: 50%;
     font-size: 14px;
-    font-weight: bold;
+    font-weight: 800;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
   
@@ -125,9 +126,10 @@
   .tokensInfoItem {
     background-color: var(--secondary-color);
     color: var(--text-color);
-    padding: 12px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 12px;
   }
   
   /* Responsividade */

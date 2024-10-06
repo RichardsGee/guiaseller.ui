@@ -98,6 +98,7 @@ const TokensBuyPage = () => {
                 Comprar {tokens < 10 ? 10 : tokens} Tokens
               </button>
 
+              {/* Exibição de preço */}
               <div className={styles.priceDetails}>
                 {discountPercentage > 0 && (
                   <div className={styles.discountPercentage}>
