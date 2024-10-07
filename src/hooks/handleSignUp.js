@@ -18,15 +18,20 @@ const handleSignUp = async ({ firstName, lastName, email, password }) => {
             email: user.email,
             name: firstName,
             last_name: lastName,
+            user_level: "basic",
         };
 
         try {
+            const userExist = await axios.get(`http://localhost:8080/users/${user.uid}`);
+            if (userExist) {
+                toast.info("Welcome back!");
+                return;
+            }
             await axios.post("http://localhost:8080/users", userObj);
-            console.log(userCredential);
-            toast.success("Account created!");
+            toast.success("Signed in successfully");
         } catch (error) {
             console.error(error);
-            toast.error("Failed to Sign up");
+            toast.error("Signed in, but failed to save user to database");
         }
     } catch (error) {
         if (error.code === 'auth/email-already-in-use') {

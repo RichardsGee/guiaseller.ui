@@ -19,15 +19,20 @@ const handleGoogleSignIn = async (e) => {
             email: user.email,
             first_name: name || "",
             last_name: last_name || "",
+            user_level: "basic",
         };
 
         try {
+            const userExist = await axios.get(`http://localhost:8080/users/${user.uid}`);
+            if (userExist) {
+                toast.info("Welcome back!");
+                return;
+            }
             await axios.post("http://localhost:8080/users", userObj);
             toast.success("Signed in successfully");
         } catch (error) {
             console.error(error);
             toast.error("Signed in, but failed to save user to database");
-            console.log(userObj);
         }
     } catch (error) {
         if (error.code === 'auth/cancelled-popup-request') {

@@ -8,23 +8,28 @@ import AccountSettings from '../../components/AccountSettings/AccountSettings';
 import CompanySettings from '../../components/CompanySettings/CompanySettings';
 import { AuthContext } from '../../context/AuthContext';
 import styles from './settingsPage.module.css';
+import axios from "axios";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 function SettingsPage() {
   const { user, signOut } = useContext(AuthContext);
   const username = user ? user.displayName || user.email : "No User Logged";
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
-  const userLevel = "Admin"; // Exemplo de nível do usuário
+  const userId = user ? user.uid : null;  
+  const userLevel = "Admin";
 
   // Estados para os dados
-  const [name, setName] = useState(username);
+  const [first_name, setName] = useState(username);
   const [email, setEmail] = useState(userEmail);
   const [phone, setPhone] = useState('');
-  const [companyName, setCompanyName] = useState('Minha Empresa Ltda');
-  const [cnpj, setCnpj] = useState('12.345.678/0001-90');
-  const [fantasyName, setFantasyName] = useState('Empresa Fantasia');
-  const [taxRate, setTaxRate] = useState('15%');
-  const [additionalCost, setAdditionalCost] = useState(''); // Novo campo
+  const [companyName, setCompanyName] = useState('');
+  const [cnpj, setCnpj] = useState('');
+  const [fantasyName, setFantasyName] = useState('');
+  const [taxRate, setTaxRate] = useState('');
+  const [additionalCost, setAdditionalCost] = useState('');
 
   // Estados para controlar se o usuário está no modo de edição
   const [isEditingAccount, setIsEditingAccount] = useState(false);
@@ -39,14 +44,83 @@ function SettingsPage() {
     setIsEditingCompany(!isEditingCompany);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    await updateUserData();
+    await updateCompanyData();
     setIsEditingAccount(false);
     setIsEditingCompany(false);
-    alert("Dados salvos com sucesso!"); // Feedback de exemplo
   };
 
   // Funções para verificar se um campo específico está vazio
-  const isFieldEmpty = (field) => !field || field.trim() === '';
+  const isFieldEmpty = (field) => !field === '';
+
+  const getUserDetails = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/users/${userId}`);
+      const userData = response.data;
+
+      setName(userData.first_name || '');
+      setPhone(userData.phone || ''); 
+    } catch (error) {
+      console.error("Error fetching user details:", error);
+    }
+  };
+
+  const getCompanydetails = async () => {
+    try {
+      const responseUser = await axios.get(`http://localhost:8080/users/${userId}`);
+      const company_id = responseUser.data.companies[0].company_id;
+      const response = await axios.get(`http://localhost:8080/users/company/${company_id}`);
+      const companyData = response.data;
+
+      setCompanyName(companyData.company_name || '');
+      setCnpj(companyData.cnpj || '');
+      setFantasyName(companyData.fantasy_name || '');
+      setTaxRate(companyData.tax_rate || '');
+      setAdditionalCost(companyData.additional_cost || '');
+    } catch (error) {
+      console.error("Error fetching company details:", error);
+    }
+  }
+
+  const updateUserData = async () => {
+    try {
+      const response = await axios.put(`http://localhost:8080/users/${userId}`, {
+        first_name,
+        last_name: '',
+        email,
+        phone,
+        user_level: userLevel,
+      });
+      console.log("Resposta do servidor:", response.data);
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    }
+  };
+
+  const updateCompanyData = async () => {
+    try {
+      const responseUser = await axios.get(`http://localhost:8080/users/${userId}`);
+      const company_id = responseUser.data.companies[0].company_id;
+      await axios.put(`http://localhost:8080/users/company/${company_id}`, {
+        company_name: companyName,
+        fantasy_name: fantasyName,
+        cnpj,
+        tax_rate: parseFloat(taxRate),
+      });
+      toast.success("Dados salvos com sucesso!");
+    }catch (error) {
+      console.error("Error updating company data:", error);
+    }
+  }
+
+  useEffect(() => {
+    if (userId) {
+      getUserDetails();
+      getCompanydetails();
+    }
+  }, [userId]);
+
 
   return (
     <MainContent>
@@ -56,7 +130,7 @@ function SettingsPage() {
         username={username} 
         userEmail={userEmail} 
         userLevel={userLevel}
-        isComplete={!isFieldEmpty(name) && !isFieldEmpty(email) && !isFieldEmpty(phone) && !isFieldEmpty(companyName) && !isFieldEmpty(cnpj) && !isFieldEmpty(fantasyName) && !isFieldEmpty(taxRate)}
+        isComplete={!isFieldEmpty(first_name) && !isFieldEmpty(email) && !isFieldEmpty(phone) && !isFieldEmpty(companyName) && !isFieldEmpty(cnpj) && !isFieldEmpty(fantasyName) && !isFieldEmpty(taxRate)}
       />
 
       <div className="main-content">
@@ -68,7 +142,7 @@ function SettingsPage() {
           <div className={styles.settingsGrid}>
             {/* Componente de Configurações da Conta */}
             <AccountSettings 
-              name={name} 
+              name={first_name} 
               setName={setName} 
               email={email} 
               setEmail={setEmail} 
