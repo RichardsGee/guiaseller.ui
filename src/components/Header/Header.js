@@ -19,7 +19,7 @@ function Header({ username, logout }) {
     <header className={styles.mainHeader}>
       <div className={styles.headerLogo}>
         <img src="logo.png" alt="Logo" />
-        <span className={styles.slogan}>Avance com IA</span>
+        <span className={styles.slogan}>alpha version</span>
       </div>
       <div className={styles.headerActions}>
         {/* Tornando o componente Tokens clicável */}

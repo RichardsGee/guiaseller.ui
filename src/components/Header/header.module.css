@@ -20,9 +20,10 @@
 }
 
 .slogan {
-    font-size: 10px; /* Ajusta o tamanho do texto do slogan */
+    font-size: 15px; /* Ajusta o tamanho do texto do slogan */
     color: var(--text-color);
-    font-weight: bold;
+    font-weight: 100;
+    font-style: italic;
 }
 
 .headerActions {
