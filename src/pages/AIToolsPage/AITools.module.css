@@ -8,10 +8,10 @@
     width: 100%;
     max-width: 1630px;
     min-height: 76.5vh;
-    border-top-left-radius: 20px; /* Arredonda o canto superior direito */
-    border-bottom-left-radius: 20px; /* Arredonda o canto inferior direito */
-    border-top-right-radius: 20px; /* Arredonda o canto superior direito */
-    border-bottom-right-radius: 20px; /* Arredonda o canto inferior direito */
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .title {
@@ -40,7 +40,6 @@
     width: 300px;
     min-height: 200px;
     text-align: left;
-    
 }
 
 .toolName {
@@ -59,11 +58,11 @@
 
 .lockIcon {
     position: absolute;
-    top: 10px; /* Distância do topo */
-    right: 10px; /* Distância da direita */
+    top: 10px;
+    right: 10px;
     font-size: 24px;
-    color: gray; /* Cor inicial do cadeado */
-    transition: color 0.3s ease-in-out; /* Transição suave apenas na cor */
+    color: gray;
+    transition: color 0.3s ease-in-out;
 }
 
 .adquiridoButton, .assinarButton {
@@ -80,7 +79,6 @@
     align-items: center;
     box-sizing: border-box;
     font-weight: bold;
-    
 }
 
 .adquiridoButton {
@@ -90,25 +88,23 @@
     background-color: var(--third-color);
 }
 
-/* Estilo inicial do botão Assinar */
+/* Estilo inicial do botão Ativar */
 .assinarButton {
-    background-color: #202123; /* Cor inicial do background */
+    background-color: #202123;
     color: white;
     border: none;
     position: relative;
-    overflow: hidden; /* Para garantir que a barra de carregamento fique dentro do botão */
-    background-size: 200% 100%; /* Tamanho maior para o efeito de carregamento */
-    transition: background-position 2s ease-in-out, background-color 2s ease-in-out; /* Transição suave */
+    overflow: hidden;
+    background-size: 200% 100%;
+    transition: background-position 2s ease-in-out, background-color 2s ease-in-out;
 }
 
-/* Efeito de hover para aplicar o degradê */
 .assinarButton:hover {
-    animation: shake 0.5s infinite; /* Tremor no botão */
-    background-image: linear-gradient(135deg, #17181A, #02B075, var(--primary-color)); /* Degradê após a cor inicial */
-    background-position: 100% 0; /* Move o background para o lado direito ao iniciar hover */
+    animation: shake 0.5s infinite;
+    background-image: linear-gradient(135deg, #17181A, #02B075, var(--primary-color));
+    background-position: 100% 0;
 }
 
-/* Animação de tremor */
 @keyframes shake {
     0%, 100% {
         transform: translateX(0);
@@ -150,7 +146,7 @@
 .categoriaButton {
     padding: 10px 20px;
     border-radius: 5px;
-    border: 0x solid var(--primary-color);
+    border: 0px solid var(--primary-color);
     background-color: var(--secondary-color);
     color: var(--text-color);
     cursor: pointer;

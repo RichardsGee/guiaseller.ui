@@ -11,7 +11,7 @@ import { Lock, LockOpen } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import BuySound from '../../components/BuySound'; // Certifique-se de importar corretamente o BuySound
 
-const FerramentasIA = () => {
+const AITools = () => {
   const { user, signOut } = useContext(AuthContext);
   const username = user ? user.displayName || user.email : "No User Logged";
   const userPhoto = user ? user.photoURL : null;
@@ -24,11 +24,11 @@ const FerramentasIA = () => {
   const [stopSound, setStopSound] = useState(false); // Estado para controlar o fade out do som
 
   const ferramentasData = [
-    { nome: 'Gerador de Títulos', descricao: 'Crie títulos de alta conversão.', ativo: true, custo: 'R$ 29,90', route: '/ferramentas-ia/gerador-titulos', categoria: 'Geradores' },
-    { nome: 'Gerador de Descrições', descricao: 'Gere descrições otimizadas para SEO.', ativo: false, custo: 'R$ 39,90', categoria: 'Geradores' },
-    { nome: 'Gerador de Palavras-chave', descricao: 'Encontre palavras-chave estratégicas.', ativo: true, custo: 'R$ 19,90', categoria: 'Análise' },
-    { nome: 'Analisador de Concorrência', descricao: 'Compare sua concorrência em tempo real.', ativo: false, custo: 'R$ 49,90', categoria: 'Análise' },
-    { nome: 'Análise de Anúncio', descricao: 'Analise seu anúncio.', ativo: false, custo: 'R$ 49,90', categoria: 'Análise' },
+    { nome: 'Gerador de Títulos', descricao: 'Crie títulos de alta conversão.', ativo: true, custo: '1 Token (24h)', restante: '18 horas', route: '/ferramentas-ia/gerador-titulos', categoria: 'Geradores' },
+    { nome: 'Gerador de Descrições', descricao: 'Gere descrições otimizadas para SEO.', ativo: false, custo: '1 Token (24h)', categoria: 'Geradores' },
+    { nome: 'Gerador de Palavras-chave', descricao: 'Encontre palavras-chave estratégicas.', ativo: true, custo: '1 Token (24h)', restante: '5 horas', categoria: 'Análise' },
+    { nome: 'Analisador de Concorrência', descricao: 'Compare sua concorrência em tempo real.', ativo: false, custo: '1 Token (24h)', categoria: 'Análise' },
+    { nome: 'Análise de Anúncio', descricao: 'Analise seu anúncio.', ativo: false, custo: '1 Token (24h)', categoria: 'Análise' },
   ];
 
   // Filtros de categorias
@@ -100,7 +100,7 @@ const FerramentasIA = () => {
                       setStopSound(true);  // Inicia o fade out
                     }}
                   >
-                    {ferramenta.ativo ? 'Usar' : 'Assinar'} 
+                    {ferramenta.ativo ? `Ativo ${ferramenta.restante}` : 'Ativar'} 
                     {!ferramenta.ativo && (
                       <span className={styles.custoDentro}>{ferramenta.custo}</span>
                     )}
@@ -119,4 +119,4 @@ const FerramentasIA = () => {
   );
 };
 
-export default FerramentasIA;
+export default AITools;
