@@ -1,8 +1,14 @@
-// /components/CompanySettings.jsx
 import React from 'react';
 import styles from './settingsPage.module.css';
 
-const CompanySettings = ({ companyName, setCompanyName, cnpj, setCnpj, fantasyName, setFantasyName, taxRate, setTaxRate, isEditing, handleEditClick, handleSave, isFieldEmpty }) => {
+const CompanySettings = ({ 
+  companyName, setCompanyName, 
+  cnpj, setCnpj, 
+  fantasyName, setFantasyName, 
+  taxRate, setTaxRate, 
+  additionalCost, setAdditionalCost, // Novo estado para custo adicional
+  isEditing, handleEditClick, handleSave, isFieldEmpty 
+}) => {
   return (
     <div className={styles.settingsColumn}>
       <h2 className={styles.sectionTitle}>Configurações da Empresa</h2>
@@ -50,16 +56,31 @@ const CompanySettings = ({ companyName, setCompanyName, cnpj, setCnpj, fantasyNa
           {isFieldEmpty(fantasyName) && <span className={styles.fieldAlert}>⚠️</span>}
         </div>
 
-        <div className={styles.settingItem}>
-          <label>Taxa de Imposto Paga Atualmente:</label>
-          <input
-            type="text"
-            value={taxRate}
-            onChange={(e) => setTaxRate(e.target.value)}
-            className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
-            disabled={!isEditing}
-          />
-          {isFieldEmpty(taxRate) && <span className={styles.fieldAlert}>⚠️</span>}
+        {/* Novos campos lado a lado: Taxa de Imposto e Custo Adicional */}
+        <div className={styles.settingItemDouble}>
+          <div className={styles.settingItemInline}>
+            <label>Taxa de Imposto Paga:</label>
+            <input
+              type="text"
+              value={taxRate}
+              onChange={(e) => setTaxRate(e.target.value)}
+              className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
+              disabled={!isEditing}
+            />
+            {isFieldEmpty(taxRate) && <span className={styles.fieldAlert}>⚠️</span>}
+          </div>
+
+          <div className={styles.settingItemInline}>
+            <label>Custo Adicional:</label>
+            <input
+              type="text"
+              value={additionalCost}
+              onChange={(e) => setAdditionalCost(e.target.value)}
+              className={`${styles.inputField} ${isEditing ? styles.editing : ''}`}
+              disabled={!isEditing}
+            />
+            {isFieldEmpty(additionalCost) && <span className={styles.fieldAlert}>⚠️</span>}
+          </div>
         </div>
 
         {/* Exibir o botão de salvar se estiver em modo de edição */}

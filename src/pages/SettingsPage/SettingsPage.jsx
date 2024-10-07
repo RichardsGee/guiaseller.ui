@@ -1,4 +1,3 @@
-// /pages/SettingsPage.jsx
 import React, { useState, useContext } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
@@ -25,6 +24,7 @@ function SettingsPage() {
   const [cnpj, setCnpj] = useState('12.345.678/0001-90');
   const [fantasyName, setFantasyName] = useState('Empresa Fantasia');
   const [taxRate, setTaxRate] = useState('15%');
+  const [additionalCost, setAdditionalCost] = useState(''); // Novo campo
 
   // Estados para controlar se o usuário está no modo de edição
   const [isEditingAccount, setIsEditingAccount] = useState(false);
@@ -91,6 +91,8 @@ function SettingsPage() {
               setFantasyName={setFantasyName} 
               taxRate={taxRate} 
               setTaxRate={setTaxRate}
+              additionalCost={additionalCost} 
+              setAdditionalCost={setAdditionalCost} // Passando o estado do custo adicional
               isEditing={isEditingCompany}
               handleEditClick={handleEditClickCompany}
               handleSave={handleSave}
