@@ -101,6 +101,16 @@ function SettingsPage() {
   const updateCompanyData = async () => {
     try {
       const responseUser = await axios.get(`http://localhost:8080/users/${userId}`);
+      if(responseUser.data.companies.length === 0) {
+        await axios.post(`http://localhost:8080/users/company`, {
+          company_name: companyName,
+          cnpj,
+          fantasy_name: fantasyName,
+          tax_rate: parseFloat(taxRate),
+          userId: userId,
+        }
+        );
+      }
       const company_id = responseUser.data.companies[0].company_id;
       await axios.put(`http://localhost:8080/users/company/${company_id}`, {
         company_name: companyName,
