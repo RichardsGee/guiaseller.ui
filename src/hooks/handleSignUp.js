@@ -14,9 +14,9 @@ const handleSignUp = async ({ firstName, lastName, email, password }) => {
         const user = userCredential.user;
 
         const userObj = {
-            id: user.uid,
+            user_id: user.uid,
             email: user.email,
-            name: firstName,
+            first_name: firstName,
             last_name: lastName,
             user_level: "basic",
         };
@@ -36,11 +36,13 @@ const handleSignUp = async ({ firstName, lastName, email, password }) => {
                     console.log("User saved:", response.data);
                     toast.success("Signed in successfully");
                 } catch (error) {
-                    console.error("Error saving user to database:", error);
+                    console.log(error.response.data.message)
+                    console.log(userObj);
+                    console.error("Error saving user to database:", error.response ? error.response.data : error.message);
                     toast.error("Signed in, but failed to save user to database");
                 }
             } else {
-                console.error("Error checking user existence:", error);
+                console.error("Error checking user existence:", error.response ? error.response.data : error.message);
                 toast.error("Error checking user existence.");
                 return; 
             }

@@ -25,7 +25,7 @@ const RegisterForm = () => {
         e.preventDefault();
         try{
             await handleSignUp({ firstName, lastName, email, password });
-            navigate('/tour-package'); 
+            navigate('/dashboard'); 
         }catch(error){
             console.error("Error during sign up", error);
         }

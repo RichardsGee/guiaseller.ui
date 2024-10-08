@@ -23,7 +23,7 @@ const LoginForm = () => {
         e.preventDefault();
         try {
             await handleSignIn({ email, password });
-            navigate('/tour-package'); 
+            navigate('/dashboard'); 
         } catch (error) {
             console.error("Error during sign in", error);
         }

@@ -15,9 +15,9 @@ const handleFacebookSignIn = async (e) => {
         const [name, last_name] = user.displayName ? user.displayName.split(" ", 2) : ["", ""];
 
         const userObj = {
-            id: user.uid,
+            user_id: user.uid,
             email: user.email,
-            name: name || "",
+            first_name: name || "",
             last_name: last_name || "",
             user_level: "basic",
         };
@@ -37,11 +37,11 @@ const handleFacebookSignIn = async (e) => {
                     console.log("User saved:", response.data);
                     toast.success("Signed in successfully");
                 } catch (error) {
-                    console.error("Error saving user to database:", error);
+                    console.error("Error saving user to database:", error.response ? error.response.data : error.message);
                     toast.error("Signed in, but failed to save user to database");
                 }
             } else {
-                console.error("Error checking user existence:", error);
+                console.error("Error checking user existence:", error.response ? error.response.data : error.message);
                 toast.error("Error checking user existence.");
                 return; 
             }
