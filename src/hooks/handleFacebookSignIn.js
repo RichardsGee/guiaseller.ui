@@ -24,7 +24,7 @@ const handleFacebookSignIn = async (e) => {
 
         try {
             // Verifica se o usuário já existe
-            const userExist = await axios.get(`http://localhost:8080/users/${user.uid}`);
+            const userExist = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/${user.uid}`);
             if (userExist.status === 200) {
                 // O usuário já existe
                 toast.info("Welcome back!");
@@ -33,7 +33,7 @@ const handleFacebookSignIn = async (e) => {
         } catch (error) {
             if (error.response && error.response.status === 404 && error.response.data.message === "User not found") {
                 try {
-                    const response = await axios.post("http://localhost:8080/users", userObj);
+                    const response = await axios.post("https://guiaseller-frontend.dlmi5z.easypanel.host/users", userObj);
                     console.log("User saved:", response.data);
                     toast.success("Signed in successfully");
                 } catch (error) {

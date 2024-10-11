@@ -56,7 +56,7 @@ function SettingsPage() {
 
   const getUserDetails = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/users/${userId}`);
+      const response = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/${userId}`);
       const userData = response.data;
 
       setName(userData.first_name || '');
@@ -68,9 +68,9 @@ function SettingsPage() {
 
   const getCompanydetails = async () => {
     try {
-      const responseUser = await axios.get(`http://localhost:8080/users/${userId}`);
+      const responseUser = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/${userId}`);
       const company_id = responseUser.data.companies[0].company_id;
-      const response = await axios.get(`http://localhost:8080/users/company/${company_id}`);
+      const response = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/company/${company_id}`);
       const companyData = response.data;
 
       setCompanyName(companyData.company_name || '');
@@ -85,7 +85,7 @@ function SettingsPage() {
 
   const updateUserData = async () => {
     try {
-      const response = await axios.put(`http://localhost:8080/users/${userId}`, {
+      const response = await axios.put(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/${userId}`, {
         first_name,
         last_name: '',
         email,
@@ -100,9 +100,9 @@ function SettingsPage() {
 
   const updateCompanyData = async () => {
     try {
-      const responseUser = await axios.get(`http://localhost:8080/users/${userId}`);
+      const responseUser = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/${userId}`);
       if(responseUser.data.companies.length === 0) {
-        await axios.post(`http://localhost:8080/users/company`, {
+        await axios.post(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/company`, {
           company_name: companyName,
           cnpj,
           fantasy_name: fantasyName,
@@ -112,7 +112,7 @@ function SettingsPage() {
         );
       }
       const company_id = responseUser.data.companies[0].company_id;
-      await axios.put(`http://localhost:8080/users/company/${company_id}`, {
+      await axios.put(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/company/${company_id}`, {
         company_name: companyName,
         fantasy_name: fantasyName,
         cnpj,
