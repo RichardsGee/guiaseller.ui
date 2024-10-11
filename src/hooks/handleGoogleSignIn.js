@@ -2,6 +2,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { toast } from "react-toastify";
 import { auth } from "../services/firebase";
 import axios from "axios";
+import socket from "../services/socket"; // Importando o WebSocket
 import "react-toastify/dist/ReactToastify.css";
 
 const handleGoogleSignIn = async (e) => {
@@ -28,6 +29,8 @@ const handleGoogleSignIn = async (e) => {
             if (userExist.status === 200) {
                 // O usuário já existe
                 toast.info("Welcome back!");
+                // Emitir evento WebSocket aqui, se necessário
+                socket.emit("userLoggedIn", { userId: user.uid });
                 return;
             }
         } catch (error) {
@@ -36,6 +39,9 @@ const handleGoogleSignIn = async (e) => {
                     const response = await axios.post("https://guiaseller-frontend.dlmi5z.easypanel.host/users", userObj);
                     console.log("User saved:", response.data);
                     toast.success("Signed in successfully");
+
+                    // Emitir evento WebSocket após salvar o usuário
+                    socket.emit("userLoggedIn", { userId: user.uid });
                 } catch (error) {
                     console.error("Error saving user to database:", error);
                     toast.error("Signed in, but failed to save user to database");
