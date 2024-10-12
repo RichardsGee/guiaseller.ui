@@ -23,7 +23,7 @@ const handleSignUp = async ({ firstName, lastName, email, password }) => {
 
         try {
             // Verifica se o usuário já existe
-            const userExist = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/${user.uid}`);
+            const userExist = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${user.uid}`); // Corrigido para o backend
             if (userExist.status === 200) {
                 // O usuário já existe
                 toast.info("Welcome back!");
@@ -32,14 +32,14 @@ const handleSignUp = async ({ firstName, lastName, email, password }) => {
         } catch (error) {
             if (error.response && error.response.status === 404 && error.response.data.message === "User not found") {
                 try {
-                    const response = await axios.post("https://guiaseller-frontend.dlmi5z.easypanel.host/users", userObj);
+                    const response = await axios.post("https://guiaseller-backend.dlmi5z.easypanel.host/users", userObj); // Corrigido para o backend
                     console.log("User saved:", response.data);
-                    toast.success("Signed in successfully");
+                    toast.success("Signed up successfully"); // Corrigido o texto da mensagem
                 } catch (error) {
-                    console.log(error.response.data.message)
+                    console.log(error.response.data.message);
                     console.log(userObj);
                     console.error("Error saving user to database:", error.response ? error.response.data : error.message);
-                    toast.error("Signed in, but failed to save user to database");
+                    toast.error("Signed up, but failed to save user to database"); // Corrigido o texto da mensagem
                 }
             } else {
                 console.error("Error checking user existence:", error.response ? error.response.data : error.message);
