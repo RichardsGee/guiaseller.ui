@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TopBar from '../../components/TopBar/TopBar';
@@ -11,7 +11,6 @@ import styles from './settingsPage.module.css';
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
 
 function SettingsPage() {
   const { user, signOut } = useContext(AuthContext);
@@ -51,12 +50,12 @@ function SettingsPage() {
     setIsEditingCompany(false);
   };
 
-  // Funções para verificar se um campo específico está vazio
   const isFieldEmpty = (field) => !field === '';
 
   const getUserDetails = async () => {
     try {
-      const response = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/${userId}`);
+      // URL corrigida para o backend
+      const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
       const userData = response.data;
 
       setName(userData.first_name || '');
@@ -68,9 +67,12 @@ function SettingsPage() {
 
   const getCompanydetails = async () => {
     try {
-      const responseUser = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/${userId}`);
+      // URL corrigida para o backend
+      const responseUser = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
       const company_id = responseUser.data.companies[0].company_id;
-      const response = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/company/${company_id}`);
+
+      // URL corrigida para o backend
+      const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/company/${company_id}`);
       const companyData = response.data;
 
       setCompanyName(companyData.company_name || '');
@@ -85,7 +87,8 @@ function SettingsPage() {
 
   const updateUserData = async () => {
     try {
-      const response = await axios.put(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/${userId}`, {
+      // URL corrigida para o backend
+      const response = await axios.put(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`, {
         first_name,
         last_name: '',
         email,
@@ -100,26 +103,27 @@ function SettingsPage() {
 
   const updateCompanyData = async () => {
     try {
-      const responseUser = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/${userId}`);
-      if(responseUser.data.companies.length === 0) {
-        await axios.post(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/company`, {
+      const responseUser = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
+      if (responseUser.data.companies.length === 0) {
+        // URL corrigida para o backend
+        await axios.post(`https://guiaseller-backend.dlmi5z.easypanel.host/users/company`, {
           company_name: companyName,
           cnpj,
           fantasy_name: fantasyName,
           tax_rate: parseFloat(taxRate),
           userId: userId,
-        }
-        );
+        });
       }
       const company_id = responseUser.data.companies[0].company_id;
-      await axios.put(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/company/${company_id}`, {
+      // URL corrigida para o backend
+      await axios.put(`https://guiaseller-backend.dlmi5z.easypanel.host/users/company/${company_id}`, {
         company_name: companyName,
         fantasy_name: fantasyName,
         cnpj,
         tax_rate: parseFloat(taxRate),
       });
       toast.success("Dados salvos com sucesso!");
-    }catch (error) {
+    } catch (error) {
       console.error("Error updating company data:", error);
     }
   }
@@ -130,7 +134,6 @@ function SettingsPage() {
       getCompanydetails();
     }
   }, [userId]);
-
 
   return (
     <MainContent>
@@ -150,7 +153,6 @@ function SettingsPage() {
           <h1 className={styles.mainTitle}>Configurações</h1>
 
           <div className={styles.settingsGrid}>
-            {/* Componente de Configurações da Conta */}
             <AccountSettings 
               name={first_name} 
               setName={setName} 
@@ -162,10 +164,9 @@ function SettingsPage() {
               isEditing={isEditingAccount}
               handleEditClick={handleEditClickAccount}
               handleSave={handleSave}
-              isFieldEmpty={isFieldEmpty} // Passando a função para verificar campos vazios
+              isFieldEmpty={isFieldEmpty} 
             />
 
-            {/* Componente de Configurações da Empresa */}
             <CompanySettings 
               companyName={companyName} 
               setCompanyName={setCompanyName} 
@@ -176,11 +177,11 @@ function SettingsPage() {
               taxRate={taxRate} 
               setTaxRate={setTaxRate}
               additionalCost={additionalCost} 
-              setAdditionalCost={setAdditionalCost} // Passando o estado do custo adicional
+              setAdditionalCost={setAdditionalCost} 
               isEditing={isEditingCompany}
               handleEditClick={handleEditClickCompany}
               handleSave={handleSave}
-              isFieldEmpty={isFieldEmpty} // Passando a função para verificar campos vazios
+              isFieldEmpty={isFieldEmpty} 
             />
           </div>
         </div>
