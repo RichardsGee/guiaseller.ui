@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/DashboardPage/Dashboard";
-import VendasPage from "./pages/SalesPage/VendasPage";  // Caminho atualizado
+import VendasPage from "./pages/SalesPage/VendasPage";  
 import SettingsPage from "./pages/SettingsPage/SettingsPage"; 
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./context/UserContext"; 
@@ -47,7 +47,7 @@ function App() {
             element={<ProtectedRoute><MessagesPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/integrações" // Mantido como solicitado
+            path="/integrações" 
             element={<ProtectedRoute><IntegrationsPage /></ProtectedRoute>} 
           />
           <Route 
@@ -58,8 +58,7 @@ function App() {
             path="/comprar-tokens" 
             element={<ProtectedRoute><TokensBuyPage /></ProtectedRoute>} 
           />
-
-                  </Routes>
+        </Routes>
         <ToastContainer />
       </Router>
     </UserProvider>

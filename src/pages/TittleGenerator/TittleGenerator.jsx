@@ -6,7 +6,7 @@ import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
-import WebhookResultComponent from '../../components/WebhookResultComponent'; // Importando o novo componente
+import WebhookResultComponent from '../../components/WebhookResultComponent'; // Importando o componente do Webhook
 import styles from './TittleGenerator.module.css'; 
 
 const GeradorTitulos = () => {
@@ -75,12 +75,11 @@ const GeradorTitulos = () => {
           </div>
 
           <div className={styles.resultSection}>
-            
             <p className={styles.resultText}>{generatedTitle}</p>
           </div>
 
-          {/* Componente WebhookResultComponent exibindo o resultado do webhook */}
-          <WebhookResultComponent webhookUrl="https://webhook.site/f5edbe5a-e407-488e-8b1e-57b4fbfcbfe9" />
+          {/* Exibindo o resultado do webhook vindo do backend */}
+          <WebhookResultComponent apiUrl="https://guiaseller-backend.dlmi5z.easypanel.host" />
 
         </div>
       </div>
