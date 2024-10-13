@@ -13,7 +13,7 @@ import IntegrationsPage from './pages/IntegrationsPage/IntegrationsPage';
 import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
 import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; 
 import ProtectedRoute from './components/ProtectedRoute'; 
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage'; // Importe a página 404
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
