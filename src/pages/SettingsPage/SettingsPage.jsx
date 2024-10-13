@@ -18,7 +18,6 @@ function SettingsPage() {
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
   const userId = user ? user.uid : null;  
-  const userLevel = "Admin";
 
   // Estados para os dados
   const [first_name, setName] = useState(username);
@@ -29,6 +28,7 @@ function SettingsPage() {
   const [fantasyName, setFantasyName] = useState('');
   const [taxRate, setTaxRate] = useState('');
   const [additionalCost, setAdditionalCost] = useState('');
+  const [userLevel, setUserLevel] = useState(''); // Estado para o nível do usuário
 
   // Estados para controlar se o usuário está no modo de edição
   const [isEditingAccount, setIsEditingAccount] = useState(false);
@@ -52,26 +52,27 @@ function SettingsPage() {
 
   const isFieldEmpty = (field) => !field === '';
 
+  // Função para buscar detalhes do usuário
   const getUserDetails = async () => {
     try {
-      // URL corrigida para o backend
       const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
       const userData = response.data;
 
+      console.log("User Data:", userData); // Adicionando log para verificar os dados
       setName(userData.first_name || '');
       setPhone(userData.phone || ''); 
+      setUserLevel(userData.user_level || ''); // Aqui você garante que o userLevel é obtido do banco de dados
     } catch (error) {
       console.error("Error fetching user details:", error);
     }
   };
 
-  const getCompanydetails = async () => {
+  // Função para buscar detalhes da empresa
+  const getCompanyDetails = async () => {
     try {
-      // URL corrigida para o backend
       const responseUser = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
       const company_id = responseUser.data.companies[0].company_id;
 
-      // URL corrigida para o backend
       const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/company/${company_id}`);
       const companyData = response.data;
 
@@ -83,29 +84,29 @@ function SettingsPage() {
     } catch (error) {
       console.error("Error fetching company details:", error);
     }
-  }
+  };
 
+  // Função para atualizar dados do usuário
   const updateUserData = async () => {
     try {
-      // URL corrigida para o backend
-      const response = await axios.put(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`, {
+      await axios.put(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`, {
         first_name,
         last_name: '',
         email,
         phone,
-        user_level: userLevel,
+        user_level: userLevel, // Certificando-se de que o nível do usuário está atualizado
       });
-      console.log("Resposta do servidor:", response.data);
+      toast.success("Dados do usuário atualizados com sucesso!");
     } catch (error) {
       console.error("Error updating user data:", error);
     }
   };
 
+  // Função para atualizar dados da empresa
   const updateCompanyData = async () => {
     try {
       const responseUser = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
       if (responseUser.data.companies.length === 0) {
-        // URL corrigida para o backend
         await axios.post(`https://guiaseller-backend.dlmi5z.easypanel.host/users/company`, {
           company_name: companyName,
           cnpj,
@@ -115,23 +116,23 @@ function SettingsPage() {
         });
       }
       const company_id = responseUser.data.companies[0].company_id;
-      // URL corrigida para o backend
       await axios.put(`https://guiaseller-backend.dlmi5z.easypanel.host/users/company/${company_id}`, {
         company_name: companyName,
         fantasy_name: fantasyName,
         cnpj,
         tax_rate: parseFloat(taxRate),
       });
-      toast.success("Dados salvos com sucesso!");
+      toast.success("Dados da empresa atualizados com sucesso!");
     } catch (error) {
       console.error("Error updating company data:", error);
     }
-  }
+  };
 
   useEffect(() => {
+    console.log("Fetching user details..."); // Adicionando log para garantir que a função está sendo chamada
     if (userId) {
       getUserDetails();
-      getCompanydetails();
+      getCompanyDetails();
     }
   }, [userId]);
 
@@ -142,7 +143,8 @@ function SettingsPage() {
         userPhoto={userPhoto} 
         username={username} 
         userEmail={userEmail} 
-        userLevel={userLevel}
+        userId={userId} // Passando o userId para o Sidebar
+        userLevel={userLevel} // Passando o userLevel para o Sidebar
         isComplete={!isFieldEmpty(first_name) && !isFieldEmpty(email) && !isFieldEmpty(phone) && !isFieldEmpty(companyName) && !isFieldEmpty(cnpj) && !isFieldEmpty(fantasyName) && !isFieldEmpty(taxRate)}
       />
 
@@ -160,7 +162,7 @@ function SettingsPage() {
               setEmail={setEmail} 
               phone={phone} 
               setPhone={setPhone} 
-              userLevel={userLevel}
+              userLevel={userLevel} // Passando o userLevel para AccountSettings
               isEditing={isEditingAccount}
               handleEditClick={handleEditClickAccount}
               handleSave={handleSave}

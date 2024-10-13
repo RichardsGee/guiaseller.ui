@@ -42,7 +42,7 @@ const WebhookResultComponent = ({ apiUrl }) => {
   return (
     <div className={styles.webhookContainer}>
       <div className={styles.titleContainer}>
-        <h2 className={styles.webhookTitle}>Resultado do Webhook</h2>
+        <h2 className={styles.webhookTitle}>Título Mercado Livre</h2>
         <button onClick={copyToClipboard}>
           {copySuccess || 'Copiar'}
         </button>

@@ -1,8 +1,10 @@
-// /components/AccountSettings.jsx
 import React from 'react';
 import styles from './accountsSettings.module.css';
 
 const AccountSettings = ({ name, setName, email, setEmail, phone, setPhone, userLevel, isEditing, handleEditClick, handleSave, isFieldEmpty }) => {
+  // Adicionando log para verificar o valor do userLevel
+  console.log("Account Settings User Level:", userLevel);
+
   return (
     <div className={styles.settingsColumn}>
       <h2 className={styles.sectionTitle}>Configurações da Conta</h2>
@@ -55,9 +57,9 @@ const AccountSettings = ({ name, setName, email, setEmail, phone, setPhone, user
           <label>Nível do Usuário:</label>
           <input
             type="text"
-            value={userLevel}
-            readOnly
-            className={styles.inputField}
+            value={userLevel} // Valor vindo do banco de dados
+            readOnly // Campo somente leitura
+            className={styles.inputField} // Classe para estilização
           />
         </div>
 
