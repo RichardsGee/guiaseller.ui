@@ -13,7 +13,6 @@ import IntegrationsPage from './pages/IntegrationsPage/IntegrationsPage';
 import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
 import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; 
 import ProtectedRoute from './components/ProtectedRoute'; 
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
   return (
@@ -60,9 +59,7 @@ function App() {
             element={<ProtectedRoute><TokensBuyPage /></ProtectedRoute>} 
           />
 
-          {/* Rota 404 - Página não encontrada */}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+                  </Routes>
         <ToastContainer />
       </Router>
     </UserProvider>
