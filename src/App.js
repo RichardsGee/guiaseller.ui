@@ -11,8 +11,9 @@ import FerramentasIA from './pages/AIToolsPage/AITools';
 import MessagesPage from './pages/MessagesPage/MessagesPage'; 
 import IntegrationsPage from './pages/IntegrationsPage/IntegrationsPage';
 import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
-import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; // Importe o TokensBuyPage
+import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; 
 import ProtectedRoute from './components/ProtectedRoute'; 
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage'; // Importe a página 404
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          
+
           <Route 
             path="/dashboard" 
             element={<ProtectedRoute><Dashboard /></ProtectedRoute>} 
@@ -47,7 +48,7 @@ function App() {
             element={<ProtectedRoute><MessagesPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/integrações" 
+            path="/integrações" // Mantido como solicitado
             element={<ProtectedRoute><IntegrationsPage /></ProtectedRoute>} 
           />
           <Route 
@@ -56,8 +57,11 @@ function App() {
           />
           <Route 
             path="/comprar-tokens" 
-            element={<ProtectedRoute><TokensBuyPage /></ProtectedRoute>} // Adiciona a rota para a página de compra de tokens
+            element={<ProtectedRoute><TokensBuyPage /></ProtectedRoute>} 
           />
+
+          {/* Rota 404 - Página não encontrada */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <ToastContainer />
       </Router>
