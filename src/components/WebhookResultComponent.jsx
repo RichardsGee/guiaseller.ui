@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/webhookResultComponent.module.css'; // Ajuste o caminho conforme necessário
 
-const WebhookResultComponent = ({ apiUrl }) => {
+const WebhookResultComponent = ({ apiUrl, userId }) => {
   const [webhookResult, setWebhookResult] = useState('Nenhum resultado recebido ainda.');
   const [copySuccess, setCopySuccess] = useState('');
 
   useEffect(() => {
     const fetchWebhookResult = async () => {
+      if (!userId) return; // Não buscar se o userId não estiver definido
+
       try {
-        const response = await fetch(`${apiUrl}/get-latest-webhook`, {
+        const response = await fetch(`${apiUrl}/webhook/${userId}`, {  // Busca com base no userId
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -20,7 +22,14 @@ const WebhookResultComponent = ({ apiUrl }) => {
         }
 
         const data = await response.json();
-        setWebhookResult(JSON.stringify(data, null, 2)); // Exibir dados formatados
+        
+        // Exibir o título do webhook
+        if (data && data.length > 0) {
+          const latestWebhook = data[data.length - 1]; // Pega o último webhook recebido para o userId
+          setWebhookResult(latestWebhook.word || 'Nenhum título disponível');
+        } else {
+          setWebhookResult('Nenhum título recebido.');
+        }
       } catch (error) {
         console.error('Erro ao receber o resultado do webhook:', error);
         setWebhookResult('Erro ao receber o resultado do webhook.');
@@ -29,7 +38,7 @@ const WebhookResultComponent = ({ apiUrl }) => {
 
     const intervalId = setInterval(fetchWebhookResult, 5000); // Busca a cada 5 segundos
     return () => clearInterval(intervalId); // Limpar o intervalo ao desmontar
-  }, [apiUrl]);
+  }, [apiUrl, userId]);
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(webhookResult)

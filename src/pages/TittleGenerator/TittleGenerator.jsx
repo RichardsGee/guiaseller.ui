@@ -78,8 +78,8 @@ const GeradorTitulos = () => {
             <p className={styles.resultText}>{generatedTitle}</p>
           </div>
 
-          {/* Exibindo o resultado do webhook vindo do backend */}
-          <WebhookResultComponent apiUrl="https://guiaseller-backend.dlmi5z.easypanel.host" />
+          {/* Exibindo o resultado do webhook vindo do backend, agora passando o userId */}
+          <WebhookResultComponent apiUrl="https://guiaseller-backend.dlmi5z.easypanel.host" userId={userId} />
 
         </div>
       </div>
