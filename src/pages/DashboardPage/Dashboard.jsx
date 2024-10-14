@@ -8,6 +8,7 @@ import AdditionalInfo from '../../components/AdditionalInfo/AdditionalInfo';  //
 import Footer from '../../components/Footer/Footer';  // Caminho corrigido
 import MainContent from '../../components/MainContent/MainContent';  // Caminho corrigido
 import { AuthContext } from '../../context/AuthContext';  // Caminho corrigido
+import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
 
 function Dashboard() {
   const { user, signOut } = useContext(AuthContext);
@@ -17,13 +18,17 @@ function Dashboard() {
 
   return (
     <MainContent> {/* Envolvendo o conteúdo com MainContent */}
-      <Header username={username} logout={signOut}/>
+      <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
-        <DashboardFilterSection /> {/* Usando o novo componente de filtro */}
-        <ChartSection />
-        <AdditionalInfo />
+
+        {/* Usando a classe contentContainer do styles.css */}
+        <div className="contentContainer">
+          <DashboardFilterSection /> {/* Usando o novo componente de filtro */}
+          <ChartSection />
+          <AdditionalInfo />
+        </div>
       </div>
       <Footer />
     </MainContent>

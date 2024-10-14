@@ -8,6 +8,7 @@ import { AuthContext } from '../../context/AuthContext';
 import styles from './produtos.module.css';  
 import ProductsForm from '../../components/ProductsForm/ProductsForm'; // Importando o formulário de Produto Simples
 import KitsForm from '../../components/ProductsForm/KitsForm';
+import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
 
 function ProdutosPage() {
   const [produtos, setProdutos] = useState([]);
@@ -80,56 +81,60 @@ function ProdutosPage() {
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
-        <div className={styles.produtosContainer}>
-          <h1 className={styles.produtosTitle}>Meus Produtos</h1>
+        
+        {/* Usando a classe contentContainer do styles.css */}
+        <div className="contentContainer">
+          <div className={styles.produtosContainer}>
+            <h1 className={styles.produtosTitle}>Meus Produtos</h1>
 
-          {/* Dois botões para Adicionar Produto Simples e Adicionar Kit */}
-          <div className={styles.buttonContainer}>
-            <button className={styles.addProductButton} onClick={handleOpenProductsModal}>
-              Adicionar Produto
-            </button>
-            <button className={styles.addKitButton} onClick={handleOpenKitsModal}>
-              Adicionar Kit
-            </button>
-          </div>
+            {/* Dois botões para Adicionar Produto Simples e Adicionar Kit */}
+            <div className={styles.buttonContainer}>
+              <button className={styles.addProductButton} onClick={handleOpenProductsModal}>
+                Adicionar Produto
+              </button>
+              <button className={styles.addKitButton} onClick={handleOpenKitsModal}>
+                Adicionar Kit
+              </button>
+            </div>
 
-          <div className={styles.filterSection}>
-            <label htmlFor="search"></label>
-            <input
-              id="search"
-              type="text"
-              placeholder="Digite o nome, SKU ou EAN..."
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-          </div>
+            <div className={styles.filterSection}>
+              <label htmlFor="search"></label>
+              <input
+                id="search"
+                type="text"
+                placeholder="Digite o nome, SKU ou EAN..."
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+            </div>
 
-          <table className={styles.produtosTable}>
-            <thead>
-              <tr>
-                <th>Imagem</th>
-                <th>Nome</th>
-                <th>SKU</th>
-                <th>EAN</th>
-                <th>Altura</th>
-                <th>Largura</th>
-                <th>Comprimento</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredProdutos.map((produto) => (
-                <tr key={produto.id}>
-                  <td><img src={produto.imagem} alt="Produto" className={styles.produtoImage} /></td>
-                  <td>{produto.nome}</td>
-                  <td>{produto.sku}</td>
-                  <td>{produto.ean}</td>
-                  <td>{produto.altura}</td>
-                  <td>{produto.largura}</td>
-                  <td>{produto.comprimento}</td>
+            <table className={styles.produtosTable}>
+              <thead>
+                <tr>
+                  <th>Imagem</th>
+                  <th>Nome</th>
+                  <th>SKU</th>
+                  <th>EAN</th>
+                  <th>Altura</th>
+                  <th>Largura</th>
+                  <th>Comprimento</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredProdutos.map((produto) => (
+                  <tr key={produto.id}>
+                    <td><img src={produto.imagem} alt="Produto" className={styles.produtoImage} /></td>
+                    <td>{produto.nome}</td>
+                    <td>{produto.sku}</td>
+                    <td>{produto.ean}</td>
+                    <td>{produto.altura}</td>
+                    <td>{produto.largura}</td>
+                    <td>{produto.comprimento}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 

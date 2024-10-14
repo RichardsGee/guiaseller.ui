@@ -8,6 +8,7 @@ import { AuthContext } from '../../context/AuthContext';
 import WebhookResultComponent from '../../components/WebhookResultComponent';
 import FunctionCopy from '../../components/FunctionCopy/FunctionCopy'; // Importando o componente de cópia
 import styles from './TittleGenerator.module.css'; 
+import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
 
 const GeradorTitulos = () => {
   const { user, signOut } = useContext(AuthContext);
@@ -88,7 +89,9 @@ const GeradorTitulos = () => {
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
-        <div className={styles.geradorContainer}>
+        
+        {/* Usando a classe contentContainer do styles.css */}
+        <div className="contentContainer">
           <h1 className={styles.title}>Gerador de Títulos</h1>   
           <div className={styles.inputSection}>
             <textarea
@@ -132,7 +135,6 @@ const GeradorTitulos = () => {
             userId={userId} 
             onWebhookTitleUpdate={handleWebhookTitleUpdate} 
           />
-
         </div>
       </div>
       <Footer />

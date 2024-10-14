@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TopBar from '../../components/TopBar/TopBar';
 import Footer from '../../components/Footer/Footer';
-import styles from './AITools.module.css'; // Caminho ajustado
+import styles from './AITools.module.css'; // Importando o CSS módulo para estilos específicos do componente
+import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
 import MainContent from '../../components/MainContent/MainContent'; 
 import { AuthContext } from '../../context/AuthContext';
-import { useContext } from 'react';
 import { Lock, LockOpen } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import BuySound from '../../components/BuySound'; // Certifique-se de importar corretamente o BuySound
@@ -52,7 +52,9 @@ const AITools = () => {
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
-        <div className={styles.iaContainer}>
+        
+        {/* Usando a classe contentContainer do styles.css */}
+        <div className="contentContainer">
           <h1 className={styles.title}>Ferramentas de IA</h1>
 
           {/* Botões de Categoria */}

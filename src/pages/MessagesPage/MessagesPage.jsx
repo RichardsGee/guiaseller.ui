@@ -5,8 +5,9 @@ import TopBar from '../../components/TopBar/TopBar';
 import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent'; // Adicionando o MainContent
 import { AuthContext } from '../../context/AuthContext';
-import styles from './messages.module.css'; // Certifique-se de criar o arquivo CSS
-import filterStyles from './messagesfilter.module.css'; // Importando o novo CSS do filtro
+import styles from './messages.module.css'; // Importando o CSS do módulo
+import filterStyles from './messagesfilter.module.css'; // Importando o CSS do filtro
+import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
 
 const MessagesPage = () => {
   const { user, signOut } = useContext(AuthContext);
@@ -52,35 +53,38 @@ const MessagesPage = () => {
   const readMessages = messages.filter(message => message.isRead).length;
 
   return (
-    <MainContent> {/* Envolvendo o conteúdo com MainContent */}
+    <MainContent>
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
 
-        <div className={styles.messagesContainer}>
-          <h1 className={styles.title}>Minhas Mensagens</h1>
+        {/* Usando a classe contentContainer do styles.css */}
+        <div className="contentContainer">
+          <div className={styles.messagesContainer}>
+            <h1 className={styles.title}>Minhas Mensagens</h1>
 
-          {/* Contador de mensagens lidas e não lidas, abaixo do título */}
-          <div className={filterStyles.filterWrapper}>
-            <div className={filterStyles.filterSection}>
-              <p><strong>Total de Mensagens:</strong> {totalMessages}</p>
-              <p><strong>Mensagens Lidas:</strong> {readMessages}</p>
+            {/* Contador de mensagens lidas e não lidas, abaixo do título */}
+            <div className={filterStyles.filterWrapper}>
+              <div className={filterStyles.filterSection}>
+                <p><strong>Total de Mensagens:</strong> {totalMessages}</p>
+                <p><strong>Mensagens Lidas:</strong> {readMessages}</p>
+              </div>
             </div>
-          </div>
 
-          <ul className={styles.messageList}>
-            {messages.map(message => (
-              <li key={message.id} className={`${styles.messageItem} ${message.isRead ? styles.read : styles.unread}`}>
-                <div className={styles.messageHeader}>
-                  <h3 className={styles.messageSender}>{message.sender}</h3>
-                  <p className={styles.messageDate}>{message.date}</p>
-                </div>
-                <h4 className={styles.messageSubject}>{message.subject}</h4>
-                <p className={styles.messageContent}>{message.content}</p>
-              </li>
-            ))}
-          </ul>
+            <ul className={styles.messageList}>
+              {messages.map(message => (
+                <li key={message.id} className={`${styles.messageItem} ${message.isRead ? styles.read : styles.unread}`}>
+                  <div className={styles.messageHeader}>
+                    <h3 className={styles.messageSender}>{message.sender}</h3>
+                    <p className={styles.messageDate}>{message.date}</p>
+                  </div>
+                  <h4 className={styles.messageSubject}>{message.subject}</h4>
+                  <p className={styles.messageContent}>{message.content}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
       <Footer />

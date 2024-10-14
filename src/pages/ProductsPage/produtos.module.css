@@ -1,22 +1,3 @@
-/* produtos.module.css */
-
-.produtosContainer {
-  background-color: var(--third-color);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  margin: 20px auto;
-  width: 100%;
-  max-width: 1700px;
-  color: var(--text-color);
-  overflow-y: auto;
-  min-height: 76.5vh;
-  border-top-left-radius: 20px; /* Arredonda o canto superior direito */
-  border-bottom-left-radius: 20px; /* Arredonda o canto inferior direito */
-  border-top-right-radius: 20px; /* Arredonda o canto superior direito */
-  border-bottom-right-radius: 20px; /* Arredonda o canto inferior direito */
-}
-
 .produtosTitle {
   text-align: center;
   color: var(--text-color);

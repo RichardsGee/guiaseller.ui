@@ -7,7 +7,8 @@ import MainContent from '../../components/MainContent/MainContent';
 import AccountSettings from '../../components/AccountSettings/AccountSettings';
 import CompanySettings from '../../components/CompanySettings/CompanySettings';
 import { AuthContext } from '../../context/AuthContext';
-import styles from './settingsPage.module.css';
+import styles from './settingsPage.module.css'; // Importando o CSS do módulo
+import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -151,40 +152,43 @@ function SettingsPage() {
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
 
-        <div className={styles.configContent}>
-          <h1 className={styles.mainTitle}>Configurações</h1>
+        {/* Usando a classe contentContainer do styles.css */}
+        <div className="contentContainer">
+          <div className={styles.configContent}>
+            <h1 className={styles.mainTitle}>Configurações</h1>
 
-          <div className={styles.settingsGrid}>
-            <AccountSettings 
-              name={first_name} 
-              setName={setName} 
-              email={email} 
-              setEmail={setEmail} 
-              phone={phone} 
-              setPhone={setPhone} 
-              userLevel={userLevel} // Passando o userLevel para AccountSettings
-              isEditing={isEditingAccount}
-              handleEditClick={handleEditClickAccount}
-              handleSave={handleSave}
-              isFieldEmpty={isFieldEmpty} 
-            />
+            <div className={styles.settingsGrid}>
+              <AccountSettings 
+                name={first_name} 
+                setName={setName} 
+                email={email} 
+                setEmail={setEmail} 
+                phone={phone} 
+                setPhone={setPhone} 
+                userLevel={userLevel} // Passando o userLevel para AccountSettings
+                isEditing={isEditingAccount}
+                handleEditClick={handleEditClickAccount}
+                handleSave={handleSave}
+                isFieldEmpty={isFieldEmpty} 
+              />
 
-            <CompanySettings 
-              companyName={companyName} 
-              setCompanyName={setCompanyName} 
-              cnpj={cnpj} 
-              setCnpj={setCnpj} 
-              fantasyName={fantasyName} 
-              setFantasyName={setFantasyName} 
-              taxRate={taxRate} 
-              setTaxRate={setTaxRate}
-              additionalCost={additionalCost} 
-              setAdditionalCost={setAdditionalCost} 
-              isEditing={isEditingCompany}
-              handleEditClick={handleEditClickCompany}
-              handleSave={handleSave}
-              isFieldEmpty={isFieldEmpty} 
-            />
+              <CompanySettings 
+                companyName={companyName} 
+                setCompanyName={setCompanyName} 
+                cnpj={cnpj} 
+                setCnpj={setCnpj} 
+                fantasyName={fantasyName} 
+                setFantasyName={setFantasyName} 
+                taxRate={taxRate} 
+                setTaxRate={setTaxRate}
+                additionalCost={additionalCost} 
+                setAdditionalCost={setAdditionalCost} 
+                isEditing={isEditingCompany}
+                handleEditClick={handleEditClickCompany}
+                handleSave={handleSave}
+                isFieldEmpty={isFieldEmpty} 
+              />
+            </div>
           </div>
         </div>
       </div>
