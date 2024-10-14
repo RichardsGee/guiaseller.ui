@@ -18,6 +18,7 @@ const GeradorTitulos = () => {
   const [inputText, setInputText] = useState('');
   const [generatedTitle, setGeneratedTitle] = useState('');
   const [loading, setLoading] = useState(false);
+  const [webhookTitle, setWebhookTitle] = useState(''); // Novo estado para armazenar o título recebido via webhook
 
   const handleGenerateTitle = async () => {
     if (!inputText) {
@@ -44,6 +45,11 @@ const GeradorTitulos = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Função de callback para receber o título do webhook vindo do componente WebhookResultComponent
+  const handleWebhookTitleUpdate = (title) => {
+    setWebhookTitle(title); // Armazena o título vindo do webhook no estado
   };
 
   return (
@@ -74,13 +80,29 @@ const GeradorTitulos = () => {
             </button>
           </div>
 
+          {/* Exibir o título gerado pelo processo */}
           <div className={styles.resultSection}>
             <p className={styles.resultText}>{generatedTitle}</p>
           </div>
 
-          {/* Exibindo o resultado do webhook vindo do backend, agora passando o userId */}
-          <WebhookResultComponent apiUrl="https://guiaseller-backend.dlmi5z.easypanel.host" userId={userId} />
+          {/* Exibir o título recebido pelo webhook */}
+          <div className={styles.webhookResult}>
+            <h2>Título Recebido via Webhook:</h2>
+            <textarea 
+              value={webhookTitle} 
+              readOnly 
+              className={styles.webhookInput} 
+              rows={4} 
+              cols={50} 
+            />
+          </div>
 
+          {/* Exibindo o resultado do webhook vindo do backend */}
+          <WebhookResultComponent 
+            apiUrl="https://guiaseller-backend.dlmi5z.easypanel.host" 
+            userId={userId} 
+            onWebhookTitleUpdate={handleWebhookTitleUpdate} // Passando a função para receber o título do webhook
+          />
         </div>
       </div>
       <Footer />

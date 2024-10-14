@@ -22,7 +22,7 @@ const WebhookResultComponent = ({ apiUrl, userId }) => {
         }
 
         const data = await response.json();
-        
+
         // Exibir o título do webhook
         if (data && data.length > 0) {
           const latestWebhook = data[data.length - 1]; // Pega o último webhook recebido para o userId
@@ -36,15 +36,17 @@ const WebhookResultComponent = ({ apiUrl, userId }) => {
       }
     };
 
+    fetchWebhookResult();
+
     const intervalId = setInterval(fetchWebhookResult, 5000); // Busca a cada 5 segundos
     return () => clearInterval(intervalId); // Limpar o intervalo ao desmontar
-  }, [apiUrl, userId]);
+  }, [apiUrl, userId]); // userId como dependência
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(webhookResult)
       .then(() => setCopySuccess('Copiado!'))
       .catch(err => console.error('Erro ao copiar texto: ', err));
-    
+
     setTimeout(() => setCopySuccess(''), 2000); // Limpar feedback após 2 segundos
   };
 
