@@ -89,11 +89,7 @@ const GeradorTitulos = () => {
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
         <div className={styles.geradorContainer}>
-          <h1 className={styles.title}>Gerador de Títulos</h1>
-          <p className={styles.description}>
-            Insira os detalhes do seu produto e gere títulos de alta conversão.
-          </p>
-          
+          <h1 className={styles.title}>Gerador de Títulos</h1>   
           <div className={styles.inputSection}>
             <textarea
               value={inputText}

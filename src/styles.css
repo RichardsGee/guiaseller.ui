@@ -2,7 +2,7 @@
     --padding: 20px;
     --margin: 20px;
     --sidebar-width: 240px;
-    --header-height: 5px;
+    --header-height: 50px;
     --footer-height: 40px;
     
     /* Variáveis de tema */
@@ -336,4 +336,5 @@ footer {
         width: 100%;
     }
 }
+
 

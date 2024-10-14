@@ -1,14 +1,21 @@
 /* Estilos para o topbar */
 
 .topBar {
+    position: fixed; /* Torna a TopBar fixa */
+    top: 70px; /* Distância do topo da tela igual à altura do Header */
+    left: 60; /* Alinha a TopBar à direita do Sidebar */
+    width: calc(98% - var(--sidebar-width)); /* Ocupa toda a largura restante da tela */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: var(--margin);
     margin-bottom: var(--margin);
-    width: 100%;
-    
-    
+    padding-top: 5px; /* Distância do header */
+    background-color: #17181A; /* Cor de fundo */
+    z-index: 999; /* Garante que a TopBar fique acima de outros elementos */
 }
+
+
+
 
 .topBarItem {
     background: var(--background-color);

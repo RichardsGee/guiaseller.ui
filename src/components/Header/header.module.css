@@ -1,4 +1,8 @@
 .mainHeader {
+    position: fixed; /* Torna o header fixo na parte superior */
+    top: 0; /* Alinha o header ao topo da página */
+    left: 0; /* Alinha o header à esquerda da página */
+    width: 100%; /* Ocupar toda a largura da tela */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -6,6 +10,7 @@
     padding: 30px 20px;
     height: var(--header-height);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Garante que o header fique acima de outros elementos */
 }
 
 .headerLogo {
