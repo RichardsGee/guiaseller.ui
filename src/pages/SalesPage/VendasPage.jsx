@@ -103,7 +103,7 @@ const VendasPage = () => {
         {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">
           <div className={styles.vendasContainer}>
-            <h1 className={styles.vendasTitle}>Meus Pedidos</h1>
+          <h1 className="title">Meus Pedidos</h1>
 
             {/* Filtro de busca e resultados dentro do mesmo container */}
             <div className={filterStyles.filterWrapper}>

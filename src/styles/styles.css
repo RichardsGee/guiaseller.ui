@@ -354,3 +354,10 @@ footer {
     top: calc(60px + 50px + 5px); /* Distância da TopBar e do Header */
 }
 
+
+.title {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 24px;
+}

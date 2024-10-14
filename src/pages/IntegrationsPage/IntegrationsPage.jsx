@@ -46,7 +46,7 @@ const IntegrationsPage = () => {
         {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">
           <div className={styles.integrationsContainer}>
-            <h1 className={styles.title}>Integrações</h1>
+          <h1 className="title">Integrações</h1>
 
             {/* Seção de integrações disponíveis */}
             <h2 className={styles.subTitle}>Disponíveis</h2>

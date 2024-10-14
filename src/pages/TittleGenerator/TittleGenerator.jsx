@@ -92,7 +92,7 @@ const GeradorTitulos = () => {
         
         {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">
-          <h1 className={styles.title}>Gerador de Títulos</h1>   
+        <h1 className="title">Gerador de Títulos</h1>   
           <div className={styles.inputSection}>
             <textarea
               value={inputText}

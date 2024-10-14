@@ -85,7 +85,7 @@ function ProdutosPage() {
         {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">
           <div className={styles.produtosContainer}>
-            <h1 className={styles.produtosTitle}>Meus Produtos</h1>
+            <h1 className="title">Meus Produtos</h1>
 
             {/* Dois botões para Adicionar Produto Simples e Adicionar Kit */}
             <div className={styles.buttonContainer}>

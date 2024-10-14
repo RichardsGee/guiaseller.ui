@@ -155,7 +155,7 @@ function SettingsPage() {
         {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">
           <div className={styles.configContent}>
-            <h1 className={styles.mainTitle}>Configurações</h1>
+          <h1 className="title">Configurações</h1>
 
             <div className={styles.settingsGrid}>
               <AccountSettings 

@@ -1,10 +1,4 @@
-  .vendasTitle {
-    text-align: center;
-    color: var(--text-color);
-    margin-bottom: 20px;
-    font-size: 24px;
-  }
-  
+
   .vendasTable {
     background-color: var(--third-color);
     width: 100%;
