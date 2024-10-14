@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TopBar from '../../components/TopBar/TopBar';
 import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
-import { useContext } from 'react';
 import WebhookResultComponent from '../../components/WebhookResultComponent'; // Importando o componente do Webhook
 import styles from './TittleGenerator.module.css'; 
 
@@ -14,6 +13,7 @@ const GeradorTitulos = () => {
   const username = user ? user.displayName || user.email : "No User Logged";
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
+  const userId = user ? user.uid : null; // Pegando o userId do usuário
 
   const [inputText, setInputText] = useState('');
   const [generatedTitle, setGeneratedTitle] = useState('');
@@ -33,7 +33,7 @@ const GeradorTitulos = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ inputText }),
+        body: JSON.stringify({ inputText, userId }), // Enviando o userId junto com o inputText
       });
 
       const result = await response.json();
