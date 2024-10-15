@@ -1,0 +1,42 @@
+.userLevel {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 2px 8px;
+    background-color: var(--primary-color);
+    color: var(--text3-color);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+  }
+  
+  .adminLevel {
+    background-color: #ffcccc;
+    color: #990000;
+  }
+  
+  .userLevel {
+    background-color: #e0f7fa;
+    color: #00796b;
+  }
+  
+  .proLevel {
+    background-color: #ffe082;
+    color: #ff8f00;
+  }
+  
+  .premiumLevel {
+    background-color: #c5e1a5;
+    color: #33691e;
+  }
+  
+  .founderLevel {
+    background-color: #d1c4e9;
+    color: #512da8;
+  }
+  
+  .defaultLevel {
+    background-color: #eeeeee;
+    color: #757575;
+  }
+  

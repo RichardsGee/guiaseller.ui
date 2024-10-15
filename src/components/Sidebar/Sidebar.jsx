@@ -1,13 +1,9 @@
 import { Link } from 'react-router-dom'; 
 import styles from './sidebar.module.css'; 
-import React, { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext'; // Importar o AuthContext
+import React from 'react';
+import UserLevel from '../UserLevel/UserLevel'; // Importe o novo componente UserLevel
 
 function Sidebar({ userPhoto, username, userEmail, isComplete }) {
-  const { userLevel } = useContext(AuthContext); // Consome o userLevel do contexto
-
-  console.log("Sidebar User Level:", userLevel); // Adicionando log para verificar o valor do userLevel
-  
   return (
     <nav className={styles.sidebar}>
       <div className={styles.userInfo}>
@@ -18,8 +14,11 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
         />
         <h2>{username}</h2>
         <p>{userEmail || "Nothing@gmail.com"}</p>
-        <span className={styles.userLevel}>{userLevel || "Nada"}</span> {/* Exibe o userLevel do contexto */}
+        
+        {/* Exibe o componente UserLevel */}
+        <UserLevel />
       </div>
+      
       <ul>
         <li><Link to="/dashboard"><span className={`material-icons ${styles.sidebarIcon}`}>dashboard</span>Dashboard</Link></li>
         <li><Link to="/vendas"><span className={`material-icons ${styles.sidebarIcon}`}>shopping_bag</span>Vendas</Link></li>
@@ -39,13 +38,13 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
         <li><Link to="/mensagens"><span className={`material-icons ${styles.sidebarIcon}`}>notifications</span>Mensagens</Link></li>
         <li>
           <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
-            <span className={`material-icons ${styles.sidebarIcon}`}>smart_toy</span> {/* Ícone de ferramenta */}
+            <span className={`material-icons ${styles.sidebarIcon}`}>smart_toy</span> {/* Ícone de ferramenta */} 
             Ferramentas IA
             <img 
               src="ai.png" 
               alt="IA Icon" 
               className={styles.sidebarIconIA} 
-            /> {/* Imagem PNG para IA */}
+            /> {/* Imagem PNG para IA */} 
           </Link>
         </li>
       </ul>
