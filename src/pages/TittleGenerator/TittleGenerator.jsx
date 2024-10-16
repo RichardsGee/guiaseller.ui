@@ -60,7 +60,7 @@ const GeradorTitulos = () => {
 
     } catch (error) {
       console.error('Erro ao gerar título:', error);
-      setGeneratedTitles(['Ocorreu um erro ao gerar o título.']);
+      setGeneratedTitles([]);
       setShowResultText(true);
     } finally {
       setLoading(false);
@@ -163,7 +163,7 @@ const GeradorTitulos = () => {
               type="text"
               value={newInputText}
               onChange={handleNewInputChange}
-              placeholder="Digite aqui algo novo..."
+              placeholder="Edite o título manualmente..."
               className={styles.newInput} // Borda verde fixa
             />
             <div onClick={copyToClipboard} className={styles.copyButton} title="Copiar">
