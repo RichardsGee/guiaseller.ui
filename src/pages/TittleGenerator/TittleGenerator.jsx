@@ -22,6 +22,7 @@ const GeradorTitulos = () => {
   const [loading, setLoading] = useState(false);
   const [showResultText, setShowResultText] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState(null);
+  const [newInputText, setNewInputText] = useState(''); // Novo estado para o novo input
 
   const handleGenerateTitle = async () => {
     if (!inputText) {
@@ -45,7 +46,6 @@ const GeradorTitulos = () => {
       const result = await response.json();
       const titlesArray = result.title.split('<br>').map(title => title.trim());
 
-      // Filtrar títulos que após a remoção de "1. ", "2. " resultam em comprimento maior que 0
       const filteredTitles = titlesArray
         .map(title => title.replace(/^\d+\.\s*/, '')) // Remove os números e espaços
         .filter(title => title.length > 0); // Filtra apenas os que têm comprimento maior que 0
@@ -70,17 +70,37 @@ const GeradorTitulos = () => {
     setGeneratedTitles([]);
     setShowResultText(false);
     setCopiedIndex(null);
+    setNewInputText(''); // Limpar o novo input
   };
 
   const handleWebhookTitleUpdate = (titlesString) => {
     const titlesArray = titlesString.split('<br>').map(title => title.trim());
 
-    // Filtrar títulos que após a remoção de "1. ", "2. " resultam em comprimento maior que 0
     const filteredTitles = titlesArray
       .map(title => title.replace(/^\d+\.\s*/, ''))
       .filter(title => title.length > 0);
 
     setGeneratedTitles(filteredTitles);
+  };
+
+  // Função para gerenciar a entrada do novo input
+  const handleNewInputChange = (e) => {
+    const value = e.target.value;
+    if (value.length <= 60) {
+      setNewInputText(value);
+    }
+  };
+
+  // Função para copiar o texto do input para a área de transferência
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(newInputText)
+      .then(() => alert('Texto copiado!'))
+      .catch(err => console.error('Erro ao copiar o texto: ', err));
+  };
+
+  // Função para copiar o título clicado para o input
+  const handleTitleClick = (title) => {
+    setNewInputText(title); // Atualiza o estado do input com o título clicado
   };
 
   return (
@@ -90,9 +110,8 @@ const GeradorTitulos = () => {
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
         
-        {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">
-        <h1 className="title">Gerador de Títulos</h1>   
+          <h1 className="title">Gerador de Títulos</h1>   
           <div className={styles.inputSection}>
             <textarea
               value={inputText}
@@ -125,10 +144,31 @@ const GeradorTitulos = () => {
                   title={title}
                   onCopy={() => setCopiedIndex(index)}
                   copied={copiedIndex === index}
+                  onTitleClick={handleTitleClick} // Passando a função para clicar no título
                 />
               ))}
             </div>
           )}
+
+          {/* Novo container e input abaixo dos resultados dos títulos */}
+          <div className={styles.newInputContainer}>
+            <input
+              type="text"
+              value={newInputText}
+              onChange={handleNewInputChange}
+              placeholder="Gere um título e edite como quiser"
+              className={styles.newInput} // Borda verde fixa
+            />
+            <span className={styles.characterCount}>{newInputText.length}/60</span> {/* Contagem de caracteres */}
+          </div>
+
+          <button 
+            className={styles.copyButton} 
+            onClick={copyToClipboard}
+            disabled={newInputText.length === 0} // Desabilita o botão se o input estiver vazio
+          >
+            Copiar
+          </button>
 
           <WebhookResultComponent 
             apiUrl="https://guiaseller-backend.dlmi5z.easypanel.host" 
