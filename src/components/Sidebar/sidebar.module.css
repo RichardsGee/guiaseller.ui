@@ -181,35 +181,3 @@
     font-weight: bold;
     text-transform: uppercase;
 }
-
-/* Estilos para os níveis de usuário */
-.adminLevel {
-    background-color: #ff4d4d; /* Cor para Admin */
-    color: #fff; /* Cor do texto */
-}
-
-.userLevel {
-    background-color: #ffcc00; /* Cor para Usuário */
-    color: #000; /* Cor do texto */
-}
-
-.proLevel {
-    background-color: #007bff; /* Cor para Pro */
-    color: #fff; /* Cor do texto */
-}
-
-.premiumLevel {
-    background-color: #28a745; /* Cor para Premium */
-    color: #fff; /* Cor do texto */
-}
-
-.founderLevel {
-    background-color: #6f42c1; /* Cor para Founder */
-    color: #fff; /* Cor do texto */
-}
-
-.defaultLevel {
-    background-color: #cccccc; /* Cor padrão */
-    color: #000; /* Cor do texto */
-}
-
