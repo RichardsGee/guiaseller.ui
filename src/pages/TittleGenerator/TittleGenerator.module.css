@@ -125,37 +125,37 @@
     align-items: center; /* Alinha os itens verticalmente ao centro */
     justify-content: center; /* Centraliza horizontalmente os elementos no contêiner */
     margin-top: 20px; /* Espaço entre o resultado e o novo input */
-  }
-  
-  .newInput {
-    width: 80%; /* Define uma largura apropriada */
-    max-width: 500px; /* Define uma largura máxima para o input */
-    padding: 10px; /* Adiciona algum preenchimento */
-    border: 1px solid black; /* Define uma borda verde fixa */
-    border-radius: 5px; /* Bordas arredondadas */
-    margin-right: 10px; /* Espaço entre o input e o contador */
-    margin-bottom: 10px; /* Adiciona espaço abaixo do input */
 }
- 
-  .characterCount {
+
+.characterCount {
     font-size: 12px; /* Tamanho da fonte do contador */
     color: #fff; /* Cor do texto do contador, alterado para branco */
-  }
-  
-  .copyButton {
-    width: 50%; /* Define a largura do botão menor */
-    max-width: 200px; /* Define uma largura máxima para o botão */
-    padding: 10px 15px; /* Preenchimento do botão */
-    background-color: #4CAF50; /* Cor do fundo do botão */
-    color: white; /* Cor do texto do botão */
-    border: none; /* Remove a borda padrão */
+    margin-right: 5px; /* Espaço pequeno à direita do contador */
+}
+
+.newInput {
+    width: 80%; /* Define uma largura apropriada */
+    max-width: 400px; /* Define uma largura máxima para o input */
+    padding: 10px; /* Adiciona algum preenchimento */
+    border: 1px solid black; /* Define uma borda fixa */
     border-radius: 5px; /* Bordas arredondadas */
+    margin-right: 5px; /* Espaço pequeno entre o input e o botão */
+}
+
+.copyButton {
+    display: flex; /* Usar flexbox para alinhar o ícone e o texto */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 10px; /* Preenchimento do botão */
+    background-color: transparent; /* Fundo transparente */
+    color: #4CAF50; /* Cor do ícone */
+    border: none; /* Remove a borda padrão */
     cursor: pointer; /* Muda o cursor para indicar que é clicável */
-    margin: 10px auto 0; /* Centraliza o botão e adiciona espaço acima */
-    display: block; /* Garante que o botão é tratado como bloco para centralização */
-  }
-  
-  .copyButton:disabled {
-    background-color: #ccc; /* Cor do botão desativado */
-    cursor: not-allowed; /* Muda o cursor para indicar que não é clicável */
-  }
+    margin-left: 5px; /* Espaço entre o input e o botão */
+}
+
+.copyButton span {
+    margin-left: 5px; /* Espaço entre o ícone e o texto "Copiado!" */
+    font-size: 12px; /* Tamanho do texto do status */
+}
+
+

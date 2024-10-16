@@ -7,6 +7,7 @@ import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
 import WebhookResultComponent from '../../components/WebhookResultComponent';
 import FunctionCopy from '../../components/FunctionCopy/FunctionCopy'; // Importando o componente de cópia
+import CopyAllIcon from '@mui/icons-material/CopyAll'; // Ícone de copiar
 import styles from './TittleGenerator.module.css'; 
 import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
 
@@ -23,6 +24,7 @@ const GeradorTitulos = () => {
   const [showResultText, setShowResultText] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState(null);
   const [newInputText, setNewInputText] = useState(''); // Novo estado para o novo input
+  const [copyStatus, setCopyStatus] = useState(''); // Novo estado para o status de cópia
 
   const handleGenerateTitle = async () => {
     if (!inputText) {
@@ -71,6 +73,7 @@ const GeradorTitulos = () => {
     setShowResultText(false);
     setCopiedIndex(null);
     setNewInputText(''); // Limpar o novo input
+    setCopyStatus(''); // Limpar o status de cópia
   };
 
   const handleWebhookTitleUpdate = (titlesString) => {
@@ -94,7 +97,10 @@ const GeradorTitulos = () => {
   // Função para copiar o texto do input para a área de transferência
   const copyToClipboard = () => {
     navigator.clipboard.writeText(newInputText)
-      .then(() => alert('Texto copiado!'))
+      .then(() => {
+        setCopyStatus('✅ Copiado!'); // Atualiza o status para "Copiado"
+        setTimeout(() => setCopyStatus(''), 2000); // Limpa o status após 2 segundos
+      })
       .catch(err => console.error('Erro ao copiar o texto: ', err));
   };
 
@@ -152,23 +158,19 @@ const GeradorTitulos = () => {
 
           {/* Novo container e input abaixo dos resultados dos títulos */}
           <div className={styles.newInputContainer}>
+            <span className={styles.characterCount}>{newInputText.length}/60</span> {/* Contagem de caracteres */}
             <input
               type="text"
               value={newInputText}
               onChange={handleNewInputChange}
-              placeholder="Gere um título e edite como quiser"
+              placeholder="Digite aqui algo novo..."
               className={styles.newInput} // Borda verde fixa
             />
-            <span className={styles.characterCount}>{newInputText.length}/60</span> {/* Contagem de caracteres */}
+            <div onClick={copyToClipboard} className={styles.copyButton} title="Copiar">
+              <CopyAllIcon style={{ color: 'white' }} /> {/* Ícone de copiar em branco */}
+              {copyStatus && <span>{copyStatus}</span>} {/* Exibe o status de cópia */}
+            </div>
           </div>
-
-          <button 
-            className={styles.copyButton} 
-            onClick={copyToClipboard}
-            disabled={newInputText.length === 0} // Desabilita o botão se o input estiver vazio
-          >
-            Copiar
-          </button>
 
           <WebhookResultComponent 
             apiUrl="https://guiaseller-backend.dlmi5z.easypanel.host" 
