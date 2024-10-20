@@ -20,6 +20,12 @@ function Header({ username, logout }) {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Função para navegação para diferentes seções
+  const navigateTo = (path) => {
+    navigate(path);
+    setIsMenuOpen(false); // Fecha o menu ao navegar
+  };
+
   return (
     <header className={styles.mainHeader}>
       <div className={styles.headerLogo}>
@@ -48,8 +54,21 @@ function Header({ username, logout }) {
         {/* Menu (apenas em mobile) */}
         {isMenuOpen && (
           <div className={styles.menu}>
-            {/* Nome do usuário apenas no menu mobile */}
-            <span className={styles.username}>{username}</span>
+            {/* Nome de usuário removido do menu mobile */}
+
+            {/* Links do sidebar */}
+            <ul className={styles.menuList}>
+              <li onClick={() => navigateTo('/dashboard')}>Dashboard</li>
+              <li onClick={() => navigateTo('/vendas')}>Vendas</li>
+              <li onClick={() => navigateTo('/produtos')}>Produtos</li>
+              <li onClick={() => navigateTo('/anuncios')}>Anúncios</li>
+              <li onClick={() => navigateTo('/configuracoes')}>Configurações</li>
+              <li onClick={() => navigateTo('/perfil')}>Perfil</li>
+              <li onClick={() => navigateTo('/lojas')}>Lojas</li>
+              <li onClick={() => navigateTo('/mensagens')}>Mensagens</li>
+              <li onClick={() => navigateTo('/ferramentas-ia')}>Ferramentas IA</li>
+            </ul>
+
             <button className={styles.logoutBtn} onClick={logout}>Logout</button>
           </div>
         )}

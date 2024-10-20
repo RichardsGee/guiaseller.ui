@@ -42,7 +42,7 @@
 .username {
     font-weight: bold;
     color: var(--text-color);
-    font-size: 12px; /* Tamanho do nome do usuário */
+    font-size: 8px; /* Tamanho do nome do usuário */
 }
 
 /* Botão de tema visível em ambas as versões */
@@ -50,8 +50,10 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 10px; /* Tamanho da fonte reduzido */
+    padding: 5px 8px; /* Reduzindo o padding para um botão menor */
     color: var(--text-color);
+    border-radius: 5px; /* Adicionando borda arredondada se desejar */
 }
 
 /* Botão de logout */
@@ -69,7 +71,7 @@
     background-color: var(--primary-color);
 }
 
-/* Responsividade */
+/* Botão de menu */
 .menuButton {
     background: transparent;
     border: none;
@@ -90,6 +92,23 @@
     z-index: 999; /* Garante que o menu fique acima de outros elementos */
 }
 
+/* Estilo da lista de menu */
+.menuList {
+    list-style: none; /* Remove os marcadores da lista */
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilo dos itens do menu */
+.menuList li {
+    padding: 5px 10px; /* Padding para os itens do menu */
+    cursor: pointer; /* Cursor de ponteiro para os itens clicáveis */
+}
+
+.menuList li:hover {
+    background-color: var(--primary-color); /* Efeito de hover para os itens */
+}
+
 /* Responsividade para mobile */
 @media (max-width: 600px) {
     .menuButton {
@@ -103,10 +122,10 @@
     }
 
     .headerLogo img {
-        max-width: 60px; /* Diminuindo o tamanho da logo para mobile */
+        max-width: 40px; /* Diminuindo o tamanho da logo para mobile */
     }
 
     .slogan {
-        font-size: 12px; /* Diminuindo o slogan para mobile */
+        font-size: 8px; /* Diminuindo o slogan para mobile */
     }
 }
