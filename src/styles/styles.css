@@ -3,7 +3,9 @@
     --margin: 20px;
     --sidebar-width: 240px;
     --header-height: 50px;
+    --topbar-height: 60px; /* Adicionei a altura da TopBar */
     --footer-height: 40px;
+    /* Outras variáveis */
     
     /* Variáveis de tema */
     --background-color: #171717;
@@ -20,7 +22,6 @@
     --btn2-color: #2F2F2F;
     --tools-color: #02B075;
     --ai-color: linear-gradient(135deg, #00d9ff, var(--primary-color));
-
 }
 
 /* Definindo estilos para o tema claro */
@@ -37,7 +38,6 @@ body.light {
     --text3-color: #000000;
     --btn-color: #ffd700;
     --container-color: #eaeaea;
-    
 }
 
 /* Definindo estilos para o tema escuro */
@@ -92,7 +92,6 @@ body {
     top: 0;
     left: 0;
     z-index: 1000;
-
 }
 
 .header-logo {
@@ -256,53 +255,42 @@ footer {
 
 /* Responsividade para telas menores */
 @media (max-width: 768px) {
-    footer {
-        width: 100%; /* Em telas pequenas, a sidebar pode desaparecer, então o footer ocupa 100% */
-        left: 0;
+    .main-header {
+        flex-direction: column; /* Altera a direção em telas menores */
+        align-items: flex-start;
+        padding: var(--padding); /* Ajuste de padding para espaço interno */
     }
-}
 
-
-
-@media (max-width: 1200px) {
-    .sidebar {
-        width: 200px;
+    .header-logo img {
+        width: 50px; /* Diminuindo o logo em telas pequenas */
+        height: 50px;
     }
 
     .main-content {
-        margin-left: 200px;
-        width: calc(100% - 200px);
+        padding: 10px; /* Reduzir padding em telas menores */
     }
 
-    footer {
-        width: calc(100% - 200px);
-        left: 200px;
-    }
-}
-
-@media (max-width: 900px) {
-    .top-bar {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    .chart-section {
+        height: auto; /* Permitir que a altura se ajuste automaticamente */
     }
 
-    .filter-section {
-        flex-direction: column;
-        align-items: flex-start;
+    .info-item {
+        height: auto; /* Ajuste automático na altura para melhor exibição */
     }
 
-    .additional-info {
-        grid-template-columns: 1fr;
+    .credits {
+        font-size: 12px; /* Ajuste de fonte para ser mais legível em telas menores */
     }
 }
 
 @media (max-width: 600px) {
     .sidebar {
-        display: none;
+        display: none; /* Esconde a sidebar */
     }
 
     .main-content {
-        margin-left: 0;
-        width: 100%;
+        margin-left: 0; /* Remove a margem da sidebar */
+        width: 100%; /* Ajusta a largura */
     }
 
     footer {
@@ -311,19 +299,19 @@ footer {
     }
 
     .main-header {
-        flex-direction: column;
-        align-items: flex-start;
-        height: auto;
-        padding: var(--padding);
+        height: auto; /* Permitir que o header se ajuste ao conteúdo */
     }
 
-    .header-logo img {
-        width: 50px;
-        height: 50px;
+    .main-header h2 {
+        font-size: 18px; /* Reduzindo o tamanho da fonte */
     }
 
-    .header-logo .slogan {
-        font-size: 12px;
+    .logout-btn {
+        font-size: 10px; /* Ajuste de fonte para o botão de logout */
+    }
+
+    .username {
+        font-size: 8px; /* Menor tamanho para visualização em tela pequena */
     }
 
     .header-actions {
@@ -336,24 +324,42 @@ footer {
         width: 100%;
     }
 }
-/* Estilo padronizado para contentContainer */
+
+/* Estilo do contentContainer */
 .contentContainer {
-    position: fixed;
+    position: fixed; /* Mantém o container fixo */
     background-color: var(--third-color);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin: 60px auto; /* Centraliza horizontalmente */
-    width: 100%;
-    max-width: 1630px;
-    min-height: 77.5vh;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    top: calc(60px + 50px + 5px); /* Distância da TopBar e do Header */
+    margin: 60px 0 0; /* Margem superior */
+    width: calc(100% - var(--sidebar-width)); /* Largura para desktop */
+    max-width: 1630px; /* Limite máximo da largura */
+    min-height: 77.5vh; /* Altura mínima para desktop */
+    border-radius: 20px; /* Raio de borda */
+    top: calc(var(--header-height) + var(--topbar-height)); /* Distância do header e topbar */
+    overflow-y: auto; /* Adiciona rolagem vertical */
 }
 
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+    .contentContainer {
+        margin: 30px 0 0; /* Margem superior para mobile */
+        width: 100%; /* Ocupa toda a largura da tela */
+        min-height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height))); /* Altura que respeita o restante da tela */
+        left: 0; /* Alinhamento à esquerda */
+        overflow-y: auto; /* Adiciona rolagem vertical */
+    }
+}
+
+/* Ajustando a grid de configurações */
+.settingsGrid {
+    display: flex;
+    flex-direction: column; /* Alinha verticalmente no mobile */
+    gap: 20px; /* Espaçamento entre os itens */
+    max-height: calc(100vh - 60px); /* Altura máxima para permitir a rolagem */
+    overflow-y: auto; /* Permite a rolagem se necessário */
+}
 
 .title {
     text-align: center;

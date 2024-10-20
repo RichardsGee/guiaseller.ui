@@ -7,7 +7,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: var(--secondary-color);
-    padding: 30px 20px;
+    padding: 30px 20px; /* Padding para desktop */
     height: var(--header-height);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     z-index: 1000; /* Garante que o header fique acima de outros elementos */
@@ -35,14 +35,26 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    position: relative; /* Para o menu */
 }
 
+/* Nome do usuário */
 .username {
     font-weight: bold;
     color: var(--text-color);
-    font-size: 12px;
+    font-size: 12px; /* Tamanho do nome do usuário */
 }
 
+/* Botão de tema visível em ambas as versões */
+.themeToggleBtn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+/* Botão de logout */
 .logoutBtn {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -57,10 +69,44 @@
     background-color: var(--primary-color);
 }
 
-.themeToggleBtn {
-    background-color: transparent;
+/* Responsividade */
+.menuButton {
+    background: transparent;
     border: none;
     cursor: pointer;
-    font-size: 18px;
-    color: var(--text-color);
+    font-size: 24px;
+    display: none; /* Esconde o botão por padrão */
+}
+
+/* Estilo do menu de logout */
+.menu {
+    position: absolute; /* Faz o menu aparecer sobre o conteúdo */
+    right: 0; /* Alinha o menu à direita */
+    top: 50px; /* Distância do topo */
+    background-color: var(--third-color);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 999; /* Garante que o menu fique acima de outros elementos */
+}
+
+/* Responsividade para mobile */
+@media (max-width: 600px) {
+    .menuButton {
+        display: block; /* Mostra o botão em dispositivos móveis */
+    }
+    
+    .headerActions {
+        display: flex;
+        flex-direction: row; /* Mantém em linha */
+        gap: 5px; /* Espaçamento reduzido */
+    }
+
+    .headerLogo img {
+        max-width: 60px; /* Diminuindo o tamanho da logo para mobile */
+    }
+
+    .slogan {
+        font-size: 12px; /* Diminuindo o slogan para mobile */
+    }
 }

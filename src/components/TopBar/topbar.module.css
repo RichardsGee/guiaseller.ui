@@ -1,24 +1,18 @@
-/* Estilos para o topbar */
-
+/* Estilos para o topbar - Desktop */
 .topBar {
     position: fixed; /* Torna a TopBar fixa */
-    top: 70px; /* Distância do topo da tela igual à altura do Header */
-    left: 60; /* Alinha a TopBar à direita do Sidebar */
-    width: calc(98% - var(--sidebar-width)); /* Ocupa toda a largura restante da tela */
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    top: calc(var(--header-height) + var(--margin)); /* Distância do topo da tela, com margem abaixo do header */
+    left: var(--sidebar-width); /* Alinha à direita do sidebar */
+    width: calc(100% - var(--sidebar-width)); /* Ocupa toda a largura restante da tela */
+    display: flex; /* Usar flex para melhor controle de layout */
     gap: var(--margin);
-    margin-bottom: var(--margin);
-    padding-top: 5px; /* Distância do header */
-    background-color: #17181A; /* Cor de fundo */
+    padding: 5px; /* Adicionando padding para melhorar a aparência */
     z-index: 999; /* Garante que a TopBar fique acima de outros elementos */
 }
 
-
-
-
+/* Estilos para cada item da TopBar */
 .topBarItem {
-    background: var(--background-color);
+    background: var(--third-color); /* Mantendo o fundo */
     padding: var(--padding);
     border-radius: 10px;
     color: var(--text-color);
@@ -26,40 +20,92 @@
     justify-content: space-between;
     align-items: center;
     transition: transform 0.2s, box-shadow 0.2s;
-    height: 80px;
-    border-top-left-radius: 20px; /* Arredonda o canto superior direito */
-    border-bottom-left-radius: 20px; /* Arredonda o canto inferior direito */
-    border-top-right-radius: 20px; /* Arredonda o canto superior direito */
-    border-bottom-right-radius: 20px; /* Arredonda o canto inferior direito */
-    
-    
+    height: 80px; /* Altura padrão para desktop */
+    flex: 1; /* Faz com que os itens ocupem a mesma largura */
 }
 
+/* Adicionando hover effect */
 .topBarItem:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    
+}
+
+.topBarIcon {
+    display: flex;
+    align-items: center;
 }
 
 .topBarIcon .material-icons {
-    
     color: var(--icon-color) !important; /* Usando !important para garantir a aplicação */
     font-size: 30px;
-    
 }
 
-
 .topBarContent {
-    
     display: flex;
     flex-direction: column;
     gap: 5px;
-    
-    
 }
-.icon {
-    color: var(--tools-color) !important;
-    font-size: 30px;
-    
-    
+
+/* Responsividade para Mobile */
+@media (max-width: 768px) {
+    .topBar {
+        position: fixed; /* Torna a TopBar fixa */
+        top: calc(var(--header-height) + var(--margin)); /* Distância do topo da tela, com margem abaixo do header */
+        left: 0; /* Alinha à esquerda da tela */
+        width: 100%; /* Ocupa toda a largura da tela */
+        display: flex; /* Usar flex para melhor controle de layout */
+        gap: var(--margin); /* Espaçamento entre os itens */
+        padding: 5px; /* Adicionando padding para melhorar a aparência */
+        z-index: 999; /* Garante que a TopBar fique acima de outros elementos */
+        flex-wrap: nowrap; /* Não permitir quebra de linha */
+    }
+
+    /* Estilos para cada item da TopBar no mobile */
+    .topBarItem {
+        background: var(--third-color); /* Mantendo o fundo */
+        padding: 5px; /* Ajustando o padding */
+        border-radius: 10px;
+        color: var(--text-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: transform 0.2s, box-shadow 0.2s;
+        height: 50px; /* Altura reduzida para caber na mesma linha */
+        flex: 1; /* Faz com que os itens ocupem a mesma largura */
+    }
+
+    .topBarIcon .material-icons {
+        font-size: 24px; /* Tamanho do ícone ajustado */
+    }
+
+    .topBarContent h3 {
+        font-size: 12px; /* Diminuindo a fonte do título */
+    }
+
+    .topBarContent p {
+        font-size: 10px; /* Diminuindo a fonte do valor */
+    }
+}
+
+@media (max-width: 480px) {
+    .topBar {
+        flex-direction: row; /* Mantém a direção em linha para telas muito pequenas */
+    }
+
+    .topBarItem {
+        height: 50px; /* Altura menor para telas pequenas */
+        flex: 1 1 20%; /* Permite que os quatro itens se ajustem na mesma linha */
+    }
+
+    .topBarIcon .material-icons {
+        font-size: 20px; /* Diminuindo ainda mais o tamanho do ícone */
+    }
+
+    .topBarContent h3 {
+        font-size: 10px; /* Diminuindo ainda mais a fonte do título */
+    }
+
+    .topBarContent p {
+        font-size: 8px; /* Diminuindo ainda mais a fonte do valor */
+    }
 }
