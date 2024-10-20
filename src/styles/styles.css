@@ -4,7 +4,7 @@
     --sidebar-width: 240px;
     --header-height: 50px;
     --topbar-height: 60px; /* Adicionei a altura da TopBar */
-    --footer-height: 40px;
+    --footer-height: 40px; /* Altura do footer para desktop */
     /* Outras variáveis */
     
     /* Variáveis de tema */
@@ -69,7 +69,7 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /* Impede a rolagem do body */
 }
 
 .container {
@@ -168,7 +168,7 @@ body {
     padding: var(--padding);
     width: calc(100% - var(--sidebar-width));
     height: calc(100% - var(--header-height));
-    overflow-y: auto;
+    overflow-y: auto; /* Permite rolagem vertical */
     background-color: var(--secondary-color);
 }
 
@@ -281,6 +281,12 @@ footer {
     .credits {
         font-size: 12px; /* Ajuste de fonte para ser mais legível em telas menores */
     }
+
+    /* Ajustando o contentContainer */
+    .contentContainer {
+        height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height) + 60px)); /* Altura reduzida */
+        overflow-y: auto; /* Permite rolagem vertical */
+    }
 }
 
 @media (max-width: 600px) {
@@ -325,6 +331,23 @@ footer {
     }
 }
 
+body {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; /* Impede a rolagem do body */
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+    :root {
+        --footer-height: 150px; /* Altura do footer para mobile */
+    }
+}
+
 /* Estilo do contentContainer */
 .contentContainer {
     position: fixed; /* Mantém o container fixo */
@@ -335,8 +358,7 @@ footer {
     margin: 60px 0 0; /* Margem superior */
     width: calc(100% - var(--sidebar-width)); /* Largura para desktop */
     max-width: 1630px; /* Limite máximo da largura */
-    min-height: 77.5vh; /* Altura mínima para desktop */
-    border-radius: 20px; /* Raio de borda */
+    height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height) + 60px)); /* Altura ajustada */
     top: calc(var(--header-height) + var(--topbar-height)); /* Distância do header e topbar */
     overflow-y: auto; /* Adiciona rolagem vertical */
 }
@@ -346,7 +368,7 @@ footer {
     .contentContainer {
         margin: 30px 0 0; /* Margem superior para mobile */
         width: 100%; /* Ocupa toda a largura da tela */
-        min-height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height))); /* Altura que respeita o restante da tela */
+        height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height) + 20px)); /* Altura que respeita o restante da tela */
         left: 0; /* Alinhamento à esquerda */
         overflow-y: auto; /* Adiciona rolagem vertical */
     }
@@ -355,11 +377,12 @@ footer {
 /* Ajustando a grid de configurações */
 .settingsGrid {
     display: flex;
-    flex-direction: column; /* Alinha verticalmente no mobile */
-    gap: 20px; /* Espaçamento entre os itens */
-    max-height: calc(100vh - 60px); /* Altura máxima para permitir a rolagem */
-    overflow-y: auto; /* Permite a rolagem se necessário */
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 30px;
 }
+
+/* Ajustes adicionais podem ser feitos aqui se necessário. */
 
 .title {
     text-align: center;
