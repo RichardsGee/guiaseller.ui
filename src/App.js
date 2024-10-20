@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/DashboardPage/Dashboard";
-import VendasPage from "./pages/SalesPage/VendasPage";  // Caminho atualizado
+import VendasPage from "./pages/SalesPage/VendasPage";  
 import SettingsPage from "./pages/SettingsPage/SettingsPage"; 
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./context/UserContext"; 
@@ -11,7 +11,8 @@ import FerramentasIA from './pages/AIToolsPage/AITools';
 import MessagesPage from './pages/MessagesPage/MessagesPage'; 
 import IntegrationsPage from './pages/IntegrationsPage/IntegrationsPage';
 import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
-import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; // Importe o TokensBuyPage
+import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; 
+import KitsPage from './pages/ProductsPage/KitsPage'; // Importando KitsPage
 import ProtectedRoute from './components/ProtectedRoute'; 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          
+
           <Route 
             path="/dashboard" 
             element={<ProtectedRoute><Dashboard /></ProtectedRoute>} 
@@ -47,7 +48,7 @@ function App() {
             element={<ProtectedRoute><MessagesPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/integrações" 
+            path="/integracoes" 
             element={<ProtectedRoute><IntegrationsPage /></ProtectedRoute>} 
           />
           <Route 
@@ -56,7 +57,11 @@ function App() {
           />
           <Route 
             path="/comprar-tokens" 
-            element={<ProtectedRoute><TokensBuyPage /></ProtectedRoute>} // Adiciona a rota para a página de compra de tokens
+            element={<ProtectedRoute><TokensBuyPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/kits" // Adicionando a rota para KitsPage
+            element={<ProtectedRoute><KitsPage /></ProtectedRoute>} 
           />
         </Routes>
         <ToastContainer />

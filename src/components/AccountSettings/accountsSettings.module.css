@@ -18,6 +18,8 @@
     margin-bottom: 20px;
     color: var(--text-color);
     text-align: center;
+    font-family: 'Space Grotesk', sans-serif; /* Aplica a fonte ao sidebar */
+
 }
 
 /* Container para alinhar lado a lado as seções de Conta e Empresa */

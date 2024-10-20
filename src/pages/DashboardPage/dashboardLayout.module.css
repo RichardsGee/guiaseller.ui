@@ -3,7 +3,6 @@
 .dashboardLayout {
     display: flex;
     height: 100vh; /* Garante que ocupe a altura total da tela */
-    
 }
 
 .sidebar {
@@ -44,12 +43,12 @@
     margin-top: var(--header-height);
     padding: var(--padding);
     height: calc(100% - var(--header-height) - var(--footer-height));
-    overflow-y: auto;
+    overflow-y: auto; /* Adiciona rolagem vertical ao conteúdo */
     background-color: var(--third-color); /* Mantém o fundo consistente */
 }
 
 .mainContent::-webkit-scrollbar {
-    width: 12px;
+    width: 12px; 
 }
 
 .mainContent::-webkit-scrollbar-track {
@@ -80,5 +79,3 @@
     z-index: 1000;
     font-size: 10px;
 }
-
-

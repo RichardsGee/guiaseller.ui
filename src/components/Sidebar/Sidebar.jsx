@@ -1,52 +1,120 @@
-// /components/Sidebar.jsx
 import { Link } from 'react-router-dom'; 
 import styles from './sidebar.module.css'; 
-import React from 'react';
+import React, { useState } from 'react';
+import UserLevel from '../UserLevel/UserLevel';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
+import SettingsIcon from '@mui/icons-material/Settings';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import StoreIcon from '@mui/icons-material/Store';
+import MessageIcon from '@mui/icons-material/Message';
+import WidgetsIcon from '@mui/icons-material/Widgets';
+import IntegrationsIcon from '@mui/icons-material/Api'; // Você pode substituir por um ícone apropriado para Integrações
 
-function Sidebar({ userPhoto, username, userEmail, userLevel, isComplete }) {
+function Sidebar({ userPhoto, username, userEmail, isComplete }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar o menu
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className={styles.sidebar}>
-      <div className={styles.userInfo}>
-        <img
-          src={userPhoto || "https://via.placeholder.com/80"}
-          alt="Foto do usuário"
-          className={styles.profileImage}
-        />
-        <h2>{username}</h2>
-        <p>{userEmail || "Nothing@gmail.com"}</p>
-        <span className={styles.userLevel}>{userLevel || "Admin"}</span>
-      </div>
-      <ul>
-        <li><Link to="/dashboard"><span className={`material-icons ${styles.sidebarIcon}`}>dashboard</span>Dashboard</Link></li>
-        <li><Link to="/vendas"><span className={`material-icons ${styles.sidebarIcon}`}>shopping_bag</span>Vendas</Link></li>
-        <li><Link to="/produtos"><span className={`material-icons ${styles.sidebarIcon}`}>inventory_2</span>Produtos</Link></li>
-        <li><Link to="/anuncios"><span className={`material-icons ${styles.sidebarIcon}`}>campaign</span>Anúncios</Link></li>
+    <>
+      {/* Botão para abrir/fechar o menu em dispositivos móveis */}
+      <button className={styles.menuButton} onClick={toggleMenu}>
+        {isMenuOpen ? '✖️' : '☰'} {/* Ícone do menu */}
+      </button>
+
+      {/* Sidebar visível em dispositivos desktop */}
+      <nav className={styles.sidebar}>
+        <div className={styles.userInfo}>
+          <img
+            src={userPhoto || "https://via.placeholder.com/80"}
+            alt="Foto do usuário"
+            className={styles.profileImage}
+          />
+          <h2>{username}</h2>
+          <p>{userEmail || "Nothing@gmail.com"}</p>
+          <UserLevel />
+        </div>
         
-        {/* Aqui adicionamos o alerta "Complete" */}
-        <li>
-          <Link to="/configuracoes">
-            <span className={`material-icons ${styles.sidebarIcon}`}>settings</span>
-            Configurações
-            {!isComplete && <span className={styles.completeAlert}>⚠️</span>}
-          </Link>
-        </li>
-        
-        <li><Link to="/perfil"><span className={`material-icons ${styles.sidebarIcon}`}>person</span>Perfil</Link></li>
-        <li><Link to="/integrações"><span className={`material-icons ${styles.sidebarIcon}`}>store</span>Integrações</Link></li>
-        <li><Link to="/mensagens"><span className={`material-icons ${styles.sidebarIcon}`}>notifications</span>Mensagens</Link></li>
-        <li>
-          <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
-            <span className={`material-icons ${styles.sidebarIcon}`}>smart_toy</span> {/* Ícone de ferramenta */}
-            Ferramentas IA
-            <img 
-              src="ai.png" 
-              alt="IA Icon" 
-              className={styles.sidebarIconIA} 
-            /> {/* Imagem PNG para IA */}
-          </Link>
-        </li>
-      </ul>
-    </nav>
+        <ul>
+          <li><Link to="/dashboard"><DashboardIcon className={styles.sidebarIcon} />Dashboard</Link></li>
+          <li><Link to="/vendas"><ShoppingCartIcon className={styles.sidebarIcon} />Vendas</Link></li>
+          <li><Link to="/produtos"><InventoryIcon className={styles.sidebarIcon} />Produtos</Link></li>
+          <li><Link to="/anuncios"><AnnouncementIcon className={styles.sidebarIcon} />Anúncios</Link></li>
+          <li>
+            <Link to="/integracoes"> {/* Novo link para Integrações */}
+              <IntegrationsIcon className={styles.sidebarIcon} /> {/* Ícone de Integrações */}
+              Integrações
+            </Link>
+          </li>
+          <li>
+            <Link to="/configuracoes">
+              <SettingsIcon className={styles.sidebarIcon} />
+              Configurações
+              {!isComplete && <span className={styles.completeAlert}>⚠️</span>}
+            </Link>
+          </li>
+          <li><Link to="/perfil"><AccountCircleIcon className={styles.sidebarIcon} />Perfil</Link></li>
+          <li><Link to="/lojas"><StoreIcon className={styles.sidebarIcon} />Lojas</Link></li>
+          <li><Link to="/mensagens"><MessageIcon className={styles.sidebarIcon} />Mensagens</Link></li>
+          <li>
+            <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
+              <WidgetsIcon className={styles.sidebarIcon} />
+              Ferramentas IA
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
+      {/* Mostra o menu apenas se estiver aberto em dispositivos móveis */}
+      {isMenuOpen && (
+        <div className={styles.menu}>
+          <div className={styles.userInfo}>
+            <img
+              src={userPhoto || "https://via.placeholder.com/80"}
+              alt="Foto do usuário"
+              className={styles.profileImage}
+            />
+            <h2>{username}</h2>
+            <p>{userEmail || "Nothing@gmail.com"}</p>
+            <UserLevel />
+          </div>
+          
+          <ul>
+            <li><Link to="/dashboard"><DashboardIcon className={styles.sidebarIcon} />Dashboard</Link></li>
+            <li><Link to="/vendas"><ShoppingCartIcon className={styles.sidebarIcon} />Vendas</Link></li>
+            <li><Link to="/produtos"><InventoryIcon className={styles.sidebarIcon} />Produtos</Link></li>
+            <li><Link to="/anuncios"><AnnouncementIcon className={styles.sidebarIcon} />Anúncios</Link></li>
+            <li>
+              <Link to="/integracoes"> {/* Novo link para Integrações */}
+                <IntegrationsIcon className={styles.sidebarIcon} /> {/* Ícone de Integrações */}
+                Integrações
+              </Link>
+            </li>
+            <li>
+              <Link to="/configuracoes">
+                <SettingsIcon className={styles.sidebarIcon} />
+                Configurações
+                {!isComplete && <span className={styles.completeAlert}>⚠️</span>}
+              </Link>
+            </li>
+            <li><Link to="/perfil"><AccountCircleIcon className={styles.sidebarIcon} />Perfil</Link></li>
+            <li><Link to="/lojas"><StoreIcon className={styles.sidebarIcon} />Lojas</Link></li>
+            <li><Link to="/mensagens"><MessageIcon className={styles.sidebarIcon} />Mensagens</Link></li>
+            <li>
+              <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
+                <WidgetsIcon className={styles.sidebarIcon} />
+                Ferramentas IA
+              </Link>
+            </li>
+          </ul>
+        </div>
+      )}
+    </>
   );
 }
 

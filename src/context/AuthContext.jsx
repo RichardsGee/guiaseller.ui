@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
       setLoading(true);
 
@@ -34,6 +35,15 @@ export const AuthProvider = ({ children }) => {
 
     return () => unsubscribe();
   }, []);
+
+  const fetchUserLevel = async (userId) => {
+    try {
+      const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
+      setUserLevel(response.data.user_level || ''); // Atualiza o userLevel com o valor retornado
+    } catch (error) {
+      console.error("Error fetching user level:", error);
+    }
+  };
 
   const signOut = async () => {
     try {

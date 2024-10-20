@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Header from '../../components/Header/Header';
-import Sidebar from '../../components/Sidebar/Sidebar';
-import TopBar from '../../components/TopBar/TopBar';
-import Footer from '../../components/Footer/Footer';
-import MainContent from '../../components/MainContent/MainContent'; // Adicionando o MainContent
-import { AuthContext } from '../../context/AuthContext';
+import React, { useContext, useEffect, useState } from 'react';
+import Header from '../../components/Header/Header';  
+import Sidebar from '../../components/Sidebar/Sidebar';  
+import TopBar from '../../components/TopBar/TopBar';  
+import Footer from '../../components/Footer/Footer';  
+import MainContent from '../../components/MainContent/MainContent';  
+import { AuthContext } from '../../context/AuthContext';  
 import styles from './messages.module.css'; // Certifique-se de criar o arquivo CSS
-import filterStyles from './messagesfilter.module.css'; // Importando o novo CSS do filtro
+import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
 
 const MessagesPage = () => {
   const { user, signOut } = useContext(AuthContext);
@@ -52,18 +52,19 @@ const MessagesPage = () => {
   const readMessages = messages.filter(message => message.isRead).length;
 
   return (
-    <MainContent> {/* Envolvendo o conteúdo com MainContent */}
+    <MainContent>
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
 
-        <div className={styles.messagesContainer}>
-          <h1 className={styles.title}>Minhas Mensagens</h1>
+        {/* Usando a classe contentContainer do styles.css */}
+        <div className="contentContainer">
+          <h1 className="title">Minhas Mensagens</h1> {/* Agora usando a classe .title do styles.css */}
 
           {/* Contador de mensagens lidas e não lidas, abaixo do título */}
-          <div className={filterStyles.filterWrapper}>
-            <div className={filterStyles.filterSection}>
+          <div className={styles.filterWrapper}>
+            <div className={styles.filterSection}>
               <p><strong>Total de Mensagens:</strong> {totalMessages}</p>
               <p><strong>Mensagens Lidas:</strong> {readMessages}</p>
             </div>

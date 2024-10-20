@@ -1,19 +1,3 @@
-.iaContainer {
-    position: fixed;
-    background-color: var(--third-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin: 0px auto;
-    width: 100%;
-    max-width: 1630px;
-    min-height: 76.5vh;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
 .title {
     text-align: center;
     color: var(--text-color);
@@ -162,3 +146,79 @@
     background: linear-gradient(135deg, #00d9ff, var(--primary-color));
     color: white;
 }
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .title {
+        font-size: 20px; /* Tamanho reduzido do título */
+        margin-bottom: 20px; /* Menos margem abaixo do título */
+    }
+
+    .toolsGrid {
+        display: flex;
+        flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha */
+        justify-content: space-between; /* Espaço entre os itens */
+        gap: 10px; /* Espaçamento entre os itens */
+    }
+
+    .toolCard {
+        width: calc(50% - 10px); /* Largura de 50% menos espaço para o gap */
+        max-width: 400px; /* Largura máxima para garantir legibilidade */
+        padding: 15px; /* Menos padding nas ferramentas */
+    }
+
+    .toolName {
+        font-size: 16px; /* Diminuir o tamanho do nome da ferramenta */
+    }
+
+    .toolDesc {
+        font-size: 12px; /* Diminuir o tamanho da descrição */
+    }
+
+    .adquiridoButton, .assinarButton {
+        font-size: 12px; /* Diminuir o tamanho da fonte dos botões */
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 18px; /* Tamanho ainda menor do título */
+    }
+
+    .toolCard {
+        width: 95%; /* Largura reduzida ainda mais */
+        padding: 10px; /* Menos padding nas ferramentas */
+    }
+
+    .toolName {
+        font-size: 14px; /* Diminuir o tamanho do nome da ferramenta */
+    }
+
+    .toolDesc {
+        font-size: 10px; /* Diminuir o tamanho da descrição */
+    }
+
+    .adquiridoButton, .assinarButton {
+        font-size: 10px; /* Diminuir o tamanho da fonte dos botões */
+    }
+}
+.favoritoButton {
+    background: none; /* Sem fundo */
+    border: none; /* Sem borda */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    position: absolute; /* Para posicionar no canto direito do cartão */
+    top: 10px;
+    right: 10px; /* Mover para a direita */
+}
+
+.favoritoIcon {
+    width: 24px; /* Tamanho do ícone */
+    height: 24px; /* Tamanho do ícone */
+}
+
+.toolCard {
+    /* O restante do estilo do cartão... */
+    position: relative; /* Para garantir que o botão de favorito esteja posicionado corretamente */
+}
+
+/* O restante dos estilos existentes... */

@@ -1,55 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import styles from '../styles/webhookResultComponent.module.css'; // Certifique-se de ajustar o caminho
+import React, { useEffect } from 'react';
 
-const WebhookResultComponent = ({ webhookUrl }) => {
-  const [webhookResult, setWebhookResult] = useState('Nenhum resultado recebido ainda.');
-  const [copySuccess, setCopySuccess] = useState(''); // Estado para o feedback de cópia
+const WebhookResultComponent = ({ apiUrl, userId, onWebhookTitleUpdate }) => {
 
   useEffect(() => {
     const fetchWebhookResult = async () => {
+      if (!userId) return; // Não buscar se o userId não estiver definido
+
+      console.log(`Buscando webhook para o userId: ${userId}`);
+
       try {
-        const response = await fetch(webhookUrl);
+        // Aguardar 5 segundos antes de fazer o GET
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Aguardar 5 segundos
+
+        // Fazendo um GET para o endpoint do backend com o userId
+        const response = await fetch(`${apiUrl}/webhook/${userId}`, {  
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Erro ao buscar os dados do webhook.');
+        }
+
         const data = await response.json();
-        setWebhookResult(data.message || 'Nenhum resultado recebido ainda.');
+
+        // Verificar se há resultados e enviar o título para o componente pai
+        if (data && data.length > 0) {
+          const latestWebhook = data[data.length - 1]; // Pega o último webhook recebido para o userId
+          console.log(`Título recebido do Webhook: ${latestWebhook.word}`);
+          onWebhookTitleUpdate(latestWebhook.word || '');
+        }
       } catch (error) {
         console.error('Erro ao receber o resultado do webhook:', error);
-        setWebhookResult('Erro ao receber o resultado do webhook.');
       }
     };
 
-    const intervalId = setInterval(() => {
-      fetchWebhookResult();
-    }, 5000); // Consulta a cada 5 segundos
+    // Faz o fetch assim que o componente monta, mas com um atraso de 5 segundos
+    fetchWebhookResult();
+  }, [apiUrl, userId, onWebhookTitleUpdate]); 
 
-    return () => clearInterval(intervalId); // Limpa o intervalo quando o componente desmontar
-  }, [webhookUrl]);
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(webhookResult).then(() => {
-      setCopySuccess('Copiado!');
-      setTimeout(() => setCopySuccess(''), 2000); // Remove o feedback após 2 segundos
-    }).catch(err => {
-      console.error('Erro ao copiar texto: ', err);
-    });
-  };
-
-  return (
-    <div className={styles.webhookContainer}>
-      <div className={styles.titleContainer}>
-        <h2 className={styles.webhookTitle}>Título Mercado Livre</h2>
-        <button className={styles.copyButton} onClick={copyToClipboard}>
-          {copySuccess ? copySuccess : 'Copiar'}
-        </button>
-      </div>
-      <div className={styles.textareaContainer}>
-        <textarea
-          value={webhookResult}
-          readOnly
-          className={styles.webhookText}
-        />
-      </div>
-    </div>
-  );
+  return null; // Não renderiza nada na UI
 };
 
 export default WebhookResultComponent;

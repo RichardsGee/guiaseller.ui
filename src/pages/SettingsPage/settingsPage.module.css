@@ -1,29 +1,3 @@
-/* Container principal de configurações */
-.configContent {
-    background-color: var(--third-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin: 20px auto;
-    width: 100%;
-    max-width: 1700px;
-    color: var(--text-color);
-    overflow-y: auto;
-    min-height: 76.5vh;
-    border-top-left-radius: 20px; /* Arredonda o canto superior direito */
-    border-bottom-left-radius: 20px; /* Arredonda o canto inferior direito */
-    border-top-right-radius: 20px; /* Arredonda o canto superior direito */
-    border-bottom-right-radius: 20px; /* Arredonda o canto inferior direito */
-}
-
-/* Título principal */
-.mainTitle {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: var(--p-color);
-    text-align: center;
-}
-
 /* Container para alinhar lado a lado as seções de Conta e Empresa */
 .settingsGrid {
     display: flex;
@@ -87,6 +61,7 @@
     font-weight: bold;
     border-bottom: 2px solid var(--background-color);
     padding-bottom: 10px;
+
 }
 
 /* Container de cada bloco de configurações */
@@ -105,6 +80,7 @@
     border-bottom: 1px solid #444;
     font-size: 14px;
     gap: 20px;
+
 }
 
 /* Estilo dos rótulos (Nome, Email, Celular, etc.) */
@@ -128,6 +104,7 @@
     outline: none;
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+
 }
 
 /* Estilo quando o campo de entrada está no modo de edição */

@@ -1,0 +1,414 @@
+:root {
+    --padding: 20px;
+    --margin: 20px;
+    --sidebar-width: 240px;
+    --header-height: 50px;
+    --topbar-height: 60px; /* Adicionei a altura da TopBar */
+    --footer-height: 40px; /* Altura do footer para desktop */
+    /* Outras variáveis */
+    
+    /* Variáveis de tema */
+    --background-color: #171717;
+    --text-color: #ffffff;
+    --primary-color: #ffd700;
+    --secondary-color: #1e1e1e;
+    --accent-color: #a020f0;
+    --icon-color: #fff400;
+    --third-color: #202123;
+    --userLevel-color: #fff700;
+    --text2-color: #a020f0;
+    --btn-color: #ffd700;
+    --container-color: #3f3f3f;
+    --btn2-color: #2F2F2F;
+    --tools-color: #02B075;
+    --ai-color: linear-gradient(135deg, #00d9ff, var(--primary-color));
+        /* Variável de fonte */
+        --var-font: 'Kambla', sans-serif; /* Defina a fonte padrão */
+}
+
+/* Definindo estilos para o tema claro */
+body.light {
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --primary-color: #ffd700;
+    --secondary-color: #eaeaea;
+    --accent-color: #1e1e1e;
+    --third-color: #ffffff;
+    --icon-color: #202020;
+    --userLevel-color: #d8d100;
+    --text2-color: #fff700;
+    --text3-color: #000000;
+    --btn-color: #ffd700;
+    --container-color: #eaeaea;
+}
+
+/* Definindo estilos para o tema escuro */
+body.dark {
+    
+    --background-color: #202123;
+    --text-color: #ffffff;
+    --primary-color: #a020f0;
+    --secondary-color: #17181A;
+    --accent-color: #ffd700;
+    --userLevel-color: #d8d100;
+    --container-color: #3f3f3f;
+    --btn-color: #202020;
+    --btn2-color: #2F2F2F;
+    --tools-color: #02B075;
+    --ai-color: #02B075;
+}
+
+/* Resetando estilos padrão do navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Rambla:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Rambla', sans-serif; /* Define Kambla como a fonte padrão da página */
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden; /* Impede a rolagem do body */
+}
+
+/* Aplique a fonte a outros elementos, se necessário */
+h1, h2, h3, h4, h5, h6, p, button {
+    font-family: 'Rambla', sans-serif; /* Aplica Kambla a outros elementos de texto */
+}
+
+
+
+.container {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--container-color);
+    padding: 0 var(--padding);
+    box-shadow: 0 0px 5px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo img {
+    width: 70px;
+    height: 70px;
+}
+
+.header-logo .slogan {
+    margin-left: 10px;
+    font-size: 14px;
+    color: var(--text-color);
+    font-weight: 200;
+}
+
+.main-header h2 {
+    font-size: 22px;
+    color: var(--primary-color);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.credits {
+    display: flex;
+    align-items: center;
+    background-color: var(--container-color);
+    padding: 5px 10px;
+    border-radius: 15px;
+    color: var(--accent-color);
+    font-size: 14px;
+    font-weight: bold;
+    border: 0px solid var(--accent-color);
+    box-shadow: 0 0 0px rgba(160, 32, 240, 0.5);
+}
+
+.credits-icon {
+    margin-right: 5px;
+    font-size: 18px;
+    color: var(--primary-color);
+}
+
+.username {
+    font-weight: italic;
+    color: var(--text-color);
+    font-size: 10px;
+}
+
+.logout-btn {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: var(--primary-color);
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    margin-top: var(--header-height);
+    padding: var(--padding);
+    width: calc(100% - var(--sidebar-width));
+    height: calc(100% - var(--header-height));
+    overflow-y: auto; /* Permite rolagem vertical */
+    background-color: var(--secondary-color);
+}
+
+.main-content::-webkit-scrollbar {
+    width: 12px; 
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: var(--background-color);
+    border-radius: 10px;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+    border: 2px solid var(--background-color);
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: #ffaa00;
+}
+
+.chart-section {
+    background: var(--background-color);
+    padding: var(--padding);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin-bottom: var(--margin);
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.chart-section canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.additional-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--margin);
+    width: 100%;
+}
+
+.info-item {
+    background: var(--background-color);
+    padding: var(--padding);
+    border-radius: 10px;
+    color: var(--text-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+
+.info-item h3 {
+    margin-bottom: 10px;
+}
+
+.info-item ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+footer {
+    background: var(--container-color);
+    color: var(--text-color);
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    font-size: 10px;
+    z-index: 1000; /* Garante que o footer fique acima de outros elementos */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column; /* Altera a direção em telas menores */
+        align-items: flex-start;
+        padding: var(--padding); /* Ajuste de padding para espaço interno */
+    }
+
+    .header-logo img {
+        width: 50px; /* Diminuindo o logo em telas pequenas */
+        height: 50px;
+    }
+
+    .main-content {
+        padding: 10px; /* Reduzir padding em telas menores */
+    }
+
+    .chart-section {
+        height: auto; /* Permitir que a altura se ajuste automaticamente */
+    }
+
+    .info-item {
+        height: auto; /* Ajuste automático na altura para melhor exibição */
+    }
+
+    .credits {
+        font-size: 12px; /* Ajuste de fonte para ser mais legível em telas menores */
+    }
+
+    /* Ajustando o contentContainer */
+    .contentContainer {
+        height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height) + 60px)); /* Altura reduzida */
+        overflow-y: auto; /* Permite rolagem vertical */
+        font-family: 'Satoshi', sans-serif; /* Define Satoshi como a fonte padrão da página */
+    }
+}
+
+@media (max-width: 600px) {
+    .sidebar {
+        display: none; /* Esconde a sidebar */
+    }
+
+    .main-content {
+        margin-left: 0; /* Remove a margem da sidebar */
+        width: 100%; /* Ajusta a largura */
+    }
+
+    footer {
+        width: 100%;
+        left: 0;
+    }
+
+    .main-header {
+        height: auto; /* Permitir que o header se ajuste ao conteúdo */
+    }
+
+    .main-header h2 {
+        font-size: 18px; /* Reduzindo o tamanho da fonte */
+    }
+
+    .logout-btn {
+        font-size: 10px; /* Ajuste de fonte para o botão de logout */
+    }
+
+    .username {
+        font-size: 8px; /* Menor tamanho para visualização em tela pequena */
+    }
+
+    .header-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .filter-section {
+        width: 100%;
+    }
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+    :root {
+        --footer-height: 150px; /* Altura do footer para mobile */
+    }
+}
+
+/* Estilo do contentContainer */
+.contentContainer {
+    position: fixed; /* Mantém o container fixo */
+    background-color: var(--third-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    margin: 60px 0 0; /* Margem superior */
+    width: calc(100% - var(--sidebar-width)); /* Largura para desktop */
+    max-width: 1630px; /* Limite máximo da largura */
+    height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height) + 60px)); /* Altura ajustada */
+    top: calc(var(--header-height) + var(--topbar-height)); /* Distância do header e topbar */
+    overflow-y: auto; /* Adiciona rolagem vertical */
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+    .contentContainer {
+        margin: 50px 0 0; /* Aumente a margem superior para descer mais o container */
+        width: 100%; /* Ocupa toda a largura da tela */
+        height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height) + 20px)); /* Altura que respeita o restante da tela */
+        left: 0; /* Alinhamento à esquerda */
+        overflow-y: auto; /* Adiciona rolagem vertical */
+    }
+}
+
+
+/* Ajustando a grid de configurações */
+.settingsGrid {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+/* Ajustes adicionais podem ser feitos aqui se necessário. */
+
+.title {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 30px;
+    font-size: 24px; /* Tamanho padrão para desktop */
+}
+
+/* Estilos para mobile */
+@media (max-width: 768px) {
+    .title {
+        font-size: 20px; /* Tamanho reduzido para mobile */
+        margin-bottom: 10px; /* Margem reduzida para mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 18px; /* Tamanho menor para telas pequenas */
+        margin-top: -20px; /* Espaço superior */
+        margin-bottom: -20px; /* Espaço inferior */
+    }
+}
+
+

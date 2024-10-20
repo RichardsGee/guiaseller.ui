@@ -1,11 +1,16 @@
 .mainHeader {
+    position: fixed; /* Torna o header fixo na parte superior */
+    top: 0; /* Alinha o header ao topo da página */
+    left: 0; /* Alinha o header à esquerda da página */
+    width: 100%; /* Ocupar toda a largura da tela */
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: var(--secondary-color);
-    padding: 30px 20px;
+    padding: 30px 20px; /* Padding para desktop */
     height: var(--header-height);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Garante que o header fique acima de outros elementos */
 }
 
 .headerLogo {
@@ -30,14 +35,63 @@
     display: flex;
     align-items: center;
     gap: 15px;
+    position: relative; /* Para o menu */
 }
 
+/* Estilo do container de informações do usuário */
+.userInfo {
+    display: flex; /* Para alinhar imagem e detalhes do usuário */
+    align-items: center; /* Centraliza verticalmente */
+    margin-left: 10px; /* Espaçamento à esquerda do container */
+}
+
+.profileImage {
+    width: 40px; /* Tamanho da imagem do perfil */
+    height: 40px; /* Tamanho da imagem do perfil */
+    border-radius: 50%; /* Torna a imagem redonda */
+    margin-right: 10px; /* Espaçamento entre a imagem e os detalhes */
+}
+
+/* Nome do usuário */
 .username {
     font-weight: bold;
     color: var(--text-color);
-    font-size: 12px;
+    font-size: 12px; /* Tamanho do nome do usuário */
+    text-align: left; /* Alinhado à esquerda */
 }
 
+/* Email do usuário */
+.userEmail {
+    font-size: 10px; /* Tamanho do email */
+    color: var(--text-color);
+    text-align: left; /* Alinhado à esquerda */
+}
+
+/* Nível do usuário */
+.userLevel {
+    font-size: 10px; /* Ajuste conforme necessário */
+    color: var(--text-color);
+}
+
+/* Quantidade de tokens */
+.tokenCount {
+    font-size: 10px; /* Ajuste conforme necessário */
+    color: var(--text-color);
+    margin-top: 5px; /* Espaço acima do texto de tokens */
+}
+
+/* Estilo do botão de tema visível em ambas as versões */
+.themeToggleBtn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 12px; /* Tamanho da fonte reduzido */
+    padding: 5px 8px; /* Reduzindo o padding para um botão menor */
+    color: var(--text-color);
+    border-radius: 5px; /* Adicionando borda arredondada se desejar */
+}
+
+/* Botão de logout */
 .logoutBtn {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -52,10 +106,174 @@
     background-color: var(--primary-color);
 }
 
-.themeToggleBtn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: var(--text-color);
+/* Estilo do botão de menu */
+.menuButton {
+    background: transparent; /* Torna o fundo do botão transparente */
+    border: none; /* Remove a borda do botão */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    font-size: 24px; /* Tamanho do ícone */
+    color: var(--text-color); /* Define a cor do ícone com a variável de cor */
+}
+
+.menu.open {
+    display: flex; /* Mostra o menu quando aberto */
+}
+
+/* Exemplo de efeito hover para o botão de menu */
+.menuButton:hover {
+    color: var(--primary-color); /* Muda a cor do ícone ao passar o mouse sobre ele */
+}
+
+.menu {
+    position: absolute; /* Fixa o menu em relação ao header */
+    top: 100%; /* Posiciona logo abaixo do header */
+    left: 0; /* Alinha à esquerda */
+    width: 100%; /* Ocupar toda a largura da tela */
+    background-color: var(--third-color); /* Cor de fundo do menu */
+    display: flex;
+    flex-direction: column; /* Organiza os itens em coluna */
+    padding: 10px; /* Espaçamento interno */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra opcional */
+    z-index: 999; /* Garante que fique acima de outros elementos */
+    display: none; /* Escondido por padrão */
+}
+
+/* Estilo da lista de menu */
+.menuList {
+    list-style: none; /* Remove os marcadores da lista */
+    padding: 0;
+    margin: 0;
+    display: none; /* Esconde o botão de fechar por padrão */
+
+}
+
+/* Estilo dos itens do menu */
+.menuList li {
+    display: flex; /* Usa flexbox para alinhar o ícone e o texto */
+    align-items: center; /* Centraliza verticalmente o ícone e o texto */
+    padding: 5px 10px; /* Padding para os itens do menu */
+    cursor: pointer; /* Cursor de ponteiro para os itens clicáveis */
+}
+
+.menuList li:hover {
+    background-color: var(--primary-color); /* Efeito de hover para os itens */
+}
+
+.closeMenuButton {
+    display: none; /* Esconde o botão de fechar por padrão */
+}
+
+.menuIcon {
+    margin-right: 8px; /* Espaçamento entre o ícone e o texto */
+    color: var(--text-color); /* Mantém a cor do ícone */
+    font-size: 18px; /* Tamanho do ícone */
+}
+
+/* Estilo do menu em tela cheia para mobile */
+@media (max-width: 600px) {
+    .menu {
+        position: fixed; /* Fixa o menu na tela */
+        top: 0; /* Alinha ao topo da tela */
+        left: 0; /* Alinha à esquerda */
+        width: 100%; /* Ocupar toda a largura da tela */
+        height: 100%; /* Ocupar toda a altura da tela */
+        background-color: var(--third-color); /* Cor de fundo do menu */
+        display: flex;
+        flex-direction: column; /* Organiza os itens em coluna */
+        padding: 20px; /* Espaçamento interno */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Sombra opcional */
+        z-index: 9999; /* Garante que fique acima de outros elementos */
+        transform: translateY(-100%); /* Começa fora da tela */
+        transition: transform 0.3s ease-in-out; /* Animação de deslizar */
+        align-items: center; /* Centraliza horizontalmente os itens */
+    }
+
+    .menu.open {
+        transform: translateY(0); /* Desliza para baixo quando aberto */
+    }
+
+    .closeMenuButton {
+        display: block; /* Mostra o botão de fechar em mobile */
+        background: transparent; /* Fundo transparente */
+        border: none; /* Sem borda */
+        cursor: pointer; /* Muda o cursor para indicar que é clicável */
+        font-size: 24px; /* Tamanho do ícone de fechar */
+        color: var(--text-color); /* Cor do ícone de fechar */
+        align-self: flex-end; /* Alinha o botão de fechar à direita */
+    }
+
+    .headerActions {
+        flex-direction: row; /* Alinha os itens em linha */
+        gap: 5px; /* Espaçamento reduzido */
+    }
+
+    .headerLogo img {
+        max-width: 40px; /* Diminuindo o tamanho da logo para mobile */
+    }
+
+    .slogan {
+        font-size: 8px; /* Diminuindo o slogan para mobile */
+    }
+
+    .userInfo {
+        display: flex; /* Mantém a imagem e os detalhes do usuário alinhados */
+        flex-direction: column; /* Organiza a imagem e detalhes em coluna */
+        align-items: center; /* Centraliza a imagem e detalhes */
+        margin-bottom: 20px; /* Mais espaço para o usuário */
+    }
+
+    .profileImage {
+        width: 50px; /* Tamanho da imagem do perfil */
+        height: 50px; /* Tamanho da imagem do perfil */
+        border-radius: 50%; /* Torna a imagem redonda */
+        margin-bottom: 10px; /* Espaçamento entre a imagem e os detalhes */
+    }
+
+    .userDetails {
+        display: flex; /* Exibe os detalhes do usuário em coluna */
+        flex-direction: column; /* Alinha o nome e o email verticalmente */
+        align-items: center; /* Centraliza os detalhes do usuário */
+    }
+
+    .username {
+        font-weight: bold; /* Destaca o nome do usuário */
+        color: var(--text-color);
+        font-size: 12px; /* Ajuste o tamanho conforme necessário */
+        text-align: center; /* Centraliza o texto */
+    }
+
+    .userEmail {
+        font-size: 10px; /* Ajuste o tamanho conforme necessário */
+        color: var(--text-color);
+        text-align: center; /* Centraliza o texto */
+    }
+
+    .tokenCount {
+        font-size: 10px; /* Ajuste o tamanho conforme necessário */
+        color: var(--text-color); /* Mantém a cor consistente com o restante do texto */
+        margin-top: 5px; /* Espaço acima do texto de tokens */
+        text-align: center; /* Centraliza o texto */
+    }
+
+    .menuList {
+        display: flex; /* Alinha a lista de itens como botões */
+        flex-wrap: wrap; /* Permite que os itens quebrem para a linha seguinte se não houver espaço */
+        gap: 10px; /* Espaçamento entre os itens */
+        margin-top: 20px; /* Espaço acima da lista de menu */
+        justify-content: center; /* Centraliza os botões no menu */
+    }
+
+    .menuList li {
+        flex: 1 1 45%; /* Ajusta os itens para ocupar 45% da largura cada */
+        padding: 10px; /* Padding para os botões */
+        text-align: center; /* Centraliza o texto nos botões */
+        background-color: var(--primary-color); /* Cor de fundo dos botões */
+        color: white; /* Cor do texto */
+        border-radius: 5px; /* Bordas arredondadas para um visual melhor */
+        cursor: pointer; /* Indica que é clicável */
+    }
+
+    .menuList li:hover {
+        background-color: var(--primary-dark); /* Cor do botão ao passar o mouse */
+    }
 }

@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TopBar from '../../components/TopBar/TopBar';
 import Footer from '../../components/Footer/Footer';
-import styles from './AITools.module.css'; // Caminho ajustado
+import styles from './AITools.module.css'; // Importando o CSS módulo para estilos específicos do componente
+import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
 import MainContent from '../../components/MainContent/MainContent'; 
 import { AuthContext } from '../../context/AuthContext';
-import { useContext } from 'react';
 import { Lock, LockOpen } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import BuySound from '../../components/BuySound'; // Certifique-se de importar corretamente o BuySound
+
+// Importando as imagens de favoritos
+import favoriteOn from '../../assets/favoriteon.png'; 
+import favoriteOff from '../../assets/favoriteoff.png'; 
 
 const AITools = () => {
   const { user, signOut } = useContext(AuthContext);
@@ -22,6 +26,7 @@ const AITools = () => {
   const [categoriaAtiva, setCategoriaAtiva] = useState('Todas'); // Categoria ativa
   const [playSound, setPlaySound] = useState(false); // Estado para controlar a reprodução do som
   const [stopSound, setStopSound] = useState(false); // Estado para controlar o fade out do som
+  const [favoritos, setFavoritos] = useState([]); // Estado para armazenar ferramentas favoritas
 
   const ferramentasData = [
     { nome: 'Gerador de Títulos', descricao: 'Crie títulos de alta conversão.', ativo: true, custo: '1 Token (24h)', restante: '18 horas', route: '/ferramentas-ia/gerador-titulos', categoria: 'Geradores' },
@@ -32,12 +37,14 @@ const AITools = () => {
   ];
 
   // Filtros de categorias
-  const categorias = ['Todas', 'Geradores', 'Análise'];
+  const categorias = ['Todas', 'Geradores', 'Análise', 'Favoritos']; // Adicionando a aba de Favoritos
 
   // Função para filtrar ferramentas com base na categoria selecionada
   const ferramentasFiltradas = categoriaAtiva === 'Todas'
     ? ferramentasData
-    : ferramentasData.filter(ferramenta => ferramenta.categoria === categoriaAtiva);
+    : categoriaAtiva === 'Favoritos'
+      ? ferramentasData.filter(ferramenta => favoritos.includes(ferramenta.nome)) // Filtra favoritos
+      : ferramentasData.filter(ferramenta => ferramenta.categoria === categoriaAtiva);
 
   // Função para ativar a navegação para a ferramenta ativa
   const handleUseTool = (route) => {
@@ -46,13 +53,22 @@ const AITools = () => {
     }
   };
 
+  // Função para adicionar ou remover ferramenta dos favoritos
+  const handleToggleFavorito = (nome) => {
+    setFavoritos((prev) => 
+      prev.includes(nome) ? prev.filter(fav => fav !== nome) : [...prev, nome]
+    );
+  };
+
   return (
     <MainContent>
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
-        <div className={styles.iaContainer}>
+        
+        {/* Usando a classe contentContainer do styles.css */}
+        <div className="contentContainer">
           <h1 className={styles.title}>Ferramentas de IA</h1>
 
           {/* Botões de Categoria */}
@@ -77,13 +93,27 @@ const AITools = () => {
                 <h3 className={styles.toolName}>{ferramenta.nome}</h3>
                 <p className={styles.toolDesc}>{ferramenta.descricao}</p>
 
-                {!ferramenta.ativo && (
-                  <div className={styles.lockIcon}>
-                    {hovered === index ? <LockOpen className={styles.iconInativo} /> : <Lock className={styles.iconInativo} />}
-                  </div>
-                )}
-
                 <div className={styles.bottomSection}>
+                  {/* Botão de Favorito à direita */}
+                  {ferramenta.ativo && (
+                    <button 
+                      onClick={() => handleToggleFavorito(ferramenta.nome)} 
+                      className={styles.favoritoButton}
+                    >
+                      <img 
+                        src={favoritos.includes(ferramenta.nome) ? favoriteOn : favoriteOff} 
+                        alt="Favorito" 
+                        className={styles.favoritoIcon} 
+                      />
+                    </button>
+                  )}
+
+                  {!ferramenta.ativo && (
+                    <div className={styles.lockIcon}>
+                      {hovered === index ? <LockOpen className={styles.iconInativo} /> : <Lock className={styles.iconInativo} />}
+                    </div>
+                  )}
+
                   <button 
                     className={ferramenta.ativo ? styles.adquiridoButton : styles.assinarButton}
                     onClick={() => ferramenta.ativo && handleUseTool(ferramenta.route)} // Se ativo, navega para a página

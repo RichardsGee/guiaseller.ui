@@ -7,7 +7,7 @@ const CompanySettings = ({
 }) => {
   return (
     <div className={styles.settingsColumn}>
-      <h2 className={styles.sectionTitle}>Configurações da Empresa</h2>
+      <h2 className={styles.sectionTitle}>Empresa</h2>
       <button 
         className={styles.editButton} 
         onClick={handleEditClick}

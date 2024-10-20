@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TopBar from '../../components/TopBar/TopBar';
@@ -7,11 +7,11 @@ import MainContent from '../../components/MainContent/MainContent';
 import AccountSettings from '../../components/AccountSettings/AccountSettings';
 import CompanySettings from '../../components/CompanySettings/CompanySettings';
 import { AuthContext } from '../../context/AuthContext';
-import styles from './settingsPage.module.css';
+import styles from './settingsPage.module.css'; // Importando o CSS do módulo
+import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
 import axios from "axios";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
 
 function SettingsPage() {
   const { user, signOut } = useContext(AuthContext);
@@ -19,7 +19,6 @@ function SettingsPage() {
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
   const userId = user ? user.uid : null;  
-  const userLevel = "Admin";
 
   // Estados para os dados
   const [first_name, setName] = useState(username);
@@ -30,6 +29,7 @@ function SettingsPage() {
   const [fantasyName, setFantasyName] = useState('');
   const [taxRate, setTaxRate] = useState('');
   const [additionalCost, setAdditionalCost] = useState('');
+  const [userLevel, setUserLevel] = useState(''); // Estado para o nível do usuário
 
   // Estados para controlar se o usuário está no modo de edição
   const [isEditingAccount, setIsEditingAccount] = useState(false);
@@ -51,26 +51,30 @@ function SettingsPage() {
     setIsEditingCompany(false);
   };
 
-  // Funções para verificar se um campo específico está vazio
   const isFieldEmpty = (field) => !field === '';
 
+  // Função para buscar detalhes do usuário
   const getUserDetails = async () => {
     try {
-      const response = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/${userId}`);
+      const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
       const userData = response.data;
 
+      console.log("User Data:", userData); // Adicionando log para verificar os dados
       setName(userData.first_name || '');
       setPhone(userData.phone || ''); 
+      setUserLevel(userData.user_level || ''); // Aqui você garante que o userLevel é obtido do banco de dados
     } catch (error) {
       console.error("Error fetching user details:", error);
     }
   };
 
-  const getCompanydetails = async () => {
+  // Função para buscar detalhes da empresa
+  const getCompanyDetails = async () => {
     try {
-      const responseUser = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/${userId}`);
+      const responseUser = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
       const company_id = responseUser.data.companies[0].company_id;
-      const response = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/company/${company_id}`);
+
+      const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/company/${company_id}`);
       const companyData = response.data;
 
       setCompanyName(companyData.company_name || '');
@@ -81,56 +85,57 @@ function SettingsPage() {
     } catch (error) {
       console.error("Error fetching company details:", error);
     }
-  }
+  };
 
+  // Função para atualizar dados do usuário
   const updateUserData = async () => {
     try {
-      const response = await axios.put(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/${userId}`, {
+      await axios.put(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`, {
         first_name,
         last_name: '',
         email,
         phone,
-        user_level: userLevel,
+        user_level: userLevel, // Certificando-se de que o nível do usuário está atualizado
       });
-      console.log("Resposta do servidor:", response.data);
+      toast.success("Dados do usuário atualizados com sucesso!");
     } catch (error) {
       console.error("Error updating user data:", error);
     }
   };
 
+  // Função para atualizar dados da empresa
   const updateCompanyData = async () => {
     try {
-      const responseUser = await axios.get(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/${userId}`);
-      if(responseUser.data.companies.length === 0) {
-        await axios.post(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/company`, {
+      const responseUser = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
+      if (responseUser.data.companies.length === 0) {
+        await axios.post(`https://guiaseller-backend.dlmi5z.easypanel.host/users/company`, {
           company_name: companyName,
           cnpj,
           fantasy_name: fantasyName,
           tax_rate: parseFloat(taxRate),
           userId: userId,
-        }
-        );
+        });
       }
       const company_id = responseUser.data.companies[0].company_id;
-      await axios.put(`https://guiaseller-frontend.dlmi5z.easypanel.host/users/company/${company_id}`, {
+      await axios.put(`https://guiaseller-backend.dlmi5z.easypanel.host/users/company/${company_id}`, {
         company_name: companyName,
         fantasy_name: fantasyName,
         cnpj,
         tax_rate: parseFloat(taxRate),
       });
-      toast.success("Dados salvos com sucesso!");
-    }catch (error) {
+      toast.success("Dados da empresa atualizados com sucesso!");
+    } catch (error) {
       console.error("Error updating company data:", error);
     }
-  }
+  };
 
   useEffect(() => {
+    console.log("Fetching user details..."); // Adicionando log para garantir que a função está sendo chamada
     if (userId) {
       getUserDetails();
-      getCompanydetails();
+      getCompanyDetails();
     }
   }, [userId]);
-
 
   return (
     <MainContent>
@@ -139,49 +144,51 @@ function SettingsPage() {
         userPhoto={userPhoto} 
         username={username} 
         userEmail={userEmail} 
-        userLevel={userLevel}
+        userId={userId} // Passando o userId para o Sidebar
+        userLevel={userLevel} // Passando o userLevel para o Sidebar
         isComplete={!isFieldEmpty(first_name) && !isFieldEmpty(email) && !isFieldEmpty(phone) && !isFieldEmpty(companyName) && !isFieldEmpty(cnpj) && !isFieldEmpty(fantasyName) && !isFieldEmpty(taxRate)}
       />
 
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
 
-        <div className={styles.configContent}>
-          <h1 className={styles.mainTitle}>Configurações</h1>
+        {/* Usando a classe contentContainer do styles.css */}
+        <div className="contentContainer">
+          <div className={styles.configContent}>
+          <h1 className="title">Configurações</h1>
 
-          <div className={styles.settingsGrid}>
-            {/* Componente de Configurações da Conta */}
-            <AccountSettings 
-              name={first_name} 
-              setName={setName} 
-              email={email} 
-              setEmail={setEmail} 
-              phone={phone} 
-              setPhone={setPhone} 
-              userLevel={userLevel}
-              isEditing={isEditingAccount}
-              handleEditClick={handleEditClickAccount}
-              handleSave={handleSave}
-              isFieldEmpty={isFieldEmpty} // Passando a função para verificar campos vazios
-            />
+            <div className={styles.settingsGrid}>
+              <AccountSettings 
+                name={first_name} 
+                setName={setName} 
+                email={email} 
+                setEmail={setEmail} 
+                phone={phone} 
+                setPhone={setPhone} 
+                userLevel={userLevel} // Passando o userLevel para AccountSettings
+                isEditing={isEditingAccount}
+                handleEditClick={handleEditClickAccount}
+                handleSave={handleSave}
+                isFieldEmpty={isFieldEmpty} 
+              />
 
-            {/* Componente de Configurações da Empresa */}
-            <CompanySettings 
-              companyName={companyName} 
-              setCompanyName={setCompanyName} 
-              cnpj={cnpj} 
-              setCnpj={setCnpj} 
-              fantasyName={fantasyName} 
-              setFantasyName={setFantasyName} 
-              taxRate={taxRate} 
-              setTaxRate={setTaxRate}
-              additionalCost={additionalCost} 
-              setAdditionalCost={setAdditionalCost} // Passando o estado do custo adicional
-              isEditing={isEditingCompany}
-              handleEditClick={handleEditClickCompany}
-              handleSave={handleSave}
-              isFieldEmpty={isFieldEmpty} // Passando a função para verificar campos vazios
-            />
+              <CompanySettings 
+                companyName={companyName} 
+                setCompanyName={setCompanyName} 
+                cnpj={cnpj} 
+                setCnpj={setCnpj} 
+                fantasyName={fantasyName} 
+                setFantasyName={setFantasyName} 
+                taxRate={taxRate} 
+                setTaxRate={setTaxRate}
+                additionalCost={additionalCost} 
+                setAdditionalCost={setAdditionalCost} 
+                isEditing={isEditingCompany}
+                handleEditClick={handleEditClickCompany}
+                handleSave={handleSave}
+                isFieldEmpty={isFieldEmpty} 
+              />
+            </div>
           </div>
         </div>
       </div>

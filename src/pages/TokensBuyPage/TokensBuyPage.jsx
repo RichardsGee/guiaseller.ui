@@ -5,6 +5,7 @@ import TopBar from '../../components/TopBar/TopBar';
 import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import styles from './TokensBuyPage.module.css'; // Importando o CSS Module
+import '../../styles/styles.css'; // Importando o CSS global onde está a classe contentContainer
 import { AuthContext } from '../../context/AuthContext';
 
 const TokensBuyPage = () => {
@@ -69,78 +70,80 @@ const TokensBuyPage = () => {
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
-        {/* Adicionando o container principal para envolver todo o conteúdo */}
-        <div className={styles.tokensContainer}>
-          <div className={styles.tokensBuyContainer}>
-            {/* Conteúdo de compra de tokens à esquerda */}
-            <div className={styles.leftContent}>
-              <h1 className={styles.title}>Comprar Tokens</h1>
-              <p className={styles.infoText}>Selecione a quantidade de tokens:</p>
+        {/* Usando a classe contentContainer do styles.css */}
+        <div className="contentContainer"> 
+          <div className={styles.tokensContainer}>
+            <div className={styles.tokensBuyContainer}>
+              {/* Conteúdo de compra de tokens à esquerda */}
+              <div className={styles.leftContent}>
+                <h1 className={styles.title}>Comprar Tokens</h1>
+                <p className={styles.infoText}>Selecione a quantidade de tokens:</p>
 
-              <div className={styles.selectButtons}>
-                <button onClick={() => handleSelectTokens(10)}>10 Tokens</button>
-                <button onClick={() => handleSelectTokens(30)}>30 Tokens</button>
-                <button onClick={() => handleSelectTokens(90)}>90 Tokens</button>
-                <button onClick={() => handleSelectTokens(180)}>180 Tokens</button>
-                <button onClick={() => handleSelectTokens(365)}>365 Tokens</button>
+                <div className={styles.selectButtons}>
+                  <button onClick={() => handleSelectTokens(10)}>10 Tokens</button>
+                  <button onClick={() => handleSelectTokens(30)}>30 Tokens</button>
+                  <button onClick={() => handleSelectTokens(90)}>90 Tokens</button>
+                  <button onClick={() => handleSelectTokens(180)}>180 Tokens</button>
+                  <button onClick={() => handleSelectTokens(365)}>365 Tokens</button>
+                </div>
+
+                <input
+                  type="number"
+                  className={styles.tokenInput}
+                  value={tokens}
+                  onChange={(e) => setTokens(Math.max(10, e.target.value))} // Impede valores menores que 10
+                  min="10"
+                  step="10"
+                />
+
+                <button className={styles.buyButton} onClick={handleBuyTokens}>
+                  Comprar {tokens < 10 ? 10 : tokens} Tokens
+                </button>
+
+                {/* Exibição de preço */}
+                <div className={styles.priceDetails}>
+                  {discountPercentage > 0 && (
+                    <div className={styles.discountPercentage}>
+                      {discountPercentage}%
+                    </div>
+                  )}
+                  {discountPercentage > 0 ? (
+                    <>
+                      <p className={styles.strikethrough}>Preço original: R$ {priceDetails.originalPrice}</p>
+                      <p className={styles.priceFinal}>Preço com desconto: R$ {priceDetails.finalPrice}</p>
+                    </>
+                  ) : (
+                    <p>Preço: R$ {priceDetails.originalPrice}</p>
+                  )}
+                </div>
               </div>
 
-              <input
-                type="number"
-                className={styles.tokenInput}
-                value={tokens}
-                onChange={(e) => setTokens(Math.max(10, e.target.value))} // Impede valores menores que 10
-                min="10"
-                step="10"
-              />
-
-              <button className={styles.buyButton} onClick={handleBuyTokens}>
-                Comprar {tokens < 10 ? 10 : tokens} Tokens
-              </button>
-
-              {/* Exibição de preço */}
-              <div className={styles.priceDetails}>
-                {discountPercentage > 0 && (
-                  <div className={styles.discountPercentage}>
-                    {discountPercentage}%
-                  </div>
-                )}
-                {discountPercentage > 0 ? (
-                  <>
-                    <p className={styles.strikethrough}>Preço original: R$ {priceDetails.originalPrice}</p>
-                    <p className={styles.priceFinal}>Preço com desconto: R$ {priceDetails.finalPrice}</p>
-                  </>
-                ) : (
-                  <p>Preço: R$ {priceDetails.originalPrice}</p>
-                )}
-              </div>
-            </div>
-
-            {/* Tokens Info à direita */}
-            <div className={styles.rightContent}>
-              <div className={styles.tokensInfoItem}>
-                <h3>1. Acesso às Ferramentas</h3>
-                <p>Cada token permite que você utilize uma ferramenta de IA específica na plataforma.</p>
-              </div>
-              <div className={styles.tokensInfoItem}>
-                <h3>2. Ativação do Booster</h3>
-                <p>Duração: Ao ativar um booster, você terá acesso à ferramenta escolhida por um período de 24 horas.</p>
-              </div>
-              <div className={styles.tokensInfoItem}>
-                <h3>3. Consumo</h3>
-                <p>Cada utilização da ferramenta consome um "booster" de token, garantindo acesso contínuo.</p>
-              </div>
-              <div className={styles.tokensInfoItem}>
-                <h3>4. Flexibilidade</h3>
-                <p>Os tokens oferecem a liberdade de escolher quando utilizar as ferramentas, adaptando-se às suas necessidades e horários.</p>
-              </div>
-              <div className={styles.tokensInfoItem}>
-                <h3>5. Uso Eficiente</h3>
-                <p>Com a ativação do booster, você maximiza o uso das ferramentas, aproveitando ao máximo cada dia de acesso.</p>
-              </div>
-              <div className={styles.tokensInfoItem}>
-                <h3>Experimente a Flexibilidade</h3>
-                <p>Experimente a flexibilidade e o poder das nossas ferramentas de IA com os tokens e transforme sua experiência na plataforma!</p>
+              {/* Tokens Info à direita */}
+              <div className={styles.rightContent}>
+                <div className={styles.tokensInfoItem}>
+                  <h3>1. Acesso às Ferramentas</h3>
+                  <p>Cada token permite que você utilize uma ferramenta de IA específica na plataforma.</p>
+                </div>
+                <div className={styles.tokensInfoItem}>
+                  <h3>2. Ativação do Booster</h3>
+                  <p>Duração: Ao ativar um booster, você terá acesso à ferramenta escolhida por um período de 24 horas.</p>
+                </div>
+                <div className={styles.tokensInfoItem}>
+                  <h3>3. Consumo</h3>
+                  <p>Cada utilização da ferramenta consome um "booster" de token, garantindo acesso contínuo.</p>
+                </div>
+                <div className={styles.tokensInfoItem}>
+                  <h3>4. Flexibilidade</h3>
+                  <p>Os tokens oferecem a liberdade de escolher quando utilizar as ferramentas, adaptando-se às suas necessidades e horários.</p>
+                </div>
+                <div className={styles.tokensInfoItem}>
+                  <h3>5. Uso Eficiente</h3>
+                  <p>Com a ativação do booster, você maximiza o uso das ferramentas, aproveitando ao máximo cada dia de acesso.</p>
+                </div>
+                <div className={styles.tokensInfoItem}>
+                  <h3>Experimente a Flexibilidade</h3>
+                  <p>Experimente a flexibilidade e o poder das nossas ferramentas de IA com os tokens e transforme sua experiência na plataforma!</p>
+                </div>
               </div>
             </div>
           </div>

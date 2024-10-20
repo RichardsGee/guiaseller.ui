@@ -1,8 +1,8 @@
 .sidebar {
     position: fixed;
-    top: 60px; /* Define o topo 70px abaixo */
+    top: 60px;
     left: 0;
-    height: calc(94% - 50px); /* Ajusta a altura para o novo espaço */
+    height: calc(94% - 50px);
     width: var(--sidebar-width);
     background-color: var(--third-color);
     padding: var(--padding);
@@ -10,12 +10,24 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 1px 0 5px rgba(0, 0, 0, 0.5);
-    overflow-y: auto; /* Permite rolagem vertical */
-    overflow-x: hidden; /* Remove rolagem horizontal */
-    border-top-right-radius: 20px; /* Arredonda o canto superior direito */
-    border-bottom-right-radius: 20px; /* Arredonda o canto inferior direito */
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-family: 'Rambla'; /* Aplica a fonte padrão definida */
 }
 
+.sidebar h1, 
+.sidebar .user-info h2, 
+.sidebar .user-info p, 
+.sidebar ul li a {
+    font-family: 'Rambla'; /* Aplica a fonte padrão definida */
+}
+
+
+.sidebar h1, .sidebar .user-info h2, .sidebar .user-info p, .sidebar ul li a {
+    font-family: 'Rambla'; /* Aplica a fonte padrão definida */
+}
 
 .sidebar::-webkit-scrollbar {
     width: 8px;
@@ -35,21 +47,23 @@
     font-size: 22px;
     margin-bottom: 20px;
     text-align: center;
-    
 }
 
-.sidebar .user-info {
+.userInfo {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente se necessário */
     margin-bottom: 15px;
-    
+    text-align: center; /* Centraliza o texto */
+    font-size: 12px;
+    font-weight: 400;
 }
 
-.sidebar .user-info img {
+.userInfo img {
     width: 70px;
     height: 70px;
-    border-radius: 50%;
+    border-radius: 50%; /* Tornar a imagem circular */
     margin-bottom: 10px;
 }
 
@@ -88,7 +102,6 @@
     border-radius: 5px;
     transition: background-color 0.3s;
     font-size: 14px;
-    
 }
 
 .sidebar ul li a:hover {
@@ -100,68 +113,10 @@
     color: var(--accent-color);
 }
 
-.sidebar ul li .sidebar-icon {
-    margin-right: 8px;
-    color: var(--text-color);
-    font-size: 18px;
-    
-}
-
-/* Em sidebar.module.css */
-.userInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centraliza horizontalmente */
-    justify-content: center; /* Centraliza verticalmente se necessário */
-    margin-bottom: 15px;
-    text-align: center; /* Centraliza o texto */
-    font-size: 12px;
-    font-weight: 400;
-}
-
-.userInfo img {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%; /* Tornar a imagem circular */
-    margin-bottom: 10px;
-}
-
-/* Estilo para o nível de usuário */
-.userLevel {
-    display: inline-block;
-    margin-top: 5px;
-    padding: 2px 8px;
-    background-color: var(--primary-color);
-    color: var(--text3-color);
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-    
-}
-
-/* src/styles/sidebar.module.css */
-.userInfo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 15px;
-    
-    
-}
-
-.profileImage {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-
 .sidebarIcon {
-    margin-right: 8px;
+    margin-right: 12px; /* Aumente este valor para aumentar a distância */
     color: var(--text-color);
     font-size: 18px;
-    
 }
 
 .sidebarIconIA {
@@ -169,9 +124,9 @@
     height: 18px; /* Tamanho da imagem */
     margin-left: 10px; /* Espaço entre o texto e o ícone */
     vertical-align: middle; /* Alinhamento vertical com o texto */
-  }
-  
-  /* Estilo para o alerta "Complete" */
+}
+
+/* Estilo para o alerta "Complete" */
 .completeAlert {
     margin-left: 8px;
     color: white;
@@ -182,4 +137,64 @@
     text-transform: uppercase;
 }
 
-  
+/* Responsividade */
+@media (max-width: 600px) {
+    .sidebar {
+        width: 100%; /* A sidebar ocupa 100% em telas pequenas */
+        height: auto; /* A altura se ajusta automaticamente */
+        position: relative; /* Muda a posição para não ser fixa */
+        top: 0; /* Define o topo para 0 */
+    }
+
+    .userInfo img {
+        width: 50px; /* Diminuindo o tamanho da imagem do usuário */
+        height: 50px;
+    }
+
+    .userInfo h2 {
+        font-size: 14px; /* Reduzindo o tamanho da fonte */
+        
+    }
+
+    .sidebar h1 {
+        font-size: 20px; /* Ajustando o tamanho da fonte do título */
+    }
+
+    .sidebar ul li a {
+        font-size: 12px; /* Ajuste no tamanho da fonte dos links */
+    }
+}
+
+.menuButton {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: var(--text-color);
+    cursor: pointer;
+    margin: 10px;
+    display: none; /* Esconde o botão por padrão */
+}
+
+/* Menu visível em dispositivos móveis */
+.menu {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--third-color);
+    position: absolute;
+    top: 60px; /* Abaixo do header */
+    left: 0;
+    z-index: 1000;
+}
+
+/* Mostra o botão do menu em telas menores */
+@media (max-width: 600px) {
+    .menuButton {
+        display: block; /* Mostra o botão em dispositivos móveis */
+    }
+
+    .sidebar {
+        display: none; /* Esconde a Sidebar em dispositivos móveis */
+    }
+}

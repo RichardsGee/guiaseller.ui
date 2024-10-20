@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Header from '../../components/Header/Header';
-import Sidebar from '../../components/Sidebar/Sidebar';
-import TopBar from '../../components/TopBar/TopBar';
-import Footer from '../../components/Footer/Footer';
-import MainContent from '../../components/MainContent/MainContent';  // Adicionando MainContent
+import Header from '../../components/Header/Header';  // Caminho corrigido
+import Sidebar from '../../components/Sidebar/Sidebar';  // Caminho corrigido
+import TopBar from '../../components/TopBar/TopBar';  // Caminho corrigido
+import Footer from '../../components/Footer/Footer';  // Caminho corrigido
+import MainContent from '../../components/MainContent/MainContent';  // Caminho corrigido
 import { AuthContext } from '../../context/AuthContext';
 import styles from './vendas.module.css'; // Corrigido para usar o arquivo de estilo local
 import filterStyles from '../../styles/filter.module.css'; // Corrigido para apontar para a pasta de estilos global
 import { ArrowUpward, ArrowDownward, AttachMoney, PriceCheck, LocalShipping, Person, Store, Tag } from '@mui/icons-material'; // Ícones
+import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
 
 const VendasPage = () => {
   const [vendas, setVendas] = useState([]);
@@ -17,7 +18,7 @@ const VendasPage = () => {
   // Utilizando o contexto de autenticação para pegar informações do usuário
   const { user, signOut } = useContext(AuthContext);
   const username = user ? user.displayName || user.email : "No User Logged";
-  const userPhoto = user ? user.photoURL : null;
+  const userPhoto = user ? user.photoURL : null; 
   const userEmail = user ? user.email : null;
 
   useEffect(() => {
@@ -93,85 +94,89 @@ const VendasPage = () => {
   };
 
   return (
-    <MainContent> {/* Envolvendo o conteúdo com MainContent */}
+    <MainContent>
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
-        <div className={styles.vendasContainer}>
-          <h1 className={styles.vendasTitle}>Meus Pedidos</h1>
 
-          {/* Filtro de busca e resultados dentro do mesmo container */}
-          <div className={filterStyles.filterWrapper}>
-            <div className={filterStyles.filterSection}>
-              <label htmlFor="search"></label>
-              <input
-                id="search"
-                type="text"
-                placeholder="Digite o nome, SKU ou marketplace..."
-                value={searchTerm}
-                onChange={handleSearchChange}
-              />
-            </div>
-            {/* Exibindo o termo de busca e a quantidade de resultados */}
-            <div className={`${filterStyles.searchResults} ${searchTerm ? filterStyles.active : ''}`}>
-              {getSearchIcon()}
-              <p><strong>Busca:</strong> {searchTerm || 'N/A'}</p>
-              <p><strong>Resultado:</strong> {filteredVendas.length}</p>
-            </div>
-          </div>
+        {/* Usando a classe contentContainer do styles.css */}
+        <div className="contentContainer">
+          <div className={styles.vendasContainer}>
+          <h1 className="title">Meus Pedidos</h1>
 
-          <table className={styles.vendasTable}>
-            <thead>
-              <tr>
-                <th>Imagem</th>
-                <th>SKU</th>
-                <th>Marketplace/Envio</th>
-                <th>Nome</th>
-                <th>Venda</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredVendas.map((venda) => (
-                <React.Fragment key={venda.id}>
-                  <tr onClick={() => toggleExpandVenda(venda.id)} className={styles.vendaRow}>
-                    <td><img src={venda.imagem} alt="Produto" className={styles.vendaImage} /></td>
-                    <td>{venda.sku}</td>
-                    <td>{venda.marketplaceEnvio}</td>
-                    <td>{venda.nome}</td>
-                    <td>{formatCurrency(venda.venda)}</td>
-                  </tr>
-                  {expandedVendaId === venda.id && (
-                    <tr className={styles.vendaDetails}>
-                      <td colSpan="5">
-                        <div className={styles.detailsContainer}>
-                          <p>
-                            <PriceCheck className={styles.icon} />
-                            <strong>Custo:</strong> {formatCurrency(venda.custo)}
-                          </p>
-                          <p>
-                            <LocalShipping className={styles.icon} />
-                            <strong>Imposto:</strong> {formatCurrency(venda.imposto)}
-                          </p>
-                          <p className={venda.lucro > 0 ? styles.lucroPositivo : styles.lucroNegativo}>
-                            {venda.lucro > 0 ? <ArrowUpward className={styles.iconPositive} /> : <ArrowDownward className={styles.iconNegative} />}
-                            <strong>Lucro:</strong> {formatCurrency(venda.lucro)}
-                          </p>
-                          <p>
-                            <AttachMoney className={styles.icon} />
-                            <strong>Margem:</strong> {venda.margem}
-                          </p>
-                          <p>
-                            <strong>Status:</strong> {venda.status}
-                          </p>
-                        </div>
-                      </td>
+            {/* Filtro de busca e resultados dentro do mesmo container */}
+            <div className={filterStyles.filterWrapper}>
+              <div className={filterStyles.filterSection}>
+                <label htmlFor="search"></label>
+                <input
+                  id="search"
+                  type="text"
+                  placeholder="Digite o nome, SKU ou marketplace..."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
+                />
+              </div>
+              {/* Exibindo o termo de busca e a quantidade de resultados */}
+              <div className={`${filterStyles.searchResults} ${searchTerm ? filterStyles.active : ''}`}>
+                {getSearchIcon()}
+                <p><strong>Busca:</strong> {searchTerm || 'N/A'}</p>
+                <p><strong>Resultado:</strong> {filteredVendas.length}</p>
+              </div>
+            </div>
+
+            <table className={styles.vendasTable}>
+              <thead>
+                <tr>
+                  <th>Imagem</th>
+                  <th>SKU</th>
+                  <th>Marketplace/Envio</th>
+                  <th>Nome</th>
+                  <th>Venda</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredVendas.map((venda) => (
+                  <React.Fragment key={venda.id}>
+                    <tr onClick={() => toggleExpandVenda(venda.id)} className={styles.vendaRow}>
+                      <td><img src={venda.imagem} alt="Produto" className={styles.vendaImage} /></td>
+                      <td>{venda.sku}</td>
+                      <td>{venda.marketplaceEnvio}</td>
+                      <td>{venda.nome}</td>
+                      <td>{formatCurrency(venda.venda)}</td>
                     </tr>
-                  )}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
+                    {expandedVendaId === venda.id && (
+                      <tr className={styles.vendaDetails}>
+                        <td colSpan="5">
+                          <div className={styles.detailsContainer}>
+                            <p>
+                              <PriceCheck className={styles.icon} />
+                              <strong>Custo:</strong> {formatCurrency(venda.custo)}
+                            </p>
+                            <p>
+                              <LocalShipping className={styles.icon} />
+                              <strong>Imposto:</strong> {formatCurrency(venda.imposto)}
+                            </p>
+                            <p className={venda.lucro > 0 ? styles.lucroPositivo : styles.lucroNegativo}>
+                              {venda.lucro > 0 ? <ArrowUpward className={styles.iconPositive} /> : <ArrowDownward className={styles.iconNegative} />}
+                              <strong>Lucro:</strong> {formatCurrency(venda.lucro)}
+                            </p>
+                            <p>
+                              <AttachMoney className={styles.icon} />
+                              <strong>Margem:</strong> {venda.margem}
+                            </p>
+                            <p>
+                              <strong>Status:</strong> {venda.status}
+                            </p>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <Footer />

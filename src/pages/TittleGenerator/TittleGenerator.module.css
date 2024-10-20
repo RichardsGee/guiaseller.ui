@@ -1,28 +1,4 @@
-.geradorContainer {
-    background-color: var(--third-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin: 20px auto;
-    width: 100%;
-    max-width: 1700px;
-    min-height: 79vh;
-}
-
-.title {
-    text-align: center;
-    color: var(--text-color);
-    margin-bottom: 20px;
-    font-size: 28px;
-}
-
-.description {
-    text-align: center;
-    color: var(--text-muted-color);
-    font-size: 16px;
-    margin-bottom: 30px;
-}
-
+/* Seção do input de texto */
 .inputSection {
     display: flex;
     flex-direction: column;
@@ -32,45 +8,152 @@
 .inputArea {
     width: 100%;
     max-width: 1000px;
-    height: 200px;
+    height: 100px;
     padding: 15px;
     border-radius: 8px;
     border: 1px solid var(--primary-color);
     background-color: var(--background-color);
     color: var(--text-color);
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     font-size: 16px;
     resize: none;
 }
 
-.generateButton {
+/* Botões */
+.buttonGroup {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.generateButton, .clearButton {
     padding: 12px 20px;
-    background-color: var(--primary-color);
-    color: white;
+    font-size: 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-size: 16px;
+}
+
+.generateButton {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.clearButton {
+    background-color: var(--secondary-color);
+    color: white;
 }
 
 .generateButton:hover {
     background-color: darkgreen;
 }
 
+.clearButton:hover {
+    background-color: darkred;
+}
+
+/* Seção dos títulos gerados */
 .resultSection {
-    margin-top: 40px;
+    margin-top: 5px;
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
 }
 
-.resultTitle {
-    color: var(--primary-color);
-    font-size: 22px;
-    margin-bottom: 10px;
+/* Estilos para o container dos títulos */
+.titleItem {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 15px;
+    margin: 5px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.2s ease;
+    width: 45%; 
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
 }
 
-.resultText {
-    color: var(--text-color);
-    font-size: 18px;
-    font-weight: bold;
+/* Efeito de hover nos títulos */
+.titleItem:hover {
+    background-color: var(--primary-color);
+}
+
+/* Efeito de título copiado */
+.titleItem.copied {
+    background-color: green;
+    transform: scale(1.05);
+    position: relative;
+    animation: bounce 0.5s ease;
+}
+
+/* Animação de bounce */
+@keyframes bounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Efeito de esmaecimento e diminuição nos outros títulos quando um título é copiado */
+.titleItem.faded {
+    opacity: 0.4;
+    transform: scale(0.90); /* Reduz o tamanho para 90% do tamanho original */
+}
+
+/* Tag "Copiado" */
+.copiedTag {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: white;
+    color: green;
+    font-size: 12px;
+    padding: 2px 5px;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.newInputContainer {
+    display: flex; /* Usar flexbox para alinhar os elementos */
+    align-items: center; /* Alinha os itens verticalmente ao centro */
+    justify-content: center; /* Centraliza horizontalmente os elementos no contêiner */
+    margin-top: 20px; /* Espaço entre o resultado e o novo input */
+}
+
+.characterCount {
+    font-size: 12px; /* Tamanho da fonte do contador */
+    color: #fff; /* Cor do texto do contador, alterado para branco */
+    margin-right: 5px; /* Espaço pequeno à direita do contador */
+}
+
+.newInput {
+    width: 80%; /* Define uma largura apropriada */
+    max-width: 400px; /* Define uma largura máxima para o input */
+    padding: 10px; /* Adiciona algum preenchimento */
+    border: 1px solid black; /* Define uma borda fixa */
+    border-radius: 5px; /* Bordas arredondadas */
+    margin-right: 5px; /* Espaço pequeno entre o input e o botão */
+}
+
+.copyButton {
+    display: flex; /* Usar flexbox para alinhar o ícone e o texto */
+    align-items: center; /* Centraliza verticalmente */
+    padding: 10px; /* Preenchimento do botão */
+    background-color: transparent; /* Fundo transparente */
+    color: #4CAF50; /* Cor do ícone */
+    border: none; /* Remove a borda padrão */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    margin-left: 5px; /* Espaço entre o input e o botão */
+}
+
+.copyButton span {
+    margin-left: 5px; /* Espaço entre o ícone e o texto "Copiado!" */
+    font-size: 12px; /* Tamanho do texto do status */
 }

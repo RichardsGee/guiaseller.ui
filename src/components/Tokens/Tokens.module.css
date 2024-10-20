@@ -1,29 +1,30 @@
 .tokensContainer {
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: 12px; /* Ajustar o tamanho da fonte para mobile */
   background-color: var(--background-color);
-  padding: 8px 15px;
+  padding: 5px 10px; /* Ajuste o padding se necessário */
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--primary-color);
   cursor: pointer; /* Tornar o container clicável */
   position: relative; /* Para o posicionamento de texto dinâmico */
   transition: background-color 0.3s ease; /* Suave transição ao passar o mouse */
-  
 }
 
 .tokenText {
   font-weight: bold;
   color: var(--text-color);
+  font-size: 12px; /* Ajustar o tamanho do texto para mobile */
 }
 
 .tokenIcon {
-  margin-right: 8px;
-  width: 18px;
-  height: 18px;
+  margin-right: 5px; /* Reduzir o espaço entre o ícone e o texto */
+  width: 16px; /* Ajustar a largura do ícone */
+  height: 16px; /* Ajustar a altura do ícone */
 }
 
+/* Estilos ao passar o mouse */
 .tokensContainer:hover {
   background-color: var(--hover-background-color); /* Cor de fundo ao passar o mouse */
 }

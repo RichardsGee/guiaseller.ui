@@ -156,3 +156,44 @@
 .settingItem label, .inputField {
   width: 100%;
 }
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .mainTitle {
+        font-size: 20px; /* Tamanho reduzido do título */
+    }
+    .settingsGrid {
+        flex-direction: column; /* Alinha as seções em coluna */
+        gap: 20px; /* Menos espaço entre as colunas */
+    }
+    .settingsColumn {
+        padding: 15px; /* Menos padding nas colunas */
+    }
+    .settingItem {
+        font-size: 12px; /* Diminuir o tamanho da fonte */
+    }
+    .settingItem label {
+        font-size: 14px; /* Diminuir o tamanho do rótulo */
+    }
+    .inputField {
+        font-size: 12px; /* Diminuir o tamanho do campo de entrada */
+    }
+}
+
+@media (max-width: 480px) {
+    .mainTitle {
+        font-size: 18px; /* Tamanho ainda menor do título */
+    }
+    .settingsColumn {
+        padding: 10px; /* Menos padding nas colunas */
+    }
+    .settingItem {
+        font-size: 11px; /* Diminuir ainda mais o tamanho da fonte */
+    }
+    .settingItem label {
+        font-size: 12px; /* Diminuir ainda mais o tamanho do rótulo */
+    }
+    .inputField {
+        font-size: 11px; /* Diminuir ainda mais o tamanho do campo de entrada */
+    }
+}
