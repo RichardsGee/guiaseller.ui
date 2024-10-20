@@ -48,7 +48,7 @@ function App() {
             element={<ProtectedRoute><MessagesPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/integrações" 
+            path="/integracoes" 
             element={<ProtectedRoute><IntegrationsPage /></ProtectedRoute>} 
           />
           <Route 

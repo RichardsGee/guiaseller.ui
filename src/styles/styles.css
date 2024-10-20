@@ -22,6 +22,8 @@
     --btn2-color: #2F2F2F;
     --tools-color: #02B075;
     --ai-color: linear-gradient(135deg, #00d9ff, var(--primary-color));
+        /* Variável de fonte */
+        --var-font: 'Kambla', sans-serif; /* Defina a fonte padrão */
 }
 
 /* Definindo estilos para o tema claro */
@@ -42,6 +44,7 @@ body.light {
 
 /* Definindo estilos para o tema escuro */
 body.dark {
+    
     --background-color: #202123;
     --text-color: #ffffff;
     --primary-color: #a020f0;
@@ -62,15 +65,24 @@ body.dark {
     box-sizing: border-box;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Rambla:wght@300;400;500;600;700&display=swap');
+
 body {
+    font-family: 'Rambla', sans-serif; /* Define Kambla como a fonte padrão da página */
     background-color: var(--secondary-color);
     color: var(--text-color);
-    font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     height: 100vh;
     overflow: hidden; /* Impede a rolagem do body */
 }
+
+/* Aplique a fonte a outros elementos, se necessário */
+h1, h2, h3, h4, h5, h6, p, button {
+    font-family: 'Rambla', sans-serif; /* Aplica Kambla a outros elementos de texto */
+}
+
+
 
 .container {
     display: flex;
@@ -286,6 +298,7 @@ footer {
     .contentContainer {
         height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height) + 60px)); /* Altura reduzida */
         overflow-y: auto; /* Permite rolagem vertical */
+        font-family: 'Satoshi', sans-serif; /* Define Satoshi como a fonte padrão da página */
     }
 }
 
@@ -329,16 +342,6 @@ footer {
     .filter-section {
         width: 100%;
     }
-}
-
-body {
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden; /* Impede a rolagem do body */
 }
 
 /* Responsividade para mobile */

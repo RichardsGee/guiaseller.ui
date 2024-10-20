@@ -1,8 +1,8 @@
 .sidebar {
     position: fixed;
-    top: 60px; /* Define o topo 60px abaixo do header */
+    top: 60px;
     left: 0;
-    height: calc(94% - 50px); /* Ajusta a altura para o novo espaço */
+    height: calc(94% - 50px);
     width: var(--sidebar-width);
     background-color: var(--third-color);
     padding: var(--padding);
@@ -10,10 +10,23 @@
     flex-direction: column;
     align-items: center;
     box-shadow: 1px 0 5px rgba(0, 0, 0, 0.5);
-    overflow-y: auto; /* Permite rolagem vertical */
-    overflow-x: hidden; /* Remove rolagem horizontal */
-    border-top-right-radius: 20px; /* Arredonda o canto superior direito */
-    border-bottom-right-radius: 20px; /* Arredonda o canto inferior direito */
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-family: 'Rambla'; /* Aplica a fonte padrão definida */
+}
+
+.sidebar h1, 
+.sidebar .user-info h2, 
+.sidebar .user-info p, 
+.sidebar ul li a {
+    font-family: 'Rambla'; /* Aplica a fonte padrão definida */
+}
+
+
+.sidebar h1, .sidebar .user-info h2, .sidebar .user-info p, .sidebar ul li a {
+    font-family: 'Rambla'; /* Aplica a fonte padrão definida */
 }
 
 .sidebar::-webkit-scrollbar {
@@ -106,7 +119,6 @@
     font-size: 18px;
 }
 
-
 .sidebarIconIA {
     width: 18px; /* Tamanho da imagem */
     height: 18px; /* Tamanho da imagem */
@@ -141,6 +153,7 @@
 
     .userInfo h2 {
         font-size: 14px; /* Reduzindo o tamanho da fonte */
+        
     }
 
     .sidebar h1 {
@@ -151,6 +164,7 @@
         font-size: 12px; /* Ajuste no tamanho da fonte dos links */
     }
 }
+
 .menuButton {
     background: transparent;
     border: none;

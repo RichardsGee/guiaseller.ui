@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import './styles/styles.css';
+import './styles/styles.css'; // Certifique-se de que este arquivo está incluindo as regras CSS para a fonte
 import { ThemeProvider } from './context/ThemeContext'; // Importando o ThemeProvider
 import { AuthProvider } from './context/AuthContext'; 
 

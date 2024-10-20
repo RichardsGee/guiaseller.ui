@@ -9,7 +9,7 @@
     gap: var(--margin);
     margin-bottom: var(--margin);
     padding-top: 5px; /* Distância do header */
-    background-color: #17181A; /* Cor de fundo */
+    background-color: var(--secondary-color); /* Cor de fundo */
     z-index: 999; /* Garante que a TopBar fique acima de outros elementos */
 }
 
@@ -46,15 +46,17 @@
     font-size: 20px;
 }
 
-/* Novas classes para estilização */
+/* Adicionando novos tamanhos para .title e .value */
 .title {
-    font-weight: bold; /* Estilo em negrito para o título */
+    font-weight:bolder; /* Estilo em negrito para o título */
     margin: 0; /* Remove margem padrão */
+    font-size: 24px; /* Aumentando o tamanho da fonte do título */
 }
 
 .value {
-    font-style: italic; /* Estilo itálico para o valor */
-    font-weight: lighter; /* Fonte mais fina para o valor */
+    font-style:initial; /* Estilo itálico para o valor */
+    font-weight:100; /* Fonte mais fina para o valor */
+    font-size: 20px; /* Aumentando o tamanho da fonte do valor */
 }
 
 /* Estilos para mobile */
@@ -84,12 +86,15 @@
         font-size: 20px; /* Diminuindo o tamanho do ícone para mobile */
     }
 
+    /* Ajustando a fonte do título e valor para mobile */
     .topBarContent h3 {
-        font-size: 12px; /* Diminuindo a fonte do título para mobile */
+        font-size: 16px; /* Ajustando a fonte do título para mobile */
+        margin: 0; /* Removendo a margem padrão para reduzir espaçamento */
     }
 
     .topBarContent p {
-        font-size: 10px; /* Diminuindo a fonte do valor para mobile */
+        font-size: 12px; /* Ajustando a fonte do valor para mobile */
+        margin: 0; /* Removendo a margem padrão para reduzir espaçamento */
     }
 }
 
@@ -102,11 +107,14 @@
         font-size: 16px; /* Diminuindo ainda mais o tamanho do ícone para telas pequenas */
     }
 
+    /* Ajustando a fonte do título e valor para telas pequenas */
     .topBarContent h3 {
-        font-size: 10px; /* Diminuindo ainda mais a fonte do título */
+        font-size: 14px; /* Ajustando a fonte do título para telas pequenas */
+        margin: 0; /* Removendo a margem padrão para reduzir espaçamento */
     }
 
     .topBarContent p {
-        font-size: 8px; /* Diminuindo ainda mais a fonte do valor */
+        font-size: 10px; /* Ajustando a fonte do valor para telas pequenas */
+        margin: 0; /* Removendo a margem padrão para reduzir espaçamento */
     }
 }

@@ -3,10 +3,10 @@ import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';  
 import TopBar from '../../components/TopBar/TopBar';  
 import Footer from '../../components/Footer/Footer';  
-import MainContent from '../../components/MainContent/MainContent';  // Adicionando o MainContent
+import MainContent from '../../components/MainContent/MainContent'; 
 import { AuthContext } from '../../context/AuthContext';  
-import styles from './integrations.module.css';  // Certifique-se que este caminho está correto
-import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
+import styles from './integrations.module.css'; 
+import '../../styles/styles.css'; // Importando o CSS global
 
 const IntegrationsPage = () => {
   const { user, signOut } = useContext(AuthContext);
@@ -22,12 +22,14 @@ const IntegrationsPage = () => {
     { nome: 'Amazon', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/IHDjUqS.png' },
   ]);
 
+  // Função para alternar a integração
   const handleIntegrate = (index) => {
     const updatedIntegrations = [...integrations];
     updatedIntegrations[index].integrado = !updatedIntegrations[index].integrado;
     setIntegrations(updatedIntegrations);
   };
 
+  // Função para ativar/desativar a integração
   const handleToggleActive = (index) => {
     const updatedIntegrations = [...integrations];
     if (updatedIntegrations[index].integrado) {
@@ -43,10 +45,9 @@ const IntegrationsPage = () => {
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
         
-        {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">
           <div className={styles.integrationsContainer}>
-          <h1 className="title">Integrações</h1>
+            <h1 className="title">Integrações</h1>
 
             {/* Seção de integrações disponíveis */}
             <h2 className={styles.subTitle}>Disponíveis</h2>

@@ -61,6 +61,7 @@
     font-weight: bold;
     border-bottom: 2px solid var(--background-color);
     padding-bottom: 10px;
+
 }
 
 /* Container de cada bloco de configurações */
@@ -79,6 +80,7 @@
     border-bottom: 1px solid #444;
     font-size: 14px;
     gap: 20px;
+
 }
 
 /* Estilo dos rótulos (Nome, Email, Celular, etc.) */
@@ -102,6 +104,7 @@
     outline: none;
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+
 }
 
 /* Estilo quando o campo de entrada está no modo de edição */

@@ -11,6 +11,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import StoreIcon from '@mui/icons-material/Store';
 import MessageIcon from '@mui/icons-material/Message';
 import WidgetsIcon from '@mui/icons-material/Widgets';
+import IntegrationsIcon from '@mui/icons-material/Api'; // Você pode substituir por um ícone apropriado para Integrações
 
 function Sidebar({ userPhoto, username, userEmail, isComplete }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar o menu
@@ -44,6 +45,12 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           <li><Link to="/vendas"><ShoppingCartIcon className={styles.sidebarIcon} />Vendas</Link></li>
           <li><Link to="/produtos"><InventoryIcon className={styles.sidebarIcon} />Produtos</Link></li>
           <li><Link to="/anuncios"><AnnouncementIcon className={styles.sidebarIcon} />Anúncios</Link></li>
+          <li>
+            <Link to="/integracoes"> {/* Novo link para Integrações */}
+              <IntegrationsIcon className={styles.sidebarIcon} /> {/* Ícone de Integrações */}
+              Integrações
+            </Link>
+          </li>
           <li>
             <Link to="/configuracoes">
               <SettingsIcon className={styles.sidebarIcon} />
@@ -82,6 +89,12 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             <li><Link to="/vendas"><ShoppingCartIcon className={styles.sidebarIcon} />Vendas</Link></li>
             <li><Link to="/produtos"><InventoryIcon className={styles.sidebarIcon} />Produtos</Link></li>
             <li><Link to="/anuncios"><AnnouncementIcon className={styles.sidebarIcon} />Anúncios</Link></li>
+            <li>
+              <Link to="/integracoes"> {/* Novo link para Integrações */}
+                <IntegrationsIcon className={styles.sidebarIcon} /> {/* Ícone de Integrações */}
+                Integrações
+              </Link>
+            </li>
             <li>
               <Link to="/configuracoes">
                 <SettingsIcon className={styles.sidebarIcon} />

@@ -8,7 +8,8 @@ import AdditionalInfo from '../../components/AdditionalInfo/AdditionalInfo';
 import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
-import '../../styles/styles.css'; // Importando o CSS global
+import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
+
 
 function Dashboard() {
   const { user, signOut } = useContext(AuthContext);

@@ -1,5 +1,8 @@
+// Importando o CSS global
+import '../../styles/styles.css'; // Ajuste o caminho conforme necessário
 import React from 'react';
 import styles from './topbar.module.css';
+
 
 function TopBar() {
   return (
