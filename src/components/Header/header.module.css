@@ -42,7 +42,7 @@
 .username {
     font-weight: bold;
     color: var(--text-color);
-    font-size: 8px; /* Tamanho do nome do usuário */
+    font-size: 10px; /* Tamanho do nome do usuário */
 }
 
 /* Botão de tema visível em ambas as versões */
@@ -71,14 +71,20 @@
     background-color: var(--primary-color);
 }
 
-/* Botão de menu */
+/* Estilo do botão de menu */
 .menuButton {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    display: none; /* Esconde o botão por padrão */
+    background: transparent; /* Torna o fundo do botão transparente */
+    border: none; /* Remove a borda do botão */
+    cursor: pointer; /* Muda o cursor para indicar que é clicável */
+    font-size: 24px; /* Tamanho do ícone */
+    color: var(--text-color); /* Define a cor do ícone com a variável de cor */
 }
+
+/* Exemplo de efeito hover para o botão de menu */
+.menuButton:hover {
+    color: var(--primary-color); /* Muda a cor do ícone ao passar o mouse sobre ele */
+}
+
 
 /* Estilo do menu de logout */
 .menu {
@@ -111,16 +117,12 @@
 
 /* Responsividade para mobile */
 @media (max-width: 600px) {
-    .menuButton {
-        display: block; /* Mostra o botão em dispositivos móveis */
-    }
-    
     .headerActions {
         display: flex;
         flex-direction: row; /* Mantém em linha */
         gap: 5px; /* Espaçamento reduzido */
     }
-
+    
     .headerLogo img {
         max-width: 40px; /* Diminuindo o tamanho da logo para mobile */
     }

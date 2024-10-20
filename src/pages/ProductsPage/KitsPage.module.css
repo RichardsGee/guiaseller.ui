@@ -17,21 +17,18 @@
     background-color: var(--secondary-color);
     padding: 30px;
     border-radius: 15px;
-    width: 1400px;
-    height: 700px;
+    width: 90%; /* Ajustando a largura para caber melhor na tela */
+    height: auto; /* Altura automática no mobile */
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: relative;
+    flex-direction: column; /* Mudando para coluna para uma melhor responsividade */
 }
 
 /* Seção esquerda do formulário */
 .formSection {
-    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: stretch; /* Centraliza o conteúdo horizontalmente */
     position: relative;
     gap: 10px;
     padding: 10px;
@@ -43,38 +40,57 @@
     margin-bottom: 15px;
     border: 1px solid var(--border-color);
     border-radius: 5px;
-    background-color: var(--third-color);
+    background-color: var(--secondary-color);
     color: var(--text-color);
 }
 
 /* Grupo de inputs para Nome, SKU e Quantidade */
 .inputGroup {
     display: flex;
-    justify-content: space-between;
-    gap: 8px;
-    width: 100%;
+    flex-direction: column; /* Mudando para coluna para melhor alinhamento */
+    width: 100%; /* Ocupa toda a largura */
     margin-bottom: 15px; /* Espaço abaixo do grupo de inputs */
+}
+
+/* Contêiner para alinhar Nome, SKU e Quantidade */
+.inlineFields {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Espaço entre os campos */
+    width: 100%; /* Certifica-se de que o contêiner ocupa a largura total */
 }
 
 .inputField {
     display: flex;
     flex-direction: column;
-    width: 30%; /* Definir a largura dos campos de input igual aos produtos selecionados */
+    flex: 1; /* Cada campo ocupará igualmente a largura disponível */
+    min-width: 0; /* Evita overflow se o texto for muito longo */
+    margin-bottom: 10px; /* Espaçamento entre os campos */
 }
 
 .inputField label {
     font-weight: bold;
     margin-bottom: 4px;
-    text-align: center; /* Centraliza o label */
+    text-align: left; /* Alinhado à esquerda para uma melhor legibilidade */
 }
 
 .inputField input {
     padding: 6px;
     border-radius: 5px;
     border: 1px solid var(--border-color);
-    background-color: var(--third-color);
+    background-color: var(--secondary-color);
     color: var(--text-color);
-    text-align: center; /* Centraliza o texto do campo */
+    text-align: center; /* Centraliza o texto do input */
+}
+
+/* Ajuste para a largura dos inputs de Nome, SKU e Quantidade */
+.inputField.nome,
+.inputField.sku {
+    width: 100%; /* Mantendo o Nome e SKU ocupando toda a largura */
+}
+
+.inputField.quantidade {
+    width: 30%; /* Quantidade com largura menor */
 }
 
 /* Produtos selecionados no kit */
@@ -116,12 +132,7 @@
     text-overflow: ellipsis;
     max-width: 100px;
     margin-bottom: 5px;
-    font-size: 10px; /* Reduz tamanho do texto */
-}
-
-.kitItemInfo h4, .kitItemInfo p {
-    font-size: 10px; /* Texto menor */
-    margin-bottom: 2px;
+    font-size: 10px; 
 }
 
 .kitItemImage {
@@ -137,7 +148,7 @@
     background-color: transparent;
     color: white;
     border: none;
-    font-size: 16px; /* Menor tamanho para o botão */
+    font-size: 16px; 
     font-weight: bold;
     cursor: pointer;
     position: absolute;
@@ -152,13 +163,12 @@
 
 /* Botões de Salvar Kit e Cancelar */
 .buttonGroup {
-    position: absolute;
-    bottom: 20px; /* Coloca os botões fixos na parte inferior */
     display: flex;
     justify-content: space-between;
     gap: 10px;
     width: 100%;
     align-items: center;
+    margin-top: 20px; /* Espaço superior para separar dos itens */
 }
 
 .saveProductButton, .closeButton {
@@ -178,8 +188,8 @@
 
 /* Galeria de produtos - seção da direita */
 .galleryContainer {
-    width: 45%;
-    height: 100%;
+    width: 100%;
+    height: auto; /* Altura automática para se ajustar ao conteúdo */
     overflow-y: auto;
     background-color: var(--secondary-color);
     border-radius: 10px;
@@ -216,7 +226,7 @@
 }
 
 .quantityInput {
-    width: 70px;
+    width: 70px; /* Largura reduzida para o campo de quantidade */
     padding: 6px;
     margin-right: 10px;
     border: 1px solid var(--border-color);
@@ -231,7 +241,6 @@
     padding: 6px 10px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
 }
 
 .addButton:hover {
@@ -266,4 +275,84 @@
     margin-bottom: 15px;
     text-align: center;
     width: 100%;
+}
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .modalContent {
+        flex-direction: column; /* Muda a direção para coluna no mobile */
+        width: 90%; /* Define uma largura menor no mobile */
+        height: auto; /* Altura automática no mobile */
+    }
+
+    .formSection,
+    .galleryContainer {
+        width: 100%; /* Ambas as seções ocupam 100% da largura */
+    }
+
+    .kitItem {
+        width: 100%; /* Os itens do kit ocupam 100% da largura */
+    }
+
+    .inputField {
+        width: 100%; /* Campos de input ocupam 100% da largura */
+    }
+
+    /* Escondendo informações excessivas em mobile */
+    .productInfo {
+        max-width: 100px; /* Reduzindo a largura máxima para dispositivos menores */
+    }
+}
+
+@media (max-width: 480px) {
+    .modalContent {
+        padding: 20px; /* Menor padding no mobile */
+    }
+
+    .addButton,
+    .removeButton {
+        font-size: 14px; /* Diminuindo o tamanho do botão no mobile */
+    }
+
+    .inputField label {
+        font-size: 12px; /* Diminuindo o tamanho da fonte do label */
+    }
+
+    .inputField input,
+    .quantityInput {
+        font-size: 12px; /* Diminuindo o tamanho da fonte do input */
+        width: 100%; /* Garantir que o campo ocupe 100% da largura */
+    }
+
+    .Title {
+        font-size: 16px; /* Tamanho da fonte para títulos no mobile */
+    }
+
+    .kitItemInfo h4,
+    .kitItemInfo p {
+        font-size: 10px; /* Menor tamanho de texto para informações do item */
+    }
+}
+
+/* Estilos para a tabela de kits */
+.kitsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.kitsTable th, .kitsTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--background-color);
+}
+
+.kitsTable th {
+    background-color: var(--container-color);
+    color: var(--text-color);
+}
+
+.kitsTable tr:hover {
+    background-color: var(--hover-color);
+    color: var(--text-color);
 }

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'; // Importando useNavigate para n
 function Header({ username, logout }) {
   const { theme, toggleTheme } = useContext(ThemeContext); // Obtendo o tema atual e a função de alternância
   const tokenCount = 150; // Simulação da quantidade de tokens
+
   const navigate = useNavigate(); // Instanciando o hook useNavigate
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar o menu
 
@@ -51,12 +52,9 @@ function Header({ username, logout }) {
           ☰ {/* Ícone de menu */}
         </button>
 
-        {/* Menu (apenas em mobile) */}
+        {/* Menu suspenso */}
         {isMenuOpen && (
           <div className={styles.menu}>
-            {/* Nome de usuário removido do menu mobile */}
-
-            {/* Links do sidebar */}
             <ul className={styles.menuList}>
               <li onClick={() => navigateTo('/dashboard')}>Dashboard</li>
               <li onClick={() => navigateTo('/vendas')}>Vendas</li>

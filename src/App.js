@@ -12,6 +12,7 @@ import MessagesPage from './pages/MessagesPage/MessagesPage';
 import IntegrationsPage from './pages/IntegrationsPage/IntegrationsPage';
 import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
 import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; 
+import KitsPage from './pages/ProductsPage/KitsPage'; // Importando KitsPage
 import ProtectedRoute from './components/ProtectedRoute'; 
 
 function App() {
@@ -57,6 +58,10 @@ function App() {
           <Route 
             path="/comprar-tokens" 
             element={<ProtectedRoute><TokensBuyPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/kits" // Adicionando a rota para KitsPage
+            element={<ProtectedRoute><KitsPage /></ProtectedRoute>} 
           />
         </Routes>
         <ToastContainer />

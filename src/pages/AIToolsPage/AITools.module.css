@@ -146,3 +146,58 @@
     background: linear-gradient(135deg, #00d9ff, var(--primary-color));
     color: white;
 }
+
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+    .title {
+        font-size: 20px; /* Tamanho reduzido do título */
+        margin-bottom: 20px; /* Menos margem abaixo do título */
+    }
+
+    .toolsGrid {
+        flex-direction: column; /* Coluna em vez de linha */
+        align-items: center; /* Centraliza as ferramentas */
+        gap: 15px; /* Menos espaço entre as ferramentas */
+    }
+
+    .toolCard {
+        width: 90%; /* Largura reduzida para dispositivos móveis */
+        max-width: 400px; /* Largura máxima para garantir legibilidade */
+        padding: 15px; /* Menos padding nas ferramentas */
+    }
+
+    .toolName {
+        font-size: 16px; /* Diminuir o tamanho do nome da ferramenta */
+    }
+
+    .toolDesc {
+        font-size: 12px; /* Diminuir o tamanho da descrição */
+    }
+
+    .adquiridoButton, .assinarButton {
+        font-size: 12px; /* Diminuir o tamanho da fonte dos botões */
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 18px; /* Tamanho ainda menor do título */
+    }
+
+    .toolCard {
+        width: 95%; /* Largura reduzida ainda mais */
+        padding: 10px; /* Menos padding nas ferramentas */
+    }
+
+    .toolName {
+        font-size: 14px; /* Diminuir o tamanho do nome da ferramenta */
+    }
+
+    .toolDesc {
+        font-size: 10px; /* Diminuir o tamanho da descrição */
+    }
+
+    .adquiridoButton, .assinarButton {
+        font-size: 10px; /* Diminuir o tamanho da fonte dos botões */
+    }
+}
