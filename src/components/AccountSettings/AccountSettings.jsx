@@ -7,7 +7,7 @@ const AccountSettings = ({ name, setName, email, setEmail, phone, setPhone, user
 
   return (
     <div className={styles.settingsColumn}>
-      <h2 className={styles.sectionTitle}>Configurações da Conta</h2>
+      <h2 className={styles.sectionTitle}>Conta</h2>
       <button 
         className={styles.editButton} 
         onClick={handleEditClick}

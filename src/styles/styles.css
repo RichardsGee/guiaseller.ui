@@ -366,13 +366,14 @@ body {
 /* Responsividade para mobile */
 @media (max-width: 768px) {
     .contentContainer {
-        margin: 30px 0 0; /* Margem superior para mobile */
+        margin: 50px 0 0; /* Aumente a margem superior para descer mais o container */
         width: 100%; /* Ocupa toda a largura da tela */
         height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height) + 20px)); /* Altura que respeita o restante da tela */
         left: 0; /* Alinhamento à esquerda */
         overflow-y: auto; /* Adiciona rolagem vertical */
     }
 }
+
 
 /* Ajustando a grid de configurações */
 .settingsGrid {
@@ -388,5 +389,23 @@ body {
     text-align: center;
     color: var(--text-color);
     margin-bottom: 30px;
-    font-size: 24px;
+    font-size: 24px; /* Tamanho padrão para desktop */
 }
+
+/* Estilos para mobile */
+@media (max-width: 768px) {
+    .title {
+        font-size: 20px; /* Tamanho reduzido para mobile */
+        margin-bottom: 10px; /* Margem reduzida para mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 18px; /* Tamanho menor para telas pequenas */
+        margin-top: -20px; /* Espaço superior */
+        margin-bottom: -20px; /* Espaço inferior */
+    }
+}
+
+
