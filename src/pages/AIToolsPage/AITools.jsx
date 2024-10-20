@@ -11,6 +11,10 @@ import { Lock, LockOpen } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import BuySound from '../../components/BuySound'; // Certifique-se de importar corretamente o BuySound
 
+// Importando as imagens de favoritos
+import favoriteOn from '../../assets/favoriteon.png'; 
+import favoriteOff from '../../assets/favoriteoff.png'; 
+
 const AITools = () => {
   const { user, signOut } = useContext(AuthContext);
   const username = user ? user.displayName || user.email : "No User Logged";
@@ -22,6 +26,7 @@ const AITools = () => {
   const [categoriaAtiva, setCategoriaAtiva] = useState('Todas'); // Categoria ativa
   const [playSound, setPlaySound] = useState(false); // Estado para controlar a reprodução do som
   const [stopSound, setStopSound] = useState(false); // Estado para controlar o fade out do som
+  const [favoritos, setFavoritos] = useState([]); // Estado para armazenar ferramentas favoritas
 
   const ferramentasData = [
     { nome: 'Gerador de Títulos', descricao: 'Crie títulos de alta conversão.', ativo: true, custo: '1 Token (24h)', restante: '18 horas', route: '/ferramentas-ia/gerador-titulos', categoria: 'Geradores' },
@@ -32,18 +37,27 @@ const AITools = () => {
   ];
 
   // Filtros de categorias
-  const categorias = ['Todas', 'Geradores', 'Análise'];
+  const categorias = ['Todas', 'Geradores', 'Análise', 'Favoritos']; // Adicionando a aba de Favoritos
 
   // Função para filtrar ferramentas com base na categoria selecionada
   const ferramentasFiltradas = categoriaAtiva === 'Todas'
     ? ferramentasData
-    : ferramentasData.filter(ferramenta => ferramenta.categoria === categoriaAtiva);
+    : categoriaAtiva === 'Favoritos'
+      ? ferramentasData.filter(ferramenta => favoritos.includes(ferramenta.nome)) // Filtra favoritos
+      : ferramentasData.filter(ferramenta => ferramenta.categoria === categoriaAtiva);
 
   // Função para ativar a navegação para a ferramenta ativa
   const handleUseTool = (route) => {
     if (route) {
       navigate(route);
     }
+  };
+
+  // Função para adicionar ou remover ferramenta dos favoritos
+  const handleToggleFavorito = (nome) => {
+    setFavoritos((prev) => 
+      prev.includes(nome) ? prev.filter(fav => fav !== nome) : [...prev, nome]
+    );
   };
 
   return (
@@ -79,13 +93,27 @@ const AITools = () => {
                 <h3 className={styles.toolName}>{ferramenta.nome}</h3>
                 <p className={styles.toolDesc}>{ferramenta.descricao}</p>
 
-                {!ferramenta.ativo && (
-                  <div className={styles.lockIcon}>
-                    {hovered === index ? <LockOpen className={styles.iconInativo} /> : <Lock className={styles.iconInativo} />}
-                  </div>
-                )}
-
                 <div className={styles.bottomSection}>
+                  {/* Botão de Favorito à direita */}
+                  {ferramenta.ativo && (
+                    <button 
+                      onClick={() => handleToggleFavorito(ferramenta.nome)} 
+                      className={styles.favoritoButton}
+                    >
+                      <img 
+                        src={favoritos.includes(ferramenta.nome) ? favoriteOn : favoriteOff} 
+                        alt="Favorito" 
+                        className={styles.favoritoIcon} 
+                      />
+                    </button>
+                  )}
+
+                  {!ferramenta.ativo && (
+                    <div className={styles.lockIcon}>
+                      {hovered === index ? <LockOpen className={styles.iconInativo} /> : <Lock className={styles.iconInativo} />}
+                    </div>
+                  )}
+
                   <button 
                     className={ferramenta.ativo ? styles.adquiridoButton : styles.assinarButton}
                     onClick={() => ferramenta.ativo && handleUseTool(ferramenta.route)} // Se ativo, navega para a página

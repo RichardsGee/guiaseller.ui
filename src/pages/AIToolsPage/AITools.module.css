@@ -155,13 +155,14 @@
     }
 
     .toolsGrid {
-        flex-direction: column; /* Coluna em vez de linha */
-        align-items: center; /* Centraliza as ferramentas */
-        gap: 15px; /* Menos espaço entre as ferramentas */
+        display: flex;
+        flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha */
+        justify-content: space-between; /* Espaço entre os itens */
+        gap: 10px; /* Espaçamento entre os itens */
     }
 
     .toolCard {
-        width: 90%; /* Largura reduzida para dispositivos móveis */
+        width: calc(50% - 10px); /* Largura de 50% menos espaço para o gap */
         max-width: 400px; /* Largura máxima para garantir legibilidade */
         padding: 15px; /* Menos padding nas ferramentas */
     }
@@ -201,3 +202,23 @@
         font-size: 10px; /* Diminuir o tamanho da fonte dos botões */
     }
 }
+.favoritoButton {
+    background: none; /* Sem fundo */
+    border: none; /* Sem borda */
+    cursor: pointer; /* Muda o cursor ao passar o mouse */
+    position: absolute; /* Para posicionar no canto direito do cartão */
+    top: 10px;
+    right: 10px; /* Mover para a direita */
+}
+
+.favoritoIcon {
+    width: 24px; /* Tamanho do ícone */
+    height: 24px; /* Tamanho do ícone */
+}
+
+.toolCard {
+    /* O restante do estilo do cartão... */
+    position: relative; /* Para garantir que o botão de favorito esteja posicionado corretamente */
+}
+
+/* O restante dos estilos existentes... */
