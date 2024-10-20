@@ -143,10 +143,14 @@
     list-style: none; /* Remove os marcadores da lista */
     padding: 0;
     margin: 0;
+    display: none; /* Esconde o botão de fechar por padrão */
+
 }
 
 /* Estilo dos itens do menu */
 .menuList li {
+    display: flex; /* Usa flexbox para alinhar o ícone e o texto */
+    align-items: center; /* Centraliza verticalmente o ícone e o texto */
     padding: 5px 10px; /* Padding para os itens do menu */
     cursor: pointer; /* Cursor de ponteiro para os itens clicáveis */
 }
@@ -157,6 +161,12 @@
 
 .closeMenuButton {
     display: none; /* Esconde o botão de fechar por padrão */
+}
+
+.menuIcon {
+    margin-right: 8px; /* Espaçamento entre o ícone e o texto */
+    color: var(--text-color); /* Mantém a cor do ícone */
+    font-size: 18px; /* Tamanho do ícone */
 }
 
 /* Estilo do menu em tela cheia para mobile */

@@ -4,6 +4,15 @@ import styles from './header.module.css';
 import Tokens from '../Tokens/Tokens';
 import { useNavigate } from 'react-router-dom';
 import UserLevel from '../UserLevel/UserLevel';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
+import SettingsIcon from '@mui/icons-material/Settings';
+import PersonIcon from '@mui/icons-material/Person';
+import StoreIcon from '@mui/icons-material/Store';
+import MessageIcon from '@mui/icons-material/Message';
+import BuildIcon from '@mui/icons-material/Build';
 
 function Header({ username, userEmail, userPhoto, logout }) {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -64,15 +73,33 @@ function Header({ username, userEmail, userPhoto, logout }) {
             </div>
           </div>
           <ul className={styles.menuList}>
-            <li onClick={() => navigateTo('/dashboard')}>Dashboard</li>
-            <li onClick={() => navigateTo('/vendas')}>Vendas</li>
-            <li onClick={() => navigateTo('/produtos')}>Produtos</li>
-            <li onClick={() => navigateTo('/anuncios')}>Anúncios</li>
-            <li onClick={() => navigateTo('/configuracoes')}>Configurações</li>
-            <li onClick={() => navigateTo('/perfil')}>Perfil</li>
-            <li onClick={() => navigateTo('/lojas')}>Lojas</li>
-            <li onClick={() => navigateTo('/mensagens')}>Mensagens</li>
-            <li onClick={() => navigateTo('/ferramentas-ia')}>Ferramentas IA</li>
+            <li onClick={() => navigateTo('/dashboard')}>
+              <DashboardIcon className={styles.menuIcon} /> Dashboard
+            </li>
+            <li onClick={() => navigateTo('/vendas')}>
+              <MonetizationOnIcon className={styles.menuIcon} /> Vendas
+            </li>
+            <li onClick={() => navigateTo('/produtos')}>
+              <ShoppingCartIcon className={styles.menuIcon} /> Produtos
+            </li>
+            <li onClick={() => navigateTo('/anuncios')}>
+              <AnnouncementIcon className={styles.menuIcon} /> Anúncios
+            </li>
+            <li onClick={() => navigateTo('/configuracoes')}>
+              <SettingsIcon className={styles.menuIcon} /> Configurações
+            </li>
+            <li onClick={() => navigateTo('/perfil')}>
+              <PersonIcon className={styles.menuIcon} /> Perfil
+            </li>
+            <li onClick={() => navigateTo('/lojas')}>
+              <StoreIcon className={styles.menuIcon} /> Lojas
+            </li>
+            <li onClick={() => navigateTo('/mensagens')}>
+              <MessageIcon className={styles.menuIcon} /> Mensagens
+            </li>
+            <li onClick={() => navigateTo('/ferramentas-ia')}>
+              <BuildIcon className={styles.menuIcon} /> Ferramentas IA
+            </li>
           </ul>
           <button className={styles.logoutBtn} onClick={logout}>Logout</button>
         </div>

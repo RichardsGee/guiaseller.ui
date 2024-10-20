@@ -101,10 +101,11 @@
 }
 
 .sidebarIcon {
-    margin-right: 8px;
+    margin-right: 12px; /* Aumente este valor para aumentar a distância */
     color: var(--text-color);
     font-size: 18px;
 }
+
 
 .sidebarIconIA {
     width: 18px; /* Tamanho da imagem */

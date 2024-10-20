@@ -15,7 +15,7 @@
 .tokenText {
   font-weight: bold;
   color: var(--text-color);
-  font-size: 8px; /* Ajustar o tamanho do texto para mobile */
+  font-size: 12px; /* Ajustar o tamanho do texto para mobile */
 }
 
 .tokenIcon {
