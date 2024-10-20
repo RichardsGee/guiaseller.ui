@@ -1,20 +1,34 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth } from '../services/firebase';
 import { onAuthStateChanged, signOut as firebaseSignOut } from 'firebase/auth';
+import { checkUserAlphaStatus } from '../services/api';
 
 export const AuthContext = createContext({
   user: null,
   loading: true,
-  signOut: async () => {}
+  isAlphaUser: false,
+  signOut: async () => {},
 });
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isAlphaUser, setIsAlphaUser] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setUser(user);
+      setLoading(true);
+
+      if (user) {
+        try {
+          const isAlpha = await checkUserAlphaStatus(user.uid); 
+          setIsAlphaUser(isAlpha);
+        } catch (error) {
+          console.error("Erro ao verificar o status de acesso alpha", error);
+        }
+      }
+
       setLoading(false);
     });
 
@@ -30,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, signOut }}>
+    <AuthContext.Provider value={{ user, loading, isAlphaUser, signOut }}>
       {children}
     </AuthContext.Provider>
   );
