@@ -28,7 +28,7 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
       </button>
 
       {/* Sidebar visível em dispositivos desktop */}
-      <nav className={styles.sidebar}>
+      <nav className={`${styles.sidebar} non-interactive`}>
         <div className={styles.userInfo}>
           <img
             src={userPhoto || "https://via.placeholder.com/80"}
@@ -72,7 +72,7 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
 
       {/* Mostra o menu apenas se estiver aberto em dispositivos móveis */}
       {isMenuOpen && (
-        <div className={styles.menu}>
+        <div className={`${styles.menu} non-interactive`}>
           <div className={styles.userInfo}>
             <img
               src={userPhoto || "https://via.placeholder.com/80"}

@@ -82,8 +82,6 @@ h1, h2, h3, h4, h5, h6, p, button {
     font-family: 'Rambla', sans-serif; /* Aplica Kambla a outros elementos de texto */
 }
 
-
-
 .container {
     display: flex;
     flex: 1;
@@ -365,6 +363,11 @@ footer {
     top: calc(var(--header-height) + var(--topbar-height)); /* Distância do header e topbar */
     overflow-y: auto; /* Adiciona rolagem vertical */
 }
+.non-interactive {
+    user-select: none; /* Impede a seleção de texto */
+    cursor: default; /* Muda o cursor para indicar que não é interativo */
+}
+
 
 /* Responsividade para mobile */
 @media (max-width: 768px) {
@@ -410,5 +413,3 @@ footer {
         margin-bottom: -20px; /* Espaço inferior */
     }
 }
-
-

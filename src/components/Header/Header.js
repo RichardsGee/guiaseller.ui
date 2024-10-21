@@ -39,7 +39,7 @@ function Header({ logout }) {
   if (loading) return <div>Loading...</div>; // Carregando...
 
   return (
-    <header className={styles.mainHeader}>
+    <header className={`${styles.mainHeader} non-interactive`}>
       <div className={styles.headerLogo}>
         <img src="logo.png" alt="Logo" />
         <span className={styles.slogan}>alpha version</span>
