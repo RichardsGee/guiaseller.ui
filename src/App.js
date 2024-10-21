@@ -13,6 +13,7 @@ import IntegrationsPage from './pages/IntegrationsPage/IntegrationsPage';
 import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
 import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; 
 import KitsPage from './pages/ProductsPage/KitsPage';
+import PlansPage from './pages/PlansPage/PlansPage';  // Importando a nova página
 import ProtectedRoute from './components/ProtectedRoute'; 
 import AlphaAccess from './components/AlphaScreen/AlphaScreen';
 
@@ -63,6 +64,10 @@ function App() {
           <Route 
             path="/kits" 
             element={<ProtectedRoute><KitsPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/planos" // Adicionando a rota para PlansPage
+            element={<ProtectedRoute><PlansPage /></ProtectedRoute>} 
           />
           <Route 
             path="/blocked" // Adicionando a rota para AlphaAccess
