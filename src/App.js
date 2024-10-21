@@ -12,8 +12,9 @@ import MessagesPage from './pages/MessagesPage/MessagesPage';
 import IntegrationsPage from './pages/IntegrationsPage/IntegrationsPage';
 import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
 import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; 
-import KitsPage from './pages/ProductsPage/KitsPage'; // Importando KitsPage
+import KitsPage from './pages/ProductsPage/KitsPage';
 import ProtectedRoute from './components/ProtectedRoute'; 
+import AlphaAccess from './components/AlphaScreen/AlphaScreen';
 
 function App() {
   return (
@@ -60,8 +61,12 @@ function App() {
             element={<ProtectedRoute><TokensBuyPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/kits" // Adicionando a rota para KitsPage
+            path="/kits" 
             element={<ProtectedRoute><KitsPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/blocked" // Adicionando a rota para AlphaAccess
+            element={<AlphaAccess />} 
           />
         </Routes>
         <ToastContainer />

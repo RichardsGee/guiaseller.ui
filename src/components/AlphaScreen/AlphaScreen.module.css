@@ -1,47 +1,143 @@
+/* Banner para o Guia Seller */
+.topBanner {
+    position: absolute;
+    bottom: 0; /* Altera de 'top' para 'bottom' */
+    left: 0;
+    width: 100%;
+    color: white; /* Cor do texto */
+    font-size: 28px;
+    font-weight: 100;
+    text-align: center;
+    padding: 15px 0;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para destaque */
+}
+
+/* Estilo base para o fundo */
+.alphaAccessContainer {
+    position: relative; /* Necessário para o posicionamento das gotas de chuva */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--background-color);
+    padding: 20px;
+    text-align: center;
+    overflow: hidden; /* Esconde as gotas que saem da área visível */
+}
+
+/* Estilo para a chuva */
+.alphaAccessContainer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        transparent 0%,
+        transparent 5px,
+        rgba(255, 255, 255, 0.1) 6px,
+        rgba(255, 255, 255, 0.1) 7px
+    );
+    background-size: 2px 100px;
+    opacity: 0.5;
+    animation: rain 1s linear infinite;
+}
+
+/* Animação de chuva */
+@keyframes rain {
+    from {
+        background-position: 0 -100px;
+    }
+    to {
+        background-position: 0 100px;
+    }
+}
+
 .alphaAccessContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f3f4f6;
+    background-color: var(--background-color);
     padding: 20px;
     text-align: center;
 }
 
 .alphaAccessContent {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    max-width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch; /* Garante que os elementos dentro tenham a mesma altura */
+    background-color: var(--container-color);
+    border-radius: 20px;
+    padding: 0; /* Removido o padding para não desalinhar os elementos */
+    max-width: 600px;
     width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: auto; /* O container se ajusta ao conteúdo */
+}
+
+.iconContainer {
+    background-color: #F9B321;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 150px; /* Largura fixa para o bloco amarelo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.warningIcon {
+    color: black;
+    font-size: 70px;
+    font-weight: bold;
+    background-color: #F9B321;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.textContainer {
+    padding: 20px; /* Adiciona espaçamento entre o texto e as bordas */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 }
 
 .alphaAccessTitle {
     font-size: 24px;
-    color: #333333;
-    margin-bottom: 16px;
-    font-weight: 600;
+    font-weight: bold;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 5px;
 }
 
 .alphaAccessMessage {
-    font-size: 18px;
-    color: #555555;
-    margin-bottom: 24px;
+    font-size: 16px;
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 15px;
 }
 
-.alphaAccessButton {
-    background-color: #1d4ed8;
-    color: #ffffff;
+.contactButton {
+    background-color: var(--btn-color);
+    color: var(--text-color);
     padding: 12px 24px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    width: fit-content; /* O botão se ajusta ao tamanho do conteúdo */
+    align-self: center; /* Centraliza o botão dentro do container */
+    z-index: 9999;
 }
 
-.alphaAccessButton:hover {
-    background-color: #2563eb;
+.contactButton:hover {
+    background-color: #F9B321;
 }
