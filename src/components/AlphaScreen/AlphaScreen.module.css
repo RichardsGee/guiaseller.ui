@@ -1,20 +1,20 @@
 /* Banner para o Guia Seller */
 .topBanner {
     position: absolute;
-    bottom: 0; /* Altera de 'top' para 'bottom' */
+    bottom: 0;
     left: 0;
     width: 100%;
-    color: white; /* Cor do texto */
+    color: white;
     font-size: 28px;
     font-weight: 100;
     text-align: center;
     padding: 15px 0;
-    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para destaque */
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Estilo base para o fundo */
 .alphaAccessContainer {
-    position: relative; /* Necessário para o posicionamento das gotas de chuva */
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,7 +22,8 @@
     background-color: var(--background-color);
     padding: 20px;
     text-align: center;
-    overflow: hidden; /* Esconde as gotas que saem da área visível */
+    overflow: hidden;
+    
 }
 
 /* Estilo para a chuva */
@@ -54,34 +55,24 @@
     }
 }
 
-.alphaAccessContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: var(--background-color);
-    padding: 20px;
-    text-align: center;
-}
-
 .alphaAccessContent {
     display: flex;
     flex-direction: row;
-    align-items: stretch; /* Garante que os elementos dentro tenham a mesma altura */
+    align-items: stretch;
     background-color: var(--container-color);
     border-radius: 20px;
-    padding: 0; /* Removido o padding para não desalinhar os elementos */
+    padding: 0;
     max-width: 600px;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: auto; /* O container se ajusta ao conteúdo */
+    height: auto;
 }
 
 .iconContainer {
     background-color: #F9B321;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-    width: 150px; /* Largura fixa para o bloco amarelo */
+    width: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -101,7 +92,7 @@
 }
 
 .textContainer {
-    padding: 20px; /* Adiciona espaçamento entre o texto e as bordas */
+    padding: 20px;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -133,11 +124,104 @@
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
-    width: fit-content; /* O botão se ajusta ao tamanho do conteúdo */
-    align-self: center; /* Centraliza o botão dentro do container */
+    width: fit-content;
+    align-self: center;
     z-index: 9999;
 }
 
 .contactButton:hover {
     background-color: #F9B321;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .alphaAccessContent {
+        flex-direction: column;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .iconContainer {
+        width: 100%;
+        height: 100px; /* Tamanho reduzido */
+        border-radius: 20px 20px 0 0;
+    }
+
+    .warningIcon {
+        font-size: 50px; /* Reduz o tamanho do ícone */
+        width: 50px;
+        height: 50px;
+    }
+
+    .textContainer {
+        padding: 10px;
+    }
+
+    .alphaAccessTitle {
+        font-size: 20px;
+    }
+
+    .alphaAccessMessage {
+        font-size: 14px;
+    }
+
+    .contactButton {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .topBanner {
+        font-size: 18px;
+        padding: 10px;
+    }
+}
+
+/* Responsividade para telas muito pequenas (mobile) */
+@media (max-width: 480px) {
+    .alphaAccessContainer {
+        height: calc(100vh - 50px); /* Ajusta a altura para incluir o banner */
+        justify-content: flex-start; /* Alinha o conteúdo mais para o topo */
+        padding-top: 20px; /* Adiciona padding extra no topo */
+        bottom: 50px; /* Muda o banner 50px para cima da parte inferior */
+
+    }
+
+    .alphaAccessContent {
+        flex-direction: column;
+        padding: 10px;
+        margin-bottom: 50px; /* Espaço extra para o banner */
+    }
+
+    .iconContainer {
+        width: 100%;
+        height: 80px; /* Tamanho reduzido ainda mais */
+    }
+
+    .warningIcon {
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .alphaAccessTitle {
+        font-size: 18px;
+    }
+
+    .alphaAccessMessage {
+        font-size: 12px;
+    }
+
+    .contactButton {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .topBanner {
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+    
 }
