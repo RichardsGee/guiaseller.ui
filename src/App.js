@@ -17,6 +17,7 @@ import PlansPage from './pages/PlansPage/PlansPage';  // Importando a nova pági
 import ProtectedRoute from './components/ProtectedRoute'; 
 import AlphaAccess from './components/AlphaScreen/AlphaScreen';
 
+
 function App() {
   return (
     <UserProvider>

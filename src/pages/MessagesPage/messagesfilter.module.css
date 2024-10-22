@@ -3,6 +3,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    gap: 15px; /* Espaçamento entre os elementos */
+    flex-wrap: wrap; /* Permite quebra de linha em telas menores */
 }
 
 .filterSection {
@@ -10,12 +12,54 @@
     gap: 10px;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap; /* Itens quebram linha em telas menores */
 }
 
 .filterSection p {
     padding: 8px;
     border-radius: 5px;
-    border: 0px solid #ccc;
+    border: 1px solid var(--background-color); /* Borda para visual claro */
     background-color: var(--background-color);
     color: var(--text-color);
+    margin: 5px 0; /* Margem superior e inferior */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .filterWrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px; /* Ajusta o espaçamento em telas menores */
+    }
+
+    .filterSection {
+        flex-direction: column; /* Elementos em coluna no mobile */
+        width: 100%; /* Seção ocupa toda a largura */
+    }
+
+    .filterSection p {
+        width: 100%; /* O texto ocupa a largura completa */
+        text-align: center; /* Centraliza o texto */
+    }
+}
+
+@media (max-width: 480px) {
+    .filterWrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px; /* Menos espaço entre os elementos */
+    }
+
+    .filterSection {
+        flex-direction: column;
+        width: 100%; /* Garante que o filtro ocupe toda a largura */
+        gap: 8px; /* Ajusta o espaçamento no mobile */
+    }
+
+    .filterSection p {
+        padding: 6px; /* Padding menor no mobile */
+        font-size: 12px; /* Reduz o tamanho da fonte */
+        width: 100%; /* O texto ocupa a largura total */
+        text-align: center; /* Centraliza o texto */
+    }
 }

@@ -3,7 +3,7 @@
   align-items: center;
   font-size: 12px; /* Ajustar o tamanho da fonte para mobile */
   background-color: var(--background-color);
-  padding: 5px 10px; /* Ajuste o padding se necessário */
+  padding: 0px 10px; /* Ajuste o padding se necessário */
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 2px solid var(--primary-color);
@@ -15,7 +15,7 @@
 .tokenText {
   font-weight: bold;
   color: var(--text-color);
-  font-size: 12px; /* Ajustar o tamanho do texto para mobile */
+  font-size: 16px; /* Ajustar o tamanho do texto para mobile */
 }
 
 .tokenIcon {
@@ -27,4 +27,21 @@
 /* Estilos ao passar o mouse */
 .tokensContainer:hover {
   background-color: var(--hover-background-color); /* Cor de fundo ao passar o mouse */
+}
+/* Media Queries para responsividade */
+@media (max-width: 768px) {
+  .tokenText {
+    font-weight: bold;
+    color: var(--text-color);
+    font-size: 14px; /* Ajustar o tamanho do texto para mobile */
+  }
+
+}
+@media (max-width: 480px) {
+  .tokenText {
+    font-weight: bold;
+    color: var(--text-color);
+    font-size: 14px; /* Ajustar o tamanho do texto para mobile */
+  }
+
 }

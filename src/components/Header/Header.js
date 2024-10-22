@@ -14,6 +14,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import StoreIcon from '@mui/icons-material/Store';
 import MessageIcon from '@mui/icons-material/Message';
 import BuildIcon from '@mui/icons-material/Build';
+import IntegrationIcon from '@mui/icons-material/IntegrationInstructions'; // Ícone de integrações
 
 function Header({ logout }) {
   const { theme, toggleTheme } = useContext(ThemeContext);
@@ -103,6 +104,9 @@ function Header({ logout }) {
             </li>
             <li onClick={() => navigateTo('/ferramentas-ia')}>
               <BuildIcon className={styles.menuIcon} /> Ferramentas IA
+            </li>
+            <li onClick={() => navigateTo('/integracoes')}>
+              <IntegrationIcon className={styles.menuIcon} /> Integrações
             </li>
           </ul>
           <button className={styles.logoutBtn} onClick={logout}>Logout</button>

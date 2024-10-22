@@ -6,14 +6,15 @@ import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';  
 import styles from './produtos.module.css';  
 import ProductsForm from '../../components/ProductsForm/ProductsForm'; 
-import { useNavigate } from 'react-router-dom'; // Importando useNavigate
+import { useNavigate } from 'react-router-dom'; 
 import '../../styles/styles.css'; 
 
 function ProdutosPage() {
   const [produtos, setProdutos] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [expandedProdutoId, setExpandedProdutoId] = useState(null); // Estado para armazenar o ID do produto expandido
   const [showProductsModal, setShowProductsModal] = useState(false); 
-  const navigate = useNavigate(); // Hook para navegação
+  const navigate = useNavigate(); 
   const { user, signOut } = useContext(AuthContext);
   const username = user ? user.displayName || user.email : "No User Logged";
   const userPhoto = user ? user.photoURL : null;
@@ -61,14 +62,10 @@ function ProdutosPage() {
 
   const handleCloseProductsModal = () => setShowProductsModal(false);
   const handleOpenProductsModal = () => setShowProductsModal(true);
-  
-  // Função para navegar para a página de Kits
-  const handleOpenKitsPage = () => {
-    navigate('/kits'); // Mudar para a rota correta de KitsPage
-  };
 
-  const handleSaveProduct = (newProduct) => {
-    setProdutos([...produtos, newProduct]);
+  // Função para alternar a expansão de um produto
+  const toggleExpandProduto = (id) => {
+    setExpandedProdutoId(expandedProdutoId === id ? null : id); // Alterna entre expandido e contraído
   };
 
   return (
@@ -84,7 +81,7 @@ function ProdutosPage() {
               <button className={styles.addProductButton} onClick={handleOpenProductsModal}>
                 Adicionar Produto
               </button>
-              <button className={styles.addKitButton} onClick={handleOpenKitsPage}>
+              <button className={styles.addKitButton} onClick={() => navigate('/kits')}>
                 Adicionar Kit
               </button>
             </div>
@@ -106,27 +103,46 @@ function ProdutosPage() {
                   <th>Imagem</th>
                   <th>Nome</th>
                   <th>SKU</th>
-                  <th>Custo</th> {/* Nova coluna de Custo */}
-                  <th>Estoque</th> {/* Nova coluna de Estoque */}
-                  <th>EAN</th> {/* Coluna a ser escondida no mobile */}
-                  <th>Altura</th> {/* Coluna a ser escondida no mobile */}
-                  <th>Largura</th> {/* Coluna a ser escondida no mobile */}
-                  <th>Comprimento</th> {/* Coluna a ser escondida no mobile */}
+                  <th>Custo</th>
+                  <th>Estoque</th>
+                  <th>EAN</th>
+                  <th>Altura</th>
+                  <th>Largura</th>
+                  <th>Comprimento</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredProdutos.map((produto) => (
-                  <tr key={produto.id}>
-                    <td><img src={produto.imagem} alt="Produto" className={styles.produtoImage} /></td>
-                    <td>{produto.nome}</td>
-                    <td>{produto.sku}</td>
-                    <td>{produto.custo}</td> {/* Nova coluna de Custo */}
-                    <td>{produto.estoque}</td> {/* Nova coluna de Estoque */}
-                    <td>{produto.ean}</td> {/* Coluna a ser escondida no mobile */}
-                    <td>{produto.altura}</td> {/* Coluna a ser escondida no mobile */}
-                    <td>{produto.largura}</td> {/* Coluna a ser escondida no mobile */}
-                    <td>{produto.comprimento}</td> {/* Coluna a ser escondida no mobile */}
-                  </tr>
+                  <React.Fragment key={produto.id}>
+                    <tr 
+                      onClick={() => toggleExpandProduto(produto.id)} 
+                      className={styles.produtoRow}
+                    >
+                      <td><img src={produto.imagem} alt="Produto" className={styles.produtoImage} /></td>
+                      <td>{produto.nome}</td>
+                      <td>{produto.sku}</td>
+                      <td>{produto.custo}</td>
+                      <td>{produto.estoque}</td>
+                      <td>{produto.ean}</td>
+                      <td>{produto.altura}</td>
+                      <td>{produto.largura}</td>
+                      <td>{produto.comprimento}</td>
+                    </tr>
+                    {expandedProdutoId === produto.id && (
+                      <tr className={styles.produtoDetails}>
+                        <td colSpan="9">
+                          <div className={styles.detailsContainer}>
+                            <p><strong>Nome:</strong> {produto.nome}</p>
+                            <p><strong>SKU:</strong> {produto.sku}</p>
+                            <p><strong>EAN:</strong> {produto.ean}</p>
+                            <p><strong>Dimensões:</strong> {produto.altura} x {produto.largura} x {produto.comprimento}</p>
+                            <p><strong>Custo:</strong> {produto.custo}</p>
+                            <p><strong>Estoque:</strong> {produto.estoque}</p>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>
@@ -135,7 +151,7 @@ function ProdutosPage() {
       </div>
 
       {showProductsModal && (
-        <ProductsForm onSaveProduct={handleSaveProduct} onClose={handleCloseProductsModal} />
+        <ProductsForm onSaveProduct={(newProduct) => setProdutos([...produtos, newProduct])} onClose={handleCloseProductsModal} />
       )}
 
       <Footer />

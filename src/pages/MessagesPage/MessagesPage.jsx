@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';  
 import Sidebar from '../../components/Sidebar/Sidebar';  
-import TopBar from '../../components/TopBar/TopBar';  
 import Footer from '../../components/Footer/Footer';  
 import MainContent from '../../components/MainContent/MainContent';  
 import { AuthContext } from '../../context/AuthContext';  
-import styles from './messages.module.css'; // Certifique-se de criar o arquivo CSS
-import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
+import styles from './messages.module.css'; 
+import '../../styles/styles.css'; 
+
+import { DoneAll } from '@mui/icons-material'; // Ícone para indicar leitura
 
 const MessagesPage = () => {
   const { user, signOut } = useContext(AuthContext);
@@ -59,14 +60,12 @@ const MessagesPage = () => {
 
         {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">
-          <h1 className="title">Minhas Mensagens</h1> {/* Agora usando a classe .title do styles.css */}
+          <h1 className="title">Minhas Mensagens</h1>
 
           {/* Contador de mensagens lidas e não lidas, abaixo do título */}
-          <div className={styles.filterWrapper}>
-            <div className={styles.filterSection}>
-              <p><strong>Total de Mensagens:</strong> {totalMessages}</p>
-              <p><strong>Mensagens Lidas:</strong> {readMessages}</p>
-            </div>
+          <div className={styles.messageCounter}>
+            <p><strong>Total de Mensagens:</strong> {totalMessages}</p>
+            <p><strong>Mensagens Lidas:</strong> {readMessages}</p>
           </div>
 
           <ul className={styles.messageList}>
@@ -78,6 +77,9 @@ const MessagesPage = () => {
                 </div>
                 <h4 className={styles.messageSubject}>{message.subject}</h4>
                 <p className={styles.messageContent}>{message.content}</p>
+                {message.isRead && (
+                  <DoneAll className={styles.readStatusIcon} />
+                )}
               </li>
             ))}
           </ul>

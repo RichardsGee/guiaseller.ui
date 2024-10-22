@@ -46,7 +46,12 @@
   border-radius: 5px;
 }
 
-/* Botão de Adicionar Produto */
+/* Estilos para Botões de Adicionar Produto e Kit */
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+}
+
 .addProductButton, .addKitButton {
   background-color: var(--secondary-color);
   color: white;
@@ -54,21 +59,25 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 20px;
   font-size: 16px;
-  margin-right: 10px;
 }
 
 .addProductButton:hover, .addKitButton:hover {
   background-color: var(--primary-dark);
 }
 
-.filterSection {
+/* Seção de Filtro */
+.filterWrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Garante que a busca e os botões fiquem nas extremidades */
   align-items: center;
   margin-bottom: 20px;
   width: 100%;
+}
+
+.filterSection {
+  width: 100%;
+  max-width: 600px; /* Limite de largura do campo de busca */
 }
 
 .filterSection input {
@@ -78,8 +87,50 @@
   background-color: var(--secondary-color);
   color: var(--text-color);
   width: 100%;
-  max-width: 600px;
 }
+
+.produtoRow {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.produtoRow:hover {
+  background-color: var(--hover-color); /* Cor de hover */
+}
+
+.produtoDetails {
+  background-color: var(--secondary-color);
+  animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detailsContainer {
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.produtoImage {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
 
 /* Media Queries para Responsividade */
 @media (max-width: 768px) {
@@ -89,49 +140,51 @@
   }
 
   .produtosTitle {
-    font-size: 20px; /* Tamanho reduzido do título */
-    margin-bottom: 15px; /* Menos margem abaixo do título */
+    font-size: 20px;
+    margin-bottom: 15px;
   }
 
   .produtosTable th, .produtosTable td {
-    font-size: 12px; /* Tamanho reduzido das células da tabela */
-    padding: 10px; /* Menos padding nas células */
+    font-size: 12px;
+    padding: 10px;
   }
 
   .addProductButton, .addKitButton {
-    font-size: 14px; /* Tamanho da fonte reduzido nos botões */
-    padding: 8px 16px; /* Menos padding nos botões */
+    font-size: 14px;
+    padding: 8px 16px;
   }
 
-  .filterSection {
-    flex-direction: column; /* Organiza os elementos da seção de filtro em coluna */
-    align-items: flex-start; /* Alinha os itens ao início */
+  .filterWrapper {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .filterSection input {
-    max-width: 100%; /* Permite que o campo de entrada ocupe toda a largura */
+  .buttonContainer {
+    justify-content: flex-start;
+    margin-top: 10px;
   }
 }
 
 @media (max-width: 480px) {
   .produtosTitle {
-    font-size: 18px; /* Tamanho ainda menor do título */
+    font-size: 18px;
   }
 
   .produtosTable th, .produtosTable td {
-    font-size: 10px; /* Tamanho ainda menor das células da tabela */
+    font-size: 10px;
   }
 
   .addProductButton, .addKitButton {
-    font-size: 12px; /* Tamanho da fonte reduzido nos botões */
-    padding: 6px 12px; /* Menos padding nos botões */
+    font-size: 12px;
+    padding: 6px 12px;
   }
 
-  .filterSection {
-    flex-direction: column; /* Organiza os elementos da seção de filtro em coluna */
-    width: 100%; /* Largura total */
+  .filterWrapper {
+    flex-direction: column;
+    width: 100%;
   }
 }
+
 @media (max-width: 768px) {
   .produtosTable th:nth-child(6),
   .produtosTable td:nth-child(6),
@@ -141,6 +194,6 @@
   .produtosTable td:nth-child(8),
   .produtosTable th:nth-child(9),
   .produtosTable td:nth-child(9) {
-    display: none; /* Esconde colunas indesejadas */
+    display: none;
   }
 }

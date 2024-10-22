@@ -5,135 +5,33 @@
     font-size: 24px;
 }
 
-.plansList {
-    list-style: none;
-    padding: 0;
+/* Container dos botões de duração */
+.durationButtons {
     display: flex;
-    flex-wrap: wrap; /* Permite que os itens se movam para a próxima linha */
-    gap: 20px; /* Espaço entre os itens */
-    justify-content: center; /* Centraliza os itens na linha */
-}
-
-.planItem {
-    background-color: var(--secondary-color);
-    padding: 15px; /* Padding do item do plano */
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s;
-    width: 300px; /* Largura fixa para os itens */
-    text-align: center; /* Centralizando o texto dentro do item */
-}
-
-.planItem:hover {
-    transform: scale(1.05);
-}
-
-.planName {
-    font-size: 22px; /* Tamanho do nome do plano */
-    color: var(--text-color);
-    margin-bottom: 10px;
-}
-
-.planPrice {
-    font-size: 20px; /* Tamanho do preço do plano */
-    color: var(--primary-color);
-    margin-bottom: 10px;
-}
-
-.vitalicioText {
-    font-size: 16px; /* Tamanho do texto */
-    color: var(--primary-color); /* Cor do texto */
-    position: absolute; /* Para posicionar no canto */
-    top: 10px; /* Distância do topo */
-    right: 10px; /* Distância da direita */
-    font-weight: bold; /* Texto em negrito para destaque */
-}
-
-.oldPrice {
-    text-decoration: line-through; /* Riscado */
-    color: gray; /* Cor para o preço original */
-    font-size: 16px; /* Tamanho do texto */
-}
-
-.planDescription {
-    font-size: 16px; /* Tamanho da descrição do plano */
-    color: var(--text-color);
+    justify-content: center;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-.subscribeButton {
-    padding: 12px 20px; /* Padding do botão */
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px; /* Tamanho da fonte do botão */
-    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
-    color: white; /* Cor do texto do botão */
-    background-color: #202123; /* Cor de fundo padrão */
-    border: none; /* Sem borda */
-    position: relative; /* Necessário para animações */
-    overflow: hidden; /* Para ocultar o excesso durante a animação */
-    background-size: 200% 100%; /* Para permitir o efeito de gradiente */
-}
-
-.subscribeButton:hover {
-    animation: shake 0.5s infinite; /* Animação ao passar o mouse */
-    background-image: linear-gradient(135deg, #00d9ff, var(--primary-color)); /* Gradiente de fundo ao passar o mouse */
-    background-position: 100% 0; /* Posição do gradiente ao passar o mouse */
-}
-
-/* Estilos para os botões de duração */
-.durationButtons {
-    display: flex;
-    justify-content: center; /* Centraliza os botões */
-    gap: 10px; /* Espaço entre os botões */
-    margin-bottom: 20px; /* Margem abaixo dos botões */
-}
-
+/* Estilo padrão dos botões de duração */
 .durationButton {
     padding: 10px 15px;
     border-radius: 5px;
-    border: none; /* Sem borda */
+    border: none;
     background-color: #202123; /* Cor de fundo padrão */
-    color: var(--text-color); /* Cor do texto */
-    cursor: pointer; /* Muda o cursor ao passar o mouse */
-    transition: background-color 0.3s; /* Transição suave para a cor de fundo */
+    color: var(--text-color); /* Cor do texto padrão */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Transição suave para cor de fundo e texto */
 }
 
+/* Estilo quando o botão está ativo */
+.durationButton.active {
+    background-image: linear-gradient(135deg, #00d9ff, var(--primary-color)); /* Gradiente de cor para botão ativo */
+    color: white; /* Cor do texto quando ativo */
+}
+
+/* Estilo quando o botão está em hover */
 .durationButton:hover {
-    background-image: linear-gradient(135deg, #00d9ff, var(--primary-color)); /* Novo gradiente de fundo ao passar o mouse */
+    background-image: linear-gradient(135deg, #00d9ff, var(--primary-color)); /* Gradiente de cor ao passar o mouse */
     color: white; /* Cor do texto ao passar o mouse */
-}
-
-.active {
-    background-image: linear-gradient(135deg, #00d9ff, var(--primary-color)); /* Cor para o botão ativo */
-    color: white; /* Cor do texto ativo */
-}
-
-/* Keyframes para a animação shake */
-@keyframes shake {
-    0%, 100% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(-2px);
-    }
-    50% {
-        transform: translateX(2px);
-    }
-    75% {
-        transform: translateX(-2px);
-    }
-}
-
-/* Media Queries para responsividade */
-@media (max-width: 768px) {
-    .planItem {
-        width: calc(50% - 10px); /* Ajusta para 50% em telas menores */
-    }
-}
-
-@media (max-width: 480px) {
-    .planItem {
-        width: 95%; /* Largura reduzida ainda mais em telas muito pequenas */
-    }
 }

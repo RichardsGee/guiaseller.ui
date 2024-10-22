@@ -18,7 +18,6 @@ const AITools = () => {
   const { user, signOut } = useContext(AuthContext);
   const username = user ? user.displayName || user.email : "No User Logged";
   const userPhoto = user ? user.photoURL : null;
-  const userEmail = user ? user.email : null;
   const navigate = useNavigate();
 
   const [hovered, setHovered] = useState(null);
@@ -62,12 +61,12 @@ const AITools = () => {
   return (
     <MainContent>
       <Header username={username} logout={signOut} />
-      <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
+      <Sidebar userPhoto={userPhoto} username={username} userEmail={user.email} />
       <div className="main-content">
         
         {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">
-          <h1 className={styles.title}>Ferramentas de IA</h1>
+          <h1 className="title">Ferramentas de IA</h1> {/* Usando o estilo global title */}
 
           {/* Botões de Categoria */}
           <div className={styles.categoriaButtons}>

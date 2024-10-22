@@ -1,92 +1,140 @@
+.vendasTable {
+  background-color: var(--third-color);
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 14px;
+  margin-top: 20px;
+}
 
+.vendasTable th, .vendasTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--background-color);
+}
+
+.vendasTable th {
+  background-color: var(--container-color);
+  color: var(--text-color);
+}
+
+.vendasTable tr:nth-child(even) {
+  background-color: var(--secondary-color); /* Cor alternada para linhas pares */
+}
+
+.vendasTable tr:nth-child(odd) {
+  background-color: var(--third-color); /* Cor alternada para linhas ímpares */
+}
+
+.vendasTable tr:hover {
+  background-color: var(--hover-color);
+  color: var(--text-color);
+}
+
+.vendaRow {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.vendaRow:hover {
+  background-color: var(--hover-color); /* Cor de hover */
+}
+
+.vendaDetails {
+  background-color: var(--secondary-color);
+  animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detailsContainer {
+  padding: 10px;
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.vendaImage {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Ícones */
+.icon {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.iconPositive {
+  color: green;
+}
+
+.iconNegative {
+  color: red;
+}
+
+/* Lucro positivo e negativo */
+.lucroPositivo {
+  color: green;
+}
+
+.lucroNegativo {
+  color: red;
+}
+
+/* Responsividade para telas menores que 768px */
+@media (max-width: 768px) {
   .vendasTable {
-    background-color: var(--third-color);
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: 5px;
-    overflow: hidden;
-    font-size: 14px;
-    margin-top: 20px;
+    font-size: 12px; /* Reduz o tamanho da fonte */
   }
-  
+
   .vendasTable th, .vendasTable td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid var(--background-color);
+    padding: 8px; /* Reduz o padding para compactar o layout */
   }
-  
-  .vendasTable th {
-    background-color: var(--container-color);
-    color: var(--text-color);
-  }
-  
-  .vendasTable tr:hover {
-    background-color: var(--hover-color);
-    color: var(--text-color);
-  }
-  
-  .vendaRow {
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .vendaRow:hover {
-    background-color: var(--hover-color); /* Uma cor mais clara para o hover */
-  }
-  
-  .vendaDetails {
-    background-color: var(--secondary-color);
-    animation: slideDown 0.3s ease-in-out;
-  }
-  
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
+
   .detailsContainer {
-    padding: 10px;
-    background-color: var(--secondary-color);
-    border-radius: 5px;
-    color: var(--text-color);
-    display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px; /* Reduz o espaço entre os itens */
   }
-  
+
   .vendaImage {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 5px;
+    width: 40px;
+    height: 40px; /* Reduz o tamanho da imagem */
   }
-  
-  /* Ícones */
-  .icon {
-    margin-right: 8px;
-    vertical-align: middle;
+}
+
+/* Responsividade para telas menores que 480px */
+@media (max-width: 480px) {
+  .vendasTable {
+    font-size: 11px; /* Reduz ainda mais o tamanho da fonte */
   }
-  
-  .iconPositive {
-    color: green;
+
+  .vendasTable th, .vendasTable td {
+    padding: 6px; /* Reduz mais o padding */
   }
-  
-  .iconNegative {
-    color: red;
+
+  .vendaImage {
+    width: 35px;
+    height: 35px; /* Reduz o tamanho da imagem */
   }
-  
-  /* Lucro positivo e negativo */
-  .lucroPositivo {
-    color: green;
+
+  .detailsContainer {
+    flex-direction: column;
+    gap: 3px; /* Compacta ainda mais o layout */
   }
-  
-  .lucroNegativo {
-    color: red;
-  }
-  
+}

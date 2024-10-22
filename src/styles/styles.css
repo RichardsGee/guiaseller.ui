@@ -359,13 +359,10 @@ footer {
     top: calc(var(--header-height) + 25px); /* Espaçamento acima, considerando o header */
     left: calc(var(--sidebar-width) + 20px); /* Mantém distância fixa da sidebar */
     width: calc(100% - var(--sidebar-width) - 40px); /* Ajusta a largura, mantendo distância da lateral direita */
-    height: calc(100vh - var(--header-height) - var(--footer-height) - 35px); /* Altura ajustada, com espaçamento em cima e embaixo */
+    height: calc(100vh - var(--header-height) - var(--footer-height) - 25px); /* Altura ajustada, com espaçamento em cima e embaixo */
     overflow-y: auto;
     box-sizing: border-box;
 }
-
-
-
 
 
 .non-interactive {
@@ -415,20 +412,84 @@ footer {
     color: var(--text-color);
     margin-bottom: 30px;
     font-size: 24px; /* Tamanho padrão para desktop */
+    
 }
 
 /* Estilos para mobile */
 @media (max-width: 768px) {
     .title {
         font-size: 20px; /* Tamanho reduzido para mobile */
-        margin-bottom: 10px; /* Margem reduzida para mobile */
+        margin-bottom: 5px; /* Margem reduzida para mobile */
+        margin-top: 5px; /* Aumenta a margem superior para descer o title */
+
     }
 }
 
 @media (max-width: 480px) {
     .title {
         font-size: 18px; /* Tamanho menor para telas pequenas */
-        margin-top: -20px; /* Espaço superior */
-        margin-bottom: -20px; /* Espaço inferior */
+        margin-top: 5px; /* Espaço superior */
+        margin-bottom: 5px; /* Espaço inferior */
+        
+    }
+}/* Responsividade para contentContainer em telas menores */
+@media (max-width: 768px) {
+    .contentContainer {
+        margin: 20px 0 0; /* Ajusta a margem superior */
+        width: 100%; /* Ocupa toda a largura da tela */
+        height: calc(100vh - (var(--header-height) + var(--footer-height) + 20px)); /* Altura que respeita o restante da tela */
+        left: 0; /* Alinhamento à esquerda */
+        padding: 10px; /* Reduz o padding para telas menores */
+        overflow-y: auto; /* Permite rolagem vertical */
+    }
+}
+
+/* Responsividade para dashboardContainer em telas menores */
+@media (max-width: 768px) {
+    .dashboardContainer {
+        margin: 100px 0 0; /* Aumenta a margem superior para descer o dashboard */
+        width: 100%; /* Ocupa toda a largura da tela */
+        height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height) + 100px)); /* Altura ajustada para telas menores */
+        left: 0; /* Remove a margem lateral */
+        padding: 10px; /* Reduz o padding para telas menores */
+        overflow-y: auto; /* Permite rolagem vertical */
+    }
+}
+
+/* Responsividade para contentContainer em telas menores que 600px */
+@media (max-width: 600px) {
+    .contentContainer {
+        padding: 10px; /* Reduz ainda mais o padding para dispositivos móveis */
+        height: calc(100vh - (var(--header-height) + var(--footer-height))); /* Ajusta a altura para mobile */
+        margin-top: 10px; /* Ajusta a margem superior */
+        width: 100%; /* Largura completa da tela */
+    }
+}
+
+/* Responsividade para dashboardContainer em telas menores que 600px */
+@media (max-width: 600px) {
+    .dashboardContainer {
+        padding: 10px; /* Reduz ainda mais o padding para dispositivos móveis */
+        height: calc(100vh - (var(--header-height) + var(--footer-height))); /* Ajusta a altura para mobile */
+        margin-top: 50px; /* Margem maior para descer o dashboard */
+        width: 100%; /* Largura completa da tela */
+    }
+}
+
+/* Responsividade para contentContainer em telas menores que 480px */
+@media (max-width: 480px) {
+    .contentContainer {
+        padding: 8px; /* Reduz o padding para telas muito pequenas */
+        margin: -8px 0; /* Margem superior ajustada */
+        height: calc(100vh - (var(--header-height) + var(--footer-height))); /* Ajusta a altura, removendo o topbar */
+    }
+}
+
+/* Responsividade para dashboardContainer em telas menores que 480px */
+@media (max-width: 480px) {
+    .dashboardContainer {
+        padding: 8px; /* Reduz o padding para telas muito pequenas */
+        margin-top: 50px; /* Margem maior para descer o dashboard */
+        height: calc(100vh - (var(--header-height) + var(--footer-height))); /* Ajusta a altura, removendo o topbar */
     }
 }

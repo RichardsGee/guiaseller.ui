@@ -25,7 +25,7 @@
 }
 
 .slogan {
-    font-size: 15px; /* Ajusta o tamanho do texto do slogan */
+    font-size: 20px; /* Ajusta o tamanho do texto do slogan */
     color: var(--text-color);
     font-weight: 100;
     font-style: italic;
@@ -85,7 +85,7 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 12px; /* Tamanho da fonte reduzido */
+    font-size: 16px; /* Tamanho da fonte reduzido */
     padding: 5px 8px; /* Reduzindo o padding para um botão menor */
     color: var(--text-color);
     border-radius: 5px; /* Adicionando borda arredondada se desejar */
@@ -187,6 +187,15 @@
         transition: transform 0.3s ease-in-out; /* Animação de deslizar */
         align-items: center; /* Centraliza horizontalmente os itens */
     }
+    .themeToggleBtn {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 14px; /* Tamanho da fonte reduzido */
+        padding: 5px 8px; /* Reduzindo o padding para um botão menor */
+        color: var(--text-color);
+        border-radius: 5px; /* Adicionando borda arredondada se desejar */
+    }
 
     .menu.open {
         transform: translateY(0); /* Desliza para baixo quando aberto */
@@ -208,11 +217,11 @@
     }
 
     .headerLogo img {
-        max-width: 40px; /* Diminuindo o tamanho da logo para mobile */
+        max-width: 50px; /* Diminuindo o tamanho da logo para mobile */
     }
 
     .slogan {
-        font-size: 8px; /* Diminuindo o slogan para mobile */
+        font-size: 10px; /* Diminuindo o slogan para mobile */
     }
 
     .userInfo {
@@ -222,17 +231,21 @@
         margin-bottom: 20px; /* Mais espaço para o usuário */
     }
 
+
     .profileImage {
         width: 50px; /* Tamanho da imagem do perfil */
         height: 50px; /* Tamanho da imagem do perfil */
         border-radius: 50%; /* Torna a imagem redonda */
         margin-bottom: 10px; /* Espaçamento entre a imagem e os detalhes */
+        margin-left: 10px;
+        
     }
 
     .userDetails {
         display: flex; /* Exibe os detalhes do usuário em coluna */
         flex-direction: column; /* Alinha o nome e o email verticalmente */
         align-items: center; /* Centraliza os detalhes do usuário */
+        
     }
 
     .username {
@@ -240,6 +253,7 @@
         color: var(--text-color);
         font-size: 12px; /* Ajuste o tamanho conforme necessário */
         text-align: center; /* Centraliza o texto */
+
     }
 
     .userEmail {
@@ -247,13 +261,22 @@
         color: var(--text-color);
         text-align: center; /* Centraliza o texto */
     }
-
+   
     .tokenCount {
-        font-size: 10px; /* Ajuste o tamanho conforme necessário */
-        color: var(--text-color); /* Mantém a cor consistente com o restante do texto */
-        margin-top: 5px; /* Espaço acima do texto de tokens */
-        text-align: center; /* Centraliza o texto */
-    }
+        display: flex;
+        align-items: center;
+        font-size: 12px; /* Ajustar o tamanho da fonte para mobile */
+        background-color: var(--background-color);
+        padding: 0px 10px; /* Ajuste o padding se necessário */
+        border-radius: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border: 2px solid var(--primary-color);
+        cursor: pointer; /* Tornar o container clicável */
+        position: relative; /* Para o posicionamento de texto dinâmico */
+        transition: background-color 0.3s ease; /* Suave transição ao passar o mouse */
+        margin-top: 10px; /* Mais espaço para o usuário */
+
+      }
 
     .menuList {
         display: flex; /* Alinha a lista de itens como botões */
@@ -267,7 +290,7 @@
         flex: 1 1 45%; /* Ajusta os itens para ocupar 45% da largura cada */
         padding: 10px; /* Padding para os botões */
         text-align: center; /* Centraliza o texto nos botões */
-        background-color: var(--primary-color); /* Cor de fundo dos botões */
+        background-color: var(--secondary-color); /* Cor de fundo dos botões */
         color: white; /* Cor do texto */
         border-radius: 5px; /* Bordas arredondadas para um visual melhor */
         cursor: pointer; /* Indica que é clicável */
