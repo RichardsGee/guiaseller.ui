@@ -98,7 +98,7 @@ const VendasPage = () => {
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
-        <TopBar userPhoto={userPhoto} />
+        
 
         {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">

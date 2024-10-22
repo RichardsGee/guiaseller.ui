@@ -1,8 +1,8 @@
 .sidebar {
     position: fixed;
-    top: 60px;
+    top: var(--header-height); /* Inicia logo abaixo do header */
     left: 0;
-    height: calc(94% - 50px);
+    height: calc(100vh - var(--header-height) - var(--footer-height)); /* Altura ajustada para respeitar o footer */
     width: var(--sidebar-width);
     background-color: var(--third-color);
     padding: var(--padding);
@@ -21,11 +21,6 @@
 .sidebar .user-info h2, 
 .sidebar .user-info p, 
 .sidebar ul li a {
-    font-family: 'Rambla'; /* Aplica a fonte padrão definida */
-}
-
-
-.sidebar h1, .sidebar .user-info h2, .sidebar .user-info p, .sidebar ul li a {
     font-family: 'Rambla'; /* Aplica a fonte padrão definida */
 }
 
@@ -48,6 +43,7 @@
     margin-bottom: 20px;
     text-align: center;
 }
+
 
 .userInfo {
     display: flex;

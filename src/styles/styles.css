@@ -351,21 +351,40 @@ footer {
 
 /* Estilo do contentContainer */
 .contentContainer {
-    position: fixed; /* Mantém o container fixo */
+    position: fixed;
+    background-color: var(--third-color);
+    padding: 20px; /* Espaçamento interno */
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    top: calc(var(--header-height) + 25px); /* Espaçamento acima, considerando o header */
+    left: calc(var(--sidebar-width) + 20px); /* Mantém distância fixa da sidebar */
+    width: calc(100% - var(--sidebar-width) - 40px); /* Ajusta a largura, mantendo distância da lateral direita */
+    height: calc(100vh - var(--header-height) - var(--footer-height) - 35px); /* Altura ajustada, com espaçamento em cima e embaixo */
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+
+
+
+
+.non-interactive {
+    user-select: none; /* Impede a seleção de texto */
+    cursor: default; /* Muda o cursor para indicar que não é interativo */
+}
+
+.dashboardContainer {
+    position: fixed;
     background-color: var(--third-color);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin: 60px 0 0; /* Margem superior */
+    margin: 60px 0 0; /* Mantém a margem considerando o TopBar */
     width: calc(100% - var(--sidebar-width)); /* Largura para desktop */
     max-width: 1630px; /* Limite máximo da largura */
     height: calc(100vh - (var(--header-height) + var(--topbar-height) + var(--footer-height) + 60px)); /* Altura ajustada */
     top: calc(var(--header-height) + var(--topbar-height)); /* Distância do header e topbar */
     overflow-y: auto; /* Adiciona rolagem vertical */
-}
-.non-interactive {
-    user-select: none; /* Impede a seleção de texto */
-    cursor: default; /* Muda o cursor para indicar que não é interativo */
 }
 
 

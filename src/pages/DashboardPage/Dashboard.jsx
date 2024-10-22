@@ -8,8 +8,7 @@ import AdditionalInfo from '../../components/AdditionalInfo/AdditionalInfo';
 import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
-import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
-
+import '../../styles/styles.css'; // Importando o CSS global onde está o dashboardContainer
 
 function Dashboard() {
   const { user, signOut } = useContext(AuthContext);
@@ -23,7 +22,7 @@ function Dashboard() {
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
         <TopBar userPhoto={userPhoto} />
-        <div className="contentContainer">
+        <div className="dashboardContainer"> {/* Alterado de contentContainer para dashboardContainer */}
           <DashboardFilterSection />
           <ChartSection />
           <AdditionalInfo />

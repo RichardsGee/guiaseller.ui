@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import TopBar from '../../components/TopBar/TopBar';
 import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import AccountSettings from '../../components/AccountSettings/AccountSettings';
@@ -150,7 +149,6 @@ function SettingsPage() {
       />
 
       <div className="main-content">
-        <TopBar userPhoto={userPhoto} />
 
         {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">

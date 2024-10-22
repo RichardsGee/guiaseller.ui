@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import TopBar from '../../components/TopBar/TopBar';
 import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import styles from './TokensBuyPage.module.css'; // Importando o CSS Module
@@ -69,7 +68,6 @@ const TokensBuyPage = () => {
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
-        <TopBar userPhoto={userPhoto} />
         {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer"> 
           <div className={styles.tokensContainer}>

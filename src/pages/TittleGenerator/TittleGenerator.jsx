@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
-import TopBar from '../../components/TopBar/TopBar';
 import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
@@ -114,7 +113,6 @@ const GeradorTitulos = () => {
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
-        <TopBar userPhoto={userPhoto} />
         
         <div className="contentContainer">
           <h1 className="title">Gerador de Títulos</h1>   

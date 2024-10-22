@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Header from '../../components/Header/Header';  
 import Sidebar from '../../components/Sidebar/Sidebar';  
-import TopBar from '../../components/TopBar/TopBar';  
 import Footer from '../../components/Footer/Footer';  
 import MainContent from '../../components/MainContent/MainContent'; 
 import styles from './PlansPage.module.css'; 
@@ -57,7 +56,6 @@ const PlansPage = () => {
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} />
       <div className="main-content">
-        <TopBar userPhoto={userPhoto} />
         
         <div className="contentContainer"> {/* Usando o contentContainer */}
           <h1 className={styles.title}>Escolha Seu Plano</h1>
