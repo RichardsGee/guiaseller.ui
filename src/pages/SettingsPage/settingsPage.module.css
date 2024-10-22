@@ -1,4 +1,4 @@
-/* Estilo principal do container de configurações */
+/* Container para alinhar lado a lado as seções de configurações e conteúdo */
 .settingsContainer {
     display: flex;
     gap: 30px;
@@ -16,6 +16,7 @@
     gap: 20px;
 }
 
+/* Estilo para os itens da barra lateral */
 .sidebarItem {
     padding: 10px;
     color: var(--text-color);
@@ -28,22 +29,47 @@
     transition: background-color 0.3s ease;
 }
 
+/* Estilo para o item ativo da barra lateral */
 .sidebarItem.active {
     background-color: var(--primary-color);
     color: white;
 }
 
+/* Efeito de hover nos itens da barra lateral */
 .sidebarItem:hover {
     background-color: var(--primary-dark-color);
     color: white;
 }
 
-/* Estilos para os ícones da barra lateral */
-.icon {
-    font-size: 18px;
+/* Estilo para o submenu de empresas */
+.companySubMenu {
+    margin-top: 10px;
+    padding-left: 15px;
 }
 
-/* Estilos para o conteúdo principal */
+/* Itens de empresa no submenu */
+.companyItem {
+    padding: 8px 0;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo para o item de empresa ativo */
+.companyItem.activeCompany {
+    font-weight: bold;
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Efeito de hover no item de empresa */
+.companyItem:hover {
+    background-color: var(--primary-dark-color);
+    color: white;
+}
+
+/* Área de conteúdo principal */
 .contentArea {
     flex-grow: 1;
     background-color: var(--background-color);
@@ -52,7 +78,7 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header da seção (Perfil e Empresa) */
+/* Cabeçalho da seção de perfil ou empresa */
 .sectionHeader {
     display: flex;
     justify-content: space-between;
@@ -60,6 +86,7 @@
     margin-bottom: 20px;
 }
 
+/* Título das seções de perfil e empresa */
 .sectionTitle {
     font-size: 22px;
     font-weight: bold;
@@ -78,23 +105,25 @@
     transition: background-color 0.3s ease;
 }
 
+/* Efeito de hover no botão de editar */
 .editButton:hover {
     background-color: var(--primary-dark-color);
 }
 
-/* Estilos para o formulário */
+/* Container para os formulários */
 .formContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
+/* Estilos para os grupos de formulários */
 .formGroup {
     display: flex;
     flex-direction: column;
 }
 
-/* Labels */
+/* Estilo para os rótulos */
 .label {
     font-size: 14px;
     font-weight: bold;
@@ -102,7 +131,7 @@
     margin-bottom: 8px;
 }
 
-/* Inputs */
+/* Estilo para os campos de entrada */
 .inputField {
     padding: 10px;
     border-radius: 5px;
@@ -113,6 +142,7 @@
     transition: border-color 0.3s ease;
 }
 
+/* Estilo quando o campo de entrada está em foco */
 .inputField:focus {
     border-color: var(--primary-color);
 }
@@ -131,38 +161,45 @@
     width: 100%;
 }
 
+/* Efeito de hover no botão de salvar */
 .saveButton:hover {
     background-color: var(--primary-dark-color);
 }
 
-/* Inline form groups para alinhar campos lado a lado (Taxa de Imposto e Custo Adicional) */
+/* Grupos de formulários inline para colocar dois campos lado a lado */
 .inlineFormGroup {
     display: flex;
+    justify-content: space-between;
     gap: 20px;
+}
+
+.inlineFormGroup {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Espaçamento entre os campos */
 }
 
 .inlineItem {
     flex: 1;
-    display: flex;
-    flex-direction: column;
+    position: relative; /* Para posicionar o símbolo */
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
-    .formContainer {
-        grid-template-columns: 1fr;
-    }
+.inputField {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--background-color);
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    outline: none;
+    transition: border-color 0.3s ease;
+    width: 100%; /* Certifique-se de que o campo ocupe toda a largura */
+}
 
-    .inlineFormGroup {
-        flex-direction: column;
-    }
-
-    .sidebarSettings {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .contentArea {
-        padding: 10px;
-    }
+.percentageSymbol,
+.currencySymbol {
+    position: absolute;
+    right: 10px; /* Distância do símbolo para a borda direita */
+    top: 65%;
+    transform: translateY(-50%); /* Centraliza verticalmente */
+    font-weight: bold; /* Pode ser estilizado como preferir */
 }
