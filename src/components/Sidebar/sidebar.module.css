@@ -140,7 +140,31 @@
     margin-bottom: 10px;
     text-transform: uppercase;
   }
-  
+
+  .disabledLink {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    color: #aaaaaa; /* Cor para indicar que está desativado */
+    cursor: not-allowed; /* Muda o cursor para indicar que não é clicável */
+    opacity: 0.6; /* Diminui a opacidade para dar uma aparência de desativado */
+    padding: 8px; /* Mesma padding do restante dos itens para manter a consistência */
+    border-radius: 5px; /* Estilo similar aos outros itens */
+    transition: background-color 0.3s;
+}
+
+.disabledLink:hover {
+    background-color: transparent; /* Não muda o fundo ao passar o mouse */
+}
+
+.pendingMessage {
+    margin-left: 5px; /* Espaçamento à esquerda da mensagem */
+    color: #ffcc00; /* Cor para destacar a mensagem "Em breve" */
+    font-weight: bold; /* Negrito para maior destaque */
+    font-size: 12px; /* Tamanho da fonte menor que o texto normal */
+}
+
+
 
 /* Responsividade */
 @media (max-width: 600px) {

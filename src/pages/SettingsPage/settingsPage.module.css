@@ -147,23 +147,39 @@
     border-color: var(--primary-color);
 }
 
-/* Botão de salvar */
+/* Estilos para o botão Salvar */
 .saveButton {
-    background-color: var(--primary-color);
-    color: white;
+    background-color: var(--secondary-color); /* Cor de fundo do botão Salvar */
+    color: white; /* Texto branco */
     border: none;
     border-radius: 5px;
     padding: 12px 20px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-    width: 100%;
+    flex: 1; /* Faz o botão ocupar o mesmo espaço */
+    transition: background-color 0.3s;
 }
 
 /* Efeito de hover no botão de salvar */
 .saveButton:hover {
-    background-color: var(--primary-dark-color);
+    background-color: var(--primary-color); /* Cor de fundo ao passar o mouse no botão Salvar */
+}
+
+/* Estilos para o botão Cancelar */
+.cancelButton {
+    background-color: var(--secondary-color); /* Cor de fundo do botão Salvar */
+    color: white; /* Texto branco */
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    flex: 1; /* Faz o botão ocupar o mesmo espaço */
+    transition: background-color 0.3s;
+}
+
+.cancelButton:hover {
+    background-color: #d32f2f; /* Cor de fundo ao passar o mouse no botão Cancelar */
 }
 
 /* Grupos de formulários inline para colocar dois campos lado a lado */
@@ -202,4 +218,11 @@
     top: 65%;
     transform: translateY(-50%); /* Centraliza verticalmente */
     font-weight: bold; /* Pode ser estilizado como preferir */
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões */
+    margin-top: 20px; /* Margem superior para os botões */
+    
 }

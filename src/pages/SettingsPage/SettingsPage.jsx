@@ -48,6 +48,17 @@ function SettingsPage() {
     setIsEditingCompany(false); // Desativa o modo de edição após salvar
   };
 
+  // Funções de cancelamento
+  const handleCancelProfile = () => {
+    setIsEditingProfile(false); // Desativa o modo de edição
+    // Mantém os valores atuais dos inputs
+  };
+
+  const handleCancelCompany = () => {
+    setIsEditingCompany(false); // Desativa o modo de edição
+    // Mantém os valores atuais dos inputs
+  };
+
   const isFieldEmpty = (field) => field === '';
 
   // Função para buscar detalhes do usuário
@@ -209,7 +220,12 @@ function SettingsPage() {
                     <input type="text" className={styles.inputField} value={userLevel} onChange={(e) => setUserLevel(e.target.value)} disabled={!isEditingProfile} style={{ textTransform: 'uppercase' }} />
                   </div>
                 </div>
-                {isEditingProfile && <button className={styles.saveButton} onClick={handleSaveProfile}>SALVAR ALTERAÇÕES</button>}
+                {isEditingProfile && (
+                  <div className={styles.buttonContainer}>
+                    <button className={styles.saveButton} onClick={handleSaveProfile}>SALVAR ALTERAÇÕES</button>
+                    <button className={styles.cancelButton} onClick={handleCancelProfile}>CANCELAR</button>
+                  </div>
+                )}
               </>
             )}
 
@@ -266,7 +282,12 @@ function SettingsPage() {
                     </div>
                   </div>
                 </div>
-                {isEditingCompany && <button className={styles.saveButton} onClick={handleSaveCompany}>SALVAR ALTERAÇÕES</button>}
+                {isEditingCompany && (
+                  <div className={styles.buttonContainer}>
+                    <button className={styles.saveButton} onClick={handleSaveCompany}>SALVAR ALTERAÇÕES</button>
+                    <button className={styles.cancelButton} onClick={handleCancelCompany}>CANCELAR</button>
+                  </div>
+                )}
               </>
             )}
           </div>

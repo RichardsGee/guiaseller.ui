@@ -59,23 +59,37 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
               {!isComplete && <span className={styles.completeAlert}>⚠️</span>}
             </Link>
           </li>
-          <li><Link to="/perfil"><AccountCircleIcon className={styles.sidebarIcon} />Perfil</Link></li>
+          {/* Modificação aqui para "Perfil", agora com "Em breve" */}
+          <li>
+            <span className={styles.disabledLink}>
+              <AccountCircleIcon className={styles.sidebarIcon} />
+              Perfil <span className={styles.pendingMessage}>(Em breve)</span>
+            </span>
+          </li>
+          {/* Lojas agora está ativo */}
           <li><Link to="/lojas"><StoreIcon className={styles.sidebarIcon} />Lojas</Link></li>
-          <li><Link to="/mensagens"><MessageIcon className={styles.sidebarIcon} />Mensagens</Link></li>
-          
+          {/* Modificação aqui para "Mensagens", agora com "Em breve" */}
+          <li>
+            <span className={styles.disabledLink}>
+              <MessageIcon className={styles.sidebarIcon} />
+              Mensagens <span className={styles.pendingMessage}>(Em breve)</span>
+            </span>
+          </li>
+
           {/* Categoria Conteúdos */}
           <hr /> {/* Linha separadora */}
           <li className={styles.menuCategoryTitle}>Conteúdos</li>
+          {/* Modificação aqui para "Ebooks", agora com "Em breve" */}
+          <li>
+            <span className={styles.disabledLink}>
+              <BookIcon className={styles.sidebarIcon} />
+              Ebooks <span className={styles.pendingMessage}>(Em breve)</span>
+            </span>
+          </li>
           <li>
             <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
               <WidgetsIcon className={styles.sidebarIcon} />
               Ferramentas IA
-            </Link>
-          </li>
-          <li>
-            <Link to="/ebooks">
-              <BookIcon className={styles.sidebarIcon} />
-              Ebooks
             </Link>
           </li>
         </ul>
@@ -113,23 +127,37 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
                 {!isComplete && <span className={styles.completeAlert}>⚠️</span>}
               </Link>
             </li>
-            <li><Link to="/perfil"><AccountCircleIcon className={styles.sidebarIcon} />Perfil</Link></li>
+            {/* Modificação aqui para "Perfil", agora com "Em breve" */}
+            <li>
+              <span className={styles.disabledLink}>
+                <AccountCircleIcon className={styles.sidebarIcon} />
+                Perfil <span className={styles.pendingMessage}>(Em breve)</span>
+              </span>
+            </li>
+            {/* Lojas agora está ativo */}
             <li><Link to="/lojas"><StoreIcon className={styles.sidebarIcon} />Lojas</Link></li>
-            <li><Link to="/mensagens"><MessageIcon className={styles.sidebarIcon} />Mensagens</Link></li>
-            
+            {/* Modificação aqui para "Mensagens", agora com "Em breve" */}
+            <li>
+              <span className={styles.disabledLink}>
+                <MessageIcon className={styles.sidebarIcon} />
+                Mensagens <span className={styles.pendingMessage}>(Em breve)</span>
+              </span>
+            </li>
+
             {/* Categoria Conteúdos */}
             <hr /> {/* Linha separadora */}
             <li className={styles.menuCategoryTitle}>Conteúdos</li>
+            {/* Modificação aqui para "Ebooks", agora com "Em breve" */}
+            <li>
+              <span className={styles.disabledLink}>
+                <BookIcon className={styles.sidebarIcon} />
+                Ebooks <span className={styles.pendingMessage}>(Em breve)</span>
+              </span>
+            </li>
             <li>
               <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
                 <WidgetsIcon className={styles.sidebarIcon} />
                 Ferramentas IA
-              </Link>
-            </li>
-            <li>
-              <Link to="/ebooks">
-                <BookIcon className={styles.sidebarIcon} />
-                Ebooks
               </Link>
             </li>
           </ul>
