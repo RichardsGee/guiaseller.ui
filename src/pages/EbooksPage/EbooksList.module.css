@@ -1,0 +1,128 @@
+.toolsGrid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.toolCard {
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    position: relative;
+    width: 300px;
+    min-height: 200px;
+}
+
+.ebookImageContainer {
+    width: 100%;
+    height: 100px; /* Tamanho ajustado para destacar mais a imagem */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.ebookImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.toolName {
+    font-size: 18px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.toolDesc {
+    font-size: 14px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.bottomSection {
+    margin-top: auto;
+}
+
+.adquiridoButton, .assinarButton {
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    height: 45px;
+    margin-top: 10px;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+}
+
+.adquiridoButton {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    background: linear-gradient(135deg, #00d9ff, var(--primary-color));
+  }
+
+.assinarButton {
+    background-color: var(--third-color);
+    color: white;
+    border: none;
+    background: linear-gradient(135deg, #00d9ff, var(--primary-color));
+}
+
+.custoDentro {
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-left: auto;
+}
+
+.lockIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: gray;
+}
+
+.favoritoButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .favoritoIcon {
+    width: 25px;
+    height: 25px;
+  }
+
+.inactive {
+    opacity: 0.5;
+}
+
+/* Novo container para o nome do autor */
+.authorContainer {
+    margin-top: 15px;
+    background-color: var(--background-color);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.toolOwner {
+    font-size: 14px;
+    color: var(--text-muted-color);
+    text-align: center;
+}

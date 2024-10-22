@@ -133,6 +133,15 @@
     text-transform: uppercase;
 }
 
+.menuCategoryTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  
+
 /* Responsividade */
 @media (max-width: 600px) {
     .sidebar {

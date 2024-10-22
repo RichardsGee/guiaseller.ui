@@ -7,13 +7,14 @@ import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import { ToastContainer } from "react-toastify";
 import { UserProvider } from "./context/UserContext"; 
 import ProdutosPage from './pages/ProductsPage/ProdutosPage'; 
-import FerramentasIA from './pages/AIToolsPage/AITools'; 
+import FerramentasIA from './pages/AIToolsPage/AIToolsPage'; 
 import MessagesPage from './pages/MessagesPage/MessagesPage'; 
 import IntegrationsPage from './pages/IntegrationsPage/IntegrationsPage';
 import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
 import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; 
 import KitsPage from './pages/ProductsPage/KitsPage';
-import PlansPage from './pages/PlansPage/PlansPage';  // Importando a nova página
+import PlansPage from './pages/PlansPage/PlansPage';  
+import EbooksPage from './pages/EbooksPage/EbooksPage'; // Importando a página de eBooks
 import ProtectedRoute from './components/ProtectedRoute'; 
 import AlphaAccess from './components/AlphaScreen/AlphaScreen';
 
@@ -67,11 +68,15 @@ function App() {
             element={<ProtectedRoute><KitsPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/planos" // Adicionando a rota para PlansPage
+            path="/planos" 
             element={<ProtectedRoute><PlansPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/blocked" // Adicionando a rota para AlphaAccess
+            path="/ebooks" // Adicionando a rota para a página de eBooks
+            element={<ProtectedRoute><EbooksPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/blocked" 
             element={<AlphaAccess />} 
           />
         </Routes>

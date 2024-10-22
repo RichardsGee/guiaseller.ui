@@ -11,7 +11,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import StoreIcon from '@mui/icons-material/Store';
 import MessageIcon from '@mui/icons-material/Message';
 import WidgetsIcon from '@mui/icons-material/Widgets';
-import IntegrationsIcon from '@mui/icons-material/Api'; // Você pode substituir por um ícone apropriado para Integrações
+import BookIcon from '@mui/icons-material/MenuBook'; // Ícone para Ebooks
+import IntegrationsIcon from '@mui/icons-material/Api'; // Ícone de Integrações
 
 function Sidebar({ userPhoto, username, userEmail, isComplete }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar o menu
@@ -46,8 +47,8 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           <li><Link to="/produtos"><InventoryIcon className={styles.sidebarIcon} />Produtos</Link></li>
           <li><Link to="/anuncios"><AnnouncementIcon className={styles.sidebarIcon} />Anúncios</Link></li>
           <li>
-            <Link to="/integracoes"> {/* Novo link para Integrações */}
-              <IntegrationsIcon className={styles.sidebarIcon} /> {/* Ícone de Integrações */}
+            <Link to="/integracoes">
+              <IntegrationsIcon className={styles.sidebarIcon} />
               Integrações
             </Link>
           </li>
@@ -61,10 +62,20 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           <li><Link to="/perfil"><AccountCircleIcon className={styles.sidebarIcon} />Perfil</Link></li>
           <li><Link to="/lojas"><StoreIcon className={styles.sidebarIcon} />Lojas</Link></li>
           <li><Link to="/mensagens"><MessageIcon className={styles.sidebarIcon} />Mensagens</Link></li>
+          
+          {/* Categoria Conteúdos */}
+          <hr /> {/* Linha separadora */}
+          <li className={styles.menuCategoryTitle}>Conteúdos</li>
           <li>
             <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
               <WidgetsIcon className={styles.sidebarIcon} />
               Ferramentas IA
+            </Link>
+          </li>
+          <li>
+            <Link to="/ebooks">
+              <BookIcon className={styles.sidebarIcon} />
+              Ebooks
             </Link>
           </li>
         </ul>
@@ -90,8 +101,8 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             <li><Link to="/produtos"><InventoryIcon className={styles.sidebarIcon} />Produtos</Link></li>
             <li><Link to="/anuncios"><AnnouncementIcon className={styles.sidebarIcon} />Anúncios</Link></li>
             <li>
-              <Link to="/integracoes"> {/* Novo link para Integrações */}
-                <IntegrationsIcon className={styles.sidebarIcon} /> {/* Ícone de Integrações */}
+              <Link to="/integracoes">
+                <IntegrationsIcon className={styles.sidebarIcon} />
                 Integrações
               </Link>
             </li>
@@ -105,10 +116,20 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             <li><Link to="/perfil"><AccountCircleIcon className={styles.sidebarIcon} />Perfil</Link></li>
             <li><Link to="/lojas"><StoreIcon className={styles.sidebarIcon} />Lojas</Link></li>
             <li><Link to="/mensagens"><MessageIcon className={styles.sidebarIcon} />Mensagens</Link></li>
+            
+            {/* Categoria Conteúdos */}
+            <hr /> {/* Linha separadora */}
+            <li className={styles.menuCategoryTitle}>Conteúdos</li>
             <li>
               <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
                 <WidgetsIcon className={styles.sidebarIcon} />
                 Ferramentas IA
+              </Link>
+            </li>
+            <li>
+              <Link to="/ebooks">
+                <BookIcon className={styles.sidebarIcon} />
+                Ebooks
               </Link>
             </li>
           </ul>
