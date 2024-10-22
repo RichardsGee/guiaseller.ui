@@ -43,19 +43,22 @@
 
 .icon {
     color: var(--tools-color) !important;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 /* Adicionando novos tamanhos para .title e .value */
 .title {
-    font-weight:bolder; /* Estilo em negrito para o título */
+    font-weight:lighter; /* Estilo em negrito para o título */
     margin: 0; /* Remove margem padrão */
-    font-size: 24px; /* Aumentando o tamanho da fonte do título */
+    font-size: 16px; /* Aumentando o tamanho da fonte do título */
+    color: gray;
+
+
 }
 
 .value {
     font-style:initial; /* Estilo itálico para o valor */
-    font-weight:100; /* Fonte mais fina para o valor */
+    font-weight:bolder !important; /* Fonte mais fina para o valor */
     font-size: 20px; /* Aumentando o tamanho da fonte do valor */
 }
 
@@ -84,6 +87,7 @@
 
     .topBarIcon .material-icons {
         font-size: 20px; /* Diminuindo o tamanho do ícone para mobile */
+        
     }
 
     /* Ajustando a fonte do título e valor para mobile */
