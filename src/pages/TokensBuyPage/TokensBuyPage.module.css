@@ -1,146 +1,38 @@
-  .tokensBuyContainer {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .leftContent {
-    width: 58%; /* Ajustado para caber ao lado da sidebar */
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  }
-  
-  .rightContent {
-    width: 38%; /* Ajustado para a proporção à direita */
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .title {
-    text-align: left;
-    color: var(--text-color);
-    font-size: 24px;
-  }
-  
-  .infoText {
-    font-size: 18px;
-    color: var(--text-color);
-  }
-  
-  .selectButtons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  .selectButtons button,
-  .buyButton {
-    background-color: var(--secondary-color);
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .selectButtons button:hover,
-.buyButton:hover {
-    background: linear-gradient(135deg, #00d9ff, var(--primary-color));
-    color: white; /* Mantenha o texto branco ou ajuste conforme necessário */
-    transition: background-color 0.3s ease; /* Suaviza a transição da cor */
+.main-content {
+  padding: 20px; /* Ajuste conforme necessário */
 }
 
-  
-  .buyButton {
-    margin-top: 20px;
-  }
-  
-  .tokenInput {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid var(--background-color);
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    max-width: 300px;
-    margin-top: 10px;
-  }
-  
-  .priceDetails {
-    text-align: center;
-    background-color: var(--secondary-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    width: 400px;
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  
-  .discountPercentage {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background-color: var(--primary-color);
-    color: white;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    font-size: 14px;
-    font-weight: 800;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  .strikethrough {
-    text-decoration: line-through;
-    color: var(--text-muted-color);
-    font-size: 18px;
-  }
-  
-  .priceFinal {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    background-color: var(--primary-color);
-    padding: 10px 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  .tokensInfoItem {
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    font-size: 12px;
-  }
-  
-  /* Responsividade */
-  @media (max-width: 768px) {
-    .tokensBuyContainer {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .leftContent,
-    .rightContent {
-      width: 100%;
-    }
-  
-    .priceDetails {
-      max-width: 100%;
-    }
-  }
-  
+.title {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+/* Estilos para os botões de parcelamento */
+.paymentPlans {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.paymentButton {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: #202123; /* Cor de fundo padrão */
+  color: var(--text-color); /* Cor do texto padrão */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Transição suave para cor de fundo e texto */
+}
+
+.paymentButton.active {
+  background-image: linear-gradient(135deg, #00d9ff, var(--primary-color)); /* Gradiente de cor para botão ativo */
+  color: white; /* Cor do texto quando ativo */
+}
+
+.paymentButton:hover {
+  background-image: linear-gradient(135deg, #00d9ff, var(--primary-color)); /* Gradiente de cor ao passar o mouse */
+  color: white; /* Cor do texto ao passar o mouse */
+}
