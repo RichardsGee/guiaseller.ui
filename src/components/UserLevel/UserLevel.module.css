@@ -1,42 +1,49 @@
+.userLevelContainer {
+  display: flex; /* Usando flexbox para alinhar ícone e texto */
+  align-items: center; /* Alinha verticalmente o ícone e o texto */
+  padding: 0px 10px; /* Espaçamento interno para o container */
+  border-radius: 12px; /* Arredondamento opcional para o container */
+  max-width: fit-content; /* Ajusta o container ao conteúdo */
+  margin: 5px; /* Margem para o container */
+  font-weight: 800; /* Peso da fonte */
+
+}
+
 .userLevel {
-    display: inline-block;
-    margin-top: 5px;
-    padding: 2px 8px;
-    background-color: var(--primary-color);
-    color: var(--text3-color);
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    text-align: center;
-  }
-  
-  .adminLevel {
-    background-color: #ffcccc;
-    color: #990000;
-  }
-  
-  .userLevel {
-    background-color: #e0f7fa;
-    color: #00796b;
-  }
-  
-  .proLevel {
-    background-color: #ffe082;
-    color: #ff8f00;
-  }
-  
-  .premiumLevel {
-    background-color: #c5e1a5;
-    color: #33691e;
-  }
-  
-  .founderLevel {
-    background-color: #d1c4e9;
-    color: #512da8;
-  }
-  
-  .defaultLevel {
-    background-color: #eeeeee;
-    color: #757575;
-  }
-  
+  padding: 2px 8px; /* Espaçamento interno para o texto */
+  border-radius: 12px; /* Arredondamento do background do texto */
+  font-size: 16px; /* Tamanho da fonte */
+  font-weight: 800; /* Peso da fonte */
+  text-transform: uppercase; /* Transforma o texto em maiúsculas */
+}
+
+/* Estilos específicos para cada nível de usuário */
+.adminLevel {
+  background-color: var(--secondary-color); /* Cor de fundo para admin */
+  color: #990000; /* Cor do texto para admin */
+}
+
+.basicLevel {
+  background-color: #e0f7fa; /* Cor de fundo para usuário básico */
+  color: #00796b; /* Cor do texto para usuário básico */
+}
+
+.proLevel {
+  background-color: #ffe082; /* Cor de fundo para pro */
+  color: #ff8f00; /* Cor do texto para pro */
+}
+
+.premiumLevel {
+  background-color: #c5e1a5; /* Cor de fundo para premium */
+  color: #33691e; /* Cor do texto para premium */
+}
+
+.founderLevel {
+  background-color: var(--primary-color); /* Cor de fundo para founder */
+  color: #512da8; /* Cor do texto para founder */
+}
+
+.defaultLevel {
+  background-color: #eeeeee; /* Cor de fundo padrão */
+  color: #757575; /* Cor do texto padrão */
+}
