@@ -4,7 +4,7 @@ import React from 'react';
 import styles from './topbar.module.css';
 
 
-function TopBar() {
+function TopBar({totalSales}) {
   return (
     <header className={styles.topBar}>
       <div className={styles.topBarItem}>
@@ -19,7 +19,7 @@ function TopBar() {
       <div className={styles.topBarItem}>
         <div className={styles.topBarContent}>
           <h3 className={styles.title}>Vendas</h3>
-          <p className={styles.value} id="vendas-value">120</p>
+          <p className={styles.value} id="vendas-value">{totalSales}</p>
         </div>
         <div className={styles.topBarIcon}>
           <span className={`material-icons ${styles.icon}`}>sell</span> {/* Ícone atualizado */}
