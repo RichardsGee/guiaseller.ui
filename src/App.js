@@ -15,9 +15,9 @@ import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage';
 import KitsPage from './pages/ProductsPage/KitsPage';
 import PlansPage from './pages/PlansPage/PlansPage';  
 import EbooksPage from './pages/EbooksPage/EbooksPage'; // Importando a página de eBooks
+import ToolsPage from './pages/ToolsPage/ToolsPage'; // Importando a nova página de Ferramentas
 import ProtectedRoute from './components/ProtectedRoute'; 
 import AlphaAccess from './components/AlphaScreen/AlphaScreen';
-
 
 function App() {
   return (
@@ -74,6 +74,10 @@ function App() {
           <Route 
             path="/ebooks" // Adicionando a rota para a página de eBooks
             element={<ProtectedRoute><EbooksPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/ferramentas" // Adicionando a rota para a nova página de Ferramentas
+            element={<ProtectedRoute><ToolsPage /></ProtectedRoute>} 
           />
           <Route 
             path="/blocked" 

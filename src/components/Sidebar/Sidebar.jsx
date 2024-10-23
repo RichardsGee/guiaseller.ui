@@ -79,7 +79,9 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           {/* Categoria Conteúdos */}
           <hr /> {/* Linha separadora */}
           <li className={styles.menuCategoryTitle}>Conteúdos</li>
-          {/* Modificação aqui para "Ebooks", agora com "Em breve" */}
+          {/* Modificação aqui para "Ferramentas" */}
+          <li><Link to="/ferramentas"><WidgetsIcon className={styles.sidebarIcon} />Ferramentas</Link></li>
+          {/* Ebooks agora com "Em breve" */}
           <li>
             <span className={styles.disabledLink}>
               <BookIcon className={styles.sidebarIcon} />
@@ -88,8 +90,8 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           </li>
           <li>
             <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
-              <WidgetsIcon className={styles.sidebarIcon} />
-              Ferramentas IA
+              <WidgetsIcon className={styles.sidebarIcon} /> {/* Ícone de Ferramentas */}
+              Ferramentas <span className={styles.iaHighlight}>IA</span> {/* Destaque para IA */}
             </Link>
           </li>
         </ul>
@@ -147,7 +149,9 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             {/* Categoria Conteúdos */}
             <hr /> {/* Linha separadora */}
             <li className={styles.menuCategoryTitle}>Conteúdos</li>
-            {/* Modificação aqui para "Ebooks", agora com "Em breve" */}
+            {/* Modificação aqui para "Ferramentas" */}
+            <li><Link to="/ferramentas"><WidgetsIcon className={styles.sidebarIcon} />Ferramentas</Link></li>
+            {/* Ebooks agora com "Em breve" */}
             <li>
               <span className={styles.disabledLink}>
                 <BookIcon className={styles.sidebarIcon} />
@@ -156,8 +160,8 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             </li>
             <li>
               <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
-                <WidgetsIcon className={styles.sidebarIcon} />
-                Ferramentas IA
+                <WidgetsIcon className={styles.sidebarIcon} /> {/* Ícone de Ferramentas */}
+                Ferramentas IA <span className={styles.iaHighlight}>IA</span> {/* Destaque para IA */}
               </Link>
             </li>
           </ul>

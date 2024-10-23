@@ -169,7 +169,22 @@
 }
 
 
+.iaLogo {
+    width: 16px; /* Ajuste o tamanho conforme necessário */
+    height: auto; /* Mantém a proporção da imagem */
+    margin-right: 8px; /* Espaço entre o ícone e o texto */
+    align-self: center; /* Centraliza o ícone verticalmente com o texto */
+}
 
+.iaHighlight {
+    background: linear-gradient(135deg, #00d9ff, var(--primary-color)); /* Gradiente de fundo */
+    color: white; /* Cor do texto */
+    padding: 2px 4px; /* Espaçamento interno */
+    border-radius: 4px; /* Bordas arredondadas */
+    font-weight: bold; /* Peso da fonte */
+    margin-left: 8px; /* Espaço entre o ícone e o texto */
+
+}
 
 /* Responsividade */
 @media (max-width: 600px) {
