@@ -18,6 +18,8 @@ import EbooksPage from './pages/EbooksPage/EbooksPage'; // Importando a página 
 import ToolsPage from './pages/ToolsPage/ToolsPage'; // Importando a nova página de Ferramentas
 import ProtectedRoute from './components/ProtectedRoute'; 
 import AlphaAccess from './components/AlphaScreen/AlphaScreen';
+import Callback from "./pages/Callback/Callback";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 function App() {
   return (
@@ -83,6 +85,10 @@ function App() {
             path="/blocked" 
             element={<AlphaAccess />} 
           />
+
+          <Route path="/integrations/callback" element={<Callback />} />
+
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
         <ToastContainer />
       </Router>
