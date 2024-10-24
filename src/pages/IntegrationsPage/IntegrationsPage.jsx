@@ -15,7 +15,7 @@ const IntegrationsPage = () => {
 
   // Definindo o estado de integrações: Disponíveis e Em breve com logos específicas
   const [integrations, setIntegrations] = useState([
-    { nome: 'Mercado Livre', loja: '', integrado: false, ativo: false, disponivel: true, logo: 'https://i.imgur.com/yRascr7.png' },
+    { nome: 'Mercado Livre', loja: '', integrado: false, ativo: false, disponivel: true, logo: 'https://i.imgur.com/yRascr7.png', link: 'https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=6973021883530314&redirect_uri=https://guiaseller.com/dashboard' },
     { nome: 'Bling', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/YXoGxGm.png' },
     { nome: 'Shopee', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/h2d84rv.png' },
     { nome: 'Amazon', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/IHDjUqS.png' },
@@ -23,9 +23,16 @@ const IntegrationsPage = () => {
 
   // Função para alternar a integração
   const handleIntegrate = (index) => {
-    const updatedIntegrations = [...integrations];
-    updatedIntegrations[index].integrado = !updatedIntegrations[index].integrado;
-    setIntegrations(updatedIntegrations);
+    const integration = integrations[index];
+
+    // Verifica se a integração é do Mercado Livre
+    if (integration.nome === 'Mercado Livre') {
+      window.location.href = integration.link; // Redireciona para o link do Mercado Livre
+    } else {
+      const updatedIntegrations = [...integrations];
+      updatedIntegrations[index].integrado = !updatedIntegrations[index].integrado;
+      setIntegrations(updatedIntegrations);
+    }
   };
 
   // Função para ativar/desativar a integração
