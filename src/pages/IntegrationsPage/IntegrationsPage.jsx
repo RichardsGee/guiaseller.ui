@@ -15,7 +15,7 @@ const IntegrationsPage = () => {
 
   // Definindo o estado de integrações: Disponíveis e Em breve com logos específicas
   const [integrations, setIntegrations] = useState([
-    { nome: 'Mercado Livre', loja: '', integrado: false, ativo: false, disponivel: true, logo: 'https://i.imgur.com/yRascr7.png', link: 'https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=6973021883530314&redirect_uri=https://guiaseller.com/dashboard' },
+    { nome: 'Mercado Livre', loja: '', integrado: false, ativo: false, disponivel: true, logo: 'https://i.imgur.com/yRascr7.png', link: 'https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=6973021883530314&redirect_uri=https://guiaseller.com/ml/callback' },
     { nome: 'Bling', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/YXoGxGm.png' },
     { nome: 'Shopee', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/h2d84rv.png' },
     { nome: 'Amazon', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/IHDjUqS.png' },
