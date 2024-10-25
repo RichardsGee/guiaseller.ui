@@ -1,0 +1,126 @@
+.contentContainer {
+    padding: 20px;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 24px;
+    color: var(--text-color);
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.calculatorContainer {
+    display: flex;
+    gap: 20px;
+}
+
+.leftContainer, .rightContainer {
+    flex: 1;
+    background-color: var(--secondary-background-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.inlineFormGroup {
+    display: flex;
+    gap: 20px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.inlineItem {
+    flex: 1;
+    position: relative;
+}
+
+.inputField {
+    padding: 8px;
+    padding-right: 30px; /* Espaço suficiente para o símbolo na lateral direita */
+    border-radius: 5px;
+    border: 1px solid var(--background-color);
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s ease;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.inputField:focus {
+    border-color: var(--primary-color);
+}
+
+.errorBorder {
+    border-color: red !important;
+}
+
+.percentageSymbol,
+.currencySymbol {
+    position: absolute;
+    right: 10px; /* Posiciona o símbolo na lateral direita */
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.resultContainer {
+    font-size: 18px;
+    color: var(--text-color);
+    font-weight: bold;
+    text-align: center;
+    background-color: var(--secondary-background-color);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Dropdown apenas para o campo de Plano Mercado Livre */
+.selectField {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--background-color);
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s ease;
+    font-size: 14px;
+    appearance: none; /* Permite personalizar a aparência do dropdown */
+    -webkit-appearance: none; /* Remove a aparência padrão nos navegadores WebKit */
+    -moz-appearance: none; /* Remove a aparência padrão no Firefox */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23fff' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 8px 10px;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .calculatorContainer {
+        flex-direction: column;
+    }
+
+    .inlineFormGroup {
+        flex-direction: column;
+    }
+}

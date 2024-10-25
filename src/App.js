@@ -14,12 +14,13 @@ import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
 import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; 
 import KitsPage from './pages/ProductsPage/KitsPage';
 import PlansPage from './pages/PlansPage/PlansPage';  
-import EbooksPage from './pages/EbooksPage/EbooksPage'; // Importando a página de eBooks
-import ToolsPage from './pages/ToolsPage/ToolsPage'; // Importando a nova página de Ferramentas
+import EbooksPage from './pages/EbooksPage/EbooksPage'; 
+import ToolsPage from './pages/ToolsPage/ToolsPage'; 
 import ProtectedRoute from './components/ProtectedRoute'; 
 import AlphaAccess from './components/AlphaScreen/AlphaScreen';
 import Callback from "./pages/Callback/Callback";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import PricingCalculatorPage from './pages/PricingCalculatorPage/PricingCalculatorPage'; // Importe a nova página da calculadora
 
 function App() {
   return (
@@ -74,12 +75,16 @@ function App() {
             element={<ProtectedRoute><PlansPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/ebooks" // Adicionando a rota para a página de eBooks
+            path="/ebooks" 
             element={<ProtectedRoute><EbooksPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/ferramentas" // Adicionando a rota para a nova página de Ferramentas
+            path="/ferramentas" 
             element={<ProtectedRoute><ToolsPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/calculadora-precificacao" // Caminho da nova rota
+            element={<ProtectedRoute><PricingCalculatorPage /></ProtectedRoute>} 
           />
           <Route 
             path="/blocked" 
