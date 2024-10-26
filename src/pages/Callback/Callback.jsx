@@ -89,8 +89,8 @@ const Callback = () => {
     const authorization_code = getCodeParams();
     if (authorization_code) {
       handleAccessToken(authorization_code)
-        .then(access_token => handleIntegration(access_token))
         .then(access_token => fetchUserInfo(access_token)) 
+        .then(access_token => handleIntegration(access_token))
         .catch(error => console.error('Erro no fluxo de autenticação:', error));
     }
   }, []);
