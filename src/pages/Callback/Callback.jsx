@@ -68,9 +68,11 @@ const Callback = () => {
 
   const getAccessToken = async (authorization_code) => {
   try {
+    const trimmedAuthorizationCode = authorization_code.trim(); 
+
     const response = await axios.post(
       'https://guiaseller-backend.dlmi5z.easypanel.host/getAccessToken',
-      { refreshToken: authorization_code },
+      { refreshToken: trimmedAuthorizationCode },
       {
         headers: {
           'Content-Type': 'application/json',
