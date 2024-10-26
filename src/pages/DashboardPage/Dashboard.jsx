@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TopBar from '../../components/TopBar/TopBar';
@@ -9,7 +9,6 @@ import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
 import '../../styles/styles.css'; // Importando o CSS global onde está o dashboardContainer
-import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Dashboard() {
@@ -17,6 +16,7 @@ function Dashboard() {
   const username = user ? user.displayName || user.email : "No User Logged";
   const userPhoto = user ? user.photoURL : null; 
   const userEmail = user ? user.email : null;
+
   const [accessToken, setAccessToken] = useState('');
   const [salesData, setSalesData] = useState([]);
   const [from, setFrom] = useState('2024-08-01T00:00:00Z');
@@ -37,11 +37,22 @@ function Dashboard() {
   }, [accessToken, from, to]);
 
   async function getAccessToken() {
+    const refreshToken = 'TG-671c905ab2194d00018cc07b-81270097'; // Insira seu refresh token aqui
+
     try {
-      const response = await axios.post('https://guiaseller-backend.dlmi5z.easypanel.host/getAccessToken'); 
-      setAccessToken(response.data.access_token);
+      const response = await axios.post('https://guiaseller-backend.dlmi5z.easypanel.host/getAccessToken', {
+        refreshToken: refreshToken, // Enviando o refresh token
+      });
+      if (response.data.access_token) {
+        setAccessToken(response.data.access_token); // Armazenar o Access Token
+      } else {
+        console.error('Access token não recebido da resposta:', response.data);
+      }
     } catch (error) {
       console.error('Erro ao obter Access Token:', error);
+      if (error.response) {
+        console.error('Dados do erro:', error.response.data); // Exibe detalhes do erro
+      }
     }
   }
 
@@ -49,11 +60,11 @@ function Dashboard() {
     try {
       const response = await axios.get('https://guiaseller-backend.dlmi5z.easypanel.host/vendas', {
         headers: {
-          Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`, // Usar o Access Token
         },
         params: {
-          from, // Exemplo de 2024-01-01T00:00:00Z
-          to,   // Exemplo de 2024-10-23T23:59:59Z
+          from,
+          to,
         },
       });
       console.log('Dados de vendas:', response.data);
@@ -61,6 +72,9 @@ function Dashboard() {
       setTotalSales(response.data.paging.total);
     } catch (error) {
       console.error('Erro ao obter dados de vendas:', error);
+      if (error.response) {
+        console.error('Dados do erro:', error.response.data); // Exibe detalhes do erro
+      }
     }
   }
 
