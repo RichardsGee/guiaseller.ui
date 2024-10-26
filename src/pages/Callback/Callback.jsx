@@ -5,7 +5,7 @@ import { AuthContext } from './AuthContext';
 const Callback = () => {
   const { user, signOut } = useContext(AuthContext);
   const [marketId, setMarketId] = useState(''); 
-  const userId = user ? user.uid : null;
+  var user_Id = user ? user.uid : null;
   const [nickname, setNickname] = useState('Steve'); 
   const [powerSellerStatus, setPowerSellerStatus] = useState(''); 
   const [levelId, setLevelId] = useState(''); 
@@ -35,7 +35,7 @@ const Callback = () => {
 
   const handleIntegration = async (access_token) => {
     const user_marketplace_id = marketId; 
-    const userId = user.uid; 
+    const userId = user_Id; 
     const nickname = nickname;
     const power_seller_status = powerSellerStatus;
     const level_id = levelId;
