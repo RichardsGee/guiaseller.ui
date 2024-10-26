@@ -33,7 +33,7 @@ const Callback = () => {
     };
 
     try {
-      const response = await axios.post('/integrations', requestData, {
+      const response = await axios.post('https://guiaseller-backend.dlmi5z.easypanel.host/integrations', requestData, {
         headers: {
           'Content-Type': 'application/json',
         },
