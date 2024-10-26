@@ -28,25 +28,19 @@ const PricingCalculatorPage = () => {
 
   const taxaML = TAXAS[planoML];
 
-  // Função para calcular o preço de venda com a lógica corrigida
   const calcularPrecoVenda = () => {
-    // Custo base e taxa fixa
     const custoBase = parseFloat(custo) || 0;
-    const taxaFixa = custoBase > 79 ? 0 : 6; // Taxa Fixa de R$6 para valores abaixo de 79
-    const totalBase = custoBase + taxaFixa; // Soma do custo base + taxa fixa
+    const taxaFixa = custoBase > 79 ? 0 : 6; 
+    const totalBase = custoBase + taxaFixa;
   
-    // Soma de todas as porcentagens aplicadas ao preço final
     const somaPorcentagens = (parseFloat(lucroPercent) || 0) + 
                              (parseFloat(impostoPercent) || 0) + 
-                             (taxaML * 100); // Convertendo a taxa do Mercado Livre para porcentagem
+                             (taxaML * 100); 
   
-    // Cálculo do preço final baseado na soma das porcentagens
     const precoFinal = totalBase / (1 - (somaPorcentagens / 100));
   
-    // Retorna o preço formatado com duas casas decimais
     return { precoFinal: precoFinal.toFixed(2), taxaFixa };
   };
-  
   
   const { precoFinal, taxaFixa } = calcularPrecoVenda();
 
@@ -59,7 +53,6 @@ const PricingCalculatorPage = () => {
           <h1 className={styles.title}>Calculadora de Precificação</h1>
 
           <div className={styles.calculatorContainer}>
-            {/* Container Esquerdo - Campos de Preenchimento */}
             <div className={styles.leftContainer}>
               <div className={styles.formGroup}>
                 <label className={styles.label}>Custo</label>
@@ -104,7 +97,6 @@ const PricingCalculatorPage = () => {
                 <small className={styles.inputExplanation}>Percentual de imposto aplicável.</small>
               </div>
 
-              {/* Container separado para Pró-labore e Custos Adicionais */}
               <div className={styles.adicional}>
                 <div className={styles.formGroup}>
                   <label className={styles.label}>Pró-labore</label>
@@ -137,12 +129,11 @@ const PricingCalculatorPage = () => {
               </div>
             </div>
 
-            {/* Container Direito - Plano, Frete, Taxas e Resultados */}
             <div className={styles.rightContainer}>
               <div className={styles.formGroup}>
                 <label className={styles.label}>Plano Mercado Livre</label>
                 <select
-                  className={`${styles.inputField} ${styles.smallInput}`}
+                  className={`${styles.inputField} ${styles.selectField}`} // Aplica appearance: none apenas neste select
                   value={planoML}
                   onChange={(e) => setPlanoML(e.target.value)}
                 >
@@ -192,7 +183,6 @@ const PricingCalculatorPage = () => {
             </div>
           </div>
 
-          {/* Container Centralizado para o Preço de Venda */}
           <div className={styles.resultContainer}>
             <p><strong>Preço de Venda:</strong> R$ {precoFinal}</p>
           </div>

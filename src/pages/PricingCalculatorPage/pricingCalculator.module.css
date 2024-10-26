@@ -52,7 +52,7 @@
 
 .inputField {
     padding: 8px;
-    padding-right: 30px; /* Espaço suficiente para o símbolo na lateral direita */
+    padding-right: 30px;
     border-radius: 5px;
     border: 1px solid var(--background-color);
     background-color: var(--secondary-color);
@@ -68,6 +68,14 @@
     border-color: var(--primary-color);
 }
 
+/* Estilo específico para remover setas de incremento/decremento dos inputs numéricos */
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Remove as setas no Chrome, Safari e Edge */
+    margin: 0; /* Remove qualquer margem padrão */
+}
+
 .errorBorder {
     border-color: red !important;
 }
@@ -75,7 +83,7 @@
 .percentageSymbol,
 .currencySymbol {
     position: absolute;
-    right: 10px; /* Posiciona o símbolo na lateral direita */
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
     font-weight: bold;
@@ -94,7 +102,7 @@
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Dropdown apenas para o campo de Plano Mercado Livre */
+/* Estilo exclusivo para o dropdown do campo Plano Mercado Livre */
 .selectField {
     padding: 8px;
     border-radius: 5px;
@@ -105,9 +113,7 @@
     width: 100%;
     transition: border-color 0.3s ease;
     font-size: 14px;
-    appearance: none; /* Permite personalizar a aparência do dropdown */
-    -webkit-appearance: none; /* Remove a aparência padrão nos navegadores WebKit */
-    -moz-appearance: none; /* Remove a aparência padrão no Firefox */
+    appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23fff' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;

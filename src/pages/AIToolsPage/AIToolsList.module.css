@@ -31,7 +31,14 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
+    opacity: 0.8; /* Define a transparência, ajuste conforme necessário */
+    transition: opacity 0.3s ease; /* Transição suave para hover */
+}
+
+.toolCard:hover .toolImage {
+    opacity: 1; /* Remove a transparência ao passar o mouse */
+}
+
   
   .toolName {
     font-size: 18px;

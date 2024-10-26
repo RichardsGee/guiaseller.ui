@@ -1,17 +1,17 @@
 // ToolsData.js
-import precificadorImage from '../../assets/tools/imagem.jpg'; // Substitua pela imagem real
+import precificadorImage from '../../assets/tools/calculator.png'; // Substitua pela imagem real
 import consultorLucroImage from '../../assets/tools/imagem.jpg'; // Substitua pela imagem real
 import gestaoFinanceiraImage from '../../assets/tools/imagem.jpg'; // Substitua pela imagem real
 
 export const ferramentasData = [
   {
-    nome: 'Precificador Estilo Calculadora',
+    nome: 'Calculadora de Precificação',
     descricao: 'Calcule preços de forma rápida e fácil.',
     image: precificadorImage, // Imagem do precificador
     ativo: true,
     custo: '1 Token (24h)',
     restante: '10 horas',
-    route: '/tools/precificador',
+    route: '/calculadora-precificacao',
     categoria: 'Gestão'
   },
   {

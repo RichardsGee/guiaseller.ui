@@ -1,4 +1,4 @@
-import geradorTitulosImage from '../../assets/tools/imagem.jpg';
+import geradorTitulosImage from '../../assets/tools/title.png';
 import geradorDescricoesImage from '../../assets/tools/imagem.jpg';
 import geradorPalavrasChaveImage from '../../assets/tools/imagem.jpg';
 import analisadorConcorrenciaImage from '../../assets/tools/imagem.jpg';
