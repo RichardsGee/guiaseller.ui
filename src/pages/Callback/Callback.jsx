@@ -44,14 +44,14 @@ const Callback = () => {
     }
   };
 
-  const fetchUserInfo = async (access_token, user_id) => {
+  const fetchUserInfo = async (access_token, marketId) => {
     try {
       if (!user_id) {
         console.error('user_id não definido. Não é possível buscar informações do usuário.');
         return;
       }
 
-      const response = await axios.get(`https://api.mercadolibre.com/users/${user_id}`, {
+      const response = await axios.get(`https://api.mercadolibre.com/users/${marketId}`, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
@@ -111,7 +111,7 @@ const Callback = () => {
       getAccessToken(authorization_code)
         .then((access_token) => {
           if (access_token) {
-            return fetchUserInfo(access_token, user_Id); 
+            return fetchUserInfo(access_token, marketId); 
           } else {
             console.error('access_token não definido após obter o access token.');
           }
