@@ -111,7 +111,7 @@ const Callback = () => {
       getAccessToken(authorization_code)
         .then((access_token) => {
           if (access_token) {
-            return fetchUserInfo(access_token, marketId); 
+            return fetchUserInfo(access_token, user_Id); 
           } else {
             console.error('access_token não definido após obter o access token.');
           }
