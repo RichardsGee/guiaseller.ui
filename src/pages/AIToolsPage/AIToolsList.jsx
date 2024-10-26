@@ -1,10 +1,11 @@
+// AIToolsList.jsx
 import React from 'react';
-import styles from './AIToolsList.module.css'; // Importando o CSS específico para a lista de ferramentas
+import styles from './AIToolsList.module.css';
 import { Lock, LockOpen } from '@mui/icons-material';
 import favoriteOn from '../../assets/favoriteon.png'; 
 import favoriteOff from '../../assets/favoriteoff.png';
 
-const AIToolsList = ({ ferramentas, favoritos, adquiridos, handleUseTool, handleToggleFavorito }) => {
+const AIToolsList = ({ ferramentas, favoritos, handleUseTool, handleToggleFavorito }) => {
   const [hovered, setHovered] = React.useState(null);
 
   return (
@@ -12,9 +13,8 @@ const AIToolsList = ({ ferramentas, favoritos, adquiridos, handleUseTool, handle
       {ferramentas.map((ferramenta, index) => (
         <div 
           key={index} 
-          className={`${styles.toolCard} ${!ferramenta.ativo ? styles.inactive : ''}`}
+          className={`${styles.toolCard} ${ferramenta.status === 'desativado' ? styles.inactive : ''}`}
         >
-          {/* Exibe a imagem da ferramenta */}
           <div className={styles.toolImageContainer}>
             <img src={ferramenta.image} alt={ferramenta.nome} className={styles.toolImage} />
           </div>
@@ -23,8 +23,7 @@ const AIToolsList = ({ ferramentas, favoritos, adquiridos, handleUseTool, handle
           <p className={styles.toolDesc}>{ferramenta.descricao}</p>
 
           <div className={styles.bottomSection}>
-            {/* Botão de Favorito */}
-            {ferramenta.ativo && (
+            {ferramenta.status === 'ativo' && (
               <button 
                 onClick={() => handleToggleFavorito(ferramenta.nome)} 
                 className={styles.favoritoButton}
@@ -37,22 +36,25 @@ const AIToolsList = ({ ferramentas, favoritos, adquiridos, handleUseTool, handle
               </button>
             )}
 
-            {!ferramenta.ativo && (
+            {!ferramenta.status === 'ativo' && (
               <div className={styles.lockIcon}>
                 {hovered === index ? <LockOpen className={styles.iconInativo} /> : <Lock className={styles.iconInativo} />}
               </div>
             )}
 
             <button 
-              className={ferramenta.ativo ? styles.adquiridoButton : styles.assinarButton}
-              onClick={() => ferramenta.ativo && handleUseTool(ferramenta.route)}
+              className={
+                ferramenta.status === 'ativo' 
+                  ? styles.buttonUsar 
+                  : ferramenta.status === 'emBreve' 
+                    ? styles.buttonEmBreve 
+                    : styles.buttonAdquirir
+              }
+              onClick={() => ferramenta.status === 'ativo' && handleUseTool(ferramenta.route)}
               onMouseEnter={() => setHovered(index)} 
               onMouseLeave={() => setHovered(null)}
             >
-              {ferramenta.ativo ? `Ativo ${ferramenta.restante}` : 'Ativar'} 
-              {!ferramenta.ativo && (
-                <span className={styles.custoDentro}>{ferramenta.custo}</span>
-              )}
+              {ferramenta.status === 'ativo' ? 'Usar' : ferramenta.status === 'emBreve' ? 'Em Breve' : 'Adquirir'}
             </button>
           </div>
         </div>

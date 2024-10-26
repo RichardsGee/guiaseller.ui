@@ -13,7 +13,7 @@ const ToolsList = ({ ferramentas, favoritos, adquiridos, handleUseTool, handleTo
       {ferramentas.map((ferramenta, index) => (
         <div 
           key={index} 
-          className={`${styles.toolCard} ${!ferramenta.ativo ? styles.inactive : ''}`}
+          className={`${styles.toolCard} ${ferramenta.status === 'desativado' ? styles.inactive : ''}`}
         >
           <div className={styles.toolImageContainer}>
             <img src={ferramenta.image} alt={ferramenta.nome} className={styles.toolImage} />
@@ -23,7 +23,7 @@ const ToolsList = ({ ferramentas, favoritos, adquiridos, handleUseTool, handleTo
           <p className={styles.toolDesc}>{ferramenta.descricao}</p>
 
           <div className={styles.bottomSection}>
-            {ferramenta.ativo && (
+            {ferramenta.status === 'ativo' && (
               <button 
                 onClick={() => handleToggleFavorito(ferramenta.nome)} 
                 className={styles.favoritoButton}
@@ -36,22 +36,29 @@ const ToolsList = ({ ferramentas, favoritos, adquiridos, handleUseTool, handleTo
               </button>
             )}
 
-            {!ferramenta.ativo && (
+            {ferramenta.status === 'desativado' && (
               <div className={styles.lockIcon}>
                 {hovered === index ? <LockOpen className={styles.iconInativo} /> : <Lock className={styles.iconInativo} />}
               </div>
             )}
 
             <button 
-              className={ferramenta.ativo ? styles.adquiridoButton : styles.assinarButton}
-              onClick={() => ferramenta.ativo && handleUseTool(ferramenta.route)}
+              className={
+                ferramenta.status === 'ativo'
+                  ? styles.buttonUsar
+                  : ferramenta.status === 'emBreve'
+                    ? styles.buttonEmBreve
+                    : styles.buttonAdquirir
+              }
+              onClick={() => ferramenta.status === 'ativo' && handleUseTool(ferramenta.route)}
               onMouseEnter={() => setHovered(index)} 
               onMouseLeave={() => setHovered(null)}
             >
-              {ferramenta.ativo ? `Ativo ${ferramenta.restante}` : 'Ativar'} 
-              {!ferramenta.ativo && (
-                <span className={styles.custoDentro}>{ferramenta.custo}</span>
-              )}
+              {ferramenta.status === 'ativo' 
+                ? 'Usar' 
+                : ferramenta.status === 'emBreve' 
+                ? 'Em Breve' 
+                : 'Adquirir'}
             </button>
           </div>
         </div>
