@@ -46,7 +46,7 @@ const Callback = () => {
 
   const fetchUserInfo = async (access_token, marketId) => {
     try {
-      if (!user_id) {
+      if (!marketId) {
         console.error('user_id não definido. Não é possível buscar informações do usuário.');
         return;
       }
