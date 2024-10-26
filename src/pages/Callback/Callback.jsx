@@ -3,9 +3,9 @@ import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext'; 
 
 const Callback = () => {
-  const { user, signOut } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [marketId, setMarketId] = useState(''); 
-  var user_Id = user ? user.uid : null;
+  const user_Id = user ? user.uid : null; 
   const [nickname, setNickname] = useState('Steve'); 
   const [powerSellerStatus, setPowerSellerStatus] = useState(''); 
   const [levelId, setLevelId] = useState(''); 
@@ -18,40 +18,17 @@ const Callback = () => {
     return params.get('code');
   };
 
-  const handleAccessToken = async (authorization_code) => {
-    try {
-      const response = await axios.post('https://guiaseller-backend.dlmi5z.easypanel.host/getAccessToken', {
-        refreshToken: authorization_code,
-      });
-
-      console.log('Access Token obtido:', response.data);
-      setMarketId(response.data.user_id);
-      return response.data.access_token;
-    } catch (error) {
-      console.error('Erro ao obter access token:', error);
-      throw error;
-    }
-  };
-
   const handleIntegration = async (access_token) => {
-    const user_marketplace_id = marketId; 
-    const userId = user_Id; 
-    const nickname = nickname;
-    const power_seller_status = powerSellerStatus;
-    const level_id = levelId;
-    const permalink = "https://marketplace.com/seller123";
-    const total = 1500;
-
     const requestData = {
       access_token,
-      user_marketplace_id,
-      userId,
+      user_marketplace_id: marketId, 
+      userId: user_Id, 
       authorization_code: getCodeParams(),
       nickname,
-      power_seller_status,
-      level_id,
-      permalink,
-      total,
+      power_seller_status: powerSellerStatus,
+      level_id: levelId,
+      permalink: "https://marketplace.com/seller123",
+      total: 1500,
     };
 
     try {
@@ -88,9 +65,9 @@ const Callback = () => {
   useEffect(() => {
     const authorization_code = getCodeParams();
     if (authorization_code) {
-      handleAccessToken(authorization_code)
-        .then(access_token => fetchUserInfo(access_token)) 
-        .then(access_token => handleIntegration(access_token))
+      const access_token = authorization_code; 
+      fetchUserInfo(access_token)
+        .then(() => handleIntegration(access_token))
         .catch(error => console.error('Erro no fluxo de autenticação:', error));
     }
   }, []);
