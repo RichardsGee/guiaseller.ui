@@ -6,11 +6,14 @@ const Callback = () => {
   const { user } = useContext(AuthContext);
   const [marketId, setMarketId] = useState(''); 
   const user_Id = user ? user.uid : null; 
+  const [userIDML, setUserIDML] = useState('');
   const [nickname, setNickname] = useState('Steve'); 
   const [powerSellerStatus, setPowerSellerStatus] = useState(''); 
   const [levelId, setLevelId] = useState(''); 
   const [permalink, setPermalink] = useState(''); 
   const [total, setTotal] = useState(0); 
+  const [refreshToken, setRefreshToken] = useState('');
+  const [access_token, setAccessToken] = useState('');
 
   const getCodeParams = () => {
     const url = new URL(window.location.href);
@@ -18,9 +21,10 @@ const Callback = () => {
     return params.get('code');
   };
 
-  const handleIntegration = async (access_token) => {
+  const handleIntegration = async (refresh_token) => {
     const requestData = {
       access_token,
+      refresh_token,
       user_marketplace_id: marketId, 
       userId: user_Id, 
       authorization_code: getCodeParams(),
@@ -62,15 +66,38 @@ const Callback = () => {
     }
   };
 
+  const getAccessToken = async (authorization_code) => {
+  try {
+    const response = await axios.post(
+      'https://guiaseller-backend.dlmi5z.easypanel.host/getAccessToken',
+      { refreshToken: authorization_code },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    console.log('Access Token obtido:', response.data); 
+    setAccessToken(response.data.access_token);
+    setRefreshToken(response.data.refresh_token);
+    setUserIDML(response.data.user_id);
+    return response.data; 
+  } catch (error) {
+    console.error('Erro ao obter access token:', error); 
+    throw error; 
+  }
+};
+
   useEffect(() => {
     const authorization_code = getCodeParams();
     if (authorization_code) {
-      const access_token = authorization_code; 
-      fetchUserInfo(access_token)
-        .then(() => handleIntegration(access_token))
+      getAccessToken(authorization_code)
+        .then(() => fetchUserInfo(userIDML))
+        .then(() => handleIntegration(refreshToken))
         .catch(error => console.error('Erro no fluxo de autenticação:', error));
     }
-  }, []);
+  }, [userIDML, access_token]);
 
   return (
     <div>
