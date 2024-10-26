@@ -1,22 +1,44 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext, useState } from 'react'; 
 import axios from 'axios';
+import { AuthContext } from './AuthContext'; 
 
 const Callback = () => {
+  const { user, signOut } = useContext(AuthContext);
+  const [marketId, setMarketId] = useState(''); 
+  const userId = user ? user.uid : null;
+  const [nickname, setNickname] = useState('Steve'); 
+  const [powerSellerStatus, setPowerSellerStatus] = useState(''); 
+  const [levelId, setLevelId] = useState(''); 
+  const [permalink, setPermalink] = useState(''); 
+  const [total, setTotal] = useState(0); 
+
   const getCodeParams = () => {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
-    const code = params.get('code');
-    return code;
+    return params.get('code');
   };
 
-  const handleIntegration = async () => {
-    const access_token = "fakeAccessToken123"; 
-    const user_marketplace_id = "marketplaceUser123";
-    const userId = "X02jGDhoFoao7SfG6yiQMquN8cB2"; 
-    const authorization_code = getCodeParams();
-    const nickname = "SellerNickname";
-    const power_seller_status = "gold";
-    const level_id = "level1";
+  const handleAccessToken = async (authorization_code) => {
+    try {
+      const response = await axios.post('https://guiaseller-backend.dlmi5z.easypanel.host/getAccessToken', {
+        refreshToken: authorization_code,
+      });
+
+      console.log('Access Token obtido:', response.data);
+      setMarketId(response.data.user_id);
+      return response.data.access_token;
+    } catch (error) {
+      console.error('Erro ao obter access token:', error);
+      throw error;
+    }
+  };
+
+  const handleIntegration = async (access_token) => {
+    const user_marketplace_id = marketId; 
+    const userId = user.uid; 
+    const nickname = nickname;
+    const power_seller_status = powerSellerStatus;
+    const level_id = levelId;
     const permalink = "https://marketplace.com/seller123";
     const total = 1500;
 
@@ -24,12 +46,12 @@ const Callback = () => {
       access_token,
       user_marketplace_id,
       userId,
-      authorization_code,
+      authorization_code: getCodeParams(),
       nickname,
       power_seller_status,
       level_id,
       permalink,
-      total
+      total,
     };
 
     try {
@@ -40,13 +62,37 @@ const Callback = () => {
       });
 
       console.log('Integração criada com sucesso:', response.data);
+      return access_token; 
     } catch (error) {
       console.error('Erro ao criar integração:', error);
     }
   };
 
+  const fetchUserInfo = async (access_token) => {
+    try {
+      const response = await axios.get(`https://api.mercadolibre.com/users/${marketId}`, {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      });
+
+      setNickname(response.data.nickname);
+      setPowerSellerStatus(response.data.user_type);
+      setLevelId(response.data.points);
+      setPermalink(response.data.permalink);
+    } catch (error) {
+      console.error('Erro ao obter informações do usuário:', error);
+    }
+  };
+
   useEffect(() => {
-    handleIntegration(); 
+    const authorization_code = getCodeParams();
+    if (authorization_code) {
+      handleAccessToken(authorization_code)
+        .then(access_token => handleIntegration(access_token))
+        .then(access_token => fetchUserInfo(access_token)) 
+        .catch(error => console.error('Erro no fluxo de autenticação:', error));
+    }
   }, []);
 
   return (
