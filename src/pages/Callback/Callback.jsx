@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react'; 
 import axios from 'axios';
-import { AuthContext } from './AuthContext'; 
+import { AuthContext } from '../../context/AuthContext'; 
 
 const Callback = () => {
   const { user, signOut } = useContext(AuthContext);
