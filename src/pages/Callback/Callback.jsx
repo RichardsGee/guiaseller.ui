@@ -60,6 +60,7 @@ const Callback = () => {
         power_seller_status: response.data.seller_reputation?.power_seller_status || '',
         level_id: response.data.seller_reputation?.level_id || '',
         permalink: response.data.permalink || '',
+        total: response.data.seller_reputation?.transactions?.total || 0,
       };
 
       // Log para verificar cada dado do usuário
@@ -76,6 +77,7 @@ const Callback = () => {
       setPowerSellerStatus(userData.power_seller_status);
       setLevelId(userData.level_id);
       setPermalink(userData.permalink);
+      setTotal(userData.total);
 
       return userData;
     } catch (error) {
@@ -98,7 +100,7 @@ const Callback = () => {
       power_seller_status: userData.power_seller_status,
       level_id: userData.level_id,
       permalink: userData.permalink,
-      total,
+      total: userData.total,
     };
 
     console.log("Dados para integração:", requestData);
