@@ -1,101 +1,136 @@
+/* Container principal da tela de login */
 .mainContainer {
     display: flex;
+    flex-direction: column; /* Alinha itens verticalmente */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url('../../assets/loginBackground.jpeg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    background-color: #2C2F33;
+    position: relative;
 }
 
+.logo {
+    margin-bottom: 20px; /* Espaço entre o logo e o contêiner de login */
+    width: 120px; /* Ajuste conforme necessário */
+}
+
+/* Efeito de estrelas piscantes */
+.mainContainer::before, 
+.mainContainer::after {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image: radial-gradient(circle, #ffffff88 1px, transparent 2px);
+    background-size: 50px 50px;
+    opacity: 0.6;
+    top: -100%;
+    left: -100%;
+    animation: animateStars 15s linear infinite;
+}
+
+/* Direções opostas para profundidade */
+.mainContainer::after {
+    background-size: 80px 80px;
+    animation: animateStarsReverse 20s linear infinite;
+    opacity: 0.3;
+}
+
+/* Animações de brilho e movimento */
+@keyframes animateStars {
+    0% { transform: translate(0, 0); opacity: 0.8; }
+    50% { opacity: 0.6; transform: translate(50px, 50px); }
+    100% { transform: translate(0, 0); opacity: 0.8; }
+}
+
+@keyframes animateStarsReverse {
+    0% { transform: translate(0, 0); opacity: 0.4; }
+    50% { opacity: 0.2; transform: translate(-50px, -50px); }
+    100% { transform: translate(0, 0); opacity: 0.4; }
+}
+
+/* Estilo do wrapper central */
 .wrapper {
     width: 420px;
-    background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(30px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    color: #FFF;
+    background-color: #23272A;
     border-radius: 10px;
     padding: 30px 40px;
-}
-
-.wrapper h1 {
-    font-size: 36px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #FFF;
     text-align: center;
-    color: white;
+    position: relative;
+    z-index: 10; /* Mantém o formulário acima das animações */
 }
 
-.wrapper .inputBox {
+/* Título do formulário de login */
+.wrapper h1 {
+    font-size: 32px;
+    color: #FFF;
+    margin-bottom: 20px;
+}
+
+/* Campo de entrada */
+.inputBox {
     position: relative;
     width: 100%;
-    height: 50px;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
 .inputBox input {
-    width: 85%;
-    height: 30%;
-    padding: 0 10px;
+    width: 100%;
+    height: 45px;
+    padding: 0 15px;
     font-size: 16px;
-    background-color: transparent;
+    background-color: #2C2F33;
     border: 2px solid rgba(255, 255, 255, 0.2);
     outline: none;
     color: #FFF;
-    border-radius: 40px;
-    padding: 20px 45px 20px 20px;
+    border-radius: 8px;
 }
 
 .inputBox input::placeholder {
-    color: #FFF;
+    color: #BBB;
 }
 
+/* Ícone dentro do campo de entrada */
 .inputBox .icon {
     position: absolute;
-    right: 20px;
+    right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 16px;
-    color: white !important;
+    color: #BBB;
 }
 
+/* Botão de login */
 .loginButton {
     width: 100%;
     height: 45px;
-    background-color: #FFF;
-    color: slateblue;
+    background-color: #7289DA;
+    color: #FFF;
     font-size: 16px;
     font-weight: 600;
     border: none;
-    outline: none;
     cursor: pointer;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    color: #333;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
 }
 
 .loginButton:hover {
-    background-color: #f84d50;
-    color: #FFF;
+    background-color: #5865F2;
 }
 
-.wrapper .registerLink {
-    font-size: 15px;
-    text-align: center;
-    margin: 20px 0 15px;
-}
-
+/* Estilos de links de registro */
 .registerLink p a {
-    color: #FFF;
+    color: #7289DA;
     text-decoration: none;
     font-weight: 600;
 }
 
 .registerLink p a:hover {
     text-decoration: underline;
-    color: #f84d50;
 }
 
+/* Estilos de login com Firebase */
 .firebaseLogin {
     margin-top: 2em;
     display: flex;
@@ -110,11 +145,10 @@
     font-size: 16px;
     font-weight: 600;
     border: none;
-    outline: none;
     cursor: pointer;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     color: #333;
+    transition: background-color 0.3s ease;
 }
 
 .firebaseLogin .google:hover {
@@ -129,8 +163,16 @@
 
 .firebaseLogin img {
     position: relative;
-    top: 3px;
     width: 20px;
     height: 20px;
     margin-right: 10px;
+}
+.footerText {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: #FFF;
+    font-size: 14px;
+    opacity: 0.7;
 }

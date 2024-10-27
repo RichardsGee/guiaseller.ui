@@ -6,6 +6,7 @@ import handleFacebookSignIn from '../../hooks/handleFacebookSignIn';
 import handleSignIn from '../../hooks/handleSignIn';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import logo from '../../assets/logo.png'; // Importação do logo
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -31,6 +32,9 @@ const LoginForm = () => {
 
     return (
         <main className={styles.mainContainer}>
+            {/* Logo acima do contêiner de login */}
+            <img src={logo} alt="Logo" className={styles.logo} />
+
             <div className={styles.wrapper}>
                 <form onSubmit={onSignIn}>
                     <h1>Login</h1>
@@ -87,6 +91,10 @@ const LoginForm = () => {
                         </p>
                     </div>
                 </form>
+            </div>
+            {/* Texto Guia Seller - Alpha Version */}
+            <div className={styles.footerText}>
+                Guia Seller - Alpha Version
             </div>
         </main>
     );

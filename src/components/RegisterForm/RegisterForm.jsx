@@ -1,74 +1,57 @@
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './RegisterForm.module.css';
-import { FaUser, FaLock, FaPencilAlt } from 'react-icons/fa';
-import handleGoogleSignIn from '../../hooks/handleGoogleSignIn';
-import handleFacebookSignIn from '../../hooks/handleFacebookSignIn';
+import { FaUser, FaLock, FaEnvelope } from 'react-icons/fa';
 import handleSignUp from '../../hooks/handleSignUp';
-import { useEffect, useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useState } from 'react';
+import logo from '../../assets/logo.png'; // Importação do logo
 
-const RegisterForm = () => {
+const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const { user, loading } = useAuth();
+    const [username, setUsername] = useState('');
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!loading && user) {
-            navigate('/dashboard'); 
-        }
-    }, [user, loading, navigate]);
 
     const onSignUp = async (e) => {
         e.preventDefault();
-        try{
-            await handleSignUp({ firstName, lastName, email, password });
+        try {
+            await handleSignUp({ email, password, username });
             navigate('/dashboard'); 
-        }catch(error){
+        } catch (error) {
             console.error("Error during sign up", error);
         }
     };
 
     return (
         <main className={styles.mainContainer}>
+            {/* Logo acima do contêiner de registro */}
+            <img src={logo} alt="Logo" className={styles.logo} />
+
             <div className={styles.wrapper}>
                 <form onSubmit={onSignUp}>
                     <h1>Register</h1>
-                    <div>
-                        <div className={styles.inputBox}>
-                            <input
-                                type='text'
-                                placeholder='First Name...'
-                                required
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
-                            />
-                            <FaPencilAlt className={styles.icon} />
-                        </div>
-                        <div className={styles.inputBox}>
-                            <input
-                                type='text'
-                                placeholder='Last Name...'
-                                required
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
-                            />
-                            <FaPencilAlt className={styles.icon} />
-                        </div>
+
+                    <div className={styles.inputBox}>
+                        <input
+                            type='text'
+                            placeholder='Username...'
+                            required
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <FaUser className={styles.icon} />
                     </div>
                     
                     <div className={styles.inputBox}>
                         <input
-                            type='text'
+                            type='email'
                             placeholder='Email...'
                             required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <FaUser className={styles.icon} />
+                        <FaEnvelope className={styles.icon} />
                     </div>
+
                     <div className={styles.inputBox}>
                         <input
                             type='password'
@@ -79,32 +62,24 @@ const RegisterForm = () => {
                         />
                         <FaLock className={styles.icon} />
                     </div>
-                    <button type='submit' className={styles.loginButton}>Register</button>
-                    <div className={styles.firebaseLogin}>
-                        <button
-                            type='button'
-                            className={styles.facebook}
-                            onClick={handleFacebookSignIn}
-                        >
-                            <img src="https://firebasestorage.googleapis.com/v0/b/travel-app-d9bdb.appspot.com/o/facebook_login.png?alt=media&token=276b0dc3-32d2-49a6-8a7b-9ae1daf37f6c" alt='Facebook logo' />
-                            Login with Facebook
-                        </button>
-                        <button
-                            type='button'
-                            className={styles.google}
-                            onClick={handleGoogleSignIn}
-                        >
-                            <img src="https://firebasestorage.googleapis.com/v0/b/travel-app-d9bdb.appspot.com/o/google_login.png?alt=media&token=79cbb9cf-af16-4840-83e8-b6463317510e" alt='Google logo' />
-                            Login with Google
-                        </button>
-                    </div>
+                    
+                    <button type='submit' className={styles.loginButton}>
+                        Register
+                    </button>
+
                     <div className={styles.registerLink}>
-                        <p>Already have an account? <Link to='/'>Login</Link></p>
+                        <p>
+                            Already have an account? <Link to='/'>Sign In</Link>
+                        </p>
                     </div>
                 </form>
             </div>
+            {/* Texto Guia Seller - Alpha Version */}
+            <div className={styles.footerText}>
+                Guia Seller - Alpha Version
+            </div>
         </main>
     );
-}
+};
 
-export default RegisterForm;
+export default SignUp;
