@@ -3,14 +3,12 @@ import axios from 'axios';
 
 const Callback = () => {
   const user_Id = "pvvtctrvNdg4bcnOogd839Z1ZqD3";
-  const [marketId, setMarketId] = useState('');
   const [nickname, setNickname] = useState('');
   const [powerSellerStatus, setPowerSellerStatus] = useState('');
   const [levelId, setLevelId] = useState('');
   const [permalink, setPermalink] = useState('');
   const [total] = useState(1500);
   const [refreshToken, setRefreshToken] = useState('');
-  const [userIDML, setUserIDML] = useState('');
 
   const hasFetchedAccessToken = useRef(false);
   const hasIntegrated = useRef(false);
@@ -32,12 +30,14 @@ const Callback = () => {
         { headers: { 'Content-Type': 'application/json' } }
       );
 
-      console.log('Access Token obtido:', response.data.access_token);
-      setRefreshToken(response.data.refresh_token);
-      setUserIDML(response.data.user_id);
-      setMarketId(response.data.user_id);
+      console.log('Access Token obtido:', response.data);
+      const access_token = response.data.access_token;
+      const marketId = response.data.user_id;
+      const refresh_token = response.data.refresh_token;
 
-      return response.data.access_token; 
+      setRefreshToken(refresh_token);
+
+      return { access_token, marketId, refresh_token };
     } catch (error) {
       console.error('Erro ao obter access token:', error);
       throw error;
@@ -47,42 +47,53 @@ const Callback = () => {
   const fetchUserInfo = async (access_token, marketId) => {
     try {
       if (!marketId) {
-        console.error('user_id não definido. Não é possível buscar informações do usuário.');
-        return;
+        console.error('marketId (user_id) não definido. Não é possível buscar informações do usuário.');
+        return null;
       }
 
       const response = await axios.get(`https://api.mercadolibre.com/users/${marketId}`, {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
-      setNickname(response.data.nickname);
-      setPowerSellerStatus(response.data.seller_reputation.power_seller_status || '');
-      setLevelId(response.data.seller_reputation.level_id || '');
-      setPermalink(response.data.permalink);
-
-      console.log('Informações do usuário obtidas:', response.data);
-
-      return {
-        nickname: response.data.nickname,
-        power_seller_status: response.data.seller_reputation.power_seller_status || '',
-        level_id: response.data.seller_reputation.level_id || '',
-        permalink: response.data.permalink,
+      const userData = {
+        nickname: response.data.nickname || '',
+        power_seller_status: response.data.seller_reputation?.power_seller_status || '',
+        level_id: response.data.seller_reputation?.level_id || '',
+        permalink: response.data.permalink || '',
       };
+
+      // Log para verificar cada dado do usuário
+      console.log("Dados do usuário obtidos:");
+      Object.keys(userData).forEach(key => {
+        if (!userData[key]) {
+          console.error(`Campo faltando em userData: ${key} está ${userData[key]}`);
+        } else {
+          console.log(`${key}: ${userData[key]}`);
+        }
+      });
+
+      setNickname(userData.nickname);
+      setPowerSellerStatus(userData.power_seller_status);
+      setLevelId(userData.level_id);
+      setPermalink(userData.permalink);
+
+      return userData;
     } catch (error) {
       console.error('Erro ao obter informações do usuário:', error);
+      return null;
     }
   };
 
-  const handleIntegration = async (access_token, refresh_token, userData) => {
+  const handleIntegration = async (access_token, refresh_token, authorization_code, userData, marketId) => {
     if (hasIntegrated.current) return;
     hasIntegrated.current = true;
 
     const requestData = {
       access_token,
       refresh_token,
-      user_marketplace_id: marketId,
+      user_marketplace_id: marketId.toString(),  // Convertendo para string
       userId: user_Id,
-      authorization_code: getCodeParams(),
+      authorization_code,
       nickname: userData.nickname,
       power_seller_status: userData.power_seller_status,
       level_id: userData.level_id,
@@ -105,27 +116,32 @@ const Callback = () => {
     }
   };
 
+
   useEffect(() => {
     const authorization_code = getCodeParams();
     if (authorization_code && !hasFetchedAccessToken.current) {
       getAccessToken(authorization_code)
-        .then((access_token) => {
-          if (access_token) {
-            return fetchUserInfo(access_token, marketId); 
+        .then((result) => {
+          if (result && result.access_token && result.marketId && result.refresh_token) {
+            return fetchUserInfo(result.access_token, result.marketId).then((userData) => ({
+              ...result,
+              userData,
+            }));
           } else {
-            console.error('access_token não definido após obter o access token.');
+            console.error('access_token, marketId ou refresh_token não definidos após obter o access token.');
+            return null;
           }
         })
-        .then((userData) => {
-          if (userData && user_Id && userData.nickname && userData.power_seller_status && userData.level_id) {
-            handleIntegration(access_token, refreshToken, userData); 
+        .then((data) => {
+          if (data && data.userData && data.userData.nickname && data.userData.power_seller_status && data.userData.level_id) {
+            handleIntegration(data.access_token, data.refresh_token, authorization_code, data.userData, data.marketId);
           } else {
-            console.error('Informações do usuário incompletas para integração.');
+            console.error('Informações do usuário incompletas para integração.', data);
           }
         })
         .catch(error => console.error('Erro no fluxo de autenticação:', error));
     }
-  }, []); 
+  }, []);
 
   return (
     <div>
