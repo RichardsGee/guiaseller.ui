@@ -7,7 +7,7 @@ const Callback = () => {
   const [powerSellerStatus, setPowerSellerStatus] = useState('');
   const [levelId, setLevelId] = useState('');
   const [permalink, setPermalink] = useState('');
-  const [total] = useState(1500);
+  const [total, setTotal] = useState(1500);
   const [refreshToken, setRefreshToken] = useState('');
 
   const hasFetchedAccessToken = useRef(false);
