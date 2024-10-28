@@ -21,6 +21,8 @@ import AlphaAccess from './components/AlphaScreen/AlphaScreen';
 import Callback from "./pages/Callback/Callback";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import PricingCalculatorPage from './pages/PricingCalculatorPage/PricingCalculatorPage'; // Importe a nova página da calculadora
+import IAButton from './components/Button/IAButton'; // Caminho atualizado se você renomeou a pasta
+
 
 function App() {
   return (
@@ -96,6 +98,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <ToastContainer />
+        <IAButton /> {/* Adicionando o botão flutuante aqui */}
       </Router>
     </UserProvider>
   );

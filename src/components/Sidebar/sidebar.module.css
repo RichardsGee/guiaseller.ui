@@ -44,7 +44,6 @@
     text-align: center;
 }
 
-
 .userInfo {
     display: flex;
     flex-direction: column;
@@ -64,8 +63,6 @@
     margin-bottom: 10px; /* Espaçamento abaixo da imagem */
     object-fit: cover; /* Garante que a imagem preencha o espaço adequadamente */
 }
-
-
 
 .sidebar .user-info h2 {
     font-size: 16px;
@@ -143,9 +140,9 @@
     color: var(--text-color);
     margin-bottom: 10px;
     text-transform: uppercase;
-  }
+}
 
-  .disabledLink {
+.disabledLink {
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -168,7 +165,6 @@
     font-size: 12px; /* Tamanho da fonte menor que o texto normal */
 }
 
-
 .iaLogo {
     width: 16px; /* Ajuste o tamanho conforme necessário */
     height: auto; /* Mantém a proporção da imagem */
@@ -183,7 +179,6 @@
     border-radius: 4px; /* Bordas arredondadas */
     font-weight: bold; /* Peso da fonte */
     margin-left: 8px; /* Espaço entre o ícone e o texto */
-
 }
 
 /* Responsividade */
@@ -202,7 +197,6 @@
 
     .userInfo h2 {
         font-size: 14px; /* Reduzindo o tamanho da fonte */
-        
     }
 
     .sidebar h1 {

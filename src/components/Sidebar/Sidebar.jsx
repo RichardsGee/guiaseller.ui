@@ -42,10 +42,24 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
         </div>
         
         <ul>
+          {/* Seção de Gerenciamento */}
+          <li className={styles.menuCategoryTitle}>Gerenciamento</li>
           <li><Link to="/dashboard"><DashboardIcon className={styles.sidebarIcon} />Dashboard</Link></li>
           <li><Link to="/vendas"><ShoppingCartIcon className={styles.sidebarIcon} />Vendas</Link></li>
           <li><Link to="/produtos"><InventoryIcon className={styles.sidebarIcon} />Produtos</Link></li>
           <li><Link to="/anuncios"><AnnouncementIcon className={styles.sidebarIcon} />Anúncios</Link></li>
+          <li>
+            <span className={styles.disabledLink}>
+              <MessageIcon className={styles.sidebarIcon} />
+              Mensagens <span className={styles.pendingMessage}>(Em breve)</span>
+            </span>
+          </li>
+
+          {/* Linha separadora */}
+          <hr /> 
+
+          {/* Seção de Ajustes */}
+          <li className={styles.menuCategoryTitle}>Ajustes</li>
           <li>
             <Link to="/integracoes">
               <IntegrationsIcon className={styles.sidebarIcon} />
@@ -59,29 +73,20 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
               {!isComplete && <span className={styles.completeAlert}>⚠️</span>}
             </Link>
           </li>
-          {/* Modificação aqui para "Perfil", agora com "Em breve" */}
           <li>
             <span className={styles.disabledLink}>
               <AccountCircleIcon className={styles.sidebarIcon} />
               Perfil <span className={styles.pendingMessage}>(Em breve)</span>
             </span>
           </li>
-          {/* Lojas agora está ativo */}
           <li><Link to="/lojas"><StoreIcon className={styles.sidebarIcon} />Lojas</Link></li>
-          {/* Modificação aqui para "Mensagens", agora com "Em breve" */}
-          <li>
-            <span className={styles.disabledLink}>
-              <MessageIcon className={styles.sidebarIcon} />
-              Mensagens <span className={styles.pendingMessage}>(Em breve)</span>
-            </span>
-          </li>
+
+          {/* Linha separadora */}
+          <hr /> 
 
           {/* Categoria Conteúdos */}
-          <hr /> {/* Linha separadora */}
           <li className={styles.menuCategoryTitle}>Conteúdos</li>
-          {/* Modificação aqui para "Ferramentas" */}
           <li><Link to="/ferramentas"><WidgetsIcon className={styles.sidebarIcon} />Ferramentas</Link></li>
-          {/* Ebooks agora com "Em breve" */}
           <li>
             <span className={styles.disabledLink}>
               <BookIcon className={styles.sidebarIcon} />
@@ -90,8 +95,8 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           </li>
           <li>
             <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
-              <WidgetsIcon className={styles.sidebarIcon} /> {/* Ícone de Ferramentas */}
-              Ferramentas <span className={styles.iaHighlight}>IA</span> {/* Destaque para IA */}
+              <WidgetsIcon className={styles.sidebarIcon} /> 
+              Ferramentas <span className={styles.iaHighlight}>IA</span>
             </Link>
           </li>
         </ul>
@@ -112,10 +117,24 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           </div>
           
           <ul>
+            {/* Seção de Gerenciamento */}
+            <li className={styles.menuCategoryTitle}>Gerenciamento</li>
             <li><Link to="/dashboard"><DashboardIcon className={styles.sidebarIcon} />Dashboard</Link></li>
             <li><Link to="/vendas"><ShoppingCartIcon className={styles.sidebarIcon} />Vendas</Link></li>
             <li><Link to="/produtos"><InventoryIcon className={styles.sidebarIcon} />Produtos</Link></li>
             <li><Link to="/anuncios"><AnnouncementIcon className={styles.sidebarIcon} />Anúncios</Link></li>
+            <li>
+              <span className={styles.disabledLink}>
+                <MessageIcon className={styles.sidebarIcon} />
+                Mensagens <span className={styles.pendingMessage}>(Em breve)</span>
+              </span>
+            </li>
+
+            {/* Linha separadora */}
+            <hr /> 
+
+            {/* Seção de Ajustes */}
+            <li className={styles.menuCategoryTitle}>Ajustes</li>
             <li>
               <Link to="/integracoes">
                 <IntegrationsIcon className={styles.sidebarIcon} />
@@ -129,29 +148,20 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
                 {!isComplete && <span className={styles.completeAlert}>⚠️</span>}
               </Link>
             </li>
-            {/* Modificação aqui para "Perfil", agora com "Em breve" */}
             <li>
               <span className={styles.disabledLink}>
                 <AccountCircleIcon className={styles.sidebarIcon} />
                 Perfil <span className={styles.pendingMessage}>(Em breve)</span>
               </span>
             </li>
-            {/* Lojas agora está ativo */}
             <li><Link to="/lojas"><StoreIcon className={styles.sidebarIcon} />Lojas</Link></li>
-            {/* Modificação aqui para "Mensagens", agora com "Em breve" */}
-            <li>
-              <span className={styles.disabledLink}>
-                <MessageIcon className={styles.sidebarIcon} />
-                Mensagens <span className={styles.pendingMessage}>(Em breve)</span>
-              </span>
-            </li>
+
+            {/* Linha separadora */}
+            <hr /> 
 
             {/* Categoria Conteúdos */}
-            <hr /> {/* Linha separadora */}
             <li className={styles.menuCategoryTitle}>Conteúdos</li>
-            {/* Modificação aqui para "Ferramentas" */}
             <li><Link to="/ferramentas"><WidgetsIcon className={styles.sidebarIcon} />Ferramentas</Link></li>
-            {/* Ebooks agora com "Em breve" */}
             <li>
               <span className={styles.disabledLink}>
                 <BookIcon className={styles.sidebarIcon} />
@@ -160,8 +170,8 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             </li>
             <li>
               <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
-                <WidgetsIcon className={styles.sidebarIcon} /> {/* Ícone de Ferramentas */}
-                Ferramentas IA <span className={styles.iaHighlight}>IA</span> {/* Destaque para IA */}
+                <WidgetsIcon className={styles.sidebarIcon} /> 
+                Ferramentas IA <span className={styles.iaHighlight}>IA</span>
               </Link>
             </li>
           </ul>

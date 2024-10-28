@@ -1,0 +1,21 @@
+.iaButtonContainer {
+    position: fixed;
+    right: 20px; /* Distância da lateral direita */
+    top: 50%; /* Centraliza verticalmente */
+    transform: translateY(-50%); /* Ajusta para ficar exatamente no meio */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Para garantir que o botão esteja acima de outros elementos */
+}
+
+.iaButton {
+    width: 56px; /* Largura do botão */
+    height: 56px; /* Altura do botão */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
+    transition: transform 0.2s; /* Transição suave para o efeito de hover */
+}
+
+.iaButton:hover {
+    transform: scale(1.1); /* Aumenta o tamanho do botão ao passar o mouse */
+}
