@@ -22,4 +22,4 @@ function IAButton() {
   );
 }
 
-export default IAButton;
+export default ButtonIA;
