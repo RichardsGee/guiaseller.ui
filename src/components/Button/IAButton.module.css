@@ -1,4 +1,4 @@
-.iaButtonContainer {
+.IAButtonContainer {
     position: fixed;
     right: 20px; /* Distância da lateral direita */
     bottom: 20px; /* Alinha os botões na parte inferior */
@@ -12,7 +12,7 @@
     margin-right: 5px; /* Espaçamento de 5px entre os botões */
 }
 
-.iaButton {
+.IAButton {
     width: 25px; /* Largura do botão IA */
     height: 60px; /* Altura do botão IA */
     background: linear-gradient(135deg, #00d9ff, var(--primary-color)); /* Gradiente de fundo */
@@ -44,7 +44,7 @@
     box-sizing: border-box; /* Inclui padding e borda no cálculo de largura e altura */
 }
 
-.whatsappButton:hover, .iaButton:hover {
+.whatsappButton:hover, .IAV:hover {
     transform: scale(1.1); /* Aumenta o tamanho do botão ao passar o mouse */
 }
 

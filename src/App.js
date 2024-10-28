@@ -21,7 +21,7 @@ import AlphaAccess from './components/AlphaScreen/AlphaScreen';
 import Callback from "./pages/Callback/Callback";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import PricingCalculatorPage from './pages/PricingCalculatorPage/PricingCalculatorPage'; // Importe a nova página da calculadora
-import IAButton from './components/Button/IAButton'; // Verifique o caminho e o nome
+import IAButton from './components/Button/IAButtonPage'; // Verifique o caminho e o nome
 
 
 function App() {

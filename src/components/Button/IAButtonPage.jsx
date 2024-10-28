@@ -13,11 +13,11 @@ function IAButton() {
   };
 
   return (
-    <div className={styles.iaButtonContainer}>
+    <div className={styles.IAButtonContainer}>
       <div className={styles.buttonWrapper}>
         <Button 
           variant="contained" 
-          className={styles.iaButton} // Estilo do botão "IA"
+          className={styles.IAButton} // Estilo do botão "IA"
           onClick={handleClickIA}
         >
           IA {/* Texto para indicar a função do botão */}
