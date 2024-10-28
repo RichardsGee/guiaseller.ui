@@ -22,7 +22,7 @@
     display: flex; /* Alinha o conteúdo */
     justify-content: center; /* Centraliza o conteúdo horizontalmente */
     align-items: center; /* Centraliza o conteúdo verticalmente */
-    border-radius: 50%; /* Faz o botão circular */
+    border-radius: 50% !important; /* Faz o botão circular */
     font-weight: bold; /* Texto em negrito */
     font-size: 23px; /* Tamanho da fonte ajustado */
     padding: 0; /* Remove padding para garantir que o botão permaneça circular */
@@ -39,7 +39,7 @@
     display: flex; /* Alinha o conteúdo */
     justify-content: center; /* Centraliza o conteúdo horizontalmente */
     align-items: center; /* Centraliza o conteúdo verticalmente */
-    border-radius: 50%; /* Faz o botão circular */
+    border-radius: 50% !important; /* Faz o botão circular */
     padding: 0; /* Remove padding para garantir que o botão permaneça circular */
     box-sizing: border-box; /* Inclui padding e borda no cálculo de largura e altura */
 }
