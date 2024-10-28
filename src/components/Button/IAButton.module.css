@@ -4,18 +4,51 @@
     top: 50%; /* Centraliza verticalmente */
     transform: translateY(-50%); /* Ajusta para ficar exatamente no meio */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000; /* Para garantir que o botão esteja acima de outros elementos */
+    flex-direction: column; /* Empilha verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    z-index: 1000; /* Para garantir que os botões estejam acima de outros elementos */
+}
+
+.buttonWrapper {
+    margin-bottom: 5px; /* Espaçamento de 5px entre os botões */
 }
 
 .iaButton {
-    width: 56px; /* Largura do botão */
-    height: 56px; /* Altura do botão */
+    width: 25px; /* Largura do botão IA */
+    height: 25px; /* Altura do botão IA */
+    background: linear-gradient(135deg, #00d9ff, var(--primary-color)); /* Gradiente de fundo */
+    color: white; /* Cor do texto */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
     transition: transform 0.2s; /* Transição suave para o efeito de hover */
+    display: flex; /* Alinha o conteúdo */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    border-radius: 50%; /* Faz o botão circular */
+    font-weight: bold; /* Texto em negrito */
+    font-size: 12px; /* Tamanho da fonte ajustado */
+    padding: 0; /* Remove padding para garantir que o botão permaneça circular */
+    box-sizing: border-box; /* Inclui padding e borda no cálculo de largura e altura */
 }
 
-.iaButton:hover {
+.whatsappButton {
+    width: 25px; /* Largura do botão WhatsApp */
+    height: 25px; /* Altura do botão WhatsApp */
+    background-color: #25D366; /* Cor de fundo do botão do WhatsApp */
+    color: white; /* Cor do texto */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidade */
+    transition: transform 0.2s; /* Transição suave para o efeito de hover */
+    display: flex; /* Alinha o conteúdo */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    align-items: center; /* Centraliza o conteúdo verticalmente */
+    border-radius: 50%; /* Faz o botão circular */
+    padding: 0; /* Remove padding para garantir que o botão permaneça circular */
+    box-sizing: border-box; /* Inclui padding e borda no cálculo de largura e altura */
+}
+
+.whatsappButton:hover, .iaButton:hover {
     transform: scale(1.1); /* Aumenta o tamanho do botão ao passar o mouse */
+}
+
+.whatsappIcon {
+    font-size: 16px; /* Tamanho do ícone ajustado para caber no botão */
 }
