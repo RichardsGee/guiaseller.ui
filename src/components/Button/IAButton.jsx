@@ -4,8 +4,12 @@ import { Button } from '@mui/material'; // Importando o componente Button do MUI
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'; // Importando o ícone do WhatsApp
 
 function IAButton() {
-  const handleClick = () => {
-    alert('Ferramentas IA clicadas!'); // Ação ao clicar no botão
+  const handleClickIA = () => {
+    alert('Ferramentas IA clicadas!'); // Ação ao clicar no botão IA
+  };
+
+  const handleClickWhatsApp = () => {
+    alert('WhatsApp clicado!'); // Ação ao clicar no botão WhatsApp
   };
 
   return (
@@ -14,7 +18,7 @@ function IAButton() {
         <Button 
           variant="contained" 
           className={styles.iaButton} // Estilo do botão "IA"
-          onClick={handleClick}
+          onClick={handleClickIA}
         >
           IA {/* Texto para indicar a função do botão */}
         </Button>
@@ -23,7 +27,7 @@ function IAButton() {
         <Button 
           variant="contained" 
           className={styles.whatsappButton} // Estilo do botão do WhatsApp
-          onClick={() => alert('WhatsApp clicado!')} // Ação ao clicar no WhatsApp
+          onClick={handleClickWhatsApp}
         >
           <WhatsAppIcon className={styles.whatsappIcon} /> {/* Ícone do WhatsApp */}
         </Button>
