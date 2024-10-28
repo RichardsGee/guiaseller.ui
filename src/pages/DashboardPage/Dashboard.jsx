@@ -37,7 +37,7 @@ function Dashboard() {
   }, [accessToken, from, to]);
 
   async function getAccessToken() {
-    const refreshToken = 'TG-671c905ab2194d00018cc07b-81270097'; // Insira seu refresh token aqui
+    const refreshToken = 'TG-671dc1f01e414a0001b2713d-81270097'; // Insira seu refresh token aqui
 
     try {
       const response = await axios.post('https://guiaseller-backend.dlmi5z.easypanel.host/getAccessToken', {
