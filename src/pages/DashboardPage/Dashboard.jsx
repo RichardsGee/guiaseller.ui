@@ -10,6 +10,8 @@ import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
 import '../../styles/styles.css'; // Importando o CSS global onde está o dashboardContainer
 import axios from 'axios';
+import topBarItems from '../../components/TopBar/TopBarItens'; // Certifique-se de que o caminho está correto
+
 
 function Dashboard() {
   const { user, signOut } = useContext(AuthContext);
@@ -86,7 +88,7 @@ function Dashboard() {
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
-        <TopBar userPhoto={userPhoto} totalSales={totalSales} />
+        <TopBar items={topBarItems} /> {/* Passa os itens dinâmicos */}
         <div className="dashboardContainer"> {/* Alterado de contentContainer para dashboardContainer */}
           <DashboardFilterSection />
           <ChartSection />
