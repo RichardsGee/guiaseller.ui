@@ -1,0 +1,24 @@
+/* Container das folhas */
+.fallingLeaves {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 400px; /* Define a profundidade para o efeito 3D */
+}
+
+/* Estilos das folhas */
+.leaf {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform-origin: center;
+  transform-style: preserve-3d; /* Mantém o efeito tridimensional */
+  backface-visibility: visible; /* Permite que ambos os lados da folha sejam visíveis */
+  pointer-events: none;
+}

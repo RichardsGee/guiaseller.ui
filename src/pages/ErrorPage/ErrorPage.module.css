@@ -1,0 +1,222 @@
+/* Banner para o Guia Seller */
+.topBanner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    font-size: 28px;
+    font-weight: 100;
+    text-align: center;
+    padding: 15px 0;
+}
+
+/* Estilo base para o fundo */
+.errorContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--background-color);
+    padding: 20px;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Efeito de chuva */
+.errorContainer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        transparent 0%,
+        transparent 5px,
+        rgba(255, 255, 255, 0.1) 6px,
+        rgba(255, 255, 255, 0.1) 7px
+    );
+    background-size: 2px 100px;
+    opacity: 0.5;
+    animation: rain 1s linear infinite;
+}
+
+@keyframes rain {
+    from {
+        background-position: 0 -100px;
+    }
+    to {
+        background-position: 0 100px;
+    }
+}
+
+.errorContent {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background-color: #f7f6ba;
+    border-radius: 20px;
+    padding: 0;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: auto;
+}
+
+.iconContainer {
+    background-color: #F9B321;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    width: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.warningIcon {
+    color: black;
+    font-size: 70px;
+    font-weight: bold;
+    background-color: #F9B321;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.textContainer {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.errorTitle {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.errorMessage {
+    font-size: 16px;
+    color: black;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.homeButton {
+    background-color: var(--btn-color);
+    color: var(--text-color);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: fit-content;
+    align-self: center;
+    text-decoration: none;
+    z-index: 99999;
+}
+
+.homeButton:hover {
+    background-color: #F9B321;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .errorContent {
+        flex-direction: column;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .iconContainer {
+        width: 100%;
+        height: 100px;
+    }
+
+    .warningIcon {
+        font-size: 50px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .textContainer {
+        padding: 10px;
+    }
+
+    .errorTitle {
+        font-size: 20px;
+    }
+
+    .errorMessage {
+        font-size: 14px;
+    }
+
+    .homeButton {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .topBanner {
+        font-size: 18px;
+        padding: 10px;
+    }
+}
+
+/* Responsividade para telas muito pequenas (mobile) */
+@media (max-width: 480px) {
+    .errorContainer {
+        height: calc(100vh - 50px);
+        justify-content: flex-start;
+        padding-top: 20px;
+        bottom: 50px;
+    }
+
+    .errorContent {
+        flex-direction: column;
+        padding: 10px;
+        margin-bottom: 50px;
+    }
+
+    .iconContainer {
+        width: 100%;
+        height: 80px;
+    }
+
+    .warningIcon {
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .errorTitle {
+        font-size: 18px;
+    }
+
+    .errorMessage {
+        font-size: 12px;
+    }
+
+    .homeButton {
+        padding: 8px 16px;
+        font-size: 12px;
+    }
+
+    .topBanner {
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        left: 0;
+        width: 100%;
+    }
+}
