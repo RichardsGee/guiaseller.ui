@@ -59,7 +59,7 @@
     width: 70px; /* Largura do quadrado */
     height: 70px; /* Altura do quadrado */
     border-radius: 50%; /* Mantém a imagem circular */
-    margin-top: 20px;
+    margin-top: 5px;
     margin-bottom: 10px; /* Espaçamento abaixo da imagem */
     object-fit: cover; /* Garante que a imagem preencha o espaço adequadamente */
 }
@@ -91,7 +91,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 8px;
+    padding: 2px;
     color: var(--text-color);
     text-decoration: none;
     text-align: left;
@@ -149,7 +149,7 @@
     color: #aaaaaa; /* Cor para indicar que está desativado */
     cursor: not-allowed; /* Muda o cursor para indicar que não é clicável */
     opacity: 0.6; /* Diminui a opacidade para dar uma aparência de desativado */
-    padding: 8px; /* Mesma padding do restante dos itens para manter a consistência */
+    padding: 2px; /* Mesma padding do restante dos itens para manter a consistência */
     border-radius: 5px; /* Estilo similar aos outros itens */
     transition: background-color 0.3s;
 }

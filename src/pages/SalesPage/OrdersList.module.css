@@ -1,0 +1,86 @@
+.vendasTable {
+  background-color: var(--third-color);
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  overflow: hidden;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.vendasTable th, .vendasTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--background-color);
+}
+
+.vendasTable th {
+  background-color: var(--container-color);
+  color: var(--text-color);
+}
+
+.vendasTable tr:nth-child(even) {
+  background-color: var(--secondary-color);
+}
+
+.vendasTable tr:nth-child(odd) {
+  background-color: var(--third-color);
+}
+
+.vendasTable tr:hover {
+  background-color: var(--hover-color);
+  color: var(--text-color);
+}
+
+.vendaRow {
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.vendaRow:hover {
+  background-color: var(--hover-color);
+}
+
+.vendaDetails {
+  background-color: var(--secondary-color);
+  animation: slideDown 0.3s ease-in-out;
+}
+
+/* Estilos dos Ícones */
+.catalogIcon {
+  color: #4A90E2;
+  margin-right: 5px;
+}
+
+.paidIcon {
+  color: #2ECC71;
+  margin-right: 5px;
+}
+
+.notPaidIcon {
+  color: #E74C3C;
+  margin-right: 5px;
+}
+
+.deliveredIcon {
+  color: #F39C12;
+  margin-right: 5px;
+}
+
+.refundedIcon {
+  color: #9B59B6;
+  margin-right: 5px;
+}
+
+/* Estilo para ícones inativos */
+.iconInactive {
+  color: #ccc;
+  opacity: 0.3;
+  margin-right: 5px;
+}
+
+/* Estilo para pedidos cancelados */
+.cancelledRow {
+  background-color: #FDEDEC;
+  color: #E74C3C;
+}

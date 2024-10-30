@@ -1,181 +1,96 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Header from '../../components/Header/Header';  // Caminho corrigido
-import Sidebar from '../../components/Sidebar/Sidebar';  // Caminho corrigido
-import TopBar from '../../components/TopBar/TopBar';  // Caminho corrigido
-import Footer from '../../components/Footer/Footer';  // Caminho corrigido
-import MainContent from '../../components/MainContent/MainContent';  // Caminho corrigido
+import Header from '../../components/Header/Header';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import Footer from '../../components/Footer/Footer';
+import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
-import styles from './vendas.module.css'; // Corrigido para usar o arquivo de estilo local
-import filterStyles from '../../styles/filter.module.css'; // Corrigido para apontar para a pasta de estilos global
-import { ArrowUpward, ArrowDownward, AttachMoney, PriceCheck, LocalShipping, Person, Store, Tag } from '@mui/icons-material'; // Ícones
-import '../../styles/styles.css'; // Importando o CSS global onde está o contentContainer
+import OrdersList from './OrdersList';
+import styles from './vendas.module.css';
+import filterStyles from '../../styles/filter.module.css';
 
 const VendasPage = () => {
   const [vendas, setVendas] = useState([]);
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Mês atual
   const [searchTerm, setSearchTerm] = useState('');
-  const [expandedVendaId, setExpandedVendaId] = useState(null); // Estado para armazenar o ID da venda expandida
-
-  // Utilizando o contexto de autenticação para pegar informações do usuário
   const { user, signOut } = useContext(AuthContext);
-  const username = user ? user.displayName || user.email : "No User Logged";
-  const userPhoto = user ? user.photoURL : null; 
-  const userEmail = user ? user.email : null;
+
+  const userId = 'pvvtctrvNdg4bcnOogd839Z1ZqD3';
 
   useEffect(() => {
-    const vendasData = [
-      {
-        id: 9811,
-        imagem: 'img_url_1',
-        sku: 'JARR027',
-        marketplaceEnvio: 'Kwai / Kwai',
-        nome: 'Gislene Machado',
-        venda: 109.90, // Como número
-        custo: 10.99,
-        imposto: 8.79,
-        lucro: 90.12,
-        margem: '82,00%',
-        status: 'Aguardando Pagamento',
-      },
-      {
-        id: 9810,
-        imagem: 'img_url_2',
-        sku: 'CO691486',
-        marketplaceEnvio: 'Magalu / Coleta',
-        nome: 'Rosany Vescovi',
-        venda: 29.93,
-        custo: 16.99,
-        imposto: 2.39,
-        lucro: 10.55,
-        margem: '35,29%',
-        status: 'Aguardando Pagamento',
-      },
-    ];
-    setVendas(vendasData);
-  }, []);
+    const fetchVendas = async () => {
+      try {
+        const response = await fetch(`https://guiaseller-backend.dlmi5z.easypanel.host/vendas/${userId}`);
+        
+        if (!response.ok) {
+          throw new Error(`Erro HTTP: ${response.status}`);
+        }
 
-  // Função para lidar com a alteração no campo de busca
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+        const data = await response.json();
+        setVendas(data);
+      } catch (error) {
+        console.error("Erro ao buscar vendas:", error);
+      }
+    };
+    fetchVendas();
+  }, [userId]);
 
-  // Função para alternar a expansão de uma venda
-  const toggleExpandVenda = (id) => {
-    setExpandedVendaId(expandedVendaId === id ? null : id);
-  };
+  const handleSearchChange = (e) => setSearchTerm(e.target.value);
 
-  // Função para filtrar as vendas com base no termo de busca
-  const filteredVendas = vendas.filter(venda =>
-    venda.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    venda.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    venda.marketplaceEnvio.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Formatação para valores financeiros
-  const formatCurrency = (value) => {
-    const numberValue = parseFloat(value); // Converte o valor para número
-    if (isNaN(numberValue)) {
-      return 'R$ 0,00'; // Se não for um número, retorna 0
-    }
-    return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(numberValue);
-  };
-
-  // Função para determinar o tipo de ícone com base no campo filtrado
-  const getSearchIcon = () => {
-    if (filteredVendas.some(venda => venda.nome.toLowerCase().includes(searchTerm.toLowerCase()))) {
-      return <Person className={filterStyles.searchResultsIcon} />;
-    }
-    if (filteredVendas.some(venda => venda.marketplaceEnvio.toLowerCase().includes(searchTerm.toLowerCase()))) {
-      return <Store className={filterStyles.searchResultsIcon} />;
-    }
-    if (filteredVendas.some(venda => venda.sku.toLowerCase().includes(searchTerm.toLowerCase()))) {
-      return <Tag className={filterStyles.searchResultsIcon} />;
-    }
-    return null; // Sem ícone se nenhum critério for atendido
-  };
+  const filteredVendas = vendas
+    .filter(venda => 
+      new Date(venda.date_created).getMonth() + 1 === selectedMonth &&
+      (venda.comprador_nickname?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+       venda.code?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+       venda.status?.toLowerCase().includes(searchTerm.toLowerCase()))
+    )
+    .sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
 
   return (
     <MainContent>
-      <Header username={username} logout={signOut} />
-      <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
+      <Header username={user?.displayName || user?.email || "No User Logged"} logout={signOut} />
+      <Sidebar userPhoto={user?.photoURL} username={user?.displayName || user?.email} userEmail={user?.email} />
       <div className="main-content">
-        
-
-        {/* Usando a classe contentContainer do styles.css */}
         <div className="contentContainer">
           <div className={styles.vendasContainer}>
-          <h1 className="title">Meus Pedidos</h1>
-
-            {/* Filtro de busca e resultados dentro do mesmo container */}
-            <div className={filterStyles.filterWrapper}>
-              <div className={filterStyles.filterSection}>
-                <label htmlFor="search"></label>
-                <input
-                  id="search"
-                  type="text"
-                  placeholder="Digite o nome, SKU ou marketplace..."
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                />
+            <h1 className="title">Meus Pedidos</h1>
+            
+            {/* Filtro de mês */}
+            <div className={styles.filters}>
+              <div className={styles.monthFilter}>
+                <label htmlFor="month-select">Filtrar por Mês:</label>
+                <select
+                  id="month-select"
+                  value={selectedMonth}
+                  onChange={(e) => setSelectedMonth(Number(e.target.value))}
+                >
+                  {[...Array(12)].map((_, i) => (
+                    <option key={i + 1} value={i + 1}>
+                      {new Date(0, i).toLocaleString("pt-BR", { month: "long" })}
+                    </option>
+                  ))}
+                </select>
               </div>
-              {/* Exibindo o termo de busca e a quantidade de resultados */}
-              <div className={`${filterStyles.searchResults} ${searchTerm ? filterStyles.active : ''}`}>
-                {getSearchIcon()}
-                <p><strong>Busca:</strong> {searchTerm || 'N/A'}</p>
-                <p><strong>Resultado:</strong> {filteredVendas.length}</p>
+              
+              {/* Campo de busca */}
+              <div className={filterStyles.filterWrapper}>
+                <div className={filterStyles.filterSection}>
+                  <input
+                    id="search"
+                    type="text"
+                    placeholder="Digite o nome do comprador, código ou status..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                  />
+                </div>
+                <div className={`${filterStyles.searchResults} ${searchTerm ? filterStyles.active : ''}`}>
+                  <p><strong>Busca:</strong> {searchTerm || 'N/A'}</p>
+                  <p><strong>Resultado:</strong> {filteredVendas.length}</p>
+                </div>
               </div>
             </div>
-
-            <table className={styles.vendasTable}>
-              <thead>
-                <tr>
-                  <th>Imagem</th>
-                  <th>SKU</th>
-                  <th>Marketplace/Envio</th>
-                  <th>Nome</th>
-                  <th>Venda</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredVendas.map((venda) => (
-                  <React.Fragment key={venda.id}>
-                    <tr onClick={() => toggleExpandVenda(venda.id)} className={styles.vendaRow}>
-                      <td><img src={venda.imagem} alt="Produto" className={styles.vendaImage} /></td>
-                      <td>{venda.sku}</td>
-                      <td>{venda.marketplaceEnvio}</td>
-                      <td>{venda.nome}</td>
-                      <td>{formatCurrency(venda.venda)}</td>
-                    </tr>
-                    {expandedVendaId === venda.id && (
-                      <tr className={styles.vendaDetails}>
-                        <td colSpan="5">
-                          <div className={styles.detailsContainer}>
-                            <p>
-                              <PriceCheck className={styles.icon} />
-                              <strong>Custo:</strong> {formatCurrency(venda.custo)}
-                            </p>
-                            <p>
-                              <LocalShipping className={styles.icon} />
-                              <strong>Imposto:</strong> {formatCurrency(venda.imposto)}
-                            </p>
-                            <p className={venda.lucro > 0 ? styles.lucroPositivo : styles.lucroNegativo}>
-                              {venda.lucro > 0 ? <ArrowUpward className={styles.iconPositive} /> : <ArrowDownward className={styles.iconNegative} />}
-                              <strong>Lucro:</strong> {formatCurrency(venda.lucro)}
-                            </p>
-                            <p>
-                              <AttachMoney className={styles.icon} />
-                              <strong>Margem:</strong> {venda.margem}
-                            </p>
-                            <p>
-                              <strong>Status:</strong> {venda.status}
-                            </p>
-                          </div>
-                        </td>
-                      </tr>
-                    )}
-                  </React.Fragment>
-                ))}
-              </tbody>
-            </table>
+            
+            {/* Lista de pedidos */}
+            <OrdersList vendas={filteredVendas} />
           </div>
         </div>
       </div>

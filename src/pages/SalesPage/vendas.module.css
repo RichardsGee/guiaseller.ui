@@ -46,6 +46,24 @@
   animation: slideDown 0.3s ease-in-out;
 }
 
+.monthFilter {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.monthFilter label {
+  font-weight: bold;
+}
+
+.monthFilter select {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+
+
 @keyframes slideDown {
   from {
     opacity: 0;
