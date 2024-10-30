@@ -34,6 +34,27 @@ const VendasPage = () => {
     fetchVendas();
   }, [userId]);
 
+  const handleImport = async () => {
+    try {
+      const today = new Date();
+      const yesterday = new Date(today);
+      yesterday.setDate(today.getDate() - 1);
+      
+      const from = yesterday.toISOString();
+      const to = today.toISOString();
+
+      const response = await fetch(`https://guiaseller-backend.dlmi5z.easypanel.host/vendas?from=${from}&to=${to}`);
+      
+      if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
+      }
+      
+      console.log("Importação bem-sucedida!");
+    } catch (error) {
+      console.error("Erro ao importar vendas:", error);
+    }
+  };
+
   const handleSearchChange = (e) => setSearchTerm(e.target.value);
 
   const filteredVendas = vendas
@@ -54,8 +75,10 @@ const VendasPage = () => {
           <div className={styles.vendasContainer}>
             <h1 className="title">Meus Pedidos</h1>
             
-            {/* Filtro de mês */}
-            <div className={styles.filters}>
+            {/* Filtros e Importação */}
+            <div className={styles.filtersContainer}>
+              <button className={styles.importButton} onClick={handleImport}>Importar Últimas 24 Horas</button>
+
               <div className={styles.monthFilter}>
                 <label htmlFor="month-select">Filtrar por Mês:</label>
                 <select
