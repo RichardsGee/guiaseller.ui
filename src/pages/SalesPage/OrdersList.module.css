@@ -1,3 +1,4 @@
+/* Estilos gerais da tabela */
 .vendasTable {
   background-color: var(--third-color);
   width: 100%;
@@ -8,7 +9,8 @@
   margin-top: 20px;
 }
 
-.vendasTable th, .vendasTable td {
+.vendasTable th,
+.vendasTable td {
   padding: 12px;
   text-align: left;
   border-bottom: 1px solid var(--background-color);
@@ -37,6 +39,7 @@
   transition: background-color 0.3s;
 }
 
+/* Mantém o alinhamento correto das linhas */
 .vendaRow:hover {
   background-color: var(--hover-color);
 }
@@ -44,6 +47,7 @@
 .vendaDetails {
   background-color: var(--secondary-color);
   animation: slideDown 0.3s ease-in-out;
+  display: table-row; /* Garante que os detalhes se comportem como uma linha de tabela */
 }
 
 /* Estilos dos Ícones */
@@ -83,4 +87,102 @@
 .cancelledRow {
   background-color: #FDEDEC;
   color: #E74C3C;
+}
+
+/* Responsividade para telas menores que 768px */
+@media (max-width: 768px) {
+  .vendasTable {
+    font-size: 14px; /* Reduz o tamanho da fonte */
+    display: block; /* Altera o display para bloco para empilhar */
+    overflow-x: auto; /* Permite rolagem horizontal se necessário */
+  }
+
+  .vendasTable thead {
+    display: none; /* Esconde o cabeçalho da tabela */
+  }
+
+  .vendasTable tr {
+    display: flex; /* Exibe como flexbox para disposição vertical */
+    flex-direction: column; /* Empilha os itens verticalmente */
+    border: 1px solid var(--border-color); /* Adiciona uma borda para cada venda */
+    margin-bottom: 10px; /* Espaço entre as vendas */
+    padding: 10px; /* Padding interno para cada venda */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    text-align: center; /* Centraliza o texto dentro das células */
+  }
+
+  .vendasTable tr + tr {
+    border-top: 1px solid var(--border-color); /* Linha entre as vendas */
+  }
+
+  .vendasTable td {
+    padding: 8px; /* Reduz o padding */
+    border: none; /* Remove bordas */
+    width: 100%; /* Garante que cada célula ocupe toda a largura */
+    position: relative; /* Necessário para o pseudo-elemento */
+  }
+
+  /* Adicionando ícones antes do conteúdo das células */
+  .vendasTable td::before {
+    content: '';
+    display: inline-block;
+    margin-right: 8px; /* Espaçamento entre o ícone e o texto */
+    vertical-align: middle; /* Alinha o ícone com o texto */
+  }
+
+  .vendasTable td:nth-child(1)::before {
+    content: '📅'; /* Ícone de data */
+  }
+
+  .vendasTable td:nth-child(2)::before {
+    content: '🆔'; /* Ícone de ID */
+  }
+
+  .vendasTable td:nth-child(3)::before {
+    content: '👤'; /* Ícone de Comprador */
+  }
+
+  .vendasTable td:nth-child(4)::before {
+    content: '🔢'; /* Ícone de ID do Item */
+  }
+
+  .vendasTable td:nth-child(5)::before {
+    content: '📦'; /* Ícone de Título do Item */
+  }
+
+  .vendasTable td:nth-child(6)::before {
+    content: '💰'; /* Ícone de Total Pago */
+  }
+
+  .vendasTable td:nth-child(7)::before {
+    content: '✔️'; /* Ícone de Status */
+  }
+
+  /* Estilo para detalhes das vendas */
+  .vendaDetails {
+    display: flex; /* Muda o display para flexbox */
+    flex-direction: column; /* Empilha detalhes verticalmente */
+    margin-top: 10px; /* Espaço acima dos detalhes */
+    align-items: center; /* Centraliza os detalhes */
+    text-align: center; /* Centraliza o texto dos detalhes */
+  }
+}
+
+/* Responsividade para telas menores que 480px */
+@media (max-width: 480px) {
+  .vendasTable {
+    font-size: 14px; /* Reduz ainda mais o tamanho da fonte */
+  }
+
+  .vendasTable td {
+    padding: 6px; /* Reduz mais o padding */
+  }
+
+  .vendaRow {
+    margin-bottom: 10px; /* Espaço entre as vendas */
+  }
+
+  .vendaDetails {
+    font-size: 10px; /* Reduz o tamanho da fonte das informações detalhadas */
+  }
 }
