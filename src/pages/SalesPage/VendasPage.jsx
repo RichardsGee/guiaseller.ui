@@ -41,6 +41,9 @@ const VendasPage = () => {
         }, 0);
         setTotalVendasMesAtual(totalMesAtual);
 
+        // Armazenar totalVendasMesAtual no localStorage
+        localStorage.setItem('totalVendasMesAtual', totalMesAtual);
+
         const totalUltimoMes = data.reduce((acc, venda) => {
           const month = new Date(venda.date_created).getMonth() + 1;
           const totalPago = venda.payments[0]?.total_paid_amount || 0;
