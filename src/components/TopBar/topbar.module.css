@@ -1,4 +1,5 @@
-/* Estilos para o topbar */
+/* topbar.module.css */
+
 .topBar {
     position: fixed; /* Torna a TopBar fixa */
     top: 70px; /* Distância do topo da tela igual à altura do Header */
@@ -46,19 +47,34 @@
     font-size: 30px;
 }
 
+/* Estilo para setas e porcentagens */
+.positivo {
+    color: green; /* Cor verde para aumento */
+}
+
+.negativo {
+    color: #f43054; /* Cor vermelha para diminuição */
+}
+
+.porcentagemPositivo {
+    color: green; /* Cor verde para porcentagem positiva */
+}
+
+.porcentagemNegativo {
+    color: #f43054; /* Cor vermelha para porcentagem negativa */
+}
+
 /* Adicionando novos tamanhos para .title e .value */
 .title {
-    font-weight:lighter; /* Estilo em negrito para o título */
+    font-weight: lighter; /* Estilo em negrito para o título */
     margin: 0; /* Remove margem padrão */
     font-size: 16px; /* Aumentando o tamanho da fonte do título */
     color: gray;
-
-
 }
 
 .value {
-    font-style:initial; /* Estilo itálico para o valor */
-    font-weight:bolder !important; /* Fonte mais fina para o valor */
+    font-style: initial; /* Estilo itálico para o valor */
+    font-weight: bolder !important; /* Fonte mais fina para o valor */
     font-size: 20px; /* Aumentando o tamanho da fonte do valor */
 }
 
@@ -87,7 +103,6 @@
 
     .topBarIcon .material-icons {
         font-size: 20px; /* Diminuindo o tamanho do ícone para mobile */
-        
     }
 
     /* Ajustando a fonte do título e valor para mobile */

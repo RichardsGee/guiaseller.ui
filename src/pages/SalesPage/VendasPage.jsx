@@ -12,6 +12,8 @@ const VendasPage = () => {
   const [vendas, setVendas] = useState([]);
   const [totalVendasMesAtual, setTotalVendasMesAtual] = useState(0); // Total do mês atual
   const [totalVendasUltimoMes, setTotalVendasUltimoMes] = useState(0); // Total do último mês
+  const [quantidadeVendasMesAtual, setQuantidadeVendasMesAtual] = useState(0); // Quantidade do mês atual
+  const [quantidadeVendasUltimoMes, setQuantidadeVendasUltimoMes] = useState(0); // Quantidade do último mês
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Mês atual
   const [searchTerm, setSearchTerm] = useState('');
   const { user, signOut } = useContext(AuthContext);
@@ -48,9 +50,18 @@ const VendasPage = () => {
         }, 0);
         setTotalVendasUltimoMes(totalUltimoMes);
 
+        // Cálculo da quantidade de vendas
+        const quantidadeMesAtual = data.filter(venda => new Date(venda.date_created).getMonth() + 1 === currentMonth).length;
+        const quantidadeUltimoMes = data.filter(venda => new Date(venda.date_created).getMonth() + 1 === lastMonth).length;
+
+        setQuantidadeVendasMesAtual(quantidadeMesAtual);
+        setQuantidadeVendasUltimoMes(quantidadeUltimoMes);
+
         // Armazenar valores no localStorage
         localStorage.setItem('totalVendasMesAtual', totalMesAtual);
-        localStorage.setItem('totalVendasUltimoMes', totalUltimoMes); // Armazenando também o total do mês anterior
+        localStorage.setItem('totalVendasUltimoMes', totalUltimoMes);
+        localStorage.setItem('quantidadeVendasMesAtual', quantidadeMesAtual);
+        localStorage.setItem('quantidadeVendasUltimoMes', quantidadeUltimoMes);
 
       } catch (error) {
         console.error("Erro ao buscar vendas:", error);
@@ -105,15 +116,23 @@ const VendasPage = () => {
           <div className={styles.vendasContainer}>
             <div className={styles.headerContainer}>
               <h1 className="title">Meus Pedidos</h1>
-              {/* Seção de Faturamento ao lado do título */}
+              {/* Seção de Faturamento e Quantidade ao lado do título */}
               <div className={styles.faturamentoContainer}>
                 <div className={styles.faturamentoItem}>
-                  <h3>Total {getMonthName(new Date().getMonth())}</h3> {/* Total do mês anterior */}
+                  <h3>Total Faturamento {getMonthName(new Date().getMonth())}</h3>
                   <p>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalVendasUltimoMes)}</p>
                 </div>
                 <div className={styles.faturamentoItem}>
-                  <h3>Total {getMonthName(new Date().getMonth() + 1)}</h3> {/* Total do mês atual */}
+                  <h3>Total Faturamento {getMonthName(new Date().getMonth() + 1)}</h3>
                   <p>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalVendasMesAtual)}</p>
+                </div>
+                <div className={styles.quantidadeItem}>
+                  <h3>Quantidade Vendas {getMonthName(new Date().getMonth())}</h3>
+                  <p>{quantidadeVendasUltimoMes}</p>
+                </div>
+                <div className={styles.quantidadeItem}>
+                  <h3>Quantidade Vendas {getMonthName(new Date().getMonth() + 1)}</h3>
+                  <p>{quantidadeVendasMesAtual}</p>
                 </div>
               </div>
             </div>

@@ -1,8 +1,13 @@
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale'; // Ícone para Faturamento
+import SellIcon from '@mui/icons-material/Sell'; // Ícone para Vendas
+import PaymentsIcon from '@mui/icons-material/Payments'; // Ícone para Custo (agora Payments)
+import SavingsIcon from '@mui/icons-material/Savings'; // Ícone para Lucro
+
 const topBarItems = [
-  { title: 'Faturamento', value: 'R$ 50,000', icon: 'monetization_on', id: 'faturamento' },
-  { title: 'Vendas', value: '1200', icon: 'sell', id: 'vendas' },
-  { title: 'Custo', value: 'R$ 20,000', icon: 'attach_money', id: 'custo' },
-  { title: 'Lucro', value: 'R$ 15,000', icon: 'trending_up', id: 'lucro' },
+  { title: 'Faturamento', value: 'R$ 50,000', icon: <PointOfSaleIcon />, id: 'faturamento' },
+  { title: 'Vendas', value: '1200', icon: <SellIcon />, id: 'vendas' },
+  { title: 'Custo', value: 'R$ 20,000', icon: <PaymentsIcon />, id: 'custo' }, // Alterado para Payments
+  { title: 'Lucro', value: 'R$ 15,000', icon: <SavingsIcon />, id: 'lucro' },
 ];
 
 export default topBarItems;
