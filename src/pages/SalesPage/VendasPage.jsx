@@ -87,6 +87,11 @@ const VendasPage = () => {
     )
     .sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
 
+  // Função para obter o nome do mês
+  const getMonthName = (month) => {
+    return new Date(0, month - 1).toLocaleString('pt-BR', { month: 'long' });
+  };
+
   return (
     <MainContent>
       <Header username={user?.displayName || user?.email || "No User Logged"} logout={signOut} />
@@ -94,12 +99,21 @@ const VendasPage = () => {
       <div className="main-content">
         <div className="contentContainer">
           <div className={styles.vendasContainer}>
-            <h1 className="title">Meus Pedidos</h1>
-            
-            {/* Exibindo os totais das vendas */}
-            <p><strong>Total Vendido no Mês Atual:</strong> {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalVendasMesAtual)}</p>
-            <p><strong>Total Vendido no Último Mês:</strong> {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalVendasUltimoMes)}</p>
-            
+            <div className={styles.headerContainer}>
+              <h1 className="title">Meus Pedidos</h1>
+              {/* Seção de Faturamento ao lado do título */}
+              <div className={styles.faturamentoContainer}>
+                <div className={styles.faturamentoItem}>
+                  <h3>Total {getMonthName(new Date().getMonth())}</h3> {/* Total do mês anterior */}
+                  <p>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalVendasUltimoMes)}</p>
+                </div>
+                <div className={styles.faturamentoItem}>
+                  <h3>Total {getMonthName(new Date().getMonth() + 1)}</h3> {/* Total do mês atual */}
+                  <p>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalVendasMesAtual)}</p>
+                </div>
+              </div>
+            </div>
+
             {/* Filtros e Importação */}
             <div className={styles.filtersContainer}>
               <button className={styles.importButton} onClick={handleImport}>Importar Últimas 24 Horas</button>
