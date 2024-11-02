@@ -41,15 +41,16 @@ const VendasPage = () => {
         }, 0);
         setTotalVendasMesAtual(totalMesAtual);
 
-        // Armazenar totalVendasMesAtual no localStorage
-        localStorage.setItem('totalVendasMesAtual', totalMesAtual);
-
         const totalUltimoMes = data.reduce((acc, venda) => {
           const month = new Date(venda.date_created).getMonth() + 1;
           const totalPago = venda.payments[0]?.total_paid_amount || 0;
           return month === lastMonth ? acc + (parseFloat(totalPago) || 0) : acc;
         }, 0);
         setTotalVendasUltimoMes(totalUltimoMes);
+
+        // Armazenar valores no localStorage
+        localStorage.setItem('totalVendasMesAtual', totalMesAtual);
+        localStorage.setItem('totalVendasUltimoMes', totalUltimoMes); // Armazenando também o total do mês anterior
 
       } catch (error) {
         console.error("Erro ao buscar vendas:", error);
