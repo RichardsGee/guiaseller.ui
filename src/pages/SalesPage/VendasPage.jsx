@@ -10,6 +10,8 @@ import filterStyles from '../../styles/filter.module.css';
 
 const VendasPage = () => {
   const [vendas, setVendas] = useState([]);
+  const [totalVendasMesAtual, setTotalVendasMesAtual] = useState(0); // Total do mês atual
+  const [totalVendasUltimoMes, setTotalVendasUltimoMes] = useState(0); // Total do último mês
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1); // Mês atual
   const [searchTerm, setSearchTerm] = useState('');
   const { user, signOut } = useContext(AuthContext);
@@ -27,6 +29,25 @@ const VendasPage = () => {
 
         const data = await response.json();
         setVendas(data);
+
+        // Cálculo do total para o mês atual e o último mês
+        const currentMonth = new Date().getMonth() + 1;
+        const lastMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+
+        const totalMesAtual = data.reduce((acc, venda) => {
+          const month = new Date(venda.date_created).getMonth() + 1;
+          const totalPago = venda.payments[0]?.total_paid_amount || 0;
+          return month === currentMonth ? acc + (parseFloat(totalPago) || 0) : acc;
+        }, 0);
+        setTotalVendasMesAtual(totalMesAtual);
+
+        const totalUltimoMes = data.reduce((acc, venda) => {
+          const month = new Date(venda.date_created).getMonth() + 1;
+          const totalPago = venda.payments[0]?.total_paid_amount || 0;
+          return month === lastMonth ? acc + (parseFloat(totalPago) || 0) : acc;
+        }, 0);
+        setTotalVendasUltimoMes(totalUltimoMes);
+
       } catch (error) {
         console.error("Erro ao buscar vendas:", error);
       }
@@ -74,6 +95,10 @@ const VendasPage = () => {
         <div className="contentContainer">
           <div className={styles.vendasContainer}>
             <h1 className="title">Meus Pedidos</h1>
+            
+            {/* Exibindo os totais das vendas */}
+            <p><strong>Total Vendido no Mês Atual:</strong> {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalVendasMesAtual)}</p>
+            <p><strong>Total Vendido no Último Mês:</strong> {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(totalVendasUltimoMes)}</p>
             
             {/* Filtros e Importação */}
             <div className={styles.filtersContainer}>
