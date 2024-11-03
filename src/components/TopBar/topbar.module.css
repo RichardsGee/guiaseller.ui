@@ -31,6 +31,12 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
+.topBarIcon {
+    display: flex;
+    flex-direction: column; /* Faz com que o ícone e a porcentagem fiquem empilhados */
+    align-items: center; /* Centraliza o conteúdo do ícone */
+}
+
 .topBarIcon .material-icons {
     color: var(--icon-color) !important; /* Usando !important para garantir a aplicação */
     font-size: 20px; /* Tamanho do ícone padrão */
@@ -54,14 +60,15 @@
 
 .negativo {
     color: #f43054; /* Cor vermelha para diminuição */
+    font-size: 14px; /* Ajusta o tamanho da fonte da porcentagem */
+    margin-top: 5px;
+
+    
 }
 
-.porcentagemPositivo {
-    color: green; /* Cor verde para porcentagem positiva */
-}
-
-.porcentagemNegativo {
-    color: #f43054; /* Cor vermelha para porcentagem negativa */
+.porcentagem {
+    font-size: 12px; /* Ajusta o tamanho da fonte da porcentagem */
+    font-weight: bold; /* Torna a porcentagem mais destacada */
 }
 
 /* Adicionando novos tamanhos para .title e .value */
@@ -72,10 +79,24 @@
     color: gray;
 }
 
-.value {
-    font-style: initial; /* Estilo itálico para o valor */
-    font-weight: bolder !important; /* Fonte mais fina para o valor */
-    font-size: 20px; /* Aumentando o tamanho da fonte do valor */
+/* Classe para o valor de hoje */
+.valueToday {
+    font-weight: bold; /* Negrito para o valor de hoje */
+    font-size: 16px; /* Tamanho da fonte para o valor de hoje */
+    color: var(--text-color); /* Cor do texto, ajuste conforme necessário */
+}
+
+/* Classe para o valor comparativo de ontem */
+.valueCompare {
+    font-weight: normal; /* Peso normal para o valor comparativo */
+    font-size: 14px; /* Tamanho da fonte para o valor comparativo */
+    color: gray; /* Cor do texto do valor comparativo */
+}
+
+/* Classe para períodos (Hoje: e Ontem:) */
+.period {
+    font-size: 14px; /* Tamanho da fonte para os períodos */
+    color: gray; /* Cor do texto dos períodos */
 }
 
 /* Estilos para mobile */

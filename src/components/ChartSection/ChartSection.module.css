@@ -1,7 +1,10 @@
+/* ChartSection.module.css */
+
 .chartSection {
-    width: 100%;
-    margin-bottom: 20px;
-  }
+    padding: 20px;
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
   
   .chartTitle {
     font-size: 24px;
@@ -17,4 +20,26 @@
     width: 48%; /* Para dois gráficos lado a lado */
     height: 300px; /* Altura fixa para o gráfico */
   }
-  
+  .chartContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px; /* Adiciona espaço ao redor do gráfico */
+}
+
+.chartWrapper {
+    flex: 1; /* Faz com que os gráficos ocupem espaço igual */
+    margin: 0 10px; /* Adiciona margem lateral entre os gráficos */
+    position: relative; /* Permite posicionamento de elementos filhos */
+}
+
+.chartTitle {
+    text-align: center; /* Centraliza o título dos gráficos */
+    font-size: 20px; /* Aumenta o tamanho da fonte do título */
+    color: var(--text-color); /* Cor do texto, ajuste conforme necessário */
+}
+
+.chartWrapper h3 {
+    text-align: center; /* Centraliza os subtítulos dos gráficos */
+    font-size: 18px; /* Tamanho da fonte para os subtítulos */
+    margin-bottom: 10px; /* Espaçamento abaixo do subtítulo */
+}

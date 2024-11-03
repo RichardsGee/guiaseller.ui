@@ -5,7 +5,7 @@ import TopBar from '../../components/TopBar/TopBar';
 import ChartSection from '../../components/ChartSection/ChartSection';
 import AdditionalInfo from '../../components/AdditionalInfo/AdditionalInfo';
 import Footer from '../../components/Footer/Footer';
-import MainContent from '../../components/MainContent/MainContent';
+import MainContent from '../../components/MainContent/MainContent'; // Certifique-se de que isso esteja importado
 import { AuthContext } from '../../context/AuthContext';
 import '../../styles/styles.css';
 import topBarItems from '../../components/TopBar/TopBarItens';
@@ -66,7 +66,7 @@ function Dashboard() {
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
-        <TopBar items={topBarItems} />
+        <TopBar items={topBarItems} salesData={salesData} dateRange={dateRange} /> {/* Passando dados de vendas e intervalo para TopBar */}
         <div className="dashboardContainer">
           <ChartSection salesData={salesData} dateRange={dateRange} onDateRangeChange={handleDateRangeChange} /> {/* Passando dados para o gráfico */}
           <AdditionalInfo />
