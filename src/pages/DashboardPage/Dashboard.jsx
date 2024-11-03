@@ -2,14 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import Header from '../../components/Header/Header';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import TopBar from '../../components/TopBar/TopBar';
-import DashboardFilterSection from '../../components/DashboardFilterSection/DashboardFilterSection';
-import ChartSection from '../../components/ChartSection/ChartSection'; // Usando ChartSection
+import ChartSection from '../../components/ChartSection/ChartSection';
 import AdditionalInfo from '../../components/AdditionalInfo/AdditionalInfo';
 import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
-import '../../styles/styles.css'; // Importando o CSS global
-import axios from 'axios';
+import '../../styles/styles.css';
 import topBarItems from '../../components/TopBar/TopBarItens';
 
 function Dashboard() {
@@ -18,75 +16,50 @@ function Dashboard() {
   const userPhoto = user ? user.photoURL : null; 
   const userEmail = user ? user.email : null;
 
-  const [accessToken, setAccessToken] = useState('');
   const [salesData, setSalesData] = useState([]); // Dados de vendas
-  const [from, setFrom] = useState('2024-08-01T00:00:00Z'); // Intervalo de datas
-  const [to, setTo] = useState('2024-08-31T00:00:00Z'); // Intervalo de datas
-  const [totalSales, setTotalSales] = useState(0);
-  const [quantidadeVendasMesAtual, setQuantidadeVendasMesAtual] = useState(0);
+  const [dateRange, setDateRange] = useState('30d'); // Intervalo de datas padrão
 
-  // Hook para pegar o Access Token
   useEffect(() => {
-    const fetchData = async () => {
-      await getAccessToken(); 
-    };
-    fetchData();
-  }, []);
+    fetchSalesData(); 
+  }, [dateRange]); // Atualiza os dados sempre que o dateRange muda
 
-  // Hook para buscar dados de vendas após obter o Access Token
-  useEffect(() => {
-    if (accessToken) {
-      getSalesData(from, to, accessToken); 
+  const fetchSalesData = async () => {
+    const userId = 'pvvtctrvNdg4bcnOogd839Z1ZqD3'; // ID do usuário
+    const today = new Date();
+    let from;
+
+    switch (dateRange) {
+      case '1d':
+        from = new Date(today.setDate(today.getDate() - 1)).toISOString();
+        break;
+      case '7d':
+        from = new Date(today.setDate(today.getDate() - 7)).toISOString();
+        break;
+      case '15d':
+        from = new Date(today.setDate(today.getDate() - 15)).toISOString();
+        break;
+      case '30d':
+      default:
+        from = new Date(today.setDate(today.getDate() - 30)).toISOString();
+        break;
     }
-  }, [accessToken, from, to]);
-
-  // Função para obter o Access Token
-  async function getAccessToken() {
-    const refreshToken = 'TG AQUI'; // Insira seu refresh token aqui
 
     try {
-      const response = await axios.post('https://guiaseller-backend.dlmi5z.easypanel.host/getAccessToken', {
-        refreshToken: refreshToken, // Enviando o refresh token
-      });
-      if (response.data.access_token) {
-        setAccessToken(response.data.access_token); // Armazenar o Access Token
-      } else {
-        console.error('Access token não recebido da resposta:', response.data);
+      const response = await fetch(`https://guiaseller-backend.dlmi5z.easypanel.host/vendas/${userId}?from=${from}&to=${new Date().toISOString()}`);
+      if (!response.ok) {
+        throw new Error(`Erro HTTP: ${response.status}`);
       }
-    } catch (error) {
-      console.error('Erro ao obter Access Token:', error);
-      if (error.response) {
-        console.error('Dados do erro:', error.response.data); // Exibe detalhes do erro
-      }
-    }
-  }
-
-  // Função para buscar dados de vendas
-  async function getSalesData(from, to, accessToken) {
-    try {
-      const response = await axios.get('https://guiaseller-backend.dlmi5z.easypanel.host/vendas', {
-        headers: {
-          Authorization: `Bearer ${accessToken}`, // Usar o Access Token
-        },
-        params: {
-          from,
-          to,
-        },
-      });
-      console.log('Dados de vendas:', response.data);
-      setSalesData(response.data); // Armazena os dados de vendas
-      setTotalSales(response.data.paging.total); // Total de vendas monetárias
-
-      const totalQuantidadeVendas = response.data.vendas.length; // Ajuste conforme a estrutura de dados
-      setQuantidadeVendasMesAtual(totalQuantidadeVendas); // Atualiza o estado com a quantidade
-
+      const data = await response.json();
+      console.log('Dados de vendas:', data); // Logar os dados recebidos
+      setSalesData(data); // Armazena os dados de vendas
     } catch (error) {
       console.error('Erro ao obter dados de vendas:', error);
-      if (error.response) {
-        console.error('Dados do erro:', error.response.data); // Exibe detalhes do erro
-      }
     }
-  }
+  };
+
+  const handleDateRangeChange = (range) => {
+    setDateRange(range); // Atualiza o intervalo de datas com a seleção do usuário
+  };
 
   return (
     <MainContent> 
@@ -95,8 +68,7 @@ function Dashboard() {
       <div className="main-content">
         <TopBar items={topBarItems} />
         <div className="dashboardContainer">
-          <DashboardFilterSection />
-          <ChartSection salesData={salesData} /> {/* Passando dados para o gráfico */}
+          <ChartSection salesData={salesData} dateRange={dateRange} onDateRangeChange={handleDateRangeChange} /> {/* Passando dados para o gráfico */}
           <AdditionalInfo />
         </div>
       </div>

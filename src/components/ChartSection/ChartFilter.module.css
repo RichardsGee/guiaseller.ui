@@ -1,0 +1,14 @@
+.filterContainer {
+    margin-bottom: 20px;
+  }
+  
+  .filterContainer h3 {
+    margin: 0;
+    font-size: 1.2em;
+  }
+  
+  .filterContainer select {
+    padding: 5px;
+    font-size: 1em;
+  }
+  
