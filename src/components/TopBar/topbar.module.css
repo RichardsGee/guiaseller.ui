@@ -82,7 +82,7 @@
 /* Classe para o valor de hoje */
 .valueToday {
     font-weight: bold; /* Negrito para o valor de hoje */
-    font-size: 16px; /* Tamanho da fonte para o valor de hoje */
+    font-size: 20px; /* Tamanho da fonte para o valor de hoje */
     color: var(--text-color); /* Cor do texto, ajuste conforme necessário */
 }
 

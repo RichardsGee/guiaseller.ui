@@ -29,10 +29,49 @@ const ChartSection = ({ salesData, dateRange, onDateRangeChange }) => {
     return { totalSales, totalRevenue };
   };
 
+  // Função para calcular resumo do mês atual
+  const calculateCurrentMonthSummary = () => {
+    const startDate = new Date(today.getFullYear(), today.getMonth(), 1); // Primeiro dia do mês atual
+
+    let totalSales = 0;
+    let totalRevenue = 0;
+
+    salesData.forEach(sale => {
+      const dateCreated = new Date(sale.date_created);
+      if (dateCreated >= startDate && dateCreated <= today) {
+        totalSales += 1;
+        totalRevenue += sale.total_amount || 0;
+      }
+    });
+
+    return { totalSales, totalRevenue };
+  };
+
+  // Função para calcular resumo do mês anterior
+  const calculatePreviousMonthSummary = () => {
+    const startDate = new Date(today.getFullYear(), today.getMonth() - 1, 1); // Primeiro dia do mês anterior
+    const endDate = new Date(today.getFullYear(), today.getMonth(), 0); // Último dia do mês anterior
+
+    let totalSales = 0;
+    let totalRevenue = 0;
+
+    salesData.forEach(sale => {
+      const dateCreated = new Date(sale.date_created);
+      if (dateCreated >= startDate && dateCreated <= endDate) {
+        totalSales += 1;
+        totalRevenue += sale.total_amount || 0;
+      }
+    });
+
+    return { totalSales, totalRevenue };
+  };
+
   // Resumos individuais
   const summary7d = calculateSummary(7);
   const summary15d = calculateSummary(15);
   const summary30d = calculateSummary(30);
+  const summaryCurrentMonth = calculateCurrentMonthSummary(); // Resumo do mês atual
+  const summaryPreviousMonth = calculatePreviousMonthSummary(); // Resumo do mês anterior
 
   // Resumos para comparação
   const calculateComparison = (days) => {
@@ -155,6 +194,36 @@ const ChartSection = ({ salesData, dateRange, onDateRangeChange }) => {
       ],
     };
   }
+
+  // Adicionando dados do mês atual e mês anterior
+if (dateRange === 'currentMonth') {
+  dataVendas = {
+      labels: ['Mês Anterior', 'Mês Atual'], // Invertido
+      datasets: [
+          {
+              label: 'Quantidade de Vendas',
+              data: [summaryPreviousMonth.totalSales, summaryCurrentMonth.totalSales], // Invertido
+              backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(75, 192, 192, 0.4)'],
+              borderColor: ['rgba(75, 192, 192, 1)', 'rgba(75, 192, 192, 0.7)'],
+              borderWidth: 1,
+          },
+      ],
+  };
+
+  dataFaturamento = {
+      labels: ['Mês Anterior', 'Mês Atual'], // Invertido
+      datasets: [
+          {
+              label: 'Faturamento',
+              data: [summaryPreviousMonth.totalRevenue, summaryCurrentMonth.totalRevenue], // Invertido
+              backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(255, 99, 132, 0.4)'],
+              borderColor: ['rgba(255, 99, 132, 1)', 'rgba(255, 99, 132, 0.7)'],
+              borderWidth: 1,
+          },
+      ],
+  };
+}
+
 
   const options = {
     responsive: true,
