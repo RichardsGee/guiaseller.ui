@@ -1,45 +1,33 @@
-/* ChartSection.module.css */
-
 .chartSection {
-    padding: 20px;
-    border-radius: 8px; /* Bordas arredondadas */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-}
-  
-  .chartTitle {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .chartContainer {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .chartWrapper {
-    width: 48%; /* Para dois gráficos lado a lado */
-    height: 300px; /* Altura fixa para o gráfico */
-  }
-  .chartContainer {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px; /* Adiciona espaço ao redor do gráfico */
-}
-
-.chartWrapper {
-    flex: 1; /* Faz com que os gráficos ocupem espaço igual */
-    margin: 0 10px; /* Adiciona margem lateral entre os gráficos */
-    position: relative; /* Permite posicionamento de elementos filhos */
+  padding: 20px;
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
 .chartTitle {
-    text-align: center; /* Centraliza o título dos gráficos */
-    font-size: 20px; /* Aumenta o tamanho da fonte do título */
-    color: var(--text-color); /* Cor do texto, ajuste conforme necessário */
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.chartContainer {
+  display: flex;
+  justify-content: space-between; /* Mantém espaço igual entre os gráficos */
+  flex-wrap: nowrap; /* Impede que os gráficos se movam para a linha abaixo */
+  padding: 20px; /* Adiciona espaço ao redor do gráfico */
+}
+
+.chartWrapper {
+  flex: 1 1 30%; /* Permite que cada gráfico ocupe um espaço mínimo de 30% da largura do contêiner */
+  max-width: 30%; /* Limita a largura máxima de cada gráfico para 30% */
+  height: 300px; /* Altura fixa para o gráfico */
+  margin: 0 5px; /* Adiciona margem lateral entre os gráficos */
+  position: relative; /* Permite posicionamento de elementos filhos */
+  box-sizing: border-box; /* Inclui padding e bordas na largura total do elemento */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Linha no topo dos retângulos */
 }
 
 .chartWrapper h3 {
-    text-align: center; /* Centraliza os subtítulos dos gráficos */
-    font-size: 18px; /* Tamanho da fonte para os subtítulos */
-    margin-bottom: 10px; /* Espaçamento abaixo do subtítulo */
+  text-align: center; /* Centraliza os subtítulos dos gráficos */
+  font-size: 18px; /* Tamanho da fonte para os subtítulos */
+  margin-bottom: 10px; /* Espaçamento abaixo do subtítulo */
 }

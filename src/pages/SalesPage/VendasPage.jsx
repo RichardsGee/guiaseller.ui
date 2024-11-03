@@ -14,26 +14,36 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const { user, signOut } = useContext(AuthContext);
 
-  const userId = 'pvvtctrvNdg4bcnOogd839Z1ZqD3';
+  const userId = user ? user.uid : null;
 
+  // Log do User UID apenas na primeira renderização
+  const [isMounted, setIsMounted] = useState(false);
+  if (!isMounted) {
+    console.log("User UID:", userId);
+    setIsMounted(true); // Muda o estado para indicar que o componente foi montado
+  }
+
+  // Fetch de vendas
   useEffect(() => {
     const fetchVendas = async () => {
+      if (!userId) return; // Verifica se o userId está disponível
+
       try {
         const response = await fetch(`https://guiaseller-backend.dlmi5z.easypanel.host/vendas/${userId}`);
-
         if (!response.ok) {
           throw new Error(`Erro HTTP: ${response.status}`);
         }
-
         const data = await response.json();
         setVendas(data);
+        console.log("Dados de vendas:", data); // Logando os dados de vendas
 
       } catch (error) {
         console.error("Erro ao buscar vendas:", error);
       }
     };
+
     fetchVendas();
-  }, [userId]);
+  }, [userId]); // Executa apenas quando userId muda
 
   const handleSearchChange = (e) => setSearchTerm(e.target.value);
 
@@ -55,7 +65,6 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
           <div className={styles.vendasContainer}>
             <div className={styles.headerContainer}>
               <h1 className="title">Meus Pedidos</h1>
-              {/* Exibir faturamento e quantidade direto do Dashboard */}
               <div className={styles.faturamentoContainer}>
                 <div className={styles.quantidadeItem}>
                   <h3>Quantidade Vendas {new Date().toLocaleString("pt-BR", { month: "long" })}</h3>
@@ -64,7 +73,6 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
               </div>
             </div>
 
-            {/* Filtros */}
             <div className={styles.filtersContainer}>
               <div className={styles.monthFilter}>
                 <label htmlFor="month-select">Filtrar por Mês:</label>
@@ -81,7 +89,6 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
                 </select>
               </div>
 
-              {/* Campo de busca */}
               <div className={filterStyles.filterWrapper}>
                 <div className={filterStyles.filterSection}>
                   <input
@@ -95,7 +102,6 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
               </div>
             </div>
 
-            {/* Lista de pedidos */}
             <OrdersList vendas={filteredVendas} />
           </div>
         </div>
