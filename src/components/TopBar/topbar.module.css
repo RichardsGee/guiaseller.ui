@@ -1,5 +1,3 @@
-/* topbar.module.css */
-
 .topBar {
     position: fixed; /* Torna a TopBar fixa */
     top: 70px; /* Distância do topo da tela igual à altura do Header */
@@ -62,13 +60,14 @@
     color: #f43054; /* Cor vermelha para diminuição */
     font-size: 14px; /* Ajusta o tamanho da fonte da porcentagem */
     margin-top: 5px;
-
-    
+    margin-left: 10px;
 }
 
 .porcentagem {
     font-size: 12px; /* Ajusta o tamanho da fonte da porcentagem */
     font-weight: bold; /* Torna a porcentagem mais destacada */
+    margin-left: 5px; /* Adiciona um espaço entre o valor e a porcentagem */
+    color: gray; /* Ajuste a cor conforme necessário */
 }
 
 /* Adicionando novos tamanhos para .title e .value */
