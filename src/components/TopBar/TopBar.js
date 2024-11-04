@@ -96,9 +96,6 @@ function TopBar({ items, salesData, dateRange }) {
                                 <>
                                     <span className={styles.valueToday}>
                                         {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(faturamentoAtual)}
-                                    </span>
-                                    <span className={variacaoFaturamento >= 0 ? styles.positivo : styles.negativo}>
-                                        {` (${variacaoFaturamento.toFixed(2)}%)`}
                                     </span><br />
                                     <span className={styles.valueCompare}>
                                         {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(faturamentoAnterior)}
@@ -106,10 +103,7 @@ function TopBar({ items, salesData, dateRange }) {
                                 </>
                             ) : item.id === 'vendas' ? (
                                 <>
-                                    <span className={styles.valueToday}>{quantidadeVendasAtual}</span>
-                                    <span className={variacaoVendas >= 0 ? styles.positivo : styles.negativo}>
-                                        {` (${variacaoVendas.toFixed(2)}%)`}
-                                    </span><br />
+                                    <span className={styles.valueToday}>{quantidadeVendasAtual}</span><br />
                                     <span className={styles.valueCompare}>{quantidadeVendasAnterior}</span><br />
                                 </>
                             ) : item.value}
@@ -117,6 +111,12 @@ function TopBar({ items, salesData, dateRange }) {
                     </div>
                     <div className={styles.topBarIcon}>
                         <span className={`material-icons ${styles.icon}`}>{item.icon}</span>
+                        <span className={`${styles.porcentagem} ${variacaoFaturamento < 0 ? styles.negativo : styles.positivo}`}>
+                            <span className="material-icons" style={{ fontSize: '16px' }}>
+                                {variacaoFaturamento >= 0 ? 'arrow_upward' : 'arrow_downward'}
+                            </span>
+                            {item.id === 'faturamento' ? `${Math.abs(variacaoFaturamento).toFixed(2)}%` : `${Math.abs(variacaoVendas).toFixed(2)}%`}
+                        </span>
                     </div>
                 </div>
             ))}

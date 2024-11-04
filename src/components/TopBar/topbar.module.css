@@ -52,22 +52,21 @@
 }
 
 /* Estilo para setas e porcentagens */
+.porcentagem {
+    font-size: 12x; /* Tamanho da fonte da porcentagem */
+    font-weight: bold; /* Torna a porcentagem mais destacada */
+    display: flex; /* Permite o uso de flexbox para alinhamento */
+    align-items: center; /* Alinha a seta e a porcentagem no centro */
+    margin-top: 5px; /* Espaço acima da porcentagem */
+}
+
+/* Outras classes para positivo e negativo */
 .positivo {
     color: green; /* Cor verde para aumento */
 }
 
 .negativo {
     color: #f43054; /* Cor vermelha para diminuição */
-    font-size: 14px; /* Ajusta o tamanho da fonte da porcentagem */
-    margin-top: 5px;
-    margin-left: 10px;
-}
-
-.porcentagem {
-    font-size: 12px; /* Ajusta o tamanho da fonte da porcentagem */
-    font-weight: bold; /* Torna a porcentagem mais destacada */
-    margin-left: 5px; /* Adiciona um espaço entre o valor e a porcentagem */
-    color: gray; /* Ajuste a cor conforme necessário */
 }
 
 /* Adicionando novos tamanhos para .title e .value */
