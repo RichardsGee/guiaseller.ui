@@ -2,6 +2,11 @@
 import { calculateSummary, calculateCurrentMonthSummary, calculatePreviousMonthSummary, calculateComparison } from './ChartFunctions';
 
 export const getChartData = (salesData, dateRange) => {
+    if (!salesData) {
+        console.error('salesData is undefined or null');
+        return { dataVendas: null, dataFaturamento: null, dataComparacao: null };
+    }
+
     const today = new Date();
 
     // Resumos individuais
@@ -71,12 +76,13 @@ export const getChartData = (salesData, dateRange) => {
             ],
         };
     } else if (dateRange === '7d') {
+        const comparison7d = calculateComparison(salesData, 7);
         dataVendas = {
             labels: ['7 Dias Anteriores', 'Últimos 7 Dias'],
             datasets: [
                 {
                     label: 'Quantidade de Vendas',
-                    data: [calculateComparison(salesData, 7).totalSales, summary7d.totalSales],
+                    data: [comparison7d.totalSales, summary7d.totalSales],
                     backgroundColor: ['rgba(255, 205, 86, 0.6)', 'rgba(54, 162, 235, 0.6)'],
                     borderColor: ['rgba(255, 205, 86, 1)', 'rgba(54, 162, 235, 1)'],
                     borderWidth: 1,
@@ -91,7 +97,7 @@ export const getChartData = (salesData, dateRange) => {
             datasets: [
                 {
                     label: 'Faturamento',
-                    data: [calculateComparison(salesData, 7).totalRevenue, summary7d.totalRevenue],
+                    data: [comparison7d.totalRevenue, summary7d.totalRevenue],
                     backgroundColor: ['rgba(255, 205, 86, 0.6)', 'rgba(54, 162, 235, 0.6)'],
                     borderColor: ['rgba(255, 205, 86, 1)', 'rgba(54, 162, 235, 1)'],
                     borderWidth: 1,
@@ -106,7 +112,7 @@ export const getChartData = (salesData, dateRange) => {
             datasets: [
                 {
                     label: 'Comparação de Vendas',
-                    data: [calculateComparison(salesData, 7).totalSales, summary7d.totalSales],
+                    data: [comparison7d.totalSales, summary7d.totalSales],
                     backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, 0.6)'],
                     borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
                     borderWidth: 1,
@@ -162,16 +168,15 @@ export const getChartData = (salesData, dateRange) => {
         };
     } else {
         const labels = dateRange === '15d' ? ['15 Dias Anteriores', 'Últimos 15 Dias'] : ['30 Dias Anteriores', 'Últimos 30 Dias'];
+        const comparisonData = dateRange === '15d' ? calculateComparison(salesData, 15) : calculateComparison(salesData, 30);
+        const summaryData = dateRange === '15d' ? summary15d : summary30d;
 
         dataVendas = {
             labels: labels,
             datasets: [
                 {
                     label: 'Quantidade de Vendas',
-                    data: [
-                        dateRange === '15d' ? calculateComparison(salesData, 15).totalSales : calculateComparison(salesData, 30).totalSales,
-                        dateRange === '15d' ? summary15d.totalSales : summary30d.totalSales,
-                    ],
+                    data: [comparisonData.totalSales, summaryData.totalSales],
                     backgroundColor: ['rgba(255, 205, 86, 0.6)', 'rgba(54, 162, 235, 0.6)'],
                     borderColor: ['rgba(255, 205, 86, 1)', 'rgba(54, 162, 235, 1)'],
                     borderWidth: 1,
@@ -186,10 +191,7 @@ export const getChartData = (salesData, dateRange) => {
             datasets: [
                 {
                     label: 'Faturamento',
-                    data: [
-                        dateRange === '15d' ? calculateComparison(salesData, 15).totalRevenue : calculateComparison(salesData, 30).totalRevenue,
-                        dateRange === '15d' ? summary15d.totalRevenue : summary30d.totalRevenue,
-                    ],
+                    data: [comparisonData.totalRevenue, summaryData.totalRevenue],
                     backgroundColor: ['rgba(255, 205, 86, 0.6)', 'rgba(54, 162, 235, 0.6)'],
                     borderColor: ['rgba(255, 205, 86, 1)', 'rgba(54, 162, 235, 1)'],
                     borderWidth: 1,
@@ -204,10 +206,7 @@ export const getChartData = (salesData, dateRange) => {
             datasets: [
                 {
                     label: 'Comparação de Vendas',
-                    data: [
-                        dateRange === '15d' ? calculateComparison(salesData, 15).totalSales : calculateComparison(salesData, 30).totalSales,
-                        dateRange === '15d' ? summary15d.totalSales : summary30d.totalSales,
-                    ],
+                    data: [comparisonData.totalSales, summaryData.totalSales],
                     backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, 0.6)'],
                     borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)'],
                     borderWidth: 1,

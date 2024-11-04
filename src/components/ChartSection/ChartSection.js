@@ -1,15 +1,36 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, LineElement, CategoryScale, LinearScale, Filler, PointElement } from 'chart.js';
-import styles from './ChartSection.module.css';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import styles from './ChartSection.module.css'; // Importando os estilos
 import ChartFilter from './ChartFilter';
-import { getChartData } from './ChartData'; // Importa a nova função
+import { getChartData } from './ChartData'; 
 
-// Registrar os componentes do Chart.js
-ChartJS.register(Title, Tooltip, Legend, BarElement, LineElement, CategoryScale, LinearScale, Filler, PointElement);
+// Definindo o plugin para desenhar a linha horizontal
+const horizontalLinePlugin = {
+    id: 'horizontalLine',
+    afterDatasetsDraw: (chart) => {
+        const { ctx, chartArea, scales } = chart;
+        ctx.save();
+        ctx.strokeStyle = 'red'; // Cor da linha
+        ctx.lineWidth = 2; // Espessura da linha
+
+        const value = chart.options.lineValue; // Valor que você deseja marcar
+        const y = scales.y.getPixelForValue(value); // Posição Y da linha
+
+        ctx.beginPath();
+        ctx.moveTo(chartArea.left, y); // Começa na borda esquerda do gráfico
+        ctx.lineTo(chartArea.right, y); // Termina na borda direita do gráfico
+        ctx.stroke();
+        ctx.restore();
+    }
+};
+
+// Registrar os componentes do Chart.js, incluindo ChartDataLabels
+ChartJS.register(Title, Tooltip, Legend, BarElement, LineElement, CategoryScale, LinearScale, Filler, PointElement, ChartDataLabels, horizontalLinePlugin);
 
 const ChartSection = ({ salesData, dateRange, onDateRangeChange }) => {
-    const { dataVendas, dataFaturamento, dataComparacao } = getChartData(salesData, dateRange); // Usa a nova função para obter os dados
+    const { dataVendas, dataFaturamento, dataComparacao } = getChartData(salesData, dateRange); 
 
     const options = {
         responsive: true,
@@ -27,6 +48,7 @@ const ChartSection = ({ salesData, dateRange, onDateRangeChange }) => {
                     font: {
                         size: 14,
                     },
+                    padding: 50, // Aumentar o espaço antes do label
                 },
             },
             y: {
@@ -49,8 +71,22 @@ const ChartSection = ({ salesData, dateRange, onDateRangeChange }) => {
                 titleColor: '#fff',
                 bodyColor: '#fff',
             },
+            datalabels: {
+                anchor: 'end',
+                align: 'end',
+                color: 'white',
+                font: {
+                    size: 12,
+                    weight: 'bold',
+                    family: 'Poppins, sans-serif',
+                },
+                formatter: (value) => {
+                    return value.toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+                },
+            },
         },
     };
+    
 
     return (
         <div className={styles.chartSection}>
@@ -59,15 +95,15 @@ const ChartSection = ({ salesData, dateRange, onDateRangeChange }) => {
             <div className={styles.chartContainer}>
                 <div className={styles.chartWrapper}>
                     <h3>Total de Vendas</h3>
-                    <Bar data={dataVendas} options={options} />
+                    {dataVendas && <Bar data={dataVendas} options={options} plugins={[ChartDataLabels]} />}
                 </div>
                 <div className={styles.chartWrapper}>
                     <h3>Faturamento</h3>
-                    <Bar data={dataFaturamento} options={options} />
+                    {dataFaturamento && <Bar data={dataFaturamento} options={options} plugins={[ChartDataLabels]} />}
                 </div>
                 <div className={styles.chartWrapper}>
                     <h3>Comparação de Vendas</h3>
-                    <Bar data={dataComparacao} options={options} />
+                    {dataComparacao && <Bar data={dataComparacao} options={options} plugins={[ChartDataLabels]} />}
                 </div>
             </div>
         </div>
