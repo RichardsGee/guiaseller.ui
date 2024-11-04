@@ -21,12 +21,13 @@
 .chartWrapper {
   flex: 1 1 30%; /* Permite que cada gráfico ocupe um espaço mínimo de 30% da largura do contêiner */
   max-width: 30%; /* Limita a largura máxima de cada gráfico para 30% */
-  height: 300px; /* Altura fixa para o gráfico */
+  height: 200px; /* Altura reduzida para o gráfico */
   margin: 0 5px; /* Adiciona margem lateral entre os gráficos */
   position: relative; /* Permite posicionamento de elementos filhos */
   box-sizing: border-box; /* Inclui padding e bordas na largura total do elemento */
   border: 1px solid rgba(0, 0, 0, 0.1); /* Linha no topo dos retângulos */
 }
+
 
 .chartWrapper h3 {
   text-align: center; /* Centraliza os subtítulos dos gráficos */
