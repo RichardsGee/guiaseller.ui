@@ -47,7 +47,7 @@
 }
 
 .icon {
-    color: var(--tools-color) !important;
+    color: var(--text-color) !important;
     font-size: 30px;
 }
 

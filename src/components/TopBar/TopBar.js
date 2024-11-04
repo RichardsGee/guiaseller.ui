@@ -35,13 +35,36 @@ function TopBar({ items, salesData, dateRange }) {
             return { totalFaturamento, totalVendas };
         };
 
+        // Função para calcular os totais de ontem
+        const calculateYesterdayTotals = () => {
+            const today = new Date();
+            const yesterdayStart = new Date(today);
+            yesterdayStart.setDate(today.getDate() - 1);
+            yesterdayStart.setHours(0, 0, 1); // 00:00:01
+            const yesterdayEnd = new Date(today);
+            yesterdayEnd.setDate(today.getDate() - 1);
+            yesterdayEnd.setHours(23, 59, 59); // 23:59:59
+            let totalFaturamento = 0;
+            let totalVendas = 0;
+
+            salesData.forEach(sale => {
+                const dateCreated = new Date(sale.date_created);
+                if (dateCreated >= yesterdayStart && dateCreated <= yesterdayEnd) {
+                    totalFaturamento += sale.total_amount || 0;
+                    totalVendas += 1;
+                }
+            });
+
+            return { totalFaturamento, totalVendas };
+        };
+
         // Resumos para o período atual e anterior com base no filtro
         let currentSummary = {};
         let previousSummary = {};
 
         if (dateRange === '1d') {
             currentSummary = calculateTotals(0, true); // Para "Hoje"
-            previousSummary = calculateTotals(1, false); // Para "Ontem"
+            previousSummary = calculateYesterdayTotals(); // Para "Ontem"
         } else if (dateRange === '7d') {
             currentSummary = calculateTotals(7, false); // Últimos 7 dias
             previousSummary = calculateTotals(14, false); // 14 dias atrás para comparação
