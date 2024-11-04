@@ -1,3 +1,5 @@
+/* ChartSection.module.css */
+
 .chartSection {
   padding: 20px;
   border-radius: 8px; /* Bordas arredondadas */
@@ -30,4 +32,16 @@
   text-align: center; /* Centraliza os subtítulos dos gráficos */
   font-size: 18px; /* Tamanho da fonte para os subtítulos */
   margin-bottom: 10px; /* Espaçamento abaixo do subtítulo */
+}
+
+/* Estilo do container de informações */
+.infoContainer {
+  position: absolute; /* Permite sobrepor ao gráfico */
+  right: 10px; /* Distância da direita */
+  bottom: 10px; /* Distância do fundo */
+  background-color: rgba(255, 255, 255, 0.9); /* Fundo levemente transparente */
+  padding: 10px; /* Espaçamento interno */
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  z-index: 1; /* Garante que o container fique acima do gráfico */
 }
