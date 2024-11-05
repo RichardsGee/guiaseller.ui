@@ -1,12 +1,14 @@
-import React from 'react';
+// src/components/ChartSection.jsx
+import React, { useContext } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, LineElement, CategoryScale, LinearScale, Filler, PointElement } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import styles from './ChartSection.module.css'; // Importando os estilos
+import styles from './ChartSection.module.css';
 import ChartFilter from './ChartFilter';
-import { getChartData } from './ChartData'; 
+import { getChartData } from './ChartData';
+import { ThemeContext } from '../../context/ThemeContext';
 
-// Definindo o plugin para desenhar a linha horizontal
+// Plugin para desenhar a linha horizontal
 const horizontalLinePlugin = {
     id: 'horizontalLine',
     afterDatasetsDraw: (chart) => {
@@ -30,7 +32,13 @@ const horizontalLinePlugin = {
 ChartJS.register(Title, Tooltip, Legend, BarElement, LineElement, CategoryScale, LinearScale, Filler, PointElement, ChartDataLabels, horizontalLinePlugin);
 
 const ChartSection = ({ salesData, dateRange, onDateRangeChange }) => {
-    const { dataVendas, dataFaturamento, dataComparacao } = getChartData(salesData, dateRange); 
+    const { theme } = useContext(ThemeContext); // Obtém o tema atual do contexto
+
+    const { dataVendas, dataFaturamento, dataComparacao } = getChartData(salesData, dateRange);
+
+    // Define as cores de acordo com o tema
+    const textColor = theme === 'dark' ? '#ffffff' : '#333333';
+    const tooltipBackgroundColor = theme === 'dark' ? 'rgba(50, 50, 50, 0.8)' : 'rgba(255, 255, 255, 0.9)';
 
     const options = {
         responsive: true,
@@ -40,20 +48,20 @@ const ChartSection = ({ salesData, dateRange, onDateRangeChange }) => {
             x: {
                 beginAtZero: true,
                 grid: {
-                    color: 'rgba(0, 0, 0, 0.1)',
+                    color: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
                     lineWidth: 1,
                 },
                 ticks: {
-                    color: '#333',
+                    color: textColor,
                     font: {
-                        size: 14,
+                        size: 12,
                     },
-                    padding: 50, // Aumentar o espaço antes do label
+                    padding: 40,
                 },
             },
             y: {
                 ticks: {
-                    color: '#333',
+                    color: textColor,
                     font: {
                         size: 14,
                     },
@@ -63,20 +71,20 @@ const ChartSection = ({ salesData, dateRange, onDateRangeChange }) => {
         plugins: {
             legend: {
                 labels: {
-                    color: '#333',
+                    color: textColor,
                 },
             },
             tooltip: {
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                titleColor: '#fff',
-                bodyColor: '#fff',
+                backgroundColor: tooltipBackgroundColor,
+                titleColor: textColor,
+                bodyColor: textColor,
             },
             datalabels: {
                 anchor: 'end',
                 align: 'end',
-                color: 'white',
+                color: textColor,
                 font: {
-                    size: 12,
+                    size: 14,
                     weight: 'bold',
                     family: 'Poppins, sans-serif',
                 },
@@ -86,15 +94,14 @@ const ChartSection = ({ salesData, dateRange, onDateRangeChange }) => {
             },
         },
     };
-    
 
     return (
         <div className={styles.chartSection}>
-            <h2 className={styles.chartTitle}>Gráficos de Vendas e Faturamento</h2>
+            <center><h2 className={styles.chartTitle}>Dashboard</h2></center>
             <ChartFilter dateRange={dateRange} onDateRangeChange={onDateRangeChange} />
             <div className={styles.chartContainer}>
                 <div className={styles.chartWrapper}>
-                    <h3>Total de Vendas</h3>
+                    <h3>Quantidade de Vendas</h3>
                     {dataVendas && <Bar data={dataVendas} options={options} plugins={[ChartDataLabels]} />}
                 </div>
                 <div className={styles.chartWrapper}>
@@ -102,7 +109,7 @@ const ChartSection = ({ salesData, dateRange, onDateRangeChange }) => {
                     {dataFaturamento && <Bar data={dataFaturamento} options={options} plugins={[ChartDataLabels]} />}
                 </div>
                 <div className={styles.chartWrapper}>
-                    <h3>Comparação de Vendas</h3>
+                    <h3>EM BREVE</h3>
                     {dataComparacao && <Bar data={dataComparacao} options={options} plugins={[ChartDataLabels]} />}
                 </div>
             </div>

@@ -1,3 +1,10 @@
+:root {
+  --chart-text-color: var(--text-color); /* Usa a cor do texto do tema */
+  --chart-background-color: var(--background-color);
+  --chart-primary-color: var(--primary-color);
+}
+
+
 .chartSection {
   padding: 20px;
   border-radius: 8px; /* Bordas arredondadas */
@@ -17,13 +24,15 @@
 }
 
 .chartWrapper {
+  background-color: var(--secondary-color);
+  padding: 10px;
+  border-radius: 8px;
   flex: 1 1 30%; /* Permite que cada gráfico ocupe um espaço mínimo de 30% da largura do contêiner */
   max-width: 30%; /* Limita a largura máxima de cada gráfico para 30% */
   height: 200px; /* Altura reduzida para o gráfico */
   margin: 0 5px; /* Adiciona margem lateral entre os gráficos */
   position: relative; /* Permite posicionamento de elementos filhos */
   box-sizing: border-box; /* Inclui padding e bordas na largura total do elemento */
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Linha no topo dos retângulos */
 }
 
 

@@ -1,14 +1,39 @@
+/* ChartFilter.module.css */
+
 .filterContainer {
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filterWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filterContainer label {
+  font-weight: bold;
+  margin-right: 5px;
+  font-size: 1em;
+}
+
+.select {
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 1em;
+  border: 1px solid var(--border-color);
+  background-color: var(--text-color); /* Fundo consistente com o tema */
+  color: var(--secondary-color); /* Cor do texto */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .filterContainer {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .filterContainer h3 {
-    margin: 0;
-    font-size: 1.2em;
-  }
-  
-  .filterContainer select {
-    padding: 5px;
-    font-size: 1em;
-  }
-  
+}

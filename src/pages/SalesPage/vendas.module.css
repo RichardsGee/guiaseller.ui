@@ -1,5 +1,5 @@
-/* Estilos existentes para a seção de filtros */
-.filtersContainer {
+/* Estilos para a seção de filtros */
+.filterContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -16,11 +16,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.importButton:hover {
-  background-color: #357ABD;
+  /* Removido o efeito de hover */
 }
 
 .monthFilter {
@@ -36,7 +32,15 @@
 .monthFilter select {
   padding: 5px;
   border-radius: 4px;
+  font-size: 1em;
   border: 1px solid var(--border-color);
+  background-color: var(--text-color); /* Fundo branco */
+  color: var(--secondary-color); /* Cor do texto */
+}
+
+/* Estilo sem efeito de hover para o select */
+.monthFilter select:focus {
+  outline: none;
 }
 
 .filterWrapper {
@@ -52,40 +56,40 @@
 
 /* Estilos para o container do cabeçalho */
 .headerContainer {
-  display: flex; /* Usar flexbox para alinhar os itens na linha */
-  justify-content: space-between; /* Espaço entre título e faturamento */
-  align-items: center; /* Alinha os itens verticalmente */
-  margin-bottom: 20px; /* Espaço abaixo do cabeçalho */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 /* Estilos adicionais para o container de faturamento */
 .faturamentoContainer {
-  display: flex; /* Alinhamento horizontal dos itens de faturamento */
-  margin-left: auto; /* Empurra a seção de faturamento para a direita */
-  background-color: var(--secondary-color);; /* Cor de fundo leve */
-  padding: 10px; /* Padding interno para espaçamento */
-  border-radius: 5px; /* Bordas arredondadas */
-  border: 1px solid var(--border-color); /* Borda para definir a seção */
+  display: flex;
+  margin-left: auto;
+  background-color: var(--secondary-color);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
 }
 
 .faturamentoItem {
-  margin-left: 15px; /* Espaço entre os itens */
-  text-align: center; /* Centraliza o texto dentro de cada item */
-  flex: 1; /* Faz com que cada item ocupe espaço igual */
-  min-width: 120px; /* Largura mínima para garantir espaço */
+  margin-left: 15px;
+  text-align: center;
+  flex: 1;
+  min-width: 120px;
 }
 
 .faturamentoItem h3 {
-  margin: 0; /* Remove a margem do título */
-  font-size: 14px; /* Tamanho do título ajustado */
-  color: #333; /* Cor do texto */
+  margin: 0;
+  font-size: 14px;
+  color: #333;
 }
 
 .faturamentoItem p {
-  margin: 5px 0 0; /* Margem para o parágrafo abaixo do título */
-  font-size: 14px; /* Tamanho do texto do valor */
-  color: #555; /* Cor do texto */
-  font-weight: bold; /* Para destacar o valor */
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #555;
+  font-weight: bold;
 }
 
 /* Responsividade */
@@ -96,18 +100,18 @@
   }
 
   .headerContainer {
-    flex-direction: column; /* Muda para coluna em telas menores */
-    align-items: flex-start; /* Alinha os itens à esquerda */
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .faturamentoContainer {
-    flex-direction: column; /* Muda para coluna em telas menores */
-    align-items: flex-start; /* Alinha os itens à esquerda */
-    margin-left: 0; /* Remove margem esquerda em telas menores */
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 0;
   }
 
   .faturamentoItem {
-    margin-left: 0; /* Remove margem à esquerda em telas pequenas */
-    margin-bottom: 10px; /* Adiciona margem inferior para espaçamento em coluna */
+    margin-left: 0;
+    margin-bottom: 10px;
   }
 }
