@@ -4,11 +4,9 @@
   --chart-primary-color: var(--primary-color);
 }
 
-
 .chartSection {
   padding: 5px;
   border-radius: 8px; /* Bordas arredondadas */
-  
 }
 
 .chartTitle {
@@ -21,45 +19,45 @@
   justify-content: space-between; /* Mantém espaço igual entre os gráficos */
   flex-wrap: wrap; /* Permite que os gráficos se movam para a linha abaixo se necessário */
   padding: 20px; /* Adiciona espaço ao redor do gráfico */
-  
 }
 
 .chartWrapper {
   background-color: var(--secondary-color);
   padding: 10px;
   border-radius: 8px;
-  flex: 1 1 30%; /* Permite que cada gráfico ocupe um espaço mínimo de 30% da largura do contêiner */
+  flex: 1 1 30%; /* Cada gráfico ocupa no mínimo 30% da largura do contêiner */
   max-width: 30%; /* Limita a largura máxima de cada gráfico para 30% */
-  height: 200px; /* Altura reduzida para o gráfico */
+  height: 200px; /* Altura dos gráficos */
   margin: 0 5px; /* Adiciona margem lateral entre os gráficos */
   position: relative; /* Permite posicionamento de elementos filhos */
-  box-sizing: border-box; /* Inclui padding e bordas na largura total do elemento */
+  box-sizing: border-box; /* Inclui padding e bordas na largura total */
 }
-
-
 
 .chartWrapper h3 {
   text-align: center; /* Centraliza os subtítulos dos gráficos */
   font-size: 18px; /* Tamanho da fonte para os subtítulos */
   margin-bottom: 10px; /* Espaçamento abaixo do subtítulo */
-  
 }
 
-/* Estilo do container de informações */
 .infoContainer {
-  position: absolute; /* Permite sobrepor ao gráfico */
-  right: 10px; /* Distância da direita */
-  bottom: 10px; /* Distância do fundo */
+  position: absolute; /* Sobrepõe o gráfico */
+  right: 10px;
+  bottom: 10px;
   background-color: rgba(255, 255, 255, 0.9); /* Fundo levemente transparente */
-  padding: 10px; /* Espaçamento interno */
-  border-radius: 8px; /* Bordas arredondadas */
+  padding: 10px;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra sutil */
   z-index: 1; /* Garante que o container fique acima do gráfico */
 }
 
 .chart-label {
-  font-family: 'Poppins', sans-serif; /* A fonte que você está utilizando */
-  font-size: 12px; /* Tamanho da fonte */
+  font-family: 'Poppins', sans-serif; /* Fonte Poppins */
+  font-size: 12px;
   color: #333; /* Cor do texto */
-  font-weight: bold; /* Peso da fonte */
+  font-weight: bold;
+}
+
+.chartSection.blurred {
+  filter: blur(8px); /* Aplica desfoque */
+  transition: filter 0.3s ease; /* Animação suave do desfoque */
 }

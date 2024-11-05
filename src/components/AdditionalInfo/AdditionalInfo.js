@@ -1,11 +1,11 @@
+// src/components/AdditionalInfo.jsx
 import React, { useState } from 'react';
-import { Tag, Cancel, MonetizationOn, CheckCircle } from '@mui/icons-material'; // Ícones do Material-UI
+import { Tag, Cancel, MonetizationOn, CheckCircle } from '@mui/icons-material';
 import styles from './AdditionalInfo.module.css';
 
-function AdditionalInfo({ vendas }) {
+function AdditionalInfo({ vendas = [], blurAdditional }) {
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
 
-  // Filtrar as vendas com base no mês selecionado
   const filteredVendas = vendas.filter((venda) => {
     const vendaDate = new Date(venda.date_created);
     return vendaDate.getMonth() + 1 === selectedMonth;
@@ -13,24 +13,16 @@ function AdditionalInfo({ vendas }) {
 
   const getTop3Products = () => {
     const productMap = {};
-
     filteredVendas.forEach((venda) => {
       const isCatalog = venda.tags.includes("catalog");
       const isCancelled = venda.status === "cancelled";
-
       venda.order_items.forEach((item) => {
         const productName = item.item.title;
         const quantity = item.quantity;
         const totalAmount = item.unit_price * quantity;
 
         if (!productMap[productName]) {
-          productMap[productName] = {
-            totalQuantity: 0,
-            catalogQuantity: 0,
-            traditionalQuantity: 0,
-            cancelledQuantity: 0,
-            totalAmount: 0,
-          };
+          productMap[productName] = { totalQuantity: 0, catalogQuantity: 0, cancelledQuantity: 0, totalAmount: 0 };
         }
 
         productMap[productName].totalQuantity += quantity;
@@ -40,8 +32,6 @@ function AdditionalInfo({ vendas }) {
           productMap[productName].cancelledQuantity += quantity;
         } else if (isCatalog) {
           productMap[productName].catalogQuantity += quantity;
-        } else {
-          productMap[productName].traditionalQuantity += quantity;
         }
       });
     });
@@ -59,7 +49,7 @@ function AdditionalInfo({ vendas }) {
   };
 
   return (
-    <section className={styles.additionalInfo}>
+    <section className={`${styles.additionalInfo} ${blurAdditional ? styles.blurred : ''}`}>
       <div className={styles.topSellersContainer}>
         <div className={styles.header}>
           <h3>Mais Vendidos em</h3>
@@ -71,7 +61,6 @@ function AdditionalInfo({ vendas }) {
             ))}
           </select>
         </div>
-
         <div className={styles.productList}>
           {top3Products.map((product, index) => (
             <div key={index} className={styles.productItem}>
@@ -108,9 +97,9 @@ function AdditionalInfo({ vendas }) {
         </div>
       </div>
 
+      {/* Container "Em Breve" */}
       <div className={styles.marketplaceContainer}>
         <h3>Em Breve</h3>
-        <p></p>
       </div>
     </section>
   );

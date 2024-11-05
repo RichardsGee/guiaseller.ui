@@ -64,7 +64,30 @@ body.dark {
     padding: 0;
     box-sizing: border-box;
 }
+/* styles.css */
 
+.blurred {
+    filter: blur(8px);
+    transition: filter 0.3s ease;
+  }
+  
+  .visibility-toggle {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre os controles de desfoque */
+    cursor: pointer;
+  }
+  
+  .visibility-toggle div {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espaço entre o ícone de olho e o texto */
+    cursor: pointer;
+  }
+  
+  
+  
+  
 @import url('https://fonts.googleapis.com/css2?family=Rambla:wght@300;400;500;600;700&display=swap');
 
 body {

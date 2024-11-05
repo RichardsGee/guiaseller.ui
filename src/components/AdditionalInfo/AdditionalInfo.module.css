@@ -1,24 +1,19 @@
+/* AdditionalInfo.module.css */
+
 .additionalInfo {
     display: flex;
-    gap: 15px; /* Espaço entre os containers */
-    padding: 15px; /* Preenchimento do container principal */
+    gap: 15px;
+    padding: 15px;
     background-color: var(--background-color);
     border-radius: 8px;
-    margin-top: 15px; /* Espaço acima do componente */
+    margin-top: 15px;
 }
 
-.topSellersContainer {
-    flex: 1;
-    background-color: var(--secondary-color);
-    padding: 10px; /* Preenchimento interno */
-    border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-}
-
+.topSellersContainer,
 .marketplaceContainer {
     flex: 1;
     background-color: var(--secondary-color);
-    padding: 10px; /* Preenchimento interno */
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
@@ -26,133 +21,136 @@
 .header {
     display: flex;
     align-items: center;
-    gap: 8px; /* Espaço entre o título e o filtro */
-    margin-bottom: 10px; /* Espaço abaixo do header */
-    justify-content: center; /* Centraliza o header */
+    gap: 8px;
+    margin-bottom: 10px;
+    justify-content: center;
 }
 
 .header h3 {
-    font-size: 1.2em; /* Tamanho da fonte do título */
+    font-size: 1.2em;
     color: var(--text-color);
 }
 
 .monthFilter {
-    padding: 4px; /* Preenchimento do select */
-    font-size: 0.9em; /* Tamanho da fonte */
+    padding: 4px;
+    font-size: 0.9em;
     border-radius: 4px;
     border: 1px solid var(--border-color);
     background-color: var(--secondary-color);
     color: var(--text-color);
-    cursor: pointer; /* Muda o cursor ao passar por cima */
+    cursor: pointer;
 }
 
 .productList {
     display: flex;
-    flex-direction: column; /* Organiza produtos em coluna */
-    gap: 8px; /* Espaço entre os produtos */
+    flex-direction: column;
+    gap: 8px;
 }
 
 .productItem {
     display: flex;
-    align-items: center; /* Alinha verticalmente os itens */
+    align-items: center;
     background-color: var(--background-color);
-    padding: 8px; /* Preenchimento interno do item */
-    border-radius: 6px; /* Bordas arredondadas */
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Sombra do item */
-    font-size: 15px; /* Tamanho da fonte */
-
+    padding: 8px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
 }
 
 .productImage {
-    width: 60px; /* Largura da imagem do produto */
-    height: 60px; /* Altura da imagem do produto */
-    background-color: #f5f5f5; /* Cor de fundo */
-    border-radius: 4px; /* Bordas arredondadas */
+    width: 60px;
+    height: 60px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
     display: flex;
-    align-items: center; /* Centraliza o conteúdo */
-    justify-content: center; /* Centraliza o conteúdo */
-    margin-right: 8px; /* Espaço à direita da imagem */
-    font-size: 20px; /* Tamanho da fonte do ícone */
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    font-size: 20px;
 }
 
 .productDetails {
-    flex: 1; /* Permite que os detalhes ocupem o espaço restante */
+    flex: 1;
     display: flex;
-    flex-direction: column; /* Organiza detalhes em coluna */
+    flex-direction: column;
 }
 
 .productName {
-    font-size: 1em; /* Tamanho da fonte do nome do produto */
+    font-size: 1em;
     color: var(--text-color);
-    font-weight: bold; /* Negrito */
-    margin-bottom: 3px; /* Espaço abaixo do nome */
+    font-weight: bold;
+    margin-bottom: 3px;
 }
 
 .productInfo {
     display: flex;
-    align-items: center; /* Alinha verticalmente os itens */
-    justify-content: space-between; /* Alinha os itens com espaço entre eles */
-    margin-top: 5px; /* Espaço acima para separação */
-    gap: 10px; /* Espaço entre os itens na linha */
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5px;
+    gap: 10px;
 }
 
 .fixedContainerWithIcon {
-    display: flex; /* Permite o uso de flexbox */
-    align-items: center; /* Alinha verticalmente */
-    justify-content: flex-start; /* Alinha os ícones e texto à esquerda */
-    gap: 8px; /* Espaço entre o ícone e o texto */
-    width: 150px; /* Largura fixa */
-    height: 25px; /* Altura fixa */
-    background-color: var(--secondary-color); /* Cor de fundo */
-    color: var(--text-color); /* Cor do texto */
-    border-radius: 6px; /* Bordas arredondadas */
-    font-size: 0.85em; /* Tamanho da fonte */
-    padding: 4px; /* Preenchimento interno */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 150px;
+    height: 25px;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border-radius: 6px;
+    font-size: 0.85em;
+    padding: 4px;
 }
 
 .icon {
-    margin-right: 4px; /* Espaço entre o ícone e o texto */
-    font-size: 15px; /* Tamanho da fonte */
-
+    font-size: 15px;
 }
 
 .cancelledInfo {
     display: flex;
-    align-items: center; /* Alinha verticalmente */
-    font-weight: bold; /* Negrito */
+    align-items: center;
+    font-weight: bold;
 }
 
 .productTypeBreakdown {
     display: flex;
-    justify-content: flex-start; /* Alinha os tipos de vendas na mesma linha */
-    gap: 10px; /* Menor espaçamento para layout compacto */
-    padding-top: 5px; /* Espaço acima */
+    justify-content: flex-start;
+    gap: 10px;
+    padding-top: 5px;
 }
 
 .catalogQuantity,
 .traditionalQuantity {
     display: flex;
-    align-items: center; /* Alinha verticalmente */
-    gap: 5px; /* Espaço entre o ícone e o texto */
-    font-weight: bold; /* Negrito */
-    font-size: 0.85em; /* Tamanho da fonte */
-    
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    font-size: 0.85em;
 }
 
 .catalogIcon {
-    color: #4A90E2; /* Cor para vendas de catálogo */
-    font-size: 15px; /* Tamanho da fonte */
-
+    color: #4A90E2;
+    font-size: 15px;
 }
 
 .traditionalIcon {
-    color: #A9A9A9; /* Cor para vendas tradicionais */
-    font-size: 15px; /* Tamanho da fonte */
-
+    color: #A9A9A9;
+    font-size: 15px;
 }
 
 .cancelledIcon {
-    color: #E74C3C; /* Cor para vendas canceladas */
-    font-size: 15px; /* Tamanho da fonte */
+    color: #E74C3C;
+    font-size: 15px;
+}
 
+.blurred {
+    filter: blur(8px);
+    transition: filter 0.3s ease;
+}
+
+.blurControls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
 }
