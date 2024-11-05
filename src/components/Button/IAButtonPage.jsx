@@ -9,7 +9,10 @@ function IAButton() {
   };
 
   const handleClickWhatsApp = () => {
-    alert('WhatsApp clicado!'); // Ação ao clicar no botão WhatsApp
+    window.open(
+      'https://wa.me/5514981914741?text=Olá%2C%20sou%20cliente%20do%20GuiaSeller%20e%20tenho%20algumas%20dúvidas%2C%20a%20equipe%20de%20vocês%20poderia%20me%20auxiliar%3F',
+      '_blank'
+    );
   };
 
   return (
