@@ -1,16 +1,23 @@
 // src/components/AdditionalInfo/AdditionalInfo.jsx
-import React from 'react';
-import { Tag, Cancel } from '@mui/icons-material'; // Ícones de hashtag e cancelado
+import React, { useState } from 'react';
+import { Tag, Cancel } from '@mui/icons-material';
 import styles from './AdditionalInfo.module.css';
 
 function AdditionalInfo({ vendas }) {
-  // Função para calcular os 3 produtos mais vendidos com contagem de "Catálogo", "Tradicional" e "Cancelados"
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+
+  // Filtrar as vendas com base no mês selecionado
+  const filteredVendas = vendas.filter((venda) => {
+    const vendaDate = new Date(venda.date_created);
+    return vendaDate.getMonth() + 1 === selectedMonth;
+  });
+
   const getTop3Products = () => {
     const productMap = {};
 
-    vendas.forEach((venda) => {
+    filteredVendas.forEach((venda) => {
       const isCatalog = venda.tags.includes("catalog");
-      const isCancelled = venda.status === "cancelled"; // Checa se o pedido foi cancelado
+      const isCancelled = venda.status === "cancelled";
 
       venda.order_items.forEach((item) => {
         const productName = item.item.title;
@@ -40,7 +47,6 @@ function AdditionalInfo({ vendas }) {
       });
     });
 
-    // Converte o mapa em array, ordena por quantidade total e retorna os 3 primeiros
     return Object.entries(productMap)
       .map(([name, data]) => ({ name, ...data }))
       .sort((a, b) => b.totalQuantity - a.totalQuantity)
@@ -49,10 +55,24 @@ function AdditionalInfo({ vendas }) {
 
   const top3Products = getTop3Products();
 
+  const handleMonthChange = (e) => {
+    setSelectedMonth(Number(e.target.value));
+  };
+
   return (
     <section className={styles.additionalInfo}>
       <div className={styles.topSellersContainer}>
-        <h3>Mais Vendidos</h3>
+        <div className={styles.header}>
+          <h3>Mais Vendidos em</h3>
+          <select className={styles.monthFilter} value={selectedMonth} onChange={handleMonthChange}>
+            {[...Array(12)].map((_, i) => (
+              <option key={i + 1} value={i + 1}>
+                {new Date(0, i).toLocaleString("pt-BR", { month: "long" })}
+              </option>
+            ))}
+          </select>
+        </div>
+
         <div className={styles.productList}>
           {top3Products.map((product, index) => (
             <div key={index} className={styles.productItem}>
@@ -83,6 +103,7 @@ function AdditionalInfo({ vendas }) {
           ))}
         </div>
       </div>
+
       <div className={styles.marketplaceContainer}>
         <h3>Mais Vendidos em Cada Marketplace</h3>
         <p>Em Breve</p>

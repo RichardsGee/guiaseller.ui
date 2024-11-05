@@ -6,9 +6,9 @@
 
 
 .chartSection {
-  padding: 20px;
+  padding: 5px;
   border-radius: 8px; /* Bordas arredondadas */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  
 }
 
 .chartTitle {
@@ -21,6 +21,7 @@
   justify-content: space-between; /* Mantém espaço igual entre os gráficos */
   flex-wrap: wrap; /* Permite que os gráficos se movam para a linha abaixo se necessário */
   padding: 20px; /* Adiciona espaço ao redor do gráfico */
+  
 }
 
 .chartWrapper {
@@ -41,6 +42,7 @@
   text-align: center; /* Centraliza os subtítulos dos gráficos */
   font-size: 18px; /* Tamanho da fonte para os subtítulos */
   margin-bottom: 10px; /* Espaçamento abaixo do subtítulo */
+  
 }
 
 /* Estilo do container de informações */

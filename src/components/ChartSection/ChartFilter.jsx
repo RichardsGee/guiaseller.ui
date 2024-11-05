@@ -4,7 +4,7 @@ import styles from './ChartFilter.module.css';
 
 const ChartFilter = ({ dateRange, onDateRangeChange }) => {
   return (
-    <div className={styles.filterContainer}>
+    <center><div className={styles.filterContainer}>
       <div className={styles.filterWrapper}>
         <label htmlFor="dateRangeSelect">Filtrar por Período:</label>
         <select
@@ -20,7 +20,7 @@ const ChartFilter = ({ dateRange, onDateRangeChange }) => {
           <option value="1d">Hoje</option>
         </select>
       </div>
-    </div>
+    </div></center>
   );
 };
 

@@ -3,10 +3,13 @@
 .filterContainer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
+  justify-content: flex-end; /* Posiciona o filtro no canto superior direito */
+  position: absolute; /* Define posição absoluta dentro do container pai */
+  top: 0; /* Coloca no topo */
+  right: 0; /* Coloca à direita */
+  gap: 10px;
+  margin: 10px; /* Ajusta a margem para que não fique encostado nas bordas */
+  z-index: 10; /* Garante que esteja acima dos demais elementos, se necessário */
 }
 
 .filterWrapper {
@@ -33,6 +36,7 @@
 /* Responsividade */
 @media (max-width: 768px) {
   .filterContainer {
+    position: static; /* Reseta a posição em telas menores */
     flex-direction: column;
     align-items: flex-start;
   }

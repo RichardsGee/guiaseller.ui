@@ -1,113 +1,126 @@
-/* AdditionalInfo.module.css */
+/* src/components/AdditionalInfo/AdditionalInfo.module.css */
 
 .additionalInfo {
     display: flex;
-    gap: 20px;
-    padding: 20px;
-    background-color: var(--secondary-color);
+    gap: 15px; /* Reduzido para dar mais espaço na tela */
+    padding: 15px; /* Reduzido para dar mais espaço na tela */
+    background-color: var(--background-color);
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-  }
-  
-  .topSellersContainer,
-  .marketplaceContainer {
+    margin-top: 15px; /* Reduzido para economizar espaço */
+}
+
+.topSellersContainer,
+.marketplaceContainer {
     flex: 1;
-    background-color: var(--third-color);
-    padding: 15px;
+    background-color: var(--secondary-color);
+    padding: 10px; /* Reduzido para deixar mais compacto */
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .topSellersContainer h3,
-  .marketplaceContainer h3 {
-    font-size: 1.2em;
-    color: var(--text-color);
-    margin-bottom: 15px;
-    text-align: center;
-  }
-  
-  .productList {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .productItem {
+}
+
+.header {
     display: flex;
     align-items: center;
-    background-color: var(--container-color);
-    padding: 10px;
-    border-radius: 8px;
+    gap: 8px; /* Reduzido para dar mais espaço */
+    margin-bottom: 10px; /* Reduzido para dar mais espaço */
+    justify-content: center;
+}
+
+.header h3 {
+    font-size: 1em; /* Diminuído para deixar mais compacto */
+    color: var(--text-color);
+}
+
+.monthFilter {
+    padding: 4px; /* Reduzido para economizar espaço */
+    font-size: 0.9em; /* Diminuído para harmonizar com o layout compacto */
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.productList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Reduzido para um layout mais compacto */
+}
+
+.productItem {
+    display: flex;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 8px; /* Reduzido para economizar espaço */
+    border-radius: 6px; /* Ligeiramente menor para harmonizar com o layout */
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .productImage {
-    width: 50px;
-    height: 50px;
+}
+
+.productImage {
+    width: 40px; /* Diminuído para um layout mais compacto */
+    height: 40px; /* Diminuído para um layout mais compacto */
     background-color: #f5f5f5;
     border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 10px;
-    font-size: 24px;
-  }
-  
-  .productDetails {
+    margin-right: 8px; /* Reduzido para um layout mais compacto */
+    font-size: 20px; /* Diminuído para um layout mais compacto */
+}
+
+.productDetails {
     flex: 1;
     display: flex;
     flex-direction: column;
-  }
-  
-  .productName {
-    font-size: 1em;
+}
+
+.productName {
+    font-size: 0.95em; /* Reduzido para deixar mais compacto */
     color: var(--text-color);
     font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .productInfo {
+    margin-bottom: 3px; /* Menor margem para mais espaço */
+}
+
+.productInfo {
     display: flex;
-    gap: 10px;
+    gap: 8px; /* Reduzido para layout mais compacto */
     align-items: center;
-  }
-  
-  .productQuantity,
-  .productTotal {
-    background-color: var(--primary-color);
-    color: #fff;
+}
+
+.productQuantity,
+.productTotal {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
     font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 8px;
-    font-size: 0.9em;
-  }
-  
-  .productTypeBreakdown {
+    padding: 4px 8px; /* Reduzido para economizar espaço */
+    border-radius: 6px; /* Menor para harmonizar com o layout */
+    font-size: 0.85em; /* Reduzido para layout compacto */
+}
+
+.productTypeBreakdown {
     display: flex;
-    gap: 15px;
+    gap: 10px; /* Menor espaçamento para layout compacto */
     padding-top: 5px;
-  }
-  
-  .catalogQuantity,
-  .traditionalQuantity,
-  .cancelledQuantity {
+}
+
+.catalogQuantity,
+.traditionalQuantity,
+.cancelledQuantity {
     display: flex;
     align-items: center;
     gap: 5px;
     font-weight: bold;
-    font-size: 0.9em;
-  }
-  
-  .catalogIcon {
-    color: #4A90E2; /* Azul para itens de catálogo */
-  }
-  
-  .traditionalIcon {
-    color: #A9A9A9; /* Cinza para itens tradicionais */
-  }
-  
-  .cancelledIcon {
-    color: #E74C3C; /* Vermelho para itens cancelados */
-  }
-  
+    font-size: 0.85em; /* Reduzido para layout mais compacto */
+}
+
+.catalogIcon {
+    color: #4A90E2;
+}
+
+.traditionalIcon {
+    color: #A9A9A9;
+}
+
+.cancelledIcon {
+    color: #E74C3C;
+}
