@@ -8,10 +8,9 @@ import AdditionalInfo from '../../components/AdditionalInfo/AdditionalInfo';
 import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
+import Blured from '../../components/Blured/Blured'; // Importa o novo componente de desfoque
 import '../../styles/styles.css';
 import topBarItems from '../../components/TopBar/TopBarItens';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 function Dashboard() {
   const { user, signOut } = useContext(AuthContext);
@@ -21,7 +20,6 @@ function Dashboard() {
 
   const [salesData, setSalesData] = useState([]);
   const [dateRange, setDateRange] = useState('30d');
-  const [blurAll, setBlurAll] = useState(false);
   const [blurChart, setBlurChart] = useState(false);
   const [blurAdditional, setBlurAdditional] = useState(false);
 
@@ -67,19 +65,6 @@ function Dashboard() {
     setDateRange(range);
   };
 
-  // Função para alternar o desfoque de todos os itens
-  const toggleBlurAll = () => {
-    const newBlurAllState = !blurAll;
-    setBlurAll(newBlurAllState);
-    if (newBlurAllState) {
-      setBlurChart(true);
-      setBlurAdditional(true);
-    } else {
-      setBlurChart(false);
-      setBlurAdditional(false);
-    }
-  };
-
   return (
     <MainContent> 
       <Header username={username} logout={signOut} />
@@ -87,31 +72,16 @@ function Dashboard() {
       <div className="main-content">
         <TopBar items={topBarItems} salesData={salesData} dateRange={dateRange} />
         <div className="dashboardContainer">
-          {/* Controles de Desfoque */}
-          <div className="visibility-toggle">
-            {/* Botão principal de borrar todos */}
-            <div onClick={toggleBlurAll}>
-              {blurAll ? <VisibilityOffIcon /> : <VisibilityIcon />}
-              <span>Borrar Todos</span>
-            </div>
-            {/* Botões individuais para cada seção */}
-            <div onClick={() => setBlurChart(!blurChart)}>
-              {blurChart ? <VisibilityOffIcon /> : <VisibilityIcon />}
-              <span>Borrar Gráficos</span>
-            </div>
-            <div onClick={() => setBlurAdditional(!blurAdditional)}>
-              {blurAdditional ? <VisibilityOffIcon /> : <VisibilityIcon />}
-              <span>Borrar Mais Vendidos</span>
-            </div>
-          </div>
+          {/* Componente de Controle de Desfoque */}
+          <Blured setBlurChart={setBlurChart} setBlurAdditional={setBlurAdditional} />
           {/* Seções com desfoque controlado */}
           <ChartSection
             salesData={salesData}
             dateRange={dateRange}
             onDateRangeChange={handleDateRangeChange}
-            blurChart={blurAll || blurChart} // Borrar tudo se blurAll estiver ativo
+            blurChart={blurChart}
           />
-          <AdditionalInfo vendas={salesData} blurAdditional={blurAll || blurAdditional} /> {/* Borrar tudo se blurAll estiver ativo */}
+          <AdditionalInfo vendas={salesData} blurAdditional={blurAdditional} />
         </div>
       </div>
       <Footer />
