@@ -105,8 +105,8 @@ function AdditionalInfo({ vendas }) {
       </div>
 
       <div className={styles.marketplaceContainer}>
-        <h3>Mais Vendidos em Cada Marketplace</h3>
-        <p>Em Breve</p>
+        <h3>Em Breve</h3>
+        <p></p>
       </div>
     </section>
   );

@@ -9,7 +9,14 @@
     margin-top: 15px; /* Reduzido para economizar espaço */
 }
 
-.topSellersContainer,
+.topSellersContainer {
+    flex: 1;
+    background-color: var(--secondary-color);
+    padding: 10px; /* Reduzido para deixar mais compacto */
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
 .marketplaceContainer {
     flex: 1;
     background-color: var(--secondary-color);

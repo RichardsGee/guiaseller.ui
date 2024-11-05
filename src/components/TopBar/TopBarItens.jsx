@@ -6,8 +6,8 @@ import SavingsIcon from '@mui/icons-material/Savings'; // Ícone para Lucro
 const topBarItems = [
   { title: 'Faturamento', value: 'R$ 50,000', icon: <PointOfSaleIcon />, id: 'faturamento' },
   { title: 'Vendas', value: '1200', icon: <SellIcon />, id: 'vendas' },
-  { title: 'Custo', value: 'R$ 20,000', icon: <PaymentsIcon />, id: 'custo' }, // Alterado para Payments
-  { title: 'Lucro', value: 'R$ 15,000', icon: <SavingsIcon />, id: 'lucro' },
+  { title: 'Custo', value: 'Em Breve', icon: <PaymentsIcon />, id: 'custo' }, // Alterado para Payments
+  { title: 'Lucro', value: 'Em Breve', icon: <SavingsIcon />, id: 'lucro' },
 ];
 
 export default topBarItems;
