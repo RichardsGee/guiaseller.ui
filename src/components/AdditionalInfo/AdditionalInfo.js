@@ -1,6 +1,5 @@
-// src/components/AdditionalInfo/AdditionalInfo.jsx
 import React, { useState } from 'react';
-import { Tag, Cancel } from '@mui/icons-material';
+import { Tag, Cancel, MonetizationOn, CheckCircle } from '@mui/icons-material'; // Ícones do Material-UI
 import styles from './AdditionalInfo.module.css';
 
 function AdditionalInfo({ vendas }) {
@@ -82,21 +81,26 @@ function AdditionalInfo({ vendas }) {
               <div className={styles.productDetails}>
                 <span className={styles.productName}>{product.name}</span>
                 <div className={styles.productInfo}>
-                  <span className={styles.productQuantity}>Total: {product.totalQuantity}</span>
-                  <span className={styles.productTotal}>
-                    Valor Total: {product.totalAmount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
-                  </span>
-                </div>
-                <div className={styles.productTypeBreakdown}>
-                  <span className={styles.catalogQuantity}>
-                    <Tag className={styles.catalogIcon} /> {product.catalogQuantity} Vendas
-                  </span>
-                  <span className={styles.traditionalQuantity}>
-                    <Tag className={styles.traditionalIcon} /> {product.traditionalQuantity} Vendas
-                  </span>
-                  <span className={styles.cancelledQuantity}>
-                    <Cancel className={styles.cancelledIcon} /> {product.cancelledQuantity} Cancelados
-                  </span>
+                  <div className={styles.fixedContainerWithIcon}>
+                    <CheckCircle className={styles.icon} />
+                    <span>Vendas&nbsp;</span>
+                    <span>{product.totalQuantity}</span>
+                  </div>
+                  <div className={styles.fixedContainerWithIcon}>
+                    <MonetizationOn className={styles.icon} />
+                    <span>Total&nbsp;</span>
+                    <span>{product.totalAmount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                  </div>
+                  <div className={styles.fixedContainerWithIcon}>
+                    <Tag className={styles.catalogIcon} />
+                    <span>Catálogo&nbsp;</span>
+                    <span>{product.catalogQuantity}</span>
+                  </div>
+                  <div className={styles.fixedContainerWithIcon}>
+                    <Cancel className={styles.cancelledIcon} />
+                    <span>Cancelados&nbsp;</span>
+                    <span>{product.cancelledQuantity}</span>
+                  </div>
                 </div>
               </div>
             </div>

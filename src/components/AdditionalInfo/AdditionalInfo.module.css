@@ -1,18 +1,16 @@
-/* src/components/AdditionalInfo/AdditionalInfo.module.css */
-
 .additionalInfo {
     display: flex;
-    gap: 15px; /* Reduzido para dar mais espaço na tela */
-    padding: 15px; /* Reduzido para dar mais espaço na tela */
+    gap: 15px; /* Espaço entre os containers */
+    padding: 15px; /* Preenchimento do container principal */
     background-color: var(--background-color);
     border-radius: 8px;
-    margin-top: 15px; /* Reduzido para economizar espaço */
+    margin-top: 15px; /* Espaço acima do componente */
 }
 
 .topSellersContainer {
     flex: 1;
     background-color: var(--secondary-color);
-    padding: 10px; /* Reduzido para deixar mais compacto */
+    padding: 10px; /* Preenchimento interno */
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
@@ -20,7 +18,7 @@
 .marketplaceContainer {
     flex: 1;
     background-color: var(--secondary-color);
-    padding: 10px; /* Reduzido para deixar mais compacto */
+    padding: 10px; /* Preenchimento interno */
     border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
@@ -28,106 +26,133 @@
 .header {
     display: flex;
     align-items: center;
-    gap: 8px; /* Reduzido para dar mais espaço */
-    margin-bottom: 10px; /* Reduzido para dar mais espaço */
-    justify-content: center;
+    gap: 8px; /* Espaço entre o título e o filtro */
+    margin-bottom: 10px; /* Espaço abaixo do header */
+    justify-content: center; /* Centraliza o header */
 }
 
 .header h3 {
-    font-size: 1em; /* Diminuído para deixar mais compacto */
+    font-size: 1.2em; /* Tamanho da fonte do título */
     color: var(--text-color);
 }
 
 .monthFilter {
-    padding: 4px; /* Reduzido para economizar espaço */
-    font-size: 0.9em; /* Diminuído para harmonizar com o layout compacto */
+    padding: 4px; /* Preenchimento do select */
+    font-size: 0.9em; /* Tamanho da fonte */
     border-radius: 4px;
     border: 1px solid var(--border-color);
     background-color: var(--secondary-color);
     color: var(--text-color);
-    cursor: pointer;
+    cursor: pointer; /* Muda o cursor ao passar por cima */
 }
 
 .productList {
     display: flex;
-    flex-direction: column;
-    gap: 8px; /* Reduzido para um layout mais compacto */
+    flex-direction: column; /* Organiza produtos em coluna */
+    gap: 8px; /* Espaço entre os produtos */
 }
 
 .productItem {
     display: flex;
-    align-items: center;
+    align-items: center; /* Alinha verticalmente os itens */
     background-color: var(--background-color);
-    padding: 8px; /* Reduzido para economizar espaço */
-    border-radius: 6px; /* Ligeiramente menor para harmonizar com o layout */
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px; /* Preenchimento interno do item */
+    border-radius: 6px; /* Bordas arredondadas */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Sombra do item */
+    font-size: 15px; /* Tamanho da fonte */
+
 }
 
 .productImage {
-    width: 40px; /* Diminuído para um layout mais compacto */
-    height: 40px; /* Diminuído para um layout mais compacto */
-    background-color: #f5f5f5;
-    border-radius: 4px;
+    width: 60px; /* Largura da imagem do produto */
+    height: 60px; /* Altura da imagem do produto */
+    background-color: #f5f5f5; /* Cor de fundo */
+    border-radius: 4px; /* Bordas arredondadas */
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 8px; /* Reduzido para um layout mais compacto */
-    font-size: 20px; /* Diminuído para um layout mais compacto */
+    align-items: center; /* Centraliza o conteúdo */
+    justify-content: center; /* Centraliza o conteúdo */
+    margin-right: 8px; /* Espaço à direita da imagem */
+    font-size: 20px; /* Tamanho da fonte do ícone */
 }
 
 .productDetails {
-    flex: 1;
+    flex: 1; /* Permite que os detalhes ocupem o espaço restante */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Organiza detalhes em coluna */
 }
 
 .productName {
-    font-size: 0.95em; /* Reduzido para deixar mais compacto */
+    font-size: 1em; /* Tamanho da fonte do nome do produto */
     color: var(--text-color);
-    font-weight: bold;
-    margin-bottom: 3px; /* Menor margem para mais espaço */
+    font-weight: bold; /* Negrito */
+    margin-bottom: 3px; /* Espaço abaixo do nome */
 }
 
 .productInfo {
     display: flex;
-    gap: 8px; /* Reduzido para layout mais compacto */
-    align-items: center;
+    align-items: center; /* Alinha verticalmente os itens */
+    justify-content: space-between; /* Alinha os itens com espaço entre eles */
+    margin-top: 5px; /* Espaço acima para separação */
+    gap: 10px; /* Espaço entre os itens na linha */
 }
 
-.productQuantity,
-.productTotal {
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-    font-weight: bold;
-    padding: 4px 8px; /* Reduzido para economizar espaço */
-    border-radius: 6px; /* Menor para harmonizar com o layout */
-    font-size: 0.85em; /* Reduzido para layout compacto */
+.fixedContainerWithIcon {
+    display: flex; /* Permite o uso de flexbox */
+    align-items: center; /* Alinha verticalmente */
+    justify-content: flex-start; /* Alinha os ícones e texto à esquerda */
+    gap: 8px; /* Espaço entre o ícone e o texto */
+    width: 150px; /* Largura fixa */
+    height: 25px; /* Altura fixa */
+    background-color: var(--secondary-color); /* Cor de fundo */
+    color: var(--text-color); /* Cor do texto */
+    border-radius: 6px; /* Bordas arredondadas */
+    font-size: 0.85em; /* Tamanho da fonte */
+    padding: 4px; /* Preenchimento interno */
+}
+
+.icon {
+    margin-right: 4px; /* Espaço entre o ícone e o texto */
+    font-size: 15px; /* Tamanho da fonte */
+
+}
+
+.cancelledInfo {
+    display: flex;
+    align-items: center; /* Alinha verticalmente */
+    font-weight: bold; /* Negrito */
 }
 
 .productTypeBreakdown {
     display: flex;
+    justify-content: flex-start; /* Alinha os tipos de vendas na mesma linha */
     gap: 10px; /* Menor espaçamento para layout compacto */
-    padding-top: 5px;
+    padding-top: 5px; /* Espaço acima */
 }
 
 .catalogQuantity,
-.traditionalQuantity,
-.cancelledQuantity {
+.traditionalQuantity {
     display: flex;
-    align-items: center;
-    gap: 5px;
-    font-weight: bold;
-    font-size: 0.85em; /* Reduzido para layout mais compacto */
+    align-items: center; /* Alinha verticalmente */
+    gap: 5px; /* Espaço entre o ícone e o texto */
+    font-weight: bold; /* Negrito */
+    font-size: 0.85em; /* Tamanho da fonte */
+    
 }
 
 .catalogIcon {
-    color: #4A90E2;
+    color: #4A90E2; /* Cor para vendas de catálogo */
+    font-size: 15px; /* Tamanho da fonte */
+
 }
 
 .traditionalIcon {
-    color: #A9A9A9;
+    color: #A9A9A9; /* Cor para vendas tradicionais */
+    font-size: 15px; /* Tamanho da fonte */
+
 }
 
 .cancelledIcon {
-    color: #E74C3C;
+    color: #E74C3C; /* Cor para vendas canceladas */
+    font-size: 15px; /* Tamanho da fonte */
+
 }
