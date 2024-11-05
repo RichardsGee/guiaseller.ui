@@ -61,6 +61,15 @@ const QRCodePage = () => {
               </div>
             </div>
           </div>
+
+          {/* Container para informações do plano selecionado */}
+          <div className={styles.planInfoContainer}>
+            <h2 className={styles.planTitle}>Informações do Plano</h2>
+            <p>Plano Selecionado: Premium</p>
+            <p>Valor: R$ 149,00</p>
+            <p>Recursos: 5</p>
+            <p>Limitações: 2 Marketplaces integrados</p>
+          </div>
         </div>
       </div>
       <Footer />
