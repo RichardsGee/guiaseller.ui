@@ -8,7 +8,7 @@ function QRCodePage() {
 
   const generateQrCode = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/generate-pix-qrcode', { value });
+      const response = await axios.post('https://guiaseller-backend.dlmi5z.easypanel.host/generate-pix-qrcode', { value });
       
       setQrCode(response.data.qrCodeImage); 
       setPixPayload(response.data.pixPayload); 
