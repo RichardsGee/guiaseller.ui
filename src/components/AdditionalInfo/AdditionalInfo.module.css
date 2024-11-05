@@ -1,0 +1,113 @@
+/* AdditionalInfo.module.css */
+
+.additionalInfo {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  .topSellersContainer,
+  .marketplaceContainer {
+    flex: 1;
+    background-color: var(--third-color);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .topSellersContainer h3,
+  .marketplaceContainer h3 {
+    font-size: 1.2em;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .productList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .productItem {
+    display: flex;
+    align-items: center;
+    background-color: var(--container-color);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .productImage {
+    width: 50px;
+    height: 50px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-size: 24px;
+  }
+  
+  .productDetails {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .productName {
+    font-size: 1em;
+    color: var(--text-color);
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .productInfo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .productQuantity,
+  .productTotal {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 0.9em;
+  }
+  
+  .productTypeBreakdown {
+    display: flex;
+    gap: 15px;
+    padding-top: 5px;
+  }
+  
+  .catalogQuantity,
+  .traditionalQuantity,
+  .cancelledQuantity {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+  
+  .catalogIcon {
+    color: #4A90E2; /* Azul para itens de catálogo */
+  }
+  
+  .traditionalIcon {
+    color: #A9A9A9; /* Cinza para itens tradicionais */
+  }
+  
+  .cancelledIcon {
+    color: #E74C3C; /* Vermelho para itens cancelados */
+  }
+  
