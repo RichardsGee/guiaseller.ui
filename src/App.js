@@ -21,9 +21,9 @@ import AlphaAccess from './components/AlphaScreen/AlphaScreen';
 import Callback from "./pages/Callback/Callback";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import PricingCalculatorPage from './pages/PricingCalculatorPage/PricingCalculatorPage'; // Importe a nova página da calculadora
+import AdCampaignsPage from './pages/AdCampaignsPage/AdCampaignsPage'; // Importe a nova página de campanhas
 import IAButton from './components/Button/IAButtonPage'; // Verifique o caminho e o nome
 import QRCodePage from "./pages/QRCodePage/QRCodePage";
-
 
 function App() {
   return (
@@ -81,27 +81,27 @@ function App() {
             path="/ebooks" 
             element={<ProtectedRoute><EbooksPage /></ProtectedRoute>} 
           />
-
           <Route 
             path="/pagamento-pix-qrcode" 
             element={<ProtectedRoute><QRCodePage /></ProtectedRoute>}
           />
-
           <Route 
             path="/ferramentas" 
             element={<ProtectedRoute><ToolsPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/calculadora-precificacao" // Caminho da nova rota
+            path="/calculadora-precificacao" 
             element={<ProtectedRoute><PricingCalculatorPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/campanhas-publicidade" // Nova rota para campanhas de publicidade
+            element={<ProtectedRoute><AdCampaignsPage /></ProtectedRoute>} 
           />
           <Route 
             path="/blocked" 
             element={<AlphaAccess />} 
           />
-
           <Route path="/integrations/callback" element={<Callback />} />
-
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <ToastContainer />

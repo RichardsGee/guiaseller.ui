@@ -1,0 +1,47 @@
+.campaignContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Espaço entre os cards */
+    justify-content: center; /* Centraliza os cards */
+}
+
+.campaignCard {
+    background-color: var(--secondary-color); /* Fundo branco para o card */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra do card */
+    transition: transform 0.2s; /* Transição suave ao passar o mouse */
+    width: 300px; /* Largura fixa para os cards */
+}
+
+.campaignCard:hover {
+    transform: translateY(-5px); /* Eleva o card ao passar o mouse */
+}
+
+.campaignName {
+    font-size: 18px; /* Tamanho da fonte para o nome da campanha */
+    font-weight: bold; /* Negrito para o nome da campanha */
+    color: var(--text-color); /* Cor do texto */
+}
+
+.campaignTable, .metricsTable {
+    width: 100%; /* Largura total da tabela */
+    margin: 10px 0; /* Margem vertical */
+    border-collapse: collapse; /* Remove espaços entre as células */
+}
+
+.campaignTable td, .metricsTable td {
+    border: 1px solid #ddd; /* Borda das células */
+    padding: 8px; /* Espaçamento interno das células */
+}
+
+.campaignTable td:first-child, .metricsTable td:first-child {
+    font-weight: bold; /* Negrito para a primeira coluna */
+    background-color: var(--secondary-color); /* Fundo claro para a coluna de títulos */
+}
+
+.metricsTitle {
+    font-size: 16px; /* Tamanho da fonte para o título das métricas */
+    font-weight: bold; /* Negrito para o título das métricas */
+    margin-top: 10px; /* Margem acima do título das métricas */
+}
