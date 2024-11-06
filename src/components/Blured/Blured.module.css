@@ -10,5 +10,8 @@
     align-items: center;
     gap: 5px;
     cursor: pointer;
+    color: var(--text-color, #333); /* Cor do texto, substitua var(--text-color) pela cor desejada */
+    font-weight: 100; /* Define a espessura da fonte */
+    font-size: 0.9em; /* Ajusta o tamanho da fonte */
   }
   

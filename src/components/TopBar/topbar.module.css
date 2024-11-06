@@ -156,3 +156,8 @@
         margin: 0; /* Removendo a margem padrão para reduzir espaçamento */
     }
 }
+.blurred {
+    filter: blur(8px);
+    transition: filter 0.3s ease;
+  }
+  

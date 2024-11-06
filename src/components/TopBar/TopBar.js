@@ -3,20 +3,18 @@ import React, { useEffect, useState } from 'react';
 import styles from './topbar.module.css';
 import { calculateSummary, calculateCurrentMonthSummary, calculatePreviousMonthSummary } from '../../components/ChartSection/ChartFunctions';
 
-function TopBar({ items, salesData, dateRange }) {
+function TopBar({ items, salesData, dateRange, blurTopBar }) { // Nova prop blurTopBar
     const [faturamentoAtual, setFaturamentoAtual] = useState(0);
     const [quantidadeVendasAtual, setQuantidadeVendasAtual] = useState(0);
     const [faturamentoAnterior, setFaturamentoAnterior] = useState(0);
     const [quantidadeVendasAnterior, setQuantidadeVendasAnterior] = useState(0);
 
-    // Variáveis para armazenar os dados do mês atual e anterior
     const [faturamentoMesAtual, setFaturamentoMesAtual] = useState(0);
     const [quantidadeVendasMesAtual, setQuantidadeVendasMesAtual] = useState(0);
     const [faturamentoMesAnterior, setFaturamentoMesAnterior] = useState(0);
     const [quantidadeVendasMesAnterior, setQuantidadeVendasMesAnterior] = useState(0);
 
     useEffect(() => {
-        // Função para calcular os totais
         const calculateTotals = (days, isCurrent) => {
             const today = new Date();
             const startDate = new Date();
@@ -35,15 +33,14 @@ function TopBar({ items, salesData, dateRange }) {
             return { totalFaturamento, totalVendas };
         };
 
-        // Função para calcular os totais de ontem
         const calculateYesterdayTotals = () => {
             const today = new Date();
             const yesterdayStart = new Date(today);
             yesterdayStart.setDate(today.getDate() - 1);
-            yesterdayStart.setHours(0, 0, 1); // 00:00:01
+            yesterdayStart.setHours(0, 0, 1);
             const yesterdayEnd = new Date(today);
             yesterdayEnd.setDate(today.getDate() - 1);
-            yesterdayEnd.setHours(23, 59, 59); // 23:59:59
+            yesterdayEnd.setHours(23, 59, 59);
             let totalFaturamento = 0;
             let totalVendas = 0;
 
@@ -58,22 +55,21 @@ function TopBar({ items, salesData, dateRange }) {
             return { totalFaturamento, totalVendas };
         };
 
-        // Resumos para o período atual e anterior com base no filtro
         let currentSummary = {};
         let previousSummary = {};
 
         if (dateRange === '1d') {
-            currentSummary = calculateTotals(0, true); // Para "Hoje"
-            previousSummary = calculateYesterdayTotals(); // Para "Ontem"
+            currentSummary = calculateTotals(0, true);
+            previousSummary = calculateYesterdayTotals();
         } else if (dateRange === '7d') {
-            currentSummary = calculateTotals(7, false); // Últimos 7 dias
-            previousSummary = calculateTotals(14, false); // 14 dias atrás para comparação
+            currentSummary = calculateTotals(7, false);
+            previousSummary = calculateTotals(14, false);
         } else if (dateRange === '15d') {
-            currentSummary = calculateTotals(15, false); // Últimos 15 dias
-            previousSummary = calculateTotals(30, false); // 30 dias atrás para comparação
+            currentSummary = calculateTotals(15, false);
+            previousSummary = calculateTotals(30, false);
         } else if (dateRange === '30d') {
-            currentSummary = calculateTotals(30, false); // Últimos 30 dias
-            previousSummary = calculateTotals(60, false); // 60 dias atrás para comparação
+            currentSummary = calculateTotals(30, false);
+            previousSummary = calculateTotals(60, false);
         } else if (dateRange === 'currentMonth') {
             const currentMonthSummary = calculateCurrentMonthSummary(salesData);
             const previousMonthSummary = calculatePreviousMonthSummary(salesData);
@@ -81,35 +77,31 @@ function TopBar({ items, salesData, dateRange }) {
             previousSummary = { totalFaturamento: previousMonthSummary.totalRevenue, totalVendas: previousMonthSummary.totalSales };
         }
 
-        // Atualiza os estados com os valores calculados
         setFaturamentoAtual(currentSummary.totalFaturamento);
         setQuantidadeVendasAtual(currentSummary.totalVendas);
         setFaturamentoAnterior(previousSummary.totalFaturamento);
         setQuantidadeVendasAnterior(previousSummary.totalVendas);
 
-        // Cálculo do faturamento e quantidade de vendas do mês atual e anterior
         const currentMonthSummary = calculateCurrentMonthSummary(salesData);
         const previousMonthSummary = calculatePreviousMonthSummary(salesData);
 
-        // Atualiza os estados com os valores mensais
         setFaturamentoMesAtual(currentMonthSummary.totalRevenue);
         setQuantidadeVendasMesAtual(currentMonthSummary.totalSales);
         setFaturamentoMesAnterior(previousMonthSummary.totalRevenue);
         setQuantidadeVendasMesAnterior(previousMonthSummary.totalSales);
 
-    }, [salesData, dateRange]); // Atualiza sempre que salesData ou dateRange mudar
+    }, [salesData, dateRange]);
 
-    // Cálculo da porcentagem de variação
     const calcularVariacao = (atual, anterior) => {
-        if (anterior === 0) return 0; // Evita divisão por zero
-        return ((atual - anterior) / anterior) * 100; // Retorna a variação percentual
+        if (anterior === 0) return 0;
+        return ((atual - anterior) / anterior) * 100;
     };
 
     const variacaoFaturamento = calcularVariacao(faturamentoAtual, faturamentoAnterior);
     const variacaoVendas = calcularVariacao(quantidadeVendasAtual, quantidadeVendasAnterior);
 
     return (
-        <header className={styles.topBar}>
+        <header className={`${styles.topBar} ${blurTopBar ? styles.blurred : ''}`}>
             {items.map((item, index) => (
                 <div key={index} className={styles.topBarItem}>
                     <div className={styles.topBarContent}>

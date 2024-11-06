@@ -8,9 +8,9 @@ import AdditionalInfo from '../../components/AdditionalInfo/AdditionalInfo';
 import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
-import Blured from '../../components/Blured/Blured'; // Importa o novo componente de desfoque
+import Blured from '../../components/Blured/Blured'; // Importa o componente Blured
+import topBarItems from '../../components/TopBar/TopBarItens'; // Importa os itens do TopBar
 import '../../styles/styles.css';
-import topBarItems from '../../components/TopBar/TopBarItens';
 
 function Dashboard() {
   const { user, signOut } = useContext(AuthContext);
@@ -22,6 +22,7 @@ function Dashboard() {
   const [dateRange, setDateRange] = useState('30d');
   const [blurChart, setBlurChart] = useState(false);
   const [blurAdditional, setBlurAdditional] = useState(false);
+  const [blurTopBar, setBlurTopBar] = useState(false); // Estado para desfoque do TopBar
 
   useEffect(() => {
     fetchSalesData();
@@ -70,10 +71,13 @@ function Dashboard() {
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
-        <TopBar items={topBarItems} salesData={salesData} dateRange={dateRange} />
+        {/* Aplica desfoque ao TopBar com base no estado */}
+        <TopBar items={topBarItems} salesData={salesData} dateRange={dateRange} blurTopBar={blurTopBar} />
+        
         <div className="dashboardContainer">
-          {/* Componente de Controle de Desfoque */}
-          <Blured setBlurChart={setBlurChart} setBlurAdditional={setBlurAdditional} />
+          {/* Controles de Desfoque */}
+          <Blured setBlurChart={setBlurChart} setBlurAdditional={setBlurAdditional} setBlurTopBar={setBlurTopBar} />
+          
           {/* Seções com desfoque controlado */}
           <ChartSection
             salesData={salesData}
