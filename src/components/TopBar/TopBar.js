@@ -1,9 +1,9 @@
 import '../../styles/styles.css';
 import React, { useEffect, useState } from 'react';
 import styles from './topbar.module.css';
-import { calculateCurrentMonthSummary, calculatePreviousMonthSummary } from '../../components/ChartSection/ChartFunctions';
+import { calculateSummary, calculateCurrentMonthSummary, calculatePreviousMonthSummary } from '../../components/ChartSection/ChartFunctions';
 
-function TopBar({ items, salesData, dateRange }) {
+function TopBar({ items, salesData, dateRange, blurTopBar }) { // Nova prop blurTopBar
     const [faturamentoAtual, setFaturamentoAtual] = useState(0);
     const [quantidadeVendasAtual, setQuantidadeVendasAtual] = useState(0);
     const [faturamentoAnterior, setFaturamentoAnterior] = useState(0);
@@ -101,7 +101,7 @@ function TopBar({ items, salesData, dateRange }) {
     const variacaoVendas = calcularVariacao(quantidadeVendasAtual, quantidadeVendasAnterior);
 
     return (
-        <header className={styles.topBar}>
+        <header className={`${styles.topBar} ${blurTopBar ? styles.blurred : ''}`}>
             {items.map((item, index) => (
                 <div key={index} className={styles.topBarItem}>
                     <div className={styles.topBarContent}>
@@ -126,9 +126,9 @@ function TopBar({ items, salesData, dateRange }) {
                     </div>
                     <div className={styles.topBarIcon}>
                         <span className={`material-icons ${styles.icon}`}>{item.icon}</span>
-                        <span className={`${styles.porcentagem} ${item.id === 'faturamento' ? (variacaoFaturamento >= 0 ? styles.positivo : styles.negativo) : (variacaoVendas >= 0 ? styles.positivo : styles.negativo)}`}>
+                        <span className={`${styles.porcentagem} ${variacaoFaturamento < 0 ? styles.negativo : styles.positivo}`}>
                             <span className="material-icons" style={{ fontSize: '16px' }}>
-                                {item.id === 'faturamento' ? (variacaoFaturamento >= 0 ? 'arrow_upward' : 'arrow_downward') : (variacaoVendas >= 0 ? 'arrow_upward' : 'arrow_downward')}
+                                {variacaoFaturamento >= 0 ? 'arrow_upward' : 'arrow_downward'}
                             </span>
                             {item.id === 'faturamento' ? `${Math.abs(variacaoFaturamento).toFixed(2)}%` : `${Math.abs(variacaoVendas).toFixed(2)}%`}
                         </span>

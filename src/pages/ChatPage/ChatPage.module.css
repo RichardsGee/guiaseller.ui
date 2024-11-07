@@ -1,0 +1,94 @@
+:root {
+    /* Cores principais */
+    --chat--color-primary: var(--primary-color); /* Cor primária para cabeçalho e botões principais */
+    --chat--color-primary-shade-50: #db4061;
+    --chat--color-primary-shade-100: #cf3c5c;
+    --chat--color-secondary: var(--secondary-color); /* Cor secundária */
+    --chat--color-secondary-shade-50: #1ca08a;
+    --chat--color-white: #ffffff;
+    --chat--color-light: var(--background-color); /* Cor de fundo clara */
+    --chat--color-light-shade-50: #e6e9f1;
+    --chat--color-light-shade-100: #c2c5cc;
+    --chat--color-medium: #d2d4d9;
+    --chat--color-dark: var(--text-color); /* Cor do texto */
+    --chat--color-disabled: #777980;
+    --chat--color-typing: #404040;
+  
+    /* Espaçamento, bordas e transições */
+    --chat--spacing: 1rem;
+    --chat--border-radius: 0.5rem; /* Ajuste do arredondamento */
+    --chat--transition-duration: 0.3s; /* Transição mais suave */
+  
+    /* Tamanho da janela do chat (ajuste se necessário) */
+    --chat--window--width: 100%; /* Usando largura total do container */
+    --chat--window--height: 100%; /* Usando altura total do container */
+  
+    /* Estilo do cabeçalho */
+    --chat--header-height: auto;
+    --chat--header--padding: var(--chat--spacing);
+    --chat--header--background: var(--primary-color); /* Fundo do cabeçalho */
+    --chat--header--color: var(--background-color); /* Texto no cabeçalho */
+    --chat--heading--font-size: 1.5em; /* Tamanho do título do chat */
+    --chat--subtitle--font-size: 1rem; /* Tamanho do subtítulo */
+    --chat--subtitle--line-height: 1.8;
+  
+    /* Estilo da área de input */
+    --chat--textarea--height: 50px;
+    --chat--toggle--background: var(--primary-color); /* Cor do botão enviar */
+    --chat--toggle--hover--background: darkgreen;
+    --chat--toggle--active--background: var(--primary-color-shade-100);
+    --chat--toggle--color: white;
+  
+    /* Estilo das mensagens */
+    --chat--message--font-size: 1rem;
+    --chat--message--padding: var(--chat--spacing);
+    --chat--message--border-radius: var(--chat--border-radius);
+    --chat--message-line-height: 1.8;
+    --chat--message--bot--background: var(--background-color); /* Fundo das mensagens do bot */
+    --chat--message--bot--color: var(--text-color); /* Texto das mensagens do bot */
+    --chat--message--user--background: var(--secondary-color); /* Fundo das mensagens do usuário */
+    --chat--message--user--color: white; /* Texto das mensagens do usuário */
+    --chat--message--pre--background: rgba(0, 0, 0, 0.05);
+  
+    /* Botão de envio e seu comportamento */
+    --chat--toggle--size: 48px; /* Tamanho do botão de enviar */
+    --chat--toggle--background: var(--secondary-color); /* Fundo do botão de enviar */
+    --chat--toggle--hover--background: #1ca08a;
+    --chat--toggle--color: white; /* Cor do ícone do botão de enviar */
+  }
+  
+  /* Ajustes específicos adicionais para cabeçalho, input e botões */
+  #n8n-chat .chat--header {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  #n8n-chat .chat--input {
+    font-size: 16px;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    border: 1px solid var(--primary-color);
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  #n8n-chat .chat--send-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #n8n-chat .chat--send-button:hover {
+    background-color: darkred;
+  }
+  
+  #n8n-chat .chat--message-bot,
+  #n8n-chat .chat--message-user {
+    border-radius: var(--chat--border-radius);
+    padding: var(--chat--message--padding);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 8px 0;
+  }
+  

@@ -20,10 +20,11 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AlphaAccess from './components/AlphaScreen/AlphaScreen';
 import Callback from "./pages/Callback/Callback";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
-import PricingCalculatorPage from './pages/PricingCalculatorPage/PricingCalculatorPage'; // Importe a nova página da calculadora
-import AdCampaignsPage from './pages/AdCampaignsPage/AdCampaignsPage'; // Importe a nova página de campanhas
-import IAButton from './components/Button/IAButtonPage'; // Verifique o caminho e o nome
+import PricingCalculatorPage from './pages/PricingCalculatorPage/PricingCalculatorPage'; 
+import AdCampaignsPage from './pages/AdCampaignsPage/AdCampaignsPage'; 
+import IAButton from './components/Button/IAButtonPage'; 
 import QRCodePage from "./pages/QRCodePage/QRCodePage";
+import ChatPage from './pages/ChatPage/ChatPage'; // Importe a nova página de Chat
 
 function App() {
   return (
@@ -32,7 +33,6 @@ function App() {
         <Routes>
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-
           <Route 
             path="/dashboard" 
             element={<ProtectedRoute><Dashboard /></ProtectedRoute>} 
@@ -94,8 +94,12 @@ function App() {
             element={<ProtectedRoute><PricingCalculatorPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/campanhas-publicidade" // Nova rota para campanhas de publicidade
+            path="/campanhas-publicidade" 
             element={<ProtectedRoute><AdCampaignsPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/chat" 
+            element={<ProtectedRoute><ChatPage /></ProtectedRoute>} 
           />
           <Route 
             path="/blocked" 
