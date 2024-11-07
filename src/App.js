@@ -24,7 +24,8 @@ import PricingCalculatorPage from './pages/PricingCalculatorPage/PricingCalculat
 import AdCampaignsPage from './pages/AdCampaignsPage/AdCampaignsPage'; 
 import IAButton from './components/Button/IAButtonPage'; 
 import QRCodePage from "./pages/QRCodePage/QRCodePage";
-import ChatPage from './pages/ChatPage/ChatPage'; // Importe a nova página de Chat
+import ChatPage from './pages/ChatPage/ChatPage';
+import AnunciosPage from './pages/AnunciosPage/AnunciosPage'; // Importe a nova página de Anúncios
 
 function App() {
   return (
@@ -100,6 +101,10 @@ function App() {
           <Route 
             path="/chat" 
             element={<ProtectedRoute><ChatPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/anuncios" 
+            element={<ProtectedRoute><AnunciosPage /></ProtectedRoute>} 
           />
           <Route 
             path="/blocked" 

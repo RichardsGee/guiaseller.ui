@@ -1,0 +1,34 @@
+/* src/pages/AnunciosPage/AnunciosList.module.css */
+
+.anunciosTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  
+  .anunciosTable th,
+  .anunciosTable td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .anunciosTable th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .anuncioRow:hover {
+    background-color: #f9f9f9;
+  }
+  
+  .anuncioRow a {
+    color: #4A90E2;
+    text-decoration: none;
+  }
+  
+  .anuncioRow a:hover {
+    text-decoration: underline;
+  }
+  
