@@ -7,15 +7,15 @@ const PlansList = () => {
 
   // Preços para cada plano e duração
   const plans = [
-    { 
-      id: 1, 
-      name: 'Pro', 
-      basePrice: 129, 
-      prices: { 
-        1: 99, 
-        3: Math.round(129 * 3 * 0.95), 
-        6: Math.round(129 * 6 * 0.90), 
-        12: Math.round(129 * 12 * 0.80) 
+    {
+      id: 1,
+      name: 'Pro',
+      basePrice: 129,
+      prices: {
+        1: 129, // Valor cheio para 1 mês sem desconto
+        3: Math.round(129 * 3 * 0.95), // 5% de desconto para 3 meses
+        6: Math.round(129 * 6 * 0.90), // 10% de desconto para 6 meses
+        12: Math.round(129 * 12 * 0.80) // 20% de desconto para 12 meses
       },
       resources: [
         "Recurso 1",
@@ -29,15 +29,15 @@ const PlansList = () => {
         "10 tokens mensais",
       ]
     },
-    { 
-      id: 2, 
-      name: 'Premium', 
-      basePrice: 169, 
-      prices: { 
-        1: 149, 
-        3: Math.round(169 * 3 * 0.95), 
-        6: Math.round(169 * 6 * 0.90), 
-        12: Math.round(169 * 12 * 0.80) 
+    {
+      id: 2,
+      name: 'Premium',
+      basePrice: 169,
+      prices: {
+        1: 169, // Valor cheio para 1 mês sem desconto
+        3: Math.round(169 * 3 * 0.95), // 5% de desconto para 3 meses
+        6: Math.round(169 * 6 * 0.90), // 10% de desconto para 6 meses
+        12: Math.round(169 * 12 * 0.80) // 20% de desconto para 12 meses
       },
       resources: [
         "Recurso 1",
@@ -51,10 +51,10 @@ const PlansList = () => {
         "20 tokens mensais",
       ]
     },
-    { 
-      id: 3, 
-      name: 'Fundador', 
-      prices: { original: 9.999, discounted: 4.999 }, // Vitalício 
+    {
+      id: 3,
+      name: 'Fundador',
+      prices: { original: 9999, discounted: 4999 }, // Vitalício
       resources: [
         "Recurso 1",
         "Recurso 2",
@@ -81,32 +81,50 @@ const PlansList = () => {
     <div>
       {/* Filtro de Duração dos Planos */}
       <div className={styles.durationButtons}>
-        <button onClick={() => handleDurationChange(1)} className={`${styles.durationButton} ${duration === 1 ? styles.active : ''}`}>
+        <button
+          onClick={() => handleDurationChange(1)}
+          className={`${styles.durationButton} ${duration === 1 ? styles.active : ''}`}
+        >
           1 Mês
         </button>
-        <button onClick={() => handleDurationChange(3)} className={`${styles.durationButton} ${duration === 3 ? styles.active : ''}`}>
+        <button
+          onClick={() => handleDurationChange(3)}
+          className={`${styles.durationButton} ${duration === 3 ? styles.active : ''}`}
+        >
           3 Meses
         </button>
-        <button onClick={() => handleDurationChange(6)} className={`${styles.durationButton} ${duration === 6 ? styles.active : ''}`}>
+        <button
+          onClick={() => handleDurationChange(6)}
+          className={`${styles.durationButton} ${duration === 6 ? styles.active : ''}`}
+        >
           6 Meses
         </button>
-        <button onClick={() => handleDurationChange(12)} className={`${styles.durationButton} ${duration === 12 ? styles.active : ''}`}>
+        <button
+          onClick={() => handleDurationChange(12)}
+          className={`${styles.durationButton} ${duration === 12 ? styles.active : ''}`}
+        >
           12 Meses
         </button>
       </div>
 
       <ul className={styles.plansList}>
         {/* Pro Container */}
-        <li 
-          key="pro" 
-          className={`${styles.planItem} ${expandedPlan === 1 ? styles.expanded : ''}`} 
-          onClick={() => toggleExpandPlan(1)} 
+        <li
+          key="pro"
+          className={`${styles.planItem} ${expandedPlan === 1 ? styles.expanded : ''}`}
+          onClick={() => toggleExpandPlan(1)}
         >
           <h2 className={styles.planName}>Pro</h2>
           <p className={styles.planPrice}>
-            {plans[0].basePrice && <span className={styles.oldPrice}>R$ {plans[0].basePrice * duration},00</span>}
-            <br />
-            R$ {plans[0].prices[duration]},00
+            {duration === 1 ? (
+              <>R$ {plans[0].basePrice},00</>
+            ) : (
+              <>
+                <span className={styles.oldPrice}>R$ {plans[0].basePrice * duration},00</span>
+                <br />
+                R$ {plans[0].prices[duration]},00
+              </>
+            )}
           </p>
           <div className={`${expandedPlan === 1 ? styles.expandedContent : ''} ${styles.planDetails}`}>
             <h3 className={styles.resourceTitle}>Recursos:</h3>
@@ -126,16 +144,22 @@ const PlansList = () => {
         </li>
 
         {/* Premium Container */}
-        <li 
-          key="premium" 
-          className={`${styles.planItem} ${styles.premiumContainer} ${expandedPlan === 2 ? styles.expanded : ''}`} 
-          onClick={() => toggleExpandPlan(2)} 
+        <li
+          key="premium"
+          className={`${styles.planItem} ${styles.premiumContainer} ${expandedPlan === 2 ? styles.expanded : ''}`}
+          onClick={() => toggleExpandPlan(2)}
         >
           <h2 className={styles.planName}>Premium</h2>
           <p className={styles.planPrice}>
-            {plans[1].basePrice && <span className={styles.oldPrice}>R$ {plans[1].basePrice * duration},00</span>}
-            <br />
-            R$ {plans[1].prices[duration]},00
+            {duration === 1 ? (
+              <>R$ {plans[1].basePrice},00</>
+            ) : (
+              <>
+                <span className={styles.oldPrice}>R$ {plans[1].basePrice * duration},00</span>
+                <br />
+                R$ {plans[1].prices[duration]},00
+              </>
+            )}
           </p>
           <div className={`${expandedPlan === 2 ? styles.expandedContent : ''} ${styles.planDetails}`}>
             <h3 className={styles.resourceTitle}>Recursos:</h3>
@@ -156,10 +180,10 @@ const PlansList = () => {
         </li>
 
         {/* Founder Container */}
-        <li 
-          key="founder" 
-          className={`${styles.planItem} ${styles.founderContainer} ${expandedPlan === 3 ? styles.expanded : ''}`} 
-          onClick={() => toggleExpandPlan(3)} 
+        <li
+          key="founder"
+          className={`${styles.planItem} ${styles.founderContainer} ${expandedPlan === 3 ? styles.expanded : ''}`}
+          onClick={() => toggleExpandPlan(3)}
         >
           <h2 className={styles.planName}>Fundador</h2>
           <p className={styles.planPrice}>

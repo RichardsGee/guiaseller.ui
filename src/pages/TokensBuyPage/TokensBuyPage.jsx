@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import Header from '../../components/Header/Header';  
-import Sidebar from '../../components/Sidebar/Sidebar';  
-import Footer from '../../components/Footer/Footer';  
-import MainContent from '../../components/MainContent/MainContent'; 
+import Header from '../../components/Header/Header';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import Footer from '../../components/Footer/Footer';
+import MainContent from '../../components/MainContent/MainContent';
 import TokensList from '../../components/TokensList/TokensList'; // Importando o TokensList
-import { AuthContext } from '../../context/AuthContext'; 
+import { AuthContext } from '../../context/AuthContext';
 import styles from './TokensBuyPage.module.css'; // Estilos locais
 
 const TokensBuyPage = () => {
@@ -12,8 +12,8 @@ const TokensBuyPage = () => {
   const username = user ? user.displayName || user.email : "No User Logged";
   const userPhoto = user ? user.photoURL : null;
 
-  // Estado para o plano de pagamento selecionado
-  const [selectedPlan, setSelectedPlan] = useState(1); // 1 mês como padrão
+  // Estado para a quantidade de tokens selecionada
+  const [selectedQuantity, setSelectedQuantity] = useState(10);
 
   return (
     <MainContent>
@@ -23,36 +23,42 @@ const TokensBuyPage = () => {
         <div className="contentContainer">
           <h1 className="title">Comprar Tokens</h1>
           
-          {/* Opções de Parcelamento */}
+          {/* Opções de Quantidade de Tokens */}
           <div className={styles.paymentPlans}>
             <button 
-              className={`${styles.paymentButton} ${selectedPlan === 1 ? styles.active : ''}`} 
-              onClick={() => setSelectedPlan(1)}
+              className={`${styles.paymentButton} ${selectedQuantity === 10 ? styles.active : ''}`} 
+              onClick={() => setSelectedQuantity(10)}
             >
-              1 Mês
+              10 Tokens
             </button>
             <button 
-              className={`${styles.paymentButton} ${selectedPlan === 2 ? styles.active : ''}`} 
-              onClick={() => setSelectedPlan(2)}
+              className={`${styles.paymentButton} ${selectedQuantity === 25 ? styles.active : ''}`} 
+              onClick={() => setSelectedQuantity(25)}
             >
-              3 Meses
+              25 Tokens
             </button>
             <button 
-              className={`${styles.paymentButton} ${selectedPlan === 3 ? styles.active : ''}`} 
-              onClick={() => setSelectedPlan(3)}
+              className={`${styles.paymentButton} ${selectedQuantity === 50 ? styles.active : ''}`} 
+              onClick={() => setSelectedQuantity(50)}
             >
-              6 Meses
+              50 Tokens
             </button>
             <button 
-              className={`${styles.paymentButton} ${selectedPlan === 4 ? styles.active : ''}`} 
-              onClick={() => setSelectedPlan(4)}
+              className={`${styles.paymentButton} ${selectedQuantity === 100 ? styles.active : ''}`} 
+              onClick={() => setSelectedQuantity(100)}
             >
-              12 Meses
+              100 Tokens
+            </button>
+            <button 
+              className={`${styles.paymentButton} ${selectedQuantity === 200 ? styles.active : ''}`} 
+              onClick={() => setSelectedQuantity(200)}
+            >
+              200 Tokens
             </button>
           </div>
 
-          {/* Renderizando o TokensList, passando o plano selecionado como prop */}
-          <TokensList selectedPlan={selectedPlan} />
+          {/* Renderizando o TokensList, passando a quantidade de tokens selecionada */}
+          <TokensList selectedQuantity={selectedQuantity} />
         </div>
       </div>
       <Footer />
