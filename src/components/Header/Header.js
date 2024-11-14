@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
 import { AuthContext } from '../../context/AuthContext'; // Importando AuthContext
 import styles from './header.module.css';
-import Tokens from '../Tokens/Tokens';
+import Tokens from '../Tokens/Tokens'; // Manter o componente Tokens para exibição dos tokens
 import { useNavigate } from 'react-router-dom';
 import UserLevel from '../UserLevel/UserLevel';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -19,7 +19,7 @@ import IntegrationIcon from '@mui/icons-material/IntegrationInstructions'; // Í
 function Header({ logout }) {
   const { theme, toggleTheme } = useContext(ThemeContext);
   const { user, loading, userLevel } = useContext(AuthContext); // Usando o AuthContext
-  const tokenCount = 150;
+  const [tokenCount, setTokenCount] = useState(0); // Estado para armazenar o número de tokens
 
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,8 +47,9 @@ function Header({ logout }) {
       </div>
 
       <div className={styles.headerActions}>
+        {/* Passando a função setTokenCount para o componente Tokens */}
         <div onClick={handleTokensClick} style={{ cursor: 'pointer' }}>
-          <Tokens count={tokenCount} />
+          <Tokens userId={user?.uid} setTokenCount={setTokenCount} />
         </div>
 
         <button className={styles.themeToggleBtn} onClick={toggleTheme}>
@@ -72,8 +73,9 @@ function Header({ logout }) {
             />
             <div className={styles.userDetails}>
               <span className={styles.username}>{user?.displayName || ''}</span>
-              <p className={styles.userEmail}>{user?.email || "Nothing@gmail.com"}</p> {/* Usando user.email diretamente */}
+              <p className={styles.userEmail}>{user?.email || "Nothing@gmail.com"}</p>
               <UserLevel level={userLevel} />
+              {/* Exibindo o tokenCount atualizado */}
               <p className={styles.tokenCount}>{tokenCount} Tokens</p>
             </div>
           </div>
