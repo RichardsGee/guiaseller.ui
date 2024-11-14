@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import styles from './PlansList.module.css'; // Estilos locais
+import styles from './PlansList.module.css';
 
 const PlansList = () => {
-  const [duration, setDuration] = useState(1); // Estado para a duração do plano
-  const [expandedPlan, setExpandedPlan] = useState(null); // Estado para controlar o plano expandido no mobile
+  const [duration, setDuration] = useState(1);
+  const [expandedPlan, setExpandedPlan] = useState(null);
 
-  // Preços para cada plano e duração
   const plans = [
     {
       id: 1,
       name: 'Pro',
       basePrice: 129,
       prices: {
-        1: 129, // Valor cheio para 1 mês sem desconto
-        3: Math.round(129 * 3 * 0.95), // 5% de desconto para 3 meses
-        6: Math.round(129 * 6 * 0.90), // 10% de desconto para 6 meses
-        12: Math.round(129 * 12 * 0.80) // 20% de desconto para 12 meses
+        1: 129,
+        3: Math.round(129 * 3 * 0.95),
+        6: Math.round(129 * 6 * 0.90),
+        12: Math.round(129 * 12 * 0.80),
       },
       resources: [
         "Recurso 1",
@@ -27,17 +26,23 @@ const PlansList = () => {
       limitations: [
         "1 Marketplace integrado",
         "10 tokens mensais",
-      ]
+      ],
+      subscribeLinks: {
+        1: "https://sandbox.asaas.com/c/h40acs28hbykozw5",
+        3: "https://sandbox.asaas.com/c/pro-3meses",
+        6: "https://sandbox.asaas.com/c/pro-6meses",
+        12: "https://sandbox.asaas.com/c/pro-12meses",
+      },
     },
     {
       id: 2,
       name: 'Premium',
       basePrice: 169,
       prices: {
-        1: 169, // Valor cheio para 1 mês sem desconto
-        3: Math.round(169 * 3 * 0.95), // 5% de desconto para 3 meses
-        6: Math.round(169 * 6 * 0.90), // 10% de desconto para 6 meses
-        12: Math.round(169 * 12 * 0.80) // 20% de desconto para 12 meses
+        1: 169,
+        3: Math.round(169 * 3 * 0.95),
+        6: Math.round(169 * 6 * 0.90),
+        12: Math.round(169 * 12 * 0.80),
       },
       resources: [
         "Recurso 1",
@@ -49,12 +54,18 @@ const PlansList = () => {
       limitations: [
         "2 Marketplaces integrados",
         "20 tokens mensais",
-      ]
+      ],
+      subscribeLinks: {
+        1: "https://sandbox.asaas.com/c/premium-link",
+        3: "https://sandbox.asaas.com/c/premium-3meses",
+        6: "https://sandbox.asaas.com/c/premium-6meses",
+        12: "https://sandbox.asaas.com/c/premium-12meses",
+      },
     },
     {
       id: 3,
       name: 'Fundador',
-      prices: { original: 9999, discounted: 4999 }, // Vitalício
+      prices: { original: 9999, discounted: 4999 },
       resources: [
         "Recurso 1",
         "Recurso 2",
@@ -65,7 +76,13 @@ const PlansList = () => {
       limitations: [
         "5 Marketplaces integrados",
         "40 tokens mensais",
-      ]
+      ],
+      subscribeLinks: {
+        1: "https://sandbox.asaas.com/c/founder-link",
+        3: "https://sandbox.asaas.com/c/founder-3meses",
+        6: "https://sandbox.asaas.com/c/founder-6meses",
+        12: "https://sandbox.asaas.com/c/founder-12meses",
+      },
     },
   ];
 
@@ -74,7 +91,7 @@ const PlansList = () => {
   };
 
   const toggleExpandPlan = (planId) => {
-    setExpandedPlan(expandedPlan === planId ? null : planId); // Alterna o estado de expansão para um único plano no mobile
+    setExpandedPlan(expandedPlan === planId ? null : planId);
   };
 
   return (
@@ -139,7 +156,9 @@ const PlansList = () => {
                 <li key={idx}>{limitation}</li>
               ))}
             </ul>
-            <button className={styles.subscribeButton}>Assinar</button>
+            <a href={plans[0].subscribeLinks[duration]} className={styles.subscribeButton} target="_blank" rel="noopener noreferrer">
+              Assinar
+            </a>
           </div>
         </li>
 
@@ -174,9 +193,11 @@ const PlansList = () => {
                 <li key={idx}>{limitation}</li>
               ))}
             </ul>
-            <button className={styles.subscribeButton}>Assinar</button>
+            <a href={plans[1].subscribeLinks[duration]} className={styles.subscribeButton} target="_blank" rel="noopener noreferrer">
+              Assinar
+            </a>
           </div>
-          <span className={`${styles.planTag} ${styles.premiumTag}`}>Popular</span> {/* Tag Popular */}
+          <span className={`${styles.planTag} ${styles.premiumTag}`}>Popular</span>
         </li>
 
         {/* Founder Container */}
@@ -204,9 +225,11 @@ const PlansList = () => {
                 <li key={idx}>{limitation}</li>
               ))}
             </ul>
-            <button className={styles.subscribeButton}>Assinar</button>
+            <a href={plans[2].subscribeLinks[duration]} className={styles.subscribeButton} target="_blank" rel="noopener noreferrer">
+              Assinar
+            </a>
           </div>
-          <span className={`${styles.planTag} ${styles.founderTag}`}>Vitalício</span> {/* Tag Vitalício */}
+          <span className={`${styles.planTag} ${styles.founderTag}`}>Vitalício</span>
         </li>
       </ul>
     </div>
