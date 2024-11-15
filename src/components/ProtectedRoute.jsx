@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!user) {
-    return <Navigate to="/error" />; 
+    return <Navigate to="/" />; 
   }
 
   if (!canAccessApp) {
