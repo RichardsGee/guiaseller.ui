@@ -16,13 +16,7 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: 200px; /* Define uma largura mais consistente para o botão */
-  text-align: center;
-}
-
-.importButton:disabled {
-  background-color: #ddd; /* Botão desativado */
-  cursor: not-allowed;
+  /* Removido o efeito de hover */
 }
 
 .monthFilter {
@@ -105,25 +99,23 @@
   margin-top: 10px;
 }
 
+.importButton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.importButton:hover {
+  background-color: #45a049;
+}
+
 /* Estilo do indicador de carregamento */
 .loadingOverlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 18px;
-  z-index: 999;
-}
-
-/* Popup para visualizar as vendas */
-.popup {
-  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -132,45 +124,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999; /* Garante que o popup fique acima de outros elementos */
+  color: #fff;
+  font-size: 18px;
+  z-index: 999;
 }
 
-.popupContent {
-  background: #fff;
+/* Estilo para a mensagem de status */
+.importStatus {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  max-width: 500px;
-  width: 90%;
-  max-height: 80%;
-  overflow-y: auto; /* Permite rolar quando houver muitas vendas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  font-size: 16px;
+  color: #333;
 }
 
-.popupActions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
+.importStatus span {
+  font-weight: bold;
 }
 
-.popupActions button {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
+.importStatus span:first-child {
+  color: #4CAF50; /* Verde para sucesso */
 }
 
-.popupActions button:hover {
-  background-color: #45a049;
-}
-
-/* Novo estilo para alinhar filtros à direita */
-.filtersRightContainer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; /* Alinha ao lado direito */
-  gap: 20px;
-  width: 100%;
+.importStatus span:last-child {
+  color: #E74C3C; /* Vermelho para erro */
 }
 
 
@@ -196,19 +179,5 @@
   .faturamentoItem {
     margin-left: 0;
     margin-bottom: 10px;
-  }
-
-  .importButton {
-    width: 100%; /* Torna o botão de importação responsivo */
-  }
-
-  .filtersRightContainer {
-    flex-direction: column; /* Empilha os filtros e botão em telas menores */
-    align-items: flex-start;
-  }
-
-  .dateAndImportContainer {
-    flex-direction: column; /* Empilha a data e o botão de importação */
-    gap: 10px; /* Espaçamento entre os elementos */
   }
 }

@@ -18,9 +18,11 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
   const userId = user ? user.uid : null;
   const [accessToken, setAccessToken] = useState(null);
   const [importing, setImporting] = useState(false);
-  const [selectedDate, setSelectedDate] = useState(''); // Data selecionada
+  const [startDate, setStartDate] = useState(''); // Data de início para importação
+  const [endDate, setEndDate] = useState(''); // Data de fim para importação
   const [showPopup, setShowPopup] = useState(false); // Controlar a exibição do popup
   const [vendasPreview, setVendasPreview] = useState([]); // Armazenar as vendas para o popup
+  const [importStatus, setImportStatus] = useState(''); // Status da importação (sucesso ou erro)
 
   // Fetch do access token
   useEffect(() => {
@@ -67,13 +69,13 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
 
   const handleSearchChange = (e) => setSearchTerm(e.target.value);
 
-  // Filtrando as vendas pelo mês selecionado
+  // Filtrando as vendas para exibição, com base no mês selecionado
   const filteredVendas = vendas
+    .filter(venda => new Date(venda.date_created).getMonth() + 1 === selectedMonth) // Filtro por mês
     .filter(venda => 
-      new Date(venda.date_created).getMonth() + 1 === selectedMonth &&
-      (venda.comprador_nickname?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-       venda.code?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-       venda.status?.toLowerCase().includes(searchTerm.toLowerCase()))
+      venda.comprador_nickname?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      venda.code?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      venda.status?.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .sort((a, b) => new Date(b.date_created) - new Date(a.date_created));
 
@@ -81,47 +83,59 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
   const handleImportPreview = async () => {
     console.log("Botão de importação clicado!"); // Log para verificar
 
-    if (!selectedDate) {
-      console.error("Selecione uma data!");
+    if (!startDate || !endDate) {
+      console.error("Selecione as datas de início e fim!");
       return;
     }
 
-    const from = new Date(selectedDate);
-    const to = new Date(selectedDate);
+    // Ajustando os horários para o horário de Brasília (GMT-3)
+    const brTimeZone = 'America/Sao_Paulo'; // Fuso horário de Brasília
+    const startOfDay = new Date(new Date(startDate).toLocaleString('en-US', { timeZone: brTimeZone }));
+    const endOfDay = new Date(new Date(endDate).toLocaleString('en-US', { timeZone: brTimeZone }));
 
-    from.setHours(0, 0, 0, 0); // Início do dia
-    to.setHours(23, 59, 59, 999); // Fim do dia
+    const url = `http://localhost:8080/vendas?from=${startOfDay.toISOString()}&to=${endOfDay.toISOString()}`;
 
-    const url = `http://localhost:8080/vendas?from=${from.toISOString()}&to=${to.toISOString()}`;
+    setImporting(true); // Inicia o carregamento
+    let allVendas = []; // Para acumular todas as vendas de todas as páginas
+    let hasNextPage = true;
+    let page = 1; // Iniciar pela primeira página
 
     try {
-      const response = await axios.get(url, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-          'Content-Type': 'application/json'
-        }
-      });
+      while (hasNextPage) {
+        const response = await axios.get(url, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+          },
+          params: { page } // Passa o número da página para a requisição
+        });
 
-      if (Array.isArray(response.data)) {
-        console.log("Vendas do dia:", response.data); // Logando as vendas no console
-        setVendasPreview(response.data); // Setando as vendas para o popup
-        setShowPopup(true); // Exibe o popup com as vendas
-      } else {
-        console.error("A resposta não é um array:", response.data);
+        if (Array.isArray(response.data)) {
+          allVendas = [...allVendas, ...response.data]; // Acumula as vendas
+          page++; // Incrementa para carregar a próxima página
+          hasNextPage = response.data.length > 0; // Se a resposta vier vazia, não há mais páginas
+        } else if (response.data && response.data.message) {
+          console.log(response.data.message); // Logando a mensagem de sucesso
+          setImportStatus('success'); // Atualiza o status para sucesso
+          break;
+        } else {
+          console.error("Resposta inesperada:", response.data);
+          setImportStatus('error'); // Atualiza o status para erro
+          break;
+        }
       }
+
+      setVendasPreview(allVendas); // Setando todas as vendas para o popup
+      setShowPopup(true); // Exibe o popup com as vendas
     } catch (error) {
       console.error("Erro ao obter vendas para o preview:", error);
+      setImportStatus('error'); // Atualiza o status para erro
+    } finally {
+      setImporting(false); // Finaliza o carregamento
+      setTimeout(() => {
+        setImportStatus(''); // Limpa a mensagem de status após 5 segundos
+      }, 5000);
     }
-  };
-
-  // Função para confirmar a importação das vendas
-  const handleConfirmImport = () => {
-    console.log("Confirmando a importação...");
-    setShowPopup(false); // Fecha o popup
-    // Realiza a importação de vendas
-    setImporting(true);
-    // Lógica de importação de vendas (você pode adicionar a chamada da API aqui)
-    setImporting(false);
   };
 
   // Função para fechar o popup sem importar
@@ -180,12 +194,20 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
               {/* Agrupar data e botão de importação */}
               <div className={styles.dateAndImportContainer}>
                 <div className={styles.dateFilter}>
-                  <label htmlFor="date-select">Selecione a Data:</label>
+                  <label htmlFor="start-date-select">Data Início:</label>
                   <input
                     type="date"
-                    id="date-select"
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
+                    id="start-date-select"
+                    value={startDate}
+                    onChange={(e) => setStartDate(e.target.value)}
+                  />
+
+                  <label htmlFor="end-date-select">Data Fim:</label>
+                  <input
+                    type="date"
+                    id="end-date-select"
+                    value={endDate}
+                    onChange={(e) => setEndDate(e.target.value)}
                   />
                 </div>
 
@@ -194,12 +216,12 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
                   disabled={importing}
                   className={styles.importButton}
                 >
-                  {importing ? 'Importando...' : 'Preview das Vendas e Importar'}
+                  {importing ? 'Importando...' : 'Importar'}
                 </button>
               </div>
             </div>
 
-            <OrdersList vendas={filteredVendas} />
+            <OrdersList vendas={filteredVendas} /> {/* Exibindo todas as vendas sem afetar a listagem */}
           </div>
         </div>
       </div>
@@ -218,9 +240,26 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
             </ul>
             <div className={styles.popupActions}>
               <button onClick={handleClosePopup}>Cancelar</button>
-              <button onClick={handleConfirmImport}>Confirmar Importação</button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Overlay de carregamento enquanto importa */}
+      {importing && (
+        <div className={styles.loadingOverlay}>
+          <span>Importando Pedidos...</span>
+        </div>
+      )}
+
+      {/* Mensagem de status da importação */}
+      {importStatus && (
+        <div className={styles.importStatus}>
+          {importStatus === 'success' ? (
+            <span>Importação concluída com sucesso!</span>
+          ) : (
+            <span>Erro ao importar pedidos. Tente novamente.</span>
+          )}
         </div>
       )}
 
