@@ -30,7 +30,7 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
       if (!userId) return;
 
       try {
-        const response = await axios.get(`http://localhost:8080/integration/${userId}`);
+        const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/integration/${userId}`);
         const { access_token } = response.data;
         setAccessToken(access_token);
       } catch (error) {
@@ -93,7 +93,7 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
     const startOfDay = new Date(new Date(startDate).toLocaleString('en-US', { timeZone: brTimeZone }));
     const endOfDay = new Date(new Date(endDate).toLocaleString('en-US', { timeZone: brTimeZone }));
 
-    const url = `http://localhost:8080/vendas?from=${startOfDay.toISOString()}&to=${endOfDay.toISOString()}`;
+    const url = `https://guiaseller-backend.dlmi5z.easypanel.host/vendas?from=${startOfDay.toISOString()}&to=${endOfDay.toISOString()}`;
 
     setImporting(true); // Inicia o carregamento
     let allVendas = []; // Para acumular todas as vendas de todas as páginas
