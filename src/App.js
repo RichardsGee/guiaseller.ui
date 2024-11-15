@@ -26,6 +26,7 @@ import IAButton from './components/Button/IAButtonPage';
 import QRCodePage from "./pages/QRCodePage/QRCodePage";
 import ChatPage from './pages/ChatPage/ChatPage';
 import AnunciosPage from './pages/AnunciosPage/AnunciosPage'; // Importe a nova página de Anúncios
+import InfluencerPage from './pages/InfluencerPage/InfluencerPage'; // Importando a página do Influenciador
 
 function App() {
   return (
@@ -105,6 +106,10 @@ function App() {
           <Route 
             path="/anuncios" 
             element={<ProtectedRoute><AnunciosPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/influenciador" 
+            element={<ProtectedRoute><InfluencerPage /></ProtectedRoute>} // Nova página de influenciador
           />
           <Route 
             path="/blocked" 
