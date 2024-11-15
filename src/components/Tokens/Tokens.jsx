@@ -15,11 +15,12 @@ const Tokens = ({ userId, setTokenCount }) => {
     const fetchTokens = async () => {
       try {
         if (userId) {
-          // Atualize a URL para refletir o nome correto do campo (token)
-          const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}/token`);
+          // Realizando a requisição à API com o ID do usuário
+          const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
           console.log("Resposta da API de Tokens:", response); // Log da resposta da API
-          setTokens(response.data.token || 0); // Atualiza o estado de tokens com o valor retornado
-          setTokenCount(response.data.token || 0); // Passando os tokens para o Header ou componente pai
+          const userToken = response.data.token || 0; // Acessando o campo token da resposta
+          setTokens(userToken); // Atualiza o estado de tokens com o valor retornado
+          setTokenCount(userToken); // Passando os tokens para o Header ou componente pai
         }
       } catch (error) {
         console.error("Erro ao buscar tokens:", error); // Log de erro se ocorrer algum problema na requisição
