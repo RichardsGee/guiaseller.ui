@@ -1,10 +1,10 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { ClipLoader } from 'react-spinners'; // Importando o spinner
+import { ClipLoader } from 'react-spinners'; // Spinner para o carregamento
 
 const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, loading, canAccessApp } = useAuth();
 
   if (loading) {
     return (
@@ -15,10 +15,14 @@ const ProtectedRoute = ({ children }) => {
   }
 
   if (!user) {
-    return <Navigate to="/" />; 
+    return <Navigate to="/error" />; 
   }
 
-  return children;
+  if (!canAccessApp) {
+    return <Navigate to="/blocked" />;
+  }
+
+  return children; 
 };
 
 export default ProtectedRoute;

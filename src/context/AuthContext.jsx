@@ -16,27 +16,37 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isAlphaUser, setIsAlphaUser] = useState(false);
   const [userLevel, setUserLevel] = useState(''); // Add state for user level if needed
+  const [canAccessApp, setCanAccessApp] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      setUser(user);
-      setLoading(true);
+  const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    setUser(user);
+    setLoading(true);
 
-      if (user) {
-        try {
-          const isAlpha = await checkUserAlphaStatus(user.uid); 
-          setIsAlphaUser(isAlpha);
-          await fetchUserLevel(user.uid); // Call the function here
-        } catch (error) {
-          console.error("Erro ao verificar o status de acesso alpha", error);
-        }
+    if (user) {
+      try {
+        const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${user.uid}`);
+        const userData = response.data;
+
+        const hasAccess = 
+          userData.user_level === "Admin" || 
+          userData.isAlpha || 
+          userData.isInfluencer === true;
+
+        setCanAccessApp(hasAccess); 
+
+        const isAlpha = await checkUserAlphaStatus(user.uid); 
+        setIsAlphaUser(isAlpha);
+      } catch (error) {
+        console.error("Erro ao buscar informações do usuário ou verificar status alpha", error);
       }
+    }
 
-      setLoading(false);
-    });
+    setLoading(false);
+  });
 
-    return () => unsubscribe();
-  }, []);
+  return () => unsubscribe();
+}, []);
 
   const fetchUserLevel = async (userId) => {
     try {
@@ -56,7 +66,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, isAlphaUser, userLevel, signOut }}> {/* Include userLevel in the provider's value */}
+    <AuthContext.Provider value={{ user, loading, isAlphaUser, userLevel, canAccessApp, signOut }}>
       {children}
     </AuthContext.Provider>
   );
