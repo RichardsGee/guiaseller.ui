@@ -122,7 +122,8 @@ const Callback = () => {
   };
 
 
-  useEffect(() => {
+useEffect(() => {
+  const timer = setTimeout(() => {
     const authorization_code = getCodeParams();
     if (authorization_code && !hasFetchedAccessToken.current) {
       getAccessToken(authorization_code)
@@ -144,9 +145,13 @@ const Callback = () => {
             console.error('Informações do usuário incompletas para integração.', data);
           }
         })
-        .catch(error => console.error('Erro no fluxo de autenticação:', error));
+        .catch((error) => console.error('Erro no fluxo de autenticação:', error));
     }
-  }, []);
+  }, 3000); 
+
+  return () => clearTimeout(timer); 
+}, []);
+
 
   return (
     <div>
