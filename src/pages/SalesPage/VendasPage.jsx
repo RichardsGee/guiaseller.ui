@@ -82,61 +82,55 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
   // Função para mostrar o popup com a pré-visualização das vendas
   const handleImportPreview = async () => {
     console.log("Botão de importação clicado!"); // Log para verificar
-
+  
     if (!startDate || !endDate) {
       console.error("Selecione as datas de início e fim!");
       return;
     }
-
-    // Ajustando os horários para o horário de Brasília (GMT-3)
-    const brTimeZone = 'America/Sao_Paulo'; // Fuso horário de Brasília
-    const startOfDay = new Date(new Date(startDate).toLocaleString('en-US', { timeZone: brTimeZone }));
-    const endOfDay = new Date(new Date(endDate).toLocaleString('en-US', { timeZone: brTimeZone }));
-
-    const url = `https://guiaseller-backend.dlmi5z.easypanel.host/vendas?from=${startOfDay.toISOString()}&to=${endOfDay.toISOString()}`;
-
+  
+    // Formatação da URL com os horários fixos no final
+    const startOfDay = startDate; // Recebe a data de início, o horário será fixado na URL
+    const endOfDay = endDate; // Recebe a data de fim, o horário será fixado na URL
+    
+    // Logando as datas para verificação
+    console.log(`Buscando pedidos entre: ${startOfDay}T00:00:00.000Z e ${endOfDay}T23:59:59.999Z`);
+  
+    // URL com as datas e os horários fixos para o início e fim
+    const url = `https://guiaseller-backend.dlmi5z.easypanel.host/vendas?from=${startOfDay}T00:00:00.000Z&to=${endOfDay}T23:59:59.999Z`;
+  
+    // Log da URL da requisição
+    console.log(`URL da requisição: ${url}`);
+  
     setImporting(true); // Inicia o carregamento
-    let allVendas = []; // Para acumular todas as vendas de todas as páginas
-    let hasNextPage = true;
-    let page = 1; // Iniciar pela primeira página
-
+    let allVendas = []; // Para acumular todas as vendas
+  
     try {
-      while (hasNextPage) {
-        const response = await axios.get(url, {
-          headers: {
-            'Authorization': `Bearer ${accessToken}`,
-            'Content-Type': 'application/json'
-          },
-          params: { page } // Passa o número da página para a requisição
-        });
-
-        if (Array.isArray(response.data)) {
-          allVendas = [...allVendas, ...response.data]; // Acumula as vendas
-          page++; // Incrementa para carregar a próxima página
-          hasNextPage = response.data.length > 0; // Se a resposta vier vazia, não há mais páginas
-        } else if (response.data && response.data.message) {
-          console.log(response.data.message); // Logando a mensagem de sucesso
-          setImportStatus('success'); // Atualiza o status para sucesso
-          break;
-        } else {
-          console.error("Resposta inesperada:", response.data);
-          setImportStatus('error'); // Atualiza o status para erro
-          break;
+      const response = await axios.get(url, {
+        headers: {
+          'Authorization': `Bearer ${accessToken}`,
+          'Content-Type': 'application/json'
         }
+      });
+  
+      if (Array.isArray(response.data)) {
+        allVendas = [...allVendas, ...response.data]; // Acumula as vendas
+      } else if (response.data && response.data.message) {
+        console.log(response.data.message); // Logando a mensagem de sucesso
+      } else {
+        console.error("Resposta inesperada:", response.data);
       }
-
+  
+      // Atualizando a lista de vendas com os novos pedidos
+      setVendas(prevVendas => [...prevVendas, ...allVendas]);
       setVendasPreview(allVendas); // Setando todas as vendas para o popup
       setShowPopup(true); // Exibe o popup com as vendas
     } catch (error) {
       console.error("Erro ao obter vendas para o preview:", error);
-      setImportStatus('error'); // Atualiza o status para erro
     } finally {
       setImporting(false); // Finaliza o carregamento
-      setTimeout(() => {
-        setImportStatus(''); // Limpa a mensagem de status após 5 segundos
-      }, 5000);
     }
   };
+  
 
   // Função para fechar o popup sem importar
   const handleClosePopup = () => {
@@ -249,17 +243,6 @@ const VendasPage = ({ faturamento, quantidadeVendasMesAtual }) => {
       {importing && (
         <div className={styles.loadingOverlay}>
           <span>Importando Pedidos...</span>
-        </div>
-      )}
-
-      {/* Mensagem de status da importação */}
-      {importStatus && (
-        <div className={styles.importStatus}>
-          {importStatus === 'success' ? (
-            <span>Importação concluída com sucesso!</span>
-          ) : (
-            <span>Erro ao importar pedidos. Tente novamente.</span>
-          )}
         </div>
       )}
 
