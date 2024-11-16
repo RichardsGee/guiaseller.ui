@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Callback = () => {
   const user_Id = "pvvtctrvNdg4bcnOogd839Z1ZqD3";
@@ -113,8 +114,10 @@ const Callback = () => {
       );
 
       console.log('Integração criada com sucesso:', response.data);
+      toast.success('Integração criada com sucesso!');
     } catch (error) {
       console.error('Erro ao criar integração:', error);
+      toast.error('Erro ao criar integração.');
     }
   };
 
@@ -147,8 +150,8 @@ const Callback = () => {
 
   return (
     <div>
-      <h1>Hello, I'm callback</h1>
-      <button onClick={() => console.log(getCodeParams())}>Pegue esse code no log ai Richardão</button>
+      <h1>Integração completa!</h1>
+      <button onClick={() => console.log(getCodeParams())}>Código da integração</button>
     </div>
   );
 };
