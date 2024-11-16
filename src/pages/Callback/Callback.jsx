@@ -132,8 +132,8 @@ const fetchRefreshToken = async (authorization_code) => {
       },
       body: new URLSearchParams({
         grant_type: "authorization_code",
-        client_id: "697302188350314",
-        client_secret: "VwhQK2QoZ9CQyksPLgAWcdXCJ9aswt7i", 
+        client_id: "6973021883530314",
+        client_secret: "VwhQK2Q0z9COyksPLgAWcdXCJ9aswt7i", 
         code: authorization_code,
         redirect_uri: "https://guiaseller.com/integrations/callback",
       }),
