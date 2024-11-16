@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
-import Header from '../../components/Header/Header';  
-import Sidebar from '../../components/Sidebar/Sidebar';  
-import Footer from '../../components/Footer/Footer';  
-import MainContent from '../../components/MainContent/MainContent'; 
-import { AuthContext } from '../../context/AuthContext';  
-import styles from './integrations.module.css'; 
+import React, { useState, useEffect, useContext } from 'react';
+import Header from '../../components/Header/Header';
+import Sidebar from '../../components/Sidebar/Sidebar';
+import Footer from '../../components/Footer/Footer';
+import MainContent from '../../components/MainContent/MainContent';
+import { AuthContext } from '../../context/AuthContext';
+import styles from './integrations.module.css';
 import '../../styles/styles.css'; // Importando o CSS global
 
 const IntegrationsPage = () => {
@@ -13,13 +13,49 @@ const IntegrationsPage = () => {
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
 
-  // Definindo o estado de integrações: Disponíveis e Em breve com logos específicas
+  const userId = "pvvtctrvNdg4bcnOogd839Z1ZqD3"; // ID do usuário
+
   const [integrations, setIntegrations] = useState([
-    { nome: 'Mercado Livre', loja: '', integrado: false, ativo: false, disponivel: true, logo: 'https://i.imgur.com/yRascr7.png', link: 'https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=6973021883530314&redirect_uri=https://guiaseller.com/integrations/callback' },
-    { nome: 'Bling', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/YXoGxGm.png' },
-    { nome: 'Shopee', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/h2d84rv.png' },
-    { nome: 'Amazon', loja: '', integrado: false, ativo: false, disponivel: false, logo: 'https://i.imgur.com/IHDjUqS.png' },
+    { nome: 'Mercado Livre', loja: '', integrado: false, disponivel: true, selected: false, logo: 'https://i.imgur.com/yRascr7.png', link: 'https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=6973021883530314&redirect_uri=https://guiaseller.com/integrations/callback' },
+    { nome: 'Shopee', loja: '', integrado: false, disponivel: false, selected: false, logo: 'https://i.imgur.com/h2d84rv.png' },
+    { nome: 'Amazon', loja: '', integrado: false, disponivel: false, selected: false, logo: 'https://i.imgur.com/IHDjUqS.png' },
+    { nome: 'Kwai', loja: '', integrado: false, disponivel: false, selected: false, logo: 'https://i.imgur.com/N2sE2tx.png' },
+    { nome: 'Shein', loja: '', integrado: false, disponivel: false, selected: false, logo: 'https://i.imgur.com/4V3qxzb.png' },
+    { nome: 'Magalu', loja: '', integrado: false, disponivel: false, selected: false, logo: 'https://i.imgur.com/6w3S8R2.png' },
   ]);
+
+  // Carregar integrações do backend
+  useEffect(() => {
+    const fetchIntegrations = async () => {
+      try {
+        const response = await fetch(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
+        const data = await response.json();
+
+        // Verifica se existe integração com Mercado Livre
+        const mercadoLivreIntegration = data.Integrations.find(
+          (integration) => integration.nickname === "PERERESHOP"
+        );
+
+        if (mercadoLivreIntegration) {
+          setIntegrations((prev) =>
+            prev.map((integration) =>
+              integration.nome === "Mercado Livre"
+                ? {
+                    ...integration,
+                    integrado: true,
+                    loja: mercadoLivreIntegration.nickname,
+                  }
+                : integration
+            )
+          );
+        }
+      } catch (error) {
+        console.error("Erro ao buscar integrações:", error);
+      }
+    };
+
+    fetchIntegrations();
+  }, [userId]);
 
   // Função para alternar a integração
   const handleIntegrate = (index) => {
@@ -35,13 +71,20 @@ const IntegrationsPage = () => {
     }
   };
 
-  // Função para ativar/desativar a integração
-  const handleToggleActive = (index) => {
-    const updatedIntegrations = [...integrations];
-    if (updatedIntegrations[index].integrado) {
-      updatedIntegrations[index].ativo = !updatedIntegrations[index].ativo;
-      setIntegrations(updatedIntegrations);
+  // Função para remover integração
+  const handleRemoveIntegration = (index) => {
+    const integration = integrations[index];
+    if (integration.integrado) {
+      console.log(`Removendo integração para ${integration.nome}`);
+      // Adicione aqui o comando de remoção com o post para o backend
     }
+  };
+
+  // Função para selecionar/desmarcar a integração
+  const handleSelectIntegration = (index) => {
+    const updatedIntegrations = [...integrations];
+    updatedIntegrations[index].selected = !updatedIntegrations[index].selected;
+    setIntegrations(updatedIntegrations);
   };
 
   return (
@@ -49,7 +92,6 @@ const IntegrationsPage = () => {
       <Header username={username} logout={signOut} />
       <Sidebar userPhoto={userPhoto} username={username} userEmail={userEmail} />
       <div className="main-content">
-        
         <div className="contentContainer">
           <div className={styles.integrationsContainer}>
             <h1 className="title">Integrações</h1>
@@ -60,6 +102,12 @@ const IntegrationsPage = () => {
               {integrations.filter(integration => integration.disponivel).map((integration, index) => (
                 <li key={index} className={styles.integrationItem}>
                   <div className={styles.integrationInfo}>
+                    <input
+                      type="checkbox"
+                      checked={integration.selected}
+                      onChange={() => handleSelectIntegration(index)}
+                      className={styles.checkbox}
+                    />
                     <img
                       src={integration.logo} 
                       alt={`${integration.nome} logo`}
@@ -73,26 +121,21 @@ const IntegrationsPage = () => {
                     </div>
                   </div>
                   <div className={styles.integrationControls}>
-                    {/* Switch para Ativar/Desativar */}
-                    <label className={styles.switch}>
-                      <input
-                        type="checkbox"
-                        checked={integration.ativo}
-                        onChange={() => handleToggleActive(index)}
-                        disabled={!integration.integrado} /* Desativa se não estiver integrado */
-                      />
-                      <span className={styles.slider}></span>
-                    </label>
-
-                    {/* Status de integração */}
-                    <div className={`${styles.integrationStatus} ${integration.integrado ? (integration.ativo ? styles.statusAtivado : styles.statusNaoAtivado) : styles.statusNaoIntegrado}`} />
-
                     {/* Botão de Integração */}
                     <button
-                      className={integration.integrado ? (integration.ativo ? styles.activatedButton : styles.activateButton) : styles.integrateButton}
+                      className={integration.integrado ? styles.activatedButton : styles.integrateButton}
                       onClick={() => handleIntegrate(index)}
                     >
-                      {integration.integrado ? (integration.ativo ? 'Ativado' : 'Ativar') : 'Integrar'}
+                      {integration.integrado ? 'Ativado' : 'Integrar'}
+                    </button>
+
+                    {/* Botão de Remoção (desabilitado se não selecionado) */}
+                    <button
+                      className={styles.removeButton}
+                      onClick={() => handleRemoveIntegration(index)}
+                      disabled={!integration.selected}
+                    >
+                      Remover
                     </button>
                   </div>
                 </li>

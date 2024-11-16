@@ -154,3 +154,27 @@ input:checked + .slider:before {
 .activateButton:hover, .integrateButton:hover, .activatedButton:hover {
   background-color: darkgreen;
 }
+.removeButton {
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  color: white;
+  border: none;
+  background-color: var(--container-color); /* Igual ao botão Integrar */
+}
+
+.removeButton:disabled {
+  background-color: #d3d3d3; /* Cinza para indicar desabilitado */
+  cursor: not-allowed;
+}
+
+.removeButton:hover:not(:disabled) {
+  background-color: darkred; /* Igual ao botão Integrar no hover */
+}
+.checkbox {
+  margin-right: 15px;
+  transform: scale(1.2);
+  cursor: pointer;
+}
