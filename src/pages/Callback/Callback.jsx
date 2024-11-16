@@ -21,6 +21,7 @@ const Callback = () => {
   };
 
   const getAccessToken = async (authorization_code) => {
+    console.log('Authorization code!!!!!!!!!!!!!!!!!!!!!!!!!!', authorization_code);
     if (hasFetchedAccessToken.current) return null;
     hasFetchedAccessToken.current = true;
 
