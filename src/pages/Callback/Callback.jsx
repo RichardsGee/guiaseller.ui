@@ -123,34 +123,71 @@ const Callback = () => {
   };
 
 
+const fetchRefreshToken = async (authorization_code) => {
+  try {
+    const response = await fetch("https://api.mercadolibre.com/oauth/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        grant_type: "authorization_code",
+        client_id: "697302188350314",
+        client_secret: "VwhQK2QoZ9CQyksPLgAWcdXCJ9aswt7i", 
+        code: authorization_code,
+        redirect_uri: "https://guiaseller.com/integrations/callback",
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao obter refresh token");
+    }
+
+    const data = await response.json();
+    return data; 
+  } catch (error) {
+    console.error("Erro ao buscar o refresh token:", error);
+    return null;
+  }
+};
+
 useEffect(() => {
-  const timer = setTimeout(() => {
+  const fetchData = async () => {
     const authorization_code = getCodeParams();
     if (authorization_code && !hasFetchedAccessToken.current) {
-      getAccessToken(authorization_code)
-        .then((result) => {
-          if (result && result.access_token && result.marketId && result.refresh_token) {
-            return fetchUserInfo(result.access_token, result.marketId).then((userData) => ({
-              ...result,
-              userData,
-            }));
-          } else {
-            console.error('access_token, marketId ou refresh_token não definidos após obter o access token.');
-            return null;
-          }
-        })
-        .then((data) => {
-          if (data && data.userData && data.userData.nickname && data.userData.power_seller_status && data.userData.level_id) {
-            handleIntegration(data.access_token, data.refresh_token, authorization_code, data.userData, data.marketId);
-          } else {
-            console.error('Informações do usuário incompletas para integração.', data);
-          }
-        })
-        .catch((error) => console.error('Erro no fluxo de autenticação:', error));
-    }
-  }, 3000); 
+      try {
+        const tokenData = await fetchRefreshToken(authorization_code);
 
-  return () => clearTimeout(timer); 
+        if (tokenData && tokenData.refresh_token) {
+          const result = await getAccessToken(tokenData.refresh_token);
+
+          if (result && result.access_token && result.marketId) {
+            const userData = await fetchUserInfo(result.access_token, result.marketId);
+
+            if (userData && userData.nickname && userData.power_seller_status && userData.level_id) {
+              handleIntegration(
+                result.access_token,
+                tokenData.refresh_token,
+                authorization_code,
+                userData,
+                result.marketId
+              );
+            } else {
+              console.error("Informações do usuário incompletas para integração.");
+            }
+          } else {
+            console.error("access_token ou marketId não definidos após obter o access token.");
+          }
+        } else {
+          console.error("Refresh token não encontrado na resposta.");
+        }
+      } catch (error) {
+        console.error("Erro no fluxo de autenticação:", error);
+      }
+    }
+  };
+
+  fetchData();
 }, []);
 
 
