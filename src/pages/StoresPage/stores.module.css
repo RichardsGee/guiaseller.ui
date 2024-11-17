@@ -8,7 +8,6 @@
     max-width: 100%;
     margin: 0 auto;
     background-color: var(--secondary-color);
-
 }
 
 /* Detalhes da loja */
@@ -35,7 +34,7 @@
     text-align: center;
     color: var(--text-color);
     font-size: 28px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     font-weight: bold;
 }
 
@@ -61,18 +60,16 @@
     flex-direction: column;
     align-items: center;
     padding: 15px;
-    background-color: var(--secondary-color);
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    margin-top: 20px;
+    margin-top: -20px;
     width: 100%;
 }
 
 .storeStatusText {
-    font-size: 18px;
+    font-size: 28px;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
+    color: #00A650;
 }
 
 /* Status Power Seller */
@@ -107,10 +104,11 @@
 
 .thermometerBlock {
     width: 18%;
-    height: 20px;
+    height: 15px;
     background-color: #e0e0e0;
     border-radius: 5px;
     transition: background-color 0.3s ease-in-out;
+    margin-top: -20px;
 }
 
 /* Rank 1 (Vermelho claro) */
@@ -146,21 +144,21 @@
 .metricContainer {
     display: flex;
     justify-content: space-between;
-    width: 100%;
-    gap: 20px;
+    width: 100%; /* Ajustado para ocupar toda a largura */
+    gap: 20px; /* Menor gap para melhor organização */
     margin-top: 20px;
     background-color: var(--secondary-color);
-
 }
 
 /* Container para cada métrica */
 .metric {
     background-color: var(--background-color);
-    padding: 15px;
+    padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 23%;
+    width: 30%; /* Reduzido para mais espaçamento entre métricas */
     text-align: center;
+    position: relative; /* Necessário para o posicionamento do ícone */
 }
 
 /* Valor da métrica */
@@ -168,6 +166,7 @@
     font-size: 20px;
     font-weight: bold;
     color: var(--text-color);
+    margin-top: 10px; /* Adicionado espaço entre o valor e o título */
 }
 
 /* Rótulo da métrica */
@@ -175,4 +174,22 @@
     font-size: 14px;
     color: var(--secondary-text-color);
     margin-top: 5px;
+    text-align: center; /* Centraliza o título dentro do container */
+    font-weight: bold;
+    display: flex;
+    align-items: center; /* Alinha o ícone ao texto */
+    justify-content: center; /* Garante que o título e ícone estejam alinhados centralmente */
+    gap: 10px; /* Espaço entre o ícone e o título */
+}
+
+/* Alinhando o ícone no canto superior esquerdo, mas dentro do título */
+.metricIconContainer {
+    display: inline-flex; /* Garante que o ícone e o texto fiquem lado a lado */
+    align-items: center;
+}
+
+/* Estilizando o ícone */
+.metricIconContainer svg {
+    font-size: 20px; /* Ajuste o tamanho do ícone */
+    color: var(--text-color);
 }

@@ -5,6 +5,7 @@ import Footer from '../../components/Footer/Footer';
 import MainContent from '../../components/MainContent/MainContent';
 import { AuthContext } from '../../context/AuthContext';
 import styles from './stores.module.css'; // Atualizando para o novo CSS
+import { Cancel, ReportProblem, LocalShipping } from '@mui/icons-material'; // Importando ícones
 import '../../styles/styles.css'; // Importando o CSS global
 
 const StoresPage = () => {
@@ -13,21 +14,20 @@ const StoresPage = () => {
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
 
-  const userId = "pvvtctrvNdg4bcnOogd839Z1ZqD3"; // ID do usuário
   const [store, setStore] = useState(null); // Estado para armazenar as informações da loja
 
   // Carregar os dados do backend
   useEffect(() => {
     const fetchStoreDetailsFromBackend = async () => {
       try {
-        const response = await fetch(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
+        const response = await fetch(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${user.uid}`); // Usando o ID do usuário logado (user.uid)
         const data = await response.json();
 
         console.log("Dados do Backend:", data);  // Logando os dados do backend
 
         // Verificar se os dados de integração existem
         if (data.Integrations && data.Integrations[0]) {
-          const { access_token, nickname, power_seller_status, level_id, permalink, total } = data.Integrations[0];
+          const { access_token, nickname, power_seller_status, level_id, permalink, total, user_marketplace_id } = data.Integrations[0];
 
           // Armazenar os dados de integração
           setStore({
@@ -37,10 +37,11 @@ const StoresPage = () => {
             permalink: permalink,
             totalSales: total,
             accessToken: access_token,  // Guardar o access_token para usar na requisição da API
+            userMarketplaceId: user_marketplace_id, // Guardando o ID do Marketplace do usuário
           });
 
           // Agora que temos o access_token, vamos buscar os dados adicionais do Mercado Livre
-          fetchStoreDetailsFromML(access_token);
+          fetchStoreDetailsFromML(user_marketplace_id, access_token); // Passando o user_marketplace_id
         } else {
           console.error("Dados de integração não encontrados.");
         }
@@ -50,14 +51,14 @@ const StoresPage = () => {
     };
 
     fetchStoreDetailsFromBackend();
-  }, [userId]);
+  }, [user.uid]);
 
   // Função para buscar dados do Mercado Livre
-  const fetchStoreDetailsFromML = async (accessToken) => {
+  const fetchStoreDetailsFromML = async (userMarketplaceId, accessToken) => {
     try {
       console.log("Fazendo requisição ao Mercado Livre com o accessToken:", accessToken);  // Logando o accessToken
 
-      const response = await fetch(`https://api.mercadolibre.com/users/81270097`, {
+      const response = await fetch(`https://api.mercadolibre.com/users/${userMarketplaceId}`, { // Usando o user_marketplace_id
         headers: {
           'Authorization': `Bearer ${accessToken}`, // Utilizar o access_token na requisição
         },
@@ -101,7 +102,7 @@ const StoresPage = () => {
           <div className={styles.storesContainer}>
             <div className={styles.storeContainerHeader}>
               {/* Nome da loja e total de vendas */}
-              <h1 className={styles.storeTitle}>Loja: {store?.nickname || "N/A"}</h1>
+              <h1 className={styles.storeTitle}>{store?.nickname || "N/A"}</h1>
 
               {/* Total de vendas */}
               <div className={styles.storeInfoContainer}>
@@ -139,19 +140,28 @@ const StoresPage = () => {
             {/* Outras métricas (Reclamações, Canceladas, Despacho com Atraso) */}
             <div className={styles.metricContainer}>
               <div className={styles.metric}>
-                <p className={styles.metricLabel}>Reclamações</p>
+                <p className={styles.metricLabel}>
+                  <ReportProblem style={{ width: "20px", marginRight: "10px" }} />
+                  Reclamações
+                </p>
                 <div className={styles.metricValue}>
                   {formatMetricWithValue(store?.sellerReputation?.metrics?.claims?.rate, store?.sellerReputation?.metrics?.claims?.value)}
                 </div>
               </div>
               <div className={styles.metric}>
-                <p className={styles.metricLabel}>Canceladas por você</p>
+                <p className={styles.metricLabel}>
+                  <Cancel style={{ width: "20px", marginRight: "10px" }} />
+                  Canceladas por você
+                </p>
                 <div className={styles.metricValue}>
                   {formatMetricWithValue(store?.sellerReputation?.metrics?.cancellations?.rate, store?.sellerReputation?.metrics?.cancellations?.value)}
                 </div>
               </div>
               <div className={styles.metric}>
-                <p className={styles.metricLabel}>Despacho com Atraso</p>
+                <p className={styles.metricLabel}>
+                  <LocalShipping style={{ width: "20px", marginRight: "10px" }} />
+                  Despacho com Atraso
+                </p>
                 <div className={styles.metricValue}>
                   {formatMetricWithValue(store?.sellerReputation?.metrics?.delayed_handling_time?.rate, store?.sellerReputation?.metrics?.delayed_handling_time?.value)}
                 </div>
