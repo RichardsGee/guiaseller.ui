@@ -1,0 +1,75 @@
+.assinaturasContainer {
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .assinaturasTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: var(--secondary-color);
+  }
+  
+  .assinaturasTable th,
+  .assinaturasTable td {
+    border: 1px solid var(--text-color);
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .assinaturasTable th {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+  }
+  
+  .assinaturaRow:nth-child(even) {
+    background-color: var(--hover-color);
+  }
+  
+  .assinaturaRow:hover {
+    background-color: var(--secondary-color-light);
+  }
+  
+  .status {
+    font-weight: bold;
+  }
+  
+  .paga {
+    color: green;
+  }
+  
+  .atrasada {
+    color: red;
+  }
+  
+  .cancelada {
+    color: gray;
+  }
+  
+  .detalhesLink {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: bold;
+    border: 1px solid var(--primary-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .detalhesLink:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  

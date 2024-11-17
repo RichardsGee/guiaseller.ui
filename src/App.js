@@ -2,32 +2,33 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Dashboard from "./pages/DashboardPage/Dashboard";
-import VendasPage from "./pages/SalesPage/VendasPage";  
-import SettingsPage from "./pages/SettingsPage/SettingsPage"; 
+import VendasPage from "./pages/SalesPage/VendasPage";
+import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import { ToastContainer } from "react-toastify";
-import { UserProvider } from "./context/UserContext"; 
-import ProdutosPage from './pages/ProductsPage/ProdutosPage'; 
-import FerramentasIA from './pages/AIToolsPage/AIToolsPage'; 
-import MessagesPage from './pages/MessagesPage/MessagesPage'; 
+import { UserProvider } from "./context/UserContext";
+import ProdutosPage from './pages/ProductsPage/ProdutosPage';
+import FerramentasIA from './pages/AIToolsPage/AIToolsPage';
+import MessagesPage from './pages/MessagesPage/MessagesPage';
 import IntegrationsPage from './pages/IntegrationsPage/IntegrationsPage';
 import GeradorTitulos from './pages/TittleGenerator/TittleGenerator';
-import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage'; 
+import TokensBuyPage from './pages/TokensBuyPage/TokensBuyPage';
 import KitsPage from './pages/ProductsPage/KitsPage';
-import PlansPage from './pages/PlansPage/PlansPage';  
-import EbooksPage from './pages/EbooksPage/EbooksPage'; 
-import ToolsPage from './pages/ToolsPage/ToolsPage'; 
-import ProtectedRoute from './components/ProtectedRoute'; 
+import PlansPage from './pages/PlansPage/PlansPage';
+import EbooksPage from './pages/EbooksPage/EbooksPage';
+import ToolsPage from './pages/ToolsPage/ToolsPage';
+import ProtectedRoute from './components/ProtectedRoute';
 import AlphaAccess from './components/AlphaScreen/AlphaScreen';
 import Callback from "./pages/Callback/Callback";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
-import PricingCalculatorPage from './pages/PricingCalculatorPage/PricingCalculatorPage'; 
-import AdCampaignsPage from './pages/AdCampaignsPage/AdCampaignsPage'; 
-import IAButton from './components/Button/IAButtonPage'; 
+import PricingCalculatorPage from './pages/PricingCalculatorPage/PricingCalculatorPage';
+import AdCampaignsPage from './pages/AdCampaignsPage/AdCampaignsPage';
+import IAButton from './components/Button/IAButtonPage';
 import QRCodePage from "./pages/QRCodePage/QRCodePage";
 import ChatPage from './pages/ChatPage/ChatPage';
-import AnunciosPage from './pages/AnunciosPage/AnunciosPage'; // Importe a nova página de Anúncios
-import InfluencerPage from './pages/InfluencerPage/InfluencerPage'; // Importando a página do Influenciador
-import StoresPage from './pages/StoresPage/StoresPage'; // Importando a nova página de Lojas
+import AnunciosPage from './pages/AnunciosPage/AnunciosPage';
+import InfluencerPage from './pages/InfluencerPage/InfluencerPage';
+import StoresPage from './pages/StoresPage/StoresPage';
+import AssinaturasPage from './pages/AssinaturasPage/AssinaturasPage'; // Importe a página Assinaturas
 
 function App() {
   return (
@@ -110,12 +111,16 @@ function App() {
           />
           <Route 
             path="/influenciador" 
-            element={<ProtectedRoute><InfluencerPage /></ProtectedRoute>} // Nova página de influenciador
+            element={<ProtectedRoute><InfluencerPage /></ProtectedRoute>} 
           />
           <Route 
             path="/lojas" 
-            element={<ProtectedRoute><StoresPage /></ProtectedRoute>} // Nova página de Lojas
+            element={<ProtectedRoute><StoresPage /></ProtectedRoute>} 
           />
+          <Route 
+            path="/assinaturas" 
+            element={<ProtectedRoute><AssinaturasPage /></ProtectedRoute>} 
+          /> {/* Nova rota para Assinaturas */}
           <Route 
             path="/blocked" 
             element={<AlphaAccess />} 
@@ -124,7 +129,7 @@ function App() {
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <ToastContainer />
-        <IAButton /> {/* Adicionando o botão flutuante aqui */}
+        <IAButton />
       </Router>
     </UserProvider>
   );
