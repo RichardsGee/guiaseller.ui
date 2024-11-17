@@ -27,6 +27,7 @@ import QRCodePage from "./pages/QRCodePage/QRCodePage";
 import ChatPage from './pages/ChatPage/ChatPage';
 import AnunciosPage from './pages/AnunciosPage/AnunciosPage'; // Importe a nova página de Anúncios
 import InfluencerPage from './pages/InfluencerPage/InfluencerPage'; // Importando a página do Influenciador
+import StoresPage from './pages/StoresPage/StoresPage'; // Importando a nova página de Lojas
 
 function App() {
   return (
@@ -110,6 +111,10 @@ function App() {
           <Route 
             path="/influenciador" 
             element={<ProtectedRoute><InfluencerPage /></ProtectedRoute>} // Nova página de influenciador
+          />
+          <Route 
+            path="/lojas" 
+            element={<ProtectedRoute><StoresPage /></ProtectedRoute>} // Nova página de Lojas
           />
           <Route 
             path="/blocked" 
