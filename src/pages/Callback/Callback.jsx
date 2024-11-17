@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Callback = () => {
-  const user_Id = "EIsHdJbQn4RpBMyuU351OuwMXWF3";
+  const user_Id = "pvvtctrvNdg4bcnOogd839Z1ZqD3";
   const [nickname, setNickname] = useState('');
   const [powerSellerStatus, setPowerSellerStatus] = useState('');
   const [levelId, setLevelId] = useState('');
@@ -21,7 +21,7 @@ const Callback = () => {
   };
 
   const getAccessToken = async (authorization_code) => {
-    console.log('Authorization code:', authorization_code);
+    console.log('Authorization code!!!!!!!!!!!!!!!!!!!!!!!!!!', authorization_code);
     if (hasFetchedAccessToken.current) return null;
     hasFetchedAccessToken.current = true;
 
@@ -65,6 +65,7 @@ const Callback = () => {
         total: response.data.seller_reputation?.transactions?.total || 0,
       };
 
+      // Log para verificar cada dado do usuário
       console.log("Dados do usuário obtidos:");
       Object.keys(userData).forEach(key => {
         if (!userData[key]) {
@@ -97,9 +98,11 @@ const Callback = () => {
       user_marketplace_id: marketId.toString(),  // Convertendo para string
       userId: user_Id,
       authorization_code,
-      // Enviar apenas os dados essenciais para o banco de dados
-      nickname: userData.nickname,  // Essencial para exibir no frontend
-      total: userData.total,        // Essencial para exibir no frontend
+      nickname: userData.nickname,
+      power_seller_status: userData.power_seller_status,
+      level_id: userData.level_id,
+      permalink: userData.permalink,
+      total: userData.total,
     };
 
     console.log("Dados para integração:", requestData);
@@ -119,72 +122,73 @@ const Callback = () => {
     }
   };
 
-  const fetchRefreshToken = async (authorization_code) => {
-    try {
-      const response = await fetch("https://api.mercadolibre.com/oauth/token", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          grant_type: "authorization_code",
-          client_id: "6973021883530314",
-          client_secret: "VwhQK2Q0z9COyksPLgAWcdXCJ9aswt7i", 
-          code: authorization_code,
-          redirect_uri: "https://guiaseller.com/integrations/callback",
-        }),
-      });
 
-      if (!response.ok) {
-        throw new Error("Erro ao obter refresh token");
+const fetchRefreshToken = async (authorization_code) => {
+  try {
+    const response = await fetch("https://api.mercadolibre.com/oauth/token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        grant_type: "authorization_code",
+        client_id: "6973021883530314",
+        client_secret: "VwhQK2Q0z9COyksPLgAWcdXCJ9aswt7i", 
+        code: authorization_code,
+        redirect_uri: "https://guiaseller.com/integrations/callback",
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao obter refresh token");
+    }
+
+    const data = await response.json();
+    return data; 
+  } catch (error) {
+    console.error("Erro ao buscar o refresh token:", error);
+    return null;
+  }
+};
+
+useEffect(() => {
+  const fetchData = async () => {
+    const authorization_code = getCodeParams();
+    if (authorization_code && !hasFetchedAccessToken.current) {
+      try {
+        const tokenData = await fetchRefreshToken(authorization_code);
+
+        if (tokenData && tokenData.refresh_token) {
+          const result = await getAccessToken(tokenData.refresh_token);
+
+          if (result && result.access_token && result.marketId) {
+            const userData = await fetchUserInfo(result.access_token, result.marketId);
+
+            if (userData && userData.nickname && userData.power_seller_status && userData.level_id) {
+              handleIntegration(
+                result.access_token,
+                tokenData.refresh_token,
+                authorization_code,
+                userData,
+                result.marketId
+              );
+            } else {
+              console.error("Informações do usuário incompletas para integração.");
+            }
+          } else {
+            console.error("access_token ou marketId não definidos após obter o access token.");
+          }
+        } else {
+          console.error("Refresh token não encontrado na resposta.");
+        }
+      } catch (error) {
+        console.error("Erro no fluxo de autenticação:", error);
       }
-
-      const data = await response.json();
-      return data; 
-    } catch (error) {
-      console.error("Erro ao buscar o refresh token:", error);
-      return null;
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const authorization_code = getCodeParams();
-      if (authorization_code && !hasFetchedAccessToken.current) {
-        try {
-          const tokenData = await fetchRefreshToken(authorization_code);
-
-          if (tokenData && tokenData.refresh_token) {
-            const result = await getAccessToken(tokenData.refresh_token);
-
-            if (result && result.access_token && result.marketId) {
-              const userData = await fetchUserInfo(result.access_token, result.marketId);
-
-              if (userData && userData.nickname && userData.power_seller_status && userData.level_id) {
-                handleIntegration(
-                  result.access_token,
-                  tokenData.refresh_token,
-                  authorization_code,
-                  userData,
-                  result.marketId
-                );
-              } else {
-                console.error("Informações do usuário incompletas para integração.");
-              }
-            } else {
-              console.error("access_token ou marketId não definidos após obter o access token.");
-            }
-          } else {
-            console.error("Refresh token não encontrado na resposta.");
-          }
-        } catch (error) {
-          console.error("Erro no fluxo de autenticação:", error);
-        }
-      }
-    };
-
-    fetchData();
-  }, []);
+  fetchData();
+}, []);
 
 
   return (
