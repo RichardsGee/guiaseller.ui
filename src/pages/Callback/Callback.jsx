@@ -7,6 +7,8 @@ const Callback = () => {
   const { user } = useContext(AuthContext);  // Acessando o contexto de autenticação
   const userId = user ? user.uid : null;  // Coletando o userId dinamicamente
 
+  console.log('userId no AuthContext:', userId); // Log para verificar o valor do userId
+
   const [nickname, setNickname] = useState('');
   const [powerSellerStatus, setPowerSellerStatus] = useState('');  // Definindo valor fixo
   const [levelId, setLevelId] = useState('');  // Definindo valor fixo
@@ -93,6 +95,9 @@ const Callback = () => {
   const handleIntegration = async (access_token, refresh_token, authorization_code, userData, marketId) => {
     if (hasIntegrated.current) return;
     hasIntegrated.current = true;
+
+    // Log para verificar o userId antes de fazer a integração
+    console.log('userId utilizado para integração:', userId);
 
     const requestData = {
       access_token,
