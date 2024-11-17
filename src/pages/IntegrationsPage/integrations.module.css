@@ -148,12 +148,21 @@ input:checked + .slider:before {
 }
 
 .activatedButton {
-  background-color: var(--primary-color); /* Button when already activated */
+  background-color: green; /* Green when already activated */
+  cursor: not-allowed; /* Show cursor as not-allowed */
 }
 
 .activateButton:hover, .integrateButton:hover, .activatedButton:hover {
   background-color: darkgreen;
 }
+
+/* Desabilita o botão "Ativado" quando a integração já estiver ativa */
+.activatedButton:disabled {
+  background-color: #4CAF50; /* Keep green color when disabled */
+  cursor: not-allowed;
+}
+
+/* Habilita/desabilita o botão "Remover" baseado na seleção da caixa */
 .removeButton {
   padding: 10px 15px;
   border-radius: 5px;
@@ -166,15 +175,24 @@ input:checked + .slider:before {
 }
 
 .removeButton:disabled {
-  background-color: #d3d3d3; /* Cinza para indicar desabilitado */
+  background-color: #d3d3d3; /* Cor cinza para indicar desabilitado */
   cursor: not-allowed;
 }
 
+/* Adiciona efeito hover no botão de remover */
 .removeButton:hover:not(:disabled) {
   background-color: darkred; /* Igual ao botão Integrar no hover */
 }
+
+/* Caixa de seleção agora está habilitada */
 .checkbox {
   margin-right: 15px;
   transform: scale(1.2);
   cursor: pointer;
+}
+
+/* Caixa de seleção desabilitada visualmente, mas ainda clicável */
+.checkbox:disabled {
+  opacity: 1; /* Mantém opacidade normal */
+  cursor: pointer; /* Caixa de seleção ainda interativa */
 }

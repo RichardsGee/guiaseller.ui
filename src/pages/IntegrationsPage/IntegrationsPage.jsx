@@ -29,35 +29,28 @@ const IntegrationsPage = () => {
       try {
         const response = await fetch(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${user.uid}`); // Usando o user.uid do Firebase
         const data = await response.json();
+        console.log("Resposta do backend:", data); // Log para ver os dados retornados
 
-        // Pegando o user_marketplace_id da resposta
-        const userMarketplaceId = data.Integrations[0]?.user_marketplace_id; // Ajuste conforme necessário
+        // Verificando se há dados de integração
+        const integration = data.Integrations[0]; // Pegando a primeira integração
+        if (integration) {
+          const { nickname, user_marketplace_id } = integration;
 
-        if (userMarketplaceId) {
-          setUserMarketplaceId(userMarketplaceId); // Armazenando o user_marketplace_id
-          console.log("User Marketplace ID:", userMarketplaceId);
-        } else {
-          console.error("User Marketplace ID não encontrado.");
-        }
-
-        // Verifica se existe integração com Mercado Livre
-        const mercadoLivreIntegration = data.Integrations.find(
-          (integration) => integration.nickname === "PERERESHOP"
-        );
-
-        if (mercadoLivreIntegration) {
+          // Atualizando o estado com os dados corretos de integração
           setIntegrations((prev) =>
             prev.map((integration) =>
               integration.nome === "Mercado Livre"
                 ? {
                     ...integration,
-                    integrado: true,
-                    loja: mercadoLivreIntegration.nickname,
-                    userMarketplaceId: mercadoLivreIntegration.user_marketplace_id, // Adicionando user_marketplace_id
+                    integrado: true, // Marca como integrado
+                    loja: nickname, // Atribui o nickname da loja
+                    userMarketplaceId: user_marketplace_id, // Armazena o user_marketplace_id da integração
                   }
                 : integration
             )
           );
+        } else {
+          console.log("Integração não encontrada.");
         }
       } catch (error) {
         console.error("Erro ao buscar integrações:", error);
@@ -88,7 +81,7 @@ const IntegrationsPage = () => {
         setIntegrations((prevIntegrations) =>
           prevIntegrations.map((integration) =>
             integration.nome === "Mercado Livre"
-              ? { ...integration, loja: data.nickname }
+              ? { ...integration, loja: data.nickname } // Atualiza com o nickname correto da loja
               : integration
           )
         );
@@ -166,6 +159,7 @@ const IntegrationsPage = () => {
                     <button
                       className={integration.integrado ? styles.activatedButton : styles.integrateButton}
                       onClick={() => handleIntegrate(index)}
+                      disabled={integration.integrado}  // Desabilita o botão quando a integração estiver ativa
                     >
                       {integration.integrado ? 'Ativado' : 'Integrar'}
                     </button>
