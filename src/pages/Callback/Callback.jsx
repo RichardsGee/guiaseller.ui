@@ -5,13 +5,11 @@ import { AuthContext } from '../../context/AuthContext'; // Certifique-se de imp
 
 const Callback = () => {
   const { user } = useContext(AuthContext);  // Acessando o contexto de autenticação
-  const userId = user ? user.uid : null;  // Coletando o userId dinamicamente
 
-  console.log('userId no AuthContext:', userId); // Log para verificar o valor do userId
-
+  const [userId, setUserId] = useState(null);  // Estado para armazenar o userId
   const [nickname, setNickname] = useState('');
-  const [powerSellerStatus, setPowerSellerStatus] = useState('');  // Definindo valor fixo
-  const [levelId, setLevelId] = useState('');  // Definindo valor fixo
+  const [powerSellerStatus, setPowerSellerStatus] = useState('');
+  const [levelId, setLevelId] = useState('');
   const [permalink, setPermalink] = useState('');
   const [total, setTotal] = useState(1500);
   const [refreshToken, setRefreshToken] = useState('');
@@ -24,6 +22,18 @@ const Callback = () => {
     const params = new URLSearchParams(url.search);
     return params.get('code');
   };
+
+  // Verifica se o `userId` foi carregado com atraso de 2 segundos
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (user && user.uid) {
+        setUserId(user.uid);  // Agora setamos o userId depois do delay
+        console.log('userId após 2 segundos:', user.uid);  // Log do userId após o atraso
+      }
+    }, 2000);  // Espera 2 segundos para carregar o userId
+
+    return () => clearTimeout(timeout); // Limpa o timeout quando o componente for desmontado
+  }, [user]);  // A dependência de 'user' garante que o efeito seja executado toda vez que o usuário for alterado.
 
   const getAccessToken = async (authorization_code) => {
     console.log('Authorization code:', authorization_code);
@@ -64,8 +74,8 @@ const Callback = () => {
 
       const userData = {
         nickname: response.data.nickname || '',
-        power_seller_status: response.data.seller_reputation?.power_seller_status || 'Não disponível',  // Valor fixo
-        level_id: response.data.seller_reputation?.level_id || 'Não disponível',  // Valor fixo
+        power_seller_status: response.data.seller_reputation?.power_seller_status || 'Não disponível',
+        level_id: response.data.seller_reputation?.level_id || 'Não disponível',
         permalink: response.data.permalink || '',
         total: response.data.seller_reputation?.transactions?.total || 0,
       };
@@ -96,14 +106,13 @@ const Callback = () => {
     if (hasIntegrated.current) return;
     hasIntegrated.current = true;
 
-    // Log para verificar o userId antes de fazer a integração
-    console.log('userId utilizado para integração:', userId);
+    console.log('userId utilizado para integração:', userId);  // Verificando o userId após o delay
 
     const requestData = {
       access_token,
       refresh_token,
-      user_marketplace_id: marketId.toString(),  // Convertendo para string
-      userId,  // Usando o userId aqui
+      user_marketplace_id: marketId.toString(),
+      userId, // Usando o userId aqui (agora setado após o delay)
       authorization_code,
       nickname: userData.nickname,
       power_seller_status: userData.power_seller_status,
@@ -158,43 +167,45 @@ const Callback = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const authorization_code = getCodeParams();
-      if (authorization_code && !hasFetchedAccessToken.current) {
-        try {
-          const tokenData = await fetchRefreshToken(authorization_code);
+    if (userId) {
+      const fetchData = async () => {
+        const authorization_code = getCodeParams();
+        if (authorization_code && !hasFetchedAccessToken.current) {
+          try {
+            const tokenData = await fetchRefreshToken(authorization_code);
 
-          if (tokenData && tokenData.refresh_token) {
-            const result = await getAccessToken(tokenData.refresh_token);
+            if (tokenData && tokenData.refresh_token) {
+              const result = await getAccessToken(tokenData.refresh_token);
 
-            if (result && result.access_token && result.marketId) {
-              const userData = await fetchUserInfo(result.access_token, result.marketId);
+              if (result && result.access_token && result.marketId) {
+                const userData = await fetchUserInfo(result.access_token, result.marketId);
 
-              if (userData && userData.nickname && userData.power_seller_status && userData.level_id) {
-                handleIntegration(
-                  result.access_token,
-                  tokenData.refresh_token,
-                  authorization_code,
-                  userData,
-                  result.marketId
-                );
+                if (userData && userData.nickname && userData.power_seller_status && userData.level_id) {
+                  handleIntegration(
+                    result.access_token,
+                    tokenData.refresh_token,
+                    authorization_code,
+                    userData,
+                    result.marketId
+                  );
+                } else {
+                  console.error("Informações do usuário incompletas para integração.");
+                }
               } else {
-                console.error("Informações do usuário incompletas para integração.");
+                console.error("access_token ou marketId não definidos após obter o access token.");
               }
             } else {
-              console.error("access_token ou marketId não definidos após obter o access token.");
+              console.error("Refresh token não encontrado na resposta.");
             }
-          } else {
-            console.error("Refresh token não encontrado na resposta.");
+          } catch (error) {
+            console.error("Erro no fluxo de autenticação:", error);
           }
-        } catch (error) {
-          console.error("Erro no fluxo de autenticação:", error);
         }
-      }
-    };
+      };
 
-    fetchData();
-  }, [userId]);  // Adicionando o userId ao useEffect
+      fetchData();
+    }
+  }, [userId]);  // Adicionando o userId ao useEffect para garantir que a integração só ocorra após o userId ser carregado
 
   return (
     <div>
