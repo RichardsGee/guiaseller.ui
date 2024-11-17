@@ -13,8 +13,7 @@ const IntegrationsPage = () => {
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
 
-  const userId = "pvvtctrvNdg4bcnOogd839Z1ZqD3"; // ID do usuário
-
+  const [userMarketplaceId, setUserMarketplaceId] = useState(null); // Estado para armazenar o user_marketplace_id
   const [integrations, setIntegrations] = useState([
     { nome: 'Mercado Livre', loja: '', integrado: false, disponivel: true, selected: false, logo: 'https://i.imgur.com/yRascr7.png', link: 'https://auth.mercadolivre.com.br/authorization?response_type=code&client_id=6973021883530314&redirect_uri=https://guiaseller.com/integrations/callback' },
     { nome: 'Shopee', loja: '', integrado: false, disponivel: false, selected: false, logo: 'https://i.imgur.com/h2d84rv.png' },
@@ -26,10 +25,20 @@ const IntegrationsPage = () => {
 
   // Carregar integrações do backend
   useEffect(() => {
-    const fetchIntegrations = async () => {
+    const fetchUserDetails = async () => {
       try {
-        const response = await fetch(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
+        const response = await fetch(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${user.uid}`); // Usando o user.uid do Firebase
         const data = await response.json();
+
+        // Pegando o user_marketplace_id da resposta
+        const userMarketplaceId = data.Integrations[0]?.user_marketplace_id; // Ajuste conforme necessário
+
+        if (userMarketplaceId) {
+          setUserMarketplaceId(userMarketplaceId); // Armazenando o user_marketplace_id
+          console.log("User Marketplace ID:", userMarketplaceId);
+        } else {
+          console.error("User Marketplace ID não encontrado.");
+        }
 
         // Verifica se existe integração com Mercado Livre
         const mercadoLivreIntegration = data.Integrations.find(
@@ -44,6 +53,7 @@ const IntegrationsPage = () => {
                     ...integration,
                     integrado: true,
                     loja: mercadoLivreIntegration.nickname,
+                    userMarketplaceId: mercadoLivreIntegration.user_marketplace_id, // Adicionando user_marketplace_id
                   }
                 : integration
             )
@@ -54,14 +64,46 @@ const IntegrationsPage = () => {
       }
     };
 
-    fetchIntegrations();
-  }, [userId]);
+    if (user) {
+      fetchUserDetails(); // Busca os detalhes quando o usuário estiver logado
+    }
+  }, [user]);
+
+  // Função para buscar dados do Mercado Livre usando o user_marketplace_id
+  const fetchStoreDetailsFromML = async (userMarketplaceId, accessToken) => {
+    try {
+      console.log("Fazendo requisição ao Mercado Livre com o userMarketplaceId:", userMarketplaceId);
+
+      const response = await fetch(`https://api.mercadolibre.com/users/${userMarketplaceId}`, { // Usando o user_marketplace_id
+        headers: {
+          'Authorization': `Bearer ${accessToken}`, // Utilizando o access_token na requisição
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Resposta da API do Mercado Livre:", data);
+
+        // Atualizando o estado da loja com todos os dados
+        setIntegrations((prevIntegrations) =>
+          prevIntegrations.map((integration) =>
+            integration.nome === "Mercado Livre"
+              ? { ...integration, loja: data.nickname }
+              : integration
+          )
+        );
+      } else {
+        console.error("Erro ao obter dados do Mercado Livre:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Erro ao fazer requisição ao Mercado Livre:", error);
+    }
+  };
 
   // Função para alternar a integração
   const handleIntegrate = (index) => {
     const integration = integrations[index];
 
-    // Verifica se a integração é do Mercado Livre
     if (integration.nome === 'Mercado Livre') {
       window.location.href = integration.link; // Redireciona para o link do Mercado Livre
     } else {
@@ -121,7 +163,6 @@ const IntegrationsPage = () => {
                     </div>
                   </div>
                   <div className={styles.integrationControls}>
-                    {/* Botão de Integração */}
                     <button
                       className={integration.integrado ? styles.activatedButton : styles.integrateButton}
                       onClick={() => handleIntegrate(index)}
@@ -129,7 +170,6 @@ const IntegrationsPage = () => {
                       {integration.integrado ? 'Ativado' : 'Integrar'}
                     </button>
 
-                    {/* Botão de Remoção (desabilitado se não selecionado) */}
                     <button
                       className={styles.removeButton}
                       onClick={() => handleRemoveIntegration(index)}
