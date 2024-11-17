@@ -3,7 +3,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const Callback = () => {
-  const user_Id = "pvvtctrvNdg4bcnOogd839Z1ZqD3";
+  const user_Id = "EIsHdJbQn4RpBMyuU351OuwMXWF3";
   const [nickname, setNickname] = useState('');
   const [powerSellerStatus, setPowerSellerStatus] = useState('');
   const [levelId, setLevelId] = useState('');
