@@ -8,6 +8,8 @@ export const AuthContext = createContext({
   user: null,
   loading: true,
   isAlphaUser: false,
+  userLevel: '',
+  canAccessApp: false,
   signOut: async () => {},
 });
 
@@ -15,53 +17,47 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isAlphaUser, setIsAlphaUser] = useState(false);
-  const [userLevel, setUserLevel] = useState(''); // Add state for user level if needed
+  const [userLevel, setUserLevel] = useState(''); // State for user level
   const [canAccessApp, setCanAccessApp] = useState(false);
 
   useEffect(() => {
-  const unsubscribe = onAuthStateChanged(auth, async (user) => {
-    setUser(user);
-    setLoading(true);
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUser(user);
+      setLoading(true);
 
-    if (user) {
-      try {
-        const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${user.uid}`);
-        const userData = response.data;
+      if (user) {
+        try {
+          const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${user.uid}`);
+          const userData = response.data;
 
-        const hasAccess = 
-          userData.user_level === "Admin" || 
-          userData.isAlpha || 
-          userData.isInfluencer === true;
+          // Set user level
+          setUserLevel(userData.user_level || ''); // Update user level based on user data
 
-        setCanAccessApp(hasAccess); 
+          const hasAccess =
+            userData.user_level === 'Admin' ||
+            userData.isAlpha ||
+            userData.isInfluencer === true;
 
-        const isAlpha = await checkUserAlphaStatus(user.uid); 
-        setIsAlphaUser(isAlpha);
-      } catch (error) {
-        console.error("Erro ao buscar informações do usuário ou verificar status alpha", error);
+          setCanAccessApp(hasAccess);
+
+          const isAlpha = await checkUserAlphaStatus(user.uid);
+          setIsAlphaUser(isAlpha);
+        } catch (error) {
+          console.error('Erro ao buscar informações do usuário ou verificar status alpha', error);
+        }
       }
-    }
 
-    setLoading(false);
-  });
+      setLoading(false);
+    });
 
-  return () => unsubscribe();
-}, []);
-
-  const fetchUserLevel = async (userId) => {
-    try {
-      const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${userId}`);
-      setUserLevel(response.data.user_level || ''); // Atualiza o userLevel com o valor retornado
-    } catch (error) {
-      console.error("Error fetching user level:", error);
-    }
-  };
+    return () => unsubscribe();
+  }, []);
 
   const signOut = async () => {
     try {
       await firebaseSignOut(auth);
     } catch (error) {
-      console.error("Failed to sign out", error);
+      console.error('Failed to sign out', error);
     }
   };
 

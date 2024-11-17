@@ -8,7 +8,7 @@ import styles from "./assinaturas.module.css";
 import "../../styles/styles.css";
 
 const AssinaturasPage = () => {
-  const { user } = useContext(AuthContext); // Usuário autenticado
+  const { user, userLevel } = useContext(AuthContext); // Acessando o userLevel diretamente do AuthContext
   const username = user ? user.displayName || user.email : "Usuário Desconhecido";
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;

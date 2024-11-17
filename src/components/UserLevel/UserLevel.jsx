@@ -5,6 +5,8 @@ import { Person, AdminPanelSettings, Diamond, Grade } from '@mui/icons-material'
 
 const UserLevel = () => {
   const { userLevel } = useContext(AuthContext); // Pega o nível do usuário do contexto
+  
+  console.log("UserLevel:", userLevel); // Log para verificar o valor de userLevel
 
   // Determina a classe de cor baseada no nível do usuário
   const userLevelClass = (() => {
