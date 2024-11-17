@@ -17,6 +17,7 @@ function Dashboard() {
   const username = user ? user.displayName || user.email : "No User Logged";
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
+  const userId = user ? user.uid : null; // Coletando o userId
 
   const [salesData, setSalesData] = useState([]);
   const [dateRange, setDateRange] = useState('30d');
@@ -25,11 +26,12 @@ function Dashboard() {
   const [blurTopBar, setBlurTopBar] = useState(false); // Estado para desfoque do TopBar
 
   useEffect(() => {
-    fetchSalesData();
-  }, [dateRange]);
+    if (userId) {
+      fetchSalesData(userId); // Passando o userId para a função
+    }
+  }, [userId, dateRange]);
 
-  const fetchSalesData = async () => {
-    const userId = 'pvvtctrvNdg4bcnOogd839Z1ZqD3';
+  const fetchSalesData = async (userId) => {
     const today = new Date();
     let from;
 
