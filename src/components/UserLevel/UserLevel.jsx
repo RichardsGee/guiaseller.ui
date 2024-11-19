@@ -7,16 +7,17 @@ const UserLevel = () => {
   const { userLevel: contextUserLevel } = useContext(AuthContext); // Valor do contexto
   const [userLevel, setUserLevel] = useState(() => {
     // Inicializa o estado com o valor armazenado ou do contexto
-    return localStorage.getItem('userLevel') || contextUserLevel;
+    const storedLevel = localStorage.getItem('userLevel');
+    return storedLevel || contextUserLevel || 'basic'; // Defina um valor padrão caso nenhum esteja disponível
   });
 
   useEffect(() => {
-    // Atualiza o localStorage e o estado apenas na primeira vez
-    if (!localStorage.getItem('userLevel')) {
+    // Atualiza o localStorage e o estado se o contexto mudar
+    if (contextUserLevel !== userLevel) {
       localStorage.setItem('userLevel', contextUserLevel);
       setUserLevel(contextUserLevel);
     }
-  }, [contextUserLevel]);
+  }, [contextUserLevel, userLevel]);
 
   // Determina a classe de cor baseada no nível do usuário
   const userLevelClass = (() => {

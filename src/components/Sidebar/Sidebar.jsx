@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'; 
 import styles from './sidebar.module.css'; 
 import React, { useState } from 'react';
+import { useAuth } from '../../context/AuthContext'; // Importando o hook para acessar o contexto
 import UserLevel from '../UserLevel/UserLevel';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -15,6 +16,7 @@ import BookIcon from '@mui/icons-material/MenuBook'; // Ícone para Ebooks
 import IntegrationsIcon from '@mui/icons-material/Api'; // Ícone de Integrações
 
 function Sidebar({ userPhoto, username, userEmail, isComplete }) {
+  const { userLevel, isAlphaUser } = useAuth(); // Acessando o userLevel e isAlphaUser do contexto
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para controlar o menu
 
   const toggleMenu = () => {
@@ -38,7 +40,22 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           />
           <h2>{username}</h2>
           <p>{userEmail || "Nothing@gmail.com"}</p>
-          <UserLevel />
+          
+          {/* Exibindo o UserLevel e o ícone de Alpha, se aplicável */}
+          <div className={styles.userLevelWrapper}>
+            <UserLevel />
+            {isAlphaUser && (
+              <div className={styles.alphaContainer}>
+                <img 
+        src="/alpha.png" 
+        alt="Alpha" 
+        className={styles.alphaIcon} 
+        title="Membro Alpha"  // Exibe a dica de ferramenta quando passar o mouse
+      />
+                
+              </div>
+            )}
+          </div>
         </div>
         
         <ul>
@@ -96,7 +113,7 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           <li>
             <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
               <WidgetsIcon className={styles.sidebarIcon} /> 
-              Ferramentas <span className={styles.iaHighlight}>IA</span>
+              Ferramentas IA <span className={styles.iaHighlight}>IA</span>
             </Link>
           </li>
         </ul>
@@ -114,6 +131,11 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             <h2>{username}</h2>
             <p>{userEmail || "Nothing@gmail.com"}</p>
             <UserLevel />
+            {isAlphaUser && (
+              <div className={styles.alphaContainer}>
+                <img src="/public/alpha.png" alt="Alpha" className={styles.alphaIcon} />
+              </div>
+            )}
           </div>
           
           <ul>

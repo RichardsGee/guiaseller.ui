@@ -1,3 +1,4 @@
+/* Container principal do UserLevel */
 .userLevelContainer {
   display: flex; /* Usando flexbox para alinhar ícone e texto */
   align-items: center; /* Alinha verticalmente o ícone e o texto */
@@ -6,9 +7,10 @@
   max-width: fit-content; /* Ajusta o container ao conteúdo */
   margin: 5px; /* Margem para o container */
   font-weight: 800; /* Peso da fonte */
-
+  position: relative; /* Necessário para o posicionamento do ícone Alpha */
 }
 
+/* Estilo do texto do UserLevel */
 .userLevel {
   padding: 2px 8px; /* Espaçamento interno para o texto */
   border-radius: 12px; /* Arredondamento do background do texto */
@@ -46,4 +48,17 @@
 .defaultLevel {
   background-color: #eeeeee; /* Cor de fundo padrão */
   color: #757575; /* Cor do texto padrão */
+}
+
+/* Container do ícone Alpha fora do UserLevel */
+.alphaContainer {
+  position: absolute; /* Colocando o ícone fora do UserLevel */
+  right: -30px; /* Colocando na lateral direita */
+  top: 0; /* Alinha o ícone com o topo do container */
+}
+
+/* Estilo do ícone Alpha */
+.alphaIcon {
+  width: 15px !important; /* Tamanho do ícone */
+  height: 15px !important; /* Tamanho do ícone */
 }
