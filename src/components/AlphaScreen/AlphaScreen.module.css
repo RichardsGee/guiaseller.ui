@@ -224,3 +224,24 @@
     }
     
 }
+
+.logoutButton {
+    background-color: #e74c3c;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer !important;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: fit-content;
+    align-self: center;
+    margin-top: 15px;
+    position: relative;
+    z-index: 333;
+}
+
+.logoutButton:hover {
+    background-color: #c0392b;
+
+}
