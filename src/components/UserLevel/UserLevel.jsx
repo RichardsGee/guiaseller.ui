@@ -1,62 +1,71 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../context/AuthContext'; // Importa o AuthContext
-import styles from './UserLevel.module.css'; // Importa os estilos específicos para o UserLevel
-import { Person, AdminPanelSettings, Diamond, Grade } from '@mui/icons-material'; // Importa ícones do Material-UI
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import styles from './UserLevel.module.css';
+import { Person, AdminPanelSettings, Diamond, Grade } from '@mui/icons-material';
 
 const UserLevel = () => {
-  const { userLevel } = useContext(AuthContext); // Pega o nível do usuário do contexto
-  
-  console.log("UserLevel:", userLevel); // Log para verificar o valor de userLevel
+  const { userLevel: contextUserLevel } = useContext(AuthContext); // Valor do contexto
+  const [userLevel, setUserLevel] = useState(() => {
+    // Inicializa o estado com o valor armazenado ou do contexto
+    return localStorage.getItem('userLevel') || contextUserLevel;
+  });
+
+  useEffect(() => {
+    // Atualiza o localStorage e o estado apenas na primeira vez
+    if (!localStorage.getItem('userLevel')) {
+      localStorage.setItem('userLevel', contextUserLevel);
+      setUserLevel(contextUserLevel);
+    }
+  }, [contextUserLevel]);
 
   // Determina a classe de cor baseada no nível do usuário
   const userLevelClass = (() => {
-    switch(userLevel) {
+    switch (userLevel) {
       case 'Admin':
-        return styles.adminLevel; // Classe para admin
+        return styles.adminLevel;
       case 'basic':
-        return styles.basicLevel; // Classe para usuário básico
+        return styles.basicLevel;
       case 'pro':
-        return styles.proLevel; // Classe para pro
+        return styles.proLevel;
       case 'premium':
-        return styles.premiumLevel; // Classe para premium
+        return styles.premiumLevel;
       case 'Founder':
-        return styles.founderLevel; // Classe para founder
+        return styles.founderLevel;
       default:
-        return styles.defaultLevel; // Classe padrão
+        return styles.defaultLevel;
     }
   })();
 
   // Função para determinar o ícone baseado no nível do usuário
   const getUserLevelIcon = () => {
     const iconStyle = {
-      width: '20px', // Largura do ícone
-      height: '20px', // Altura do ícone
-      marginRight: '6px', // Espaço entre o ícone e o texto
-      marginTop: '0px', // Ajusta a posição vertical do ícone
-      alignSelf: 'center', // Alinha verticalmente
+      width: '20px',
+      height: '20px',
+      marginRight: '6px',
+      alignSelf: 'center',
     };
 
     switch (userLevel) {
       case 'Admin':
-        return <AdminPanelSettings style={iconStyle} />; // Ícone para admin
+        return <AdminPanelSettings style={iconStyle} />;
       case 'basic':
-        return <Person style={iconStyle} />; // Ícone para usuário básico
+        return <Person style={iconStyle} />;
       case 'pro':
-        return <Grade style={iconStyle} />; // Ícone para pro
+        return <Grade style={iconStyle} />;
       case 'premium':
-        return <Diamond style={iconStyle} />; // Ícone para premium
+        return <Diamond style={iconStyle} />;
       case 'Founder':
-        return <Grade style={iconStyle} />; // Usando o mesmo ícone ou outro para o fundador
+        return <Grade style={iconStyle} />;
       default:
-        return null; // Nenhum ícone para níveis desconhecidos
+        return null;
     }
   };
 
   return (
-    <div className={`${styles.userLevelContainer} ${userLevelClass}`}> {/* Container com classe do nível do usuário */}
-      {getUserLevelIcon()} {/* Exibe o ícone correspondente */}
+    <div className={`${styles.userLevelContainer} ${userLevelClass}`}>
+      {getUserLevelIcon()}
       <span className={styles.userLevel}>
-        {userLevel ? userLevel.toUpperCase() : "NADA"} {/* Converte para maiúsculas */}
+        {userLevel ? userLevel.toUpperCase() : 'NADA'}
       </span>
     </div>
   );
