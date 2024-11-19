@@ -2,12 +2,52 @@
 .storesContainer {
     padding: 20px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-between;  /* Garante que os containers fiquem lado a lado */
     width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
     background-color: var(--secondary-color);
+}
+
+/* Container da loja - Esquerda */
+.storeContainerHeader {
+    width: 48%;  /* 50% - Um pequeno espaço de margem entre os dois containers */
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Container de Reputação - Direita */
+.reputationContainer {
+    width: 48%;  /* 50% - Fica lado a lado com a loja */
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Container para as métricas (Visitas, Reclamações, etc.) */
+.metricsContainer {
+    width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Título do Container de Métricas */
+.metricsContainer .metricTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+/* Exibição do Total de Visitas */
+.metricsContainer .metricValue {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--text-color);
 }
 
 /* Detalhes da loja */
@@ -22,34 +62,17 @@
 }
 
 /* Header da loja - Nome da loja e status */
-.storeContainerHeader {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-/* Título da loja */
 .storeTitle {
     text-align: center;
     color: var(--text-color);
-    font-size: 28px;
+    font-size: 24px;
     margin-bottom: 0px;
     font-weight: bold;
 }
 
 /* Total de Vendas - Exibe abaixo do título da loja */
-.metricTitle {
-    font-size: 15px;
-    font-weight: bold;
-    color: var(--text-color);
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
-
-/* Exibir as vendas completas nos últimos 60 dias */
 .totalSales {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--text-color);
     margin-bottom: 15px;
 }
@@ -65,33 +88,11 @@
 }
 
 .storeStatusText {
-    font-size: 28px;
+    font-size: 22px;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
     color: #00A650;
-}
-
-/* Status Power Seller */
-.powerSellerGold {
-    color: #FFD700;
-    font-weight: bold;
-}
-
-.powerSellerSilver {
-    color: #C0C0C0;
-    font-weight: bold;
-}
-
-.powerSellerPlatinum {
-    color: #b9f2ff;
-    font-weight: bold;
-}
-
-.storeStatusText img {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
 }
 
 /* Termômetro de Nível */
@@ -111,27 +112,22 @@
     margin-top: -20px;
 }
 
-/* Rank 1 (Vermelho claro) */
 .thermometerRank1 {
     background-color: #FDE2E5;
 }
 
-/* Rank 2 (Laranja claro) */
 .thermometerRank2 {
     background-color: #FFEBE1;
 }
 
-/* Rank 3 (Amarelo claro) */
 .thermometerRank3 {
     background-color: #FFFCDB;
 }
 
-/* Rank 4 (Verde claro) */
 .thermometerRank4 {
     background-color: #F3FADE;
 }
 
-/* Rank 5 (Verde escuro - destaque para o nível 5) */
 .thermometerRank5 {
     background-color: #00A650;
 }
@@ -144,8 +140,8 @@
 .metricContainer {
     display: flex;
     justify-content: space-between;
-    width: 100%; /* Ajustado para ocupar toda a largura */
-    gap: 20px; /* Menor gap para melhor organização */
+    width: 100%;
+    gap: 15px;
     margin-top: 20px;
     background-color: var(--secondary-color);
 }
@@ -156,40 +152,50 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 30%; /* Reduzido para mais espaçamento entre métricas */
+    width: 30%;
     text-align: center;
-    position: relative; /* Necessário para o posicionamento do ícone */
+    position: relative;
 }
 
 /* Valor da métrica */
 .metricValue {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: var(--text-color);
-    margin-top: 10px; /* Adicionado espaço entre o valor e o título */
+    margin-top: 10px;
 }
 
 /* Rótulo da métrica */
 .metricLabel {
-    font-size: 14px;
+    font-size: 12px;
     color: var(--secondary-text-color);
     margin-top: 5px;
-    text-align: center; /* Centraliza o título dentro do container */
+    text-align: center;
     font-weight: bold;
     display: flex;
-    align-items: center; /* Alinha o ícone ao texto */
-    justify-content: center; /* Garante que o título e ícone estejam alinhados centralmente */
-    gap: 10px; /* Espaço entre o ícone e o título */
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 /* Alinhando o ícone no canto superior esquerdo, mas dentro do título */
 .metricIconContainer {
-    display: inline-flex; /* Garante que o ícone e o texto fiquem lado a lado */
+    display: inline-flex;
     align-items: center;
 }
 
-/* Estilizando o ícone */
 .metricIconContainer svg {
-    font-size: 20px; /* Ajuste o tamanho do ícone */
+    font-size: 16px;
     color: var(--text-color);
+}
+
+/* Novo Container de Métricas */
+.newMetricsContainer {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }

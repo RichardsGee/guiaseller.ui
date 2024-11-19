@@ -15,6 +15,7 @@ const StoresPage = () => {
   const userEmail = user ? user.email : null;
 
   const [store, setStore] = useState(null); // Estado para armazenar as informações da loja
+  const [visitsData, setVisitsData] = useState(null); // Estado para armazenar as visitas
 
   // Carregar os dados do backend
   useEffect(() => {
@@ -27,21 +28,11 @@ const StoresPage = () => {
 
         // Verificar se os dados de integração existem
         if (data.Integrations && data.Integrations[0]) {
-          const { access_token, nickname, power_seller_status, level_id, permalink, total, user_marketplace_id } = data.Integrations[0];
+          const { access_token, user_marketplace_id } = data.Integrations[0];
 
-          // Armazenar os dados de integração
-          setStore({
-            nickname: nickname,
-            powerSellerStatus: power_seller_status,
-            levelId: level_id,
-            permalink: permalink,
-            totalSales: total,
-            accessToken: access_token,  // Guardar o access_token para usar na requisição da API
-            userMarketplaceId: user_marketplace_id, // Guardando o ID do Marketplace do usuário
-          });
-
-          // Agora que temos o access_token, vamos buscar os dados adicionais do Mercado Livre
+          // Agora que temos o access_token, vamos buscar os dados do Mercado Livre
           fetchStoreDetailsFromML(user_marketplace_id, access_token); // Passando o user_marketplace_id
+          fetchStoreVisits(user.uid, access_token); // Buscar visitas do mês
         } else {
           console.error("Dados de integração não encontrados.");
         }
@@ -71,8 +62,11 @@ const StoresPage = () => {
         // Atualizando o estado da loja com todos os dados
         setStore((prevStore) => ({
           ...prevStore,
-          seller: data,
-          sellerReputation: data.seller_reputation,
+          nickname: data.nickname, // Nome da loja
+          totalSales: data.seller_reputation.transactions.total, // Total de vendas
+          powerSellerStatus: data.seller_reputation.power_seller_status, // Status Mercado Líder
+          levelId: data.seller_reputation.level_id, // Nível
+          sellerReputation: data.seller_reputation, // Dados de reputação do vendedor
         }));
       } else {
         console.error("Erro ao obter dados do Mercado Livre:", response.statusText);
@@ -82,15 +76,58 @@ const StoresPage = () => {
     }
   };
 
+  // Função para buscar as visitas dos itens do backend local
+  const fetchStoreVisits = async (userMarketplaceId, accessToken) => {
+    try {
+      const response = await fetch(`http://localhost:8080/visitas/${userMarketplaceId}`, { // URL do backend local
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${accessToken}`, // Passando o token fixo na requisição
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Visitas ao item:", data);  // Logando as visitas
+
+        // Armazenando as visitas no estado
+        setVisitsData(data);
+      } else {
+        console.error("Erro ao obter visitas do backend:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar visitas:", error);
+    }
+  };
+
   // Exibir o valor com a porcentagem
   const formatMetricWithValue = (rate, value) => {
     const percentage = (rate * 100).toFixed(2) + "%";
     return (
       <>
-        <div>{value} vendas</div>
+        <div>{value} visitas</div>
         <div>{percentage}</div>
       </>
     );
+  };
+
+  // Função para exibir o status Mercado Líder
+  const renderPowerSellerStatus = (status) => {
+    switch (status) {
+      case "gold":
+        return (
+          <>
+            <img src="https://http2.mlstatic.com/frontend-assets/vpp-frontend/medal.svg" alt="Mercado Líder" />
+            Mercado Líder Gold
+          </>
+        );
+      case "silver":
+        return "Mercado Líder Silver";
+      case "platinum":
+        return "Mercado Líder Platinum";
+      default:
+        return null; // Não exibe nada quando não há status
+    }
   };
 
   return (
@@ -100,28 +137,21 @@ const StoresPage = () => {
       <div className="main-content">
         <div className="contentContainer">
           <div className={styles.storesContainer}>
+            {/* Container da loja à esquerda */}
             <div className={styles.storeContainerHeader}>
-              {/* Nome da loja e total de vendas */}
               <h1 className={styles.storeTitle}>{store?.nickname || "N/A"}</h1>
 
               {/* Total de vendas */}
-              <div className={styles.storeInfoContainer}>
-                <div className={styles.totalSales}>{store?.totalSales || "N/A"} Vendas </div>
-              </div>
+              <div className={styles.totalSales}>{store?.totalSales || "N/A"} Vendas </div>
 
               {/* Status Mercado Líder */}
-              <div className={`${styles.storeStatus} ${styles[store?.powerSellerStatus || ""]}`}>
-                <div className={styles.storeStatusText}>
-                  {store?.powerSellerStatus === "gold" && (
-                    <>
-                      <img src="https://http2.mlstatic.com/frontend-assets/vpp-frontend/medal.svg" alt="Mercado Líder" />
-                      Mercado Líder Gold
-                    </>
-                  )}
-                  {store?.powerSellerStatus === "silver" && "Mercado Líder Silver"}
-                  {store?.powerSellerStatus === "platinum" && "Mercado Líder Platinum"}
+              {store?.powerSellerStatus && (
+                <div className={`${styles.storeStatus} ${styles[store?.powerSellerStatus || ""]}`} >
+                  <div className={styles.storeStatusText}>
+                    {renderPowerSellerStatus(store?.powerSellerStatus)}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Termômetro de Nível */}
               <div className={styles.thermometerContainer}>
@@ -133,37 +163,52 @@ const StoresPage = () => {
               </div>
             </div>
 
-            {/* Vendas Completadas (60 dias) como título */}
-            <h3 className={styles.metricTitle}>Vendas Completadas (60 dias)</h3>
-            <h3><div>{store?.sellerReputation?.metrics?.sales?.completed || "N/A"} vendas</div></h3>
+            {/* Container de Reputação à direita */}
+            <div className={styles.reputationContainer}>
+              <h3 className={styles.metricTitle}>Vendas Completadas (60 dias)</h3>
+              <h3>{store?.sellerReputation?.metrics?.sales?.completed || "N/A"} vendas</h3>
 
-            {/* Outras métricas (Reclamações, Canceladas, Despacho com Atraso) */}
+              {/* Outras métricas */}
+              <div className={styles.metricContainer}>
+                <div className={styles.metric}>
+                  <p className={styles.metricLabel}>
+                    <ReportProblem style={{ width: "20px", marginRight: "10px" }} />
+                    Reclamações
+                  </p>
+                  <div className={styles.metricValue}>
+                    {formatMetricWithValue(store?.sellerReputation?.metrics?.claims?.rate, store?.sellerReputation?.metrics?.claims?.value)}
+                  </div>
+                </div>
+                <div className={styles.metric}>
+                  <p className={styles.metricLabel}>
+                    <Cancel style={{ width: "20px", marginRight: "10px" }} />
+                    Canceladas por você
+                  </p>
+                  <div className={styles.metricValue}>
+                    {formatMetricWithValue(store?.sellerReputation?.metrics?.cancellations?.rate, store?.sellerReputation?.metrics?.cancellations?.value)}
+                  </div>
+                </div>
+                <div className={styles.metric}>
+                  <p className={styles.metricLabel}>
+                    <LocalShipping style={{ width: "20px", marginRight: "10px" }} />
+                    Despacho com Atraso
+                  </p>
+                  <div className={styles.metricValue}>
+                    {formatMetricWithValue(store?.sellerReputation?.metrics?.delayed_handling_time?.rate, store?.sellerReputation?.metrics?.delayed_handling_time?.value)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Container de Métricas (Visitas) */}
+          <div className={styles.metricsContainer}>
+            <h3 className={styles.metricTitle}>Visitas dos Itens (Novembro)</h3>
             <div className={styles.metricContainer}>
               <div className={styles.metric}>
-                <p className={styles.metricLabel}>
-                  <ReportProblem style={{ width: "20px", marginRight: "10px" }} />
-                  Reclamações
-                </p>
+                <p className={styles.metricLabel}>Total de Visitas</p>
                 <div className={styles.metricValue}>
-                  {formatMetricWithValue(store?.sellerReputation?.metrics?.claims?.rate, store?.sellerReputation?.metrics?.claims?.value)}
-                </div>
-              </div>
-              <div className={styles.metric}>
-                <p className={styles.metricLabel}>
-                  <Cancel style={{ width: "20px", marginRight: "10px" }} />
-                  Canceladas por você
-                </p>
-                <div className={styles.metricValue}>
-                  {formatMetricWithValue(store?.sellerReputation?.metrics?.cancellations?.rate, store?.sellerReputation?.metrics?.cancellations?.value)}
-                </div>
-              </div>
-              <div className={styles.metric}>
-                <p className={styles.metricLabel}>
-                  <LocalShipping style={{ width: "20px", marginRight: "10px" }} />
-                  Despacho com Atraso
-                </p>
-                <div className={styles.metricValue}>
-                  {formatMetricWithValue(store?.sellerReputation?.metrics?.delayed_handling_time?.rate, store?.sellerReputation?.metrics?.delayed_handling_time?.value)}
+                  {visitsData ? visitsData.total_visits : "N/A"} Visitas
                 </div>
               </div>
             </div>
