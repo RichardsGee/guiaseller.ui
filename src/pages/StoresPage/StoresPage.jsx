@@ -105,7 +105,7 @@ const StoresPage = () => {
     const percentage = (rate * 100).toFixed(2) + "%";
     return (
       <>
-        <div>{value} visitas</div>
+        <div>{value} vendas</div>  {/* Alterado de "visitas" para "vendas" */}
         <div>{percentage}</div>
       </>
     );
@@ -168,7 +168,7 @@ const StoresPage = () => {
               <h3 className={styles.metricTitle}>Vendas Completadas (60 dias)</h3>
               <h3>{store?.sellerReputation?.metrics?.sales?.completed || "N/A"} vendas</h3>
 
-              {/* Outras métricas */}
+              {/* Outras métricas de vendas */}
               <div className={styles.metricContainer}>
                 <div className={styles.metric}>
                   <p className={styles.metricLabel}>
