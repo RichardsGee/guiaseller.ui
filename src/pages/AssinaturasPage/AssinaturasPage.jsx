@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Footer from "../../components/Footer/Footer";
@@ -8,60 +9,72 @@ import styles from "./assinaturas.module.css";
 import "../../styles/styles.css";
 
 const AssinaturasPage = () => {
-  const { user, userLevel } = useContext(AuthContext); // Acessando o userLevel diretamente do AuthContext
+  const { user, signOut } = useContext(AuthContext); // Acessando o usuário e o logout
   const username = user ? user.displayName || user.email : "Usuário Desconhecido";
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
 
-  const [assinaturas, setAssinaturas] = useState([]);
+  const [subscriptions, setSubscriptions] = useState([]); // Estado para armazenar assinaturas
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Simulação de dados mockados (substitua por uma chamada à API no futuro)
-    const mockData = [
-      {
-        nome_plano: "Plano Premium",
-        valor: 49.90,
-        data_assinado: "2024-11-01",
-        data_expira: "2024-12-01",
-        link_fatura: "https://example.com/fatura/123",
-        status: "Paga",
-      },
-      {
-        nome_plano: "Plano Básico",
-        valor: 19.90,
-        data_assinado: "2024-10-15",
-        data_expira: "2024-11-15",
-        link_fatura: "https://example.com/fatura/124",
-        status: "Atrasada",
-      },
-      {
-        nome_plano: "Plano Standard",
-        valor: 29.90,
-        data_assinado: "2024-09-01",
-        data_expira: "2024-10-01",
-        link_fatura: "https://example.com/fatura/125",
-        status: "Cancelada",
-      },
-    ];
+    const fetchSubscriptions = async () => {
+      try {
+        if (user?.uid) {
+          console.log("userId enviado como parâmetro na URL:", user.uid); // Log para verificar o userId
 
-    // Simula o carregamento
-    setTimeout(() => {
-      setAssinaturas(mockData);
-      setLoading(false);
-    }, 1000);
-  }, []);
+          const response = await axios.get(
+            "https://guiaseller-backend.dlmi5z.easypanel.host/subscription", // URL do endpoint
+            {
+              params: { userId: user.uid }, // Enviando userId como parâmetro
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          console.log("Dados de assinaturas recebidos:", response.data);
+          setSubscriptions(response.data);
+        } else {
+          console.log("Usuário não autenticado ou UID não disponível.");
+        }
+      } catch (error) {
+        console.error(
+          "Erro ao buscar assinaturas:",
+          error.response ? error.response.data : error
+        );
+        setError(
+          error.response?.data?.error || "Não foi possível carregar as assinaturas."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user?.uid) {
+      fetchSubscriptions();
+    }
+  }, [user?.uid]);
+
+  const isToday = (date) => {
+    const today = new Date();
+    const targetDate = new Date(date);
+    return (
+      today.getDate() === targetDate.getDate() &&
+      today.getMonth() === targetDate.getMonth() &&
+      today.getFullYear() === targetDate.getFullYear()
+    );
+  };
 
   return (
     <MainContent>
-      <Header username={username} />
-      {/* Passa os dados do usuário para o Sidebar */}
+      <Header username={username} logout={signOut} />
       <Sidebar username={username} userPhoto={userPhoto} userEmail={userEmail} />
       <div className="main-content">
         <div className="contentContainer">
           <div className={styles.assinaturasContainer}>
-            <h1 className="title">Minhas Assinaturas</h1>
+            <h1 className="title">Minha Assinatura</h1>
 
             {/* Exibição de Erro */}
             {error && <p className={styles.error}>{error}</p>}
@@ -84,35 +97,58 @@ const AssinaturasPage = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {assinaturas.map((assinatura, index) => (
-                      <tr key={index} className={styles.assinaturaRow}>
-                        <td>{assinatura.nome_plano}</td>
-                        <td>R$ {assinatura.valor.toFixed(2)}</td>
-                        <td>{new Date(assinatura.data_assinado).toLocaleDateString()}</td>
-                        <td>{new Date(assinatura.data_expira).toLocaleDateString()}</td>
-                        <td>
-                          <a
-                            href={assinatura.link_fatura}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.detalhesLink}
+                    {subscriptions.length > 0 ? (
+                      subscriptions.map((subscription, index) => (
+                        <tr key={index} className={styles.assinaturaRow}>
+                          <td>{subscription.subscription}</td>
+                          <td>R$ {subscription.value.toFixed(2)}</td>
+                          <td>{new Date(subscription.createdAt).toLocaleDateString()}</td>
+                          <td>
+                            {new Date(subscription.updatedAt).toLocaleDateString()}
+                            {isToday(subscription.updatedAt) && (
+                              <span className={styles.todayTag}>Vence Hoje</span>
+                            )}
+                          </td>
+                          <td>
+                            {subscription.invoiceUrl && subscription.invoiceUrl !== "NADA" ? (
+                              <a
+                                href={subscription.invoiceUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.invoiceLink}
+                              >
+                                Ver Fatura
+                              </a>
+                            ) : (
+                              "N/A"
+                            )}
+                          </td>
+                          <td
+                            className={`${styles.status} ${
+                              subscription.status === "ACTIVE"
+                                ? styles.awaitingPayment
+                                : subscription.status === "CANCELED"
+                                ? styles.canceled
+                                : styles.paid
+                            }`}
                           >
-                            Ver Fatura
-                          </a>
-                        </td>
-                        <td
-                          className={`${styles.status} ${
-                            assinatura.status === "Paga"
-                              ? styles.paga
-                              : assinatura.status === "Atrasada"
-                              ? styles.atrasada
-                              : styles.cancelada
-                          }`}
-                        >
-                          {assinatura.status}
+                            {subscription.status === "ACTIVE"
+                              ? "Aguardando Pagamento"
+                              : subscription.status === "CANCELED"
+                              ? "Cancelado"
+                              : subscription.status === "RECEIVED"
+                              ? "Pago"
+                              : "Desconhecido"}
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="6" className={styles.emptyMessage}>
+                          Nenhuma assinatura encontrada.
                         </td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               </>
