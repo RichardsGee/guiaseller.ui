@@ -29,6 +29,8 @@ import AnunciosPage from './pages/AnunciosPage/AnunciosPage';
 import InfluencerPage from './pages/InfluencerPage/InfluencerPage';
 import StoresPage from './pages/StoresPage/StoresPage';
 import AssinaturasPage from './pages/AssinaturasPage/AssinaturasPage'; // Importe a página Assinaturas
+import LogPage from './pages/LogPage/LogPage';
+
 
 function App() {
   return (
@@ -116,6 +118,10 @@ function App() {
           <Route 
             path="/lojas" 
             element={<ProtectedRoute><StoresPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/log" 
+            element={<ProtectedRoute><LogPage /></ProtectedRoute>} 
           />
           <Route 
             path="/assinaturas" 

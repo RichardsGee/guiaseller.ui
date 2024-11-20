@@ -1,0 +1,36 @@
+.logPageContainer {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .logsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .logsTable th,
+  .logsTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .logsTable th {
+    background-color: var(--secondary-color);
+    font-weight: bold;
+  }
+  
+  .logsTable tr:nth-child(even) {
+    background-color: var(--secondary-color);
+  }
+  
+  .logsTable tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+  
