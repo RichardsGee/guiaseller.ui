@@ -6,6 +6,7 @@ const LogPage = () => {
   const [logs, setLogs] = useState([]); // Estado para armazenar os logs
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [expandedLogs, setExpandedLogs] = useState({}); // Estado para controlar quais logs estão expandidos
 
   useEffect(() => {
     const fetchLogs = async () => {
@@ -23,6 +24,13 @@ const LogPage = () => {
     fetchLogs();
   }, []);
 
+  const toggleLogExpansion = (index) => {
+    setExpandedLogs((prevExpandedLogs) => ({
+      ...prevExpandedLogs,
+      [index]: !prevExpandedLogs[index], // Alterna o estado expandido
+    }));
+  };
+
   return (
     <div className={styles.logPageContainer}>
       <h1>Logs de Cobranças</h1>
@@ -34,29 +42,28 @@ const LogPage = () => {
           <thead>
             <tr>
               <th>Data</th>
-              <th>ID</th>
-              <th>Valor</th>
-              <th>Status</th>
-              <th>Vencimento</th>
-              <th>Nome do Pagador</th>
-              <th>Email do Pagador</th>
+              <th>Informações</th>
             </tr>
           </thead>
           <tbody>
-            {logs.map((log, index) => {
-              const { id, amount, status, dueDate, payer } = log.body;
-              return (
-                <tr key={index}>
-                  <td>{new Date(log.timestamp).toLocaleString()}</td>
-                  <td>{id}</td>
-                  <td>R$ {amount.toFixed(2)}</td>
-                  <td>{status}</td>
-                  <td>{new Date(dueDate).toLocaleDateString()}</td>
-                  <td>{payer?.name || "N/A"}</td>
-                  <td>{payer?.email || "N/A"}</td>
-                </tr>
-              );
-            })}
+            {logs.map((log, index) => (
+              <tr key={index}>
+                <td>{new Date(log.timestamp).toLocaleString()}</td>
+                <td>
+                  <button
+                    className={styles.toggleButton}
+                    onClick={() => toggleLogExpansion(index)}
+                  >
+                    {expandedLogs[index] ? "Fechar" : "Expandir"}
+                  </button>
+                  {expandedLogs[index] && (
+                    <pre className={styles.logDetails}>
+                      {JSON.stringify(log.body, null, 2)}
+                    </pre>
+                  )}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       ) : (
