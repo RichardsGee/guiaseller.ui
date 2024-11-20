@@ -10,7 +10,7 @@ const LogPage = () => {
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/log-data"); // Endpoint do backend
+        const response = await axios.get("https://guiaseller-backend.dlmi5z.easypanel.host/log-data"); // Endpoint do backend
         setLogs(response.data);
       } catch (error) {
         console.error("Erro ao buscar logs:", error);
