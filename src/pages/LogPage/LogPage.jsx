@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import Header from "../../components/Header/Header";
-import Sidebar from "../../components/Sidebar/Sidebar";
+import Sidebar from "../../components/AdminSidebar/AdminSidebar";
 import Footer from "../../components/Footer/Footer";
 import MainContent from "../../components/MainContent/MainContent";
 import { AuthContext } from "../../context/AuthContext";

@@ -29,16 +29,19 @@ import AnunciosPage from './pages/AnunciosPage/AnunciosPage';
 import InfluencerPage from './pages/InfluencerPage/InfluencerPage';
 import StoresPage from './pages/StoresPage/StoresPage';
 import AssinaturasPage from './pages/AssinaturasPage/AssinaturasPage'; // Importe a página Assinaturas
-import LogPage from './pages/LogPage/LogPage';
-
+import LogPage from './pages/LogPage/LogPage'; // Página de Log
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 
 function App() {
   return (
     <UserProvider>
       <Router>
         <Routes>
+          {/* --- Rotas Públicas --- */}
           <Route path="/" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+
+          {/* --- Rotas Protegidas (usuário autenticado) --- */}
           <Route 
             path="/dashboard" 
             element={<ProtectedRoute><Dashboard /></ProtectedRoute>} 
@@ -120,19 +123,32 @@ function App() {
             element={<ProtectedRoute><StoresPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/log" 
-            element={<ProtectedRoute><LogPage /></ProtectedRoute>} 
-          />
-          <Route 
             path="/assinaturas" 
             element={<ProtectedRoute><AssinaturasPage /></ProtectedRoute>} 
           /> {/* Nova rota para Assinaturas */}
+
+          {/* --- Rota de Acesso Bloqueado (caso o usuário não tenha permissão) --- */}
           <Route 
             path="/blocked" 
             element={<AlphaAccess />} 
           />
+
+          {/* --- Rotas Admin --- */}
+          {/* Rota de Log para Admin */}
+          <Route 
+            path="/admin/logcobrancas" 
+            element={<ProtectedRoute><LogPage /></ProtectedRoute>} 
+          />
+          <Route 
+            path="/admin/dashboard" 
+            element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} 
+          />
+          
+          
+          {/* --- Outras Rotas --- */}
           <Route path="/integrations/callback" element={<Callback />} />
           <Route path="*" element={<ErrorPage />} />
+
         </Routes>
         <ToastContainer />
         <IAButton />

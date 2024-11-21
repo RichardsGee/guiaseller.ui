@@ -47,18 +47,28 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             {isAlphaUser && (
               <div className={styles.alphaContainer}>
                 <img 
-        src="/alpha.png" 
-        alt="Alpha" 
-        className={styles.alphaIcon} 
-        title="Membro Alpha"  // Exibe a dica de ferramenta quando passar o mouse
-      />
-                
+                  src="/alpha.png" 
+                  alt="Alpha" 
+                  className={styles.alphaIcon} 
+                  title="Membro Alpha"  // Exibe a dica de ferramenta quando passar o mouse
+                />
               </div>
             )}
           </div>
         </div>
-        
+
         <ul>
+          {/* Seção de Admin, visível apenas para Admin */}
+          {userLevel === 'Admin' && (
+            <>
+              
+              <li className={styles.menuCategoryTitle}>Admin</li>
+              <li><Link to="/admin/dashboard"><DashboardIcon className={styles.sidebarIcon} />Admin Dashboard</Link></li>
+                            {/* Adicione outras opções de Admin aqui */}
+              <hr />
+            </>
+          )}
+
           {/* Seção de Gerenciamento */}
           <li className={styles.menuCategoryTitle}>Gerenciamento</li>
           <li><Link to="/dashboard"><DashboardIcon className={styles.sidebarIcon} />Dashboard</Link></li>
@@ -139,6 +149,16 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           </div>
           
           <ul>
+            {/* Seção de Admin, visível apenas para Admin */}
+            {userLevel === 'Admin' && (
+              <>
+                <hr />
+                <li className={styles.menuCategoryTitle}>Admin</li>
+                <li><Link to="/admin/dashboard"><DashboardIcon className={styles.sidebarIcon} />Admin Dashboard</Link></li>
+                {/* Adicione outras opções de Admin aqui */}
+              </>
+            )}
+
             {/* Seção de Gerenciamento */}
             <li className={styles.menuCategoryTitle}>Gerenciamento</li>
             <li><Link to="/dashboard"><DashboardIcon className={styles.sidebarIcon} />Dashboard</Link></li>

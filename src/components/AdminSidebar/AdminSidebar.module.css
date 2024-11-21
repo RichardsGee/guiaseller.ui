@@ -134,86 +134,6 @@
     text-transform: uppercase;
 }
 
-.menuCategoryTitle {
-    font-size: 14px;
-    font-weight: bold;
-    color: var(--text-color);
-    margin-bottom: 10px;
-    text-transform: uppercase;
-}
-
-.disabledLink {
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    color: #aaaaaa; /* Cor para indicar que está desativado */
-    cursor: not-allowed; /* Muda o cursor para indicar que não é clicável */
-    opacity: 0.6; /* Diminui a opacidade para dar uma aparência de desativado */
-    padding: 2px; /* Mesma padding do restante dos itens para manter a consistência */
-    border-radius: 5px; /* Estilo similar aos outros itens */
-    transition: background-color 0.3s;
-}
-
-.disabledLink:hover {
-    background-color: transparent; /* Não muda o fundo ao passar o mouse */
-}
-
-.pendingMessage {
-    margin-left: 5px; /* Espaçamento à esquerda da mensagem */
-    color: #ffcc00; /* Cor para destacar a mensagem "Em breve" */
-    font-weight: bold; /* Negrito para maior destaque */
-    font-size: 12px; /* Tamanho da fonte menor que o texto normal */
-}
-
-.iaLogo {
-    width: 16px; /* Ajuste o tamanho conforme necessário */
-    height: auto; /* Mantém a proporção da imagem */
-    margin-right: 8px; /* Espaço entre o ícone e o texto */
-    align-self: center; /* Centraliza o ícone verticalmente com o texto */
-}
-
-.iaHighlight {
-    background: linear-gradient(135deg, #00d9ff, var(--primary-color)); /* Gradiente de fundo */
-    color: white; /* Cor do texto */
-    padding: 2px 4px; /* Espaçamento interno */
-    border-radius: 4px; /* Bordas arredondadas */
-    font-weight: bold; /* Peso da fonte */
-    margin-left: 8px; /* Espaço entre o ícone e o texto */
-}
-
-/* Estilo para o ícone Alpha */
-.alphaContainer {
-    margin-left: 0px;
-    display: flex;  /* Flex para alinhar o ícone */
-    align-items: center; /* Alinha verticalmente o ícone dentro do container */
-    margin-top: 5px;
-}
-
-.alphaIcon {
-    width: 20px !important;  /* Tamanho do ícone ajustado */
-    height: 20px !important; /* Tamanho do ícone ajustado */
-}
-
-/* Container para UserLevel e Alpha */
-.userLevelWrapper {
-    display: flex;
-    align-items: center;  /* Centraliza o conteúdo verticalmente */
-    justify-content: center;  /* Centraliza o conteúdo horizontalmente */
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-/* Estilo do UserLevel */
-.userLevelContainer {
-    display: flex;
-    align-items: center;  /* Garante que o ícone e o texto fiquem alinhados verticalmente */
-    padding: 0px 10px;
-    border-radius: 12px;
-    max-width: fit-content;
-    margin: 5px;
-    font-weight: 800;
-}
-
 /* Adiciona um estilo de separador ou título para o menu Admin */
 .menuCategoryAdmin {
     font-size: 14px;
@@ -248,6 +168,37 @@
     color: red; /* Alerta para admins */
     font-size: 12px;
     font-weight: bold;
+}
+
+.menuCategoryTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.disabledLink {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    color: #aaaaaa; /* Cor para indicar que está desativado */
+    cursor: not-allowed; /* Muda o cursor para indicar que não é clicável */
+    opacity: 0.6; /* Diminui a opacidade para dar uma aparência de desativado */
+    padding: 2px; /* Mesma padding do restante dos itens para manter a consistência */
+    border-radius: 5px; /* Estilo similar aos outros itens */
+    transition: background-color 0.3s;
+}
+
+.disabledLink:hover {
+    background-color: transparent; /* Não muda o fundo ao passar o mouse */
+}
+
+.pendingMessage {
+    margin-left: 5px; /* Espaçamento à esquerda da mensagem */
+    color: #ffcc00; /* Cor para destacar a mensagem "Em breve" */
+    font-weight: bold; /* Negrito para maior destaque */
+    font-size: 12px; /* Tamanho da fonte menor que o texto normal */
 }
 
 
@@ -302,6 +253,29 @@
     z-index: 1000;
 }
 
+/* Estilo para o ícone Alpha */
+.alphaContainer {
+    margin-left: 0px;
+    display: flex;  /* Flex para alinhar o ícone */
+    align-items: center; /* Alinha verticalmente o ícone dentro do container */
+    margin-top: 5px; /* Espaço acima do ícone */
+}
+
+.alphaIcon {
+    width: 20px !important;  /* Tamanho do ícone ajustado */
+    height: 20px !important; /* Tamanho do ícone ajustado */
+}
+
+/* Container para UserLevel e Alpha */
+.userLevelWrapper {
+    display: flex;
+    align-items: center;  /* Centraliza o conteúdo verticalmente */
+    justify-content: center;  /* Centraliza o conteúdo horizontalmente */
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
 /* Mostra o botão do menu em telas menores */
 @media (max-width: 600px) {
     .menuButton {
@@ -312,4 +286,3 @@
         display: none; /* Esconde a Sidebar em dispositivos móveis */
     }
 }
-
