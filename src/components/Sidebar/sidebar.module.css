@@ -54,6 +54,13 @@
     font-size: 12px;
     font-weight: 400;
 }
+.usernameClass {
+    font-size: 24px; /* Ou o tamanho de fonte que preferir */
+    font-weight: bold; /* Ou qualquer outro estilo que desejar */
+    color: va(--text-color); /* Cor do texto */
+    text-align: center; /* Alinhamento do texto */
+  }
+  
 
 .userInfo img {
     width: 70px; /* Largura do quadrado */
@@ -67,6 +74,7 @@
 .sidebar .user-info h2 {
     font-size: 16px;
     color: var(--text-color);
+    
 }
 
 .sidebar .user-info p {
@@ -250,8 +258,6 @@
     font-weight: bold;
 }
 
-
-
 /* Responsividade */
 @media (max-width: 600px) {
     .sidebar {
@@ -268,6 +274,7 @@
 
     .userInfo h2 {
         font-size: 14px; /* Reduzindo o tamanho da fonte */
+        
     }
 
     .sidebar h1 {
@@ -287,6 +294,7 @@
     cursor: pointer;
     margin: 10px;
     display: none; /* Esconde o botão por padrão */
+    
 }
 
 /* Menu visível em dispositivos móveis */

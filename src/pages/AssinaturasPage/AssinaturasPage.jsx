@@ -67,6 +67,12 @@ const AssinaturasPage = () => {
     );
   };
 
+  const isExpired = (date) => {
+    const today = new Date();
+    const targetDate = new Date(date);
+    return targetDate < today;
+  };
+
   return (
     <MainContent>
       <Header username={username} logout={signOut} />
@@ -107,6 +113,9 @@ const AssinaturasPage = () => {
                             {new Date(subscription.updatedAt).toLocaleDateString()}
                             {isToday(subscription.updatedAt) && (
                               <span className={styles.todayTag}>Vence Hoje</span>
+                            )}
+                            {isExpired(subscription.updatedAt) && (
+                              <span className={styles.expiredTag}>Vencido</span> // Exibe a tag de vencido
                             )}
                           </td>
                           <td>

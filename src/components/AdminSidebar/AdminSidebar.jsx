@@ -37,8 +37,8 @@ function AdminSidebar({ userPhoto, username, userEmail, isComplete }) {
     alt="Foto do usuário"
     className={styles.profileImage}
   />
-  <h2>{username}</h2>
-  <p>{userEmail || "Nothing@gmail.com"}</p>
+<div className={styles.usernameClass}>{username}</div>
+<p>{userEmail || "Nothing@gmail.com"}</p>
   
   {/* Exibindo o UserLevel e o ícone de Alpha, se aplicável */}
   <div className={styles.userLevelWrapper}>
@@ -60,7 +60,7 @@ function AdminSidebar({ userPhoto, username, userEmail, isComplete }) {
           {/* Seção de Admin, visível apenas para Admin */}
           {userLevel === 'Admin' && (
             <>
-              <hr />
+              
               <li className={styles.menuCategoryTitle}>Admin</li>
               <li><Link to="/admin/dashboard"><DashboardIcon className={styles.sidebarIcon} />Admin Dashboard</Link></li>
               <li><Link to="/admin/users"><AccountCircleIcon className={styles.sidebarIcon} />Gerenciar Usuários</Link></li>

@@ -64,6 +64,14 @@
     object-fit: cover; /* Garante que a imagem preencha o espaço adequadamente */
 }
 
+.usernameClass {
+    font-size: 24px; /* Ou o tamanho de fonte que preferir */
+    font-weight: bold; /* Ou qualquer outro estilo que desejar */
+    color: var(--text-color); /* Cor do texto */
+    text-align: center; /* Alinhamento do texto */
+  }
+  
+
 .sidebar .user-info h2 {
     font-size: 16px;
     color: var(--text-color);

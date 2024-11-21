@@ -38,7 +38,7 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             alt="Foto do usuário"
             className={styles.profileImage}
           />
-          <h2>{username}</h2>
+          <div className={styles.usernameClass}>{username}</div>
           <p>{userEmail || "Nothing@gmail.com"}</p>
           
           {/* Exibindo o UserLevel e o ícone de Alpha, se aplicável */}
