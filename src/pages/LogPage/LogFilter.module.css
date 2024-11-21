@@ -1,35 +1,29 @@
-.logContainer {
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 20px;
-    background-color: var(--background-light);
-  }
-  
-  .eventTitle {
-    font-size: 18px;
-    color: var(--secondary-color);
-    margin-bottom: 10px;
-  }
-  
-  .logDetails {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .logDetails li {
-    margin-bottom: 8px;
-    font-size: 14px;
-    color: var(--text-color);
-  }
-  
-  .logDetails strong {
-    color: var(--primary-color);
-  }
-  
-  .logError {
-    color: var(--error-color);
-    font-size: 14px;
-  }
-  
+.logRow {
+  transition: background-color 0.3s ease;
+}
+
+.logRow:hover {
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+
+/* Pontos de Status */
+.statusDot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.statusDot.success {
+  background-color: #4caf50; /* Verde para sucesso */
+}
+
+.statusDot.pending {
+  background-color: #f39c12; /* Laranja para pendente */
+}
+
+.statusDot.error {
+  background-color: #e74c3c; /* Vermelho para erro */
+}

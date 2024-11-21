@@ -7,7 +7,6 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import LogFilter from "./LogFilter";
 import styles from "./LogPage.module.css";
-import filterStyles from "../../styles/filter.module.css";
 
 const LogPage = () => {
   const { user, signOut } = useContext(AuthContext);
@@ -34,9 +33,11 @@ const LogPage = () => {
     fetchLogs();
   }, []);
 
-  const filteredLogs = logs.filter((log) =>
-    JSON.stringify(log).toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredLogs = logs
+    .filter((log) =>
+      JSON.stringify(log).toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
   return (
     <MainContent>
@@ -53,15 +54,13 @@ const LogPage = () => {
         <div className="contentContainer">
           <div className={styles.logPageContainer}>
             <div className={styles.headerContainer}>
-              <h1 className="title">Logs de Cobranças</h1>
-            </div>
-            <div>
+              <h1 className={styles.title}>Logs de Cobranças</h1>
               <input
                 type="text"
                 placeholder="Busque por termos nos logs..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className={filterStyles.searchInput}
+                className={styles.searchInput}
               />
             </div>
             {error && <p className={styles.error}>{error}</p>}

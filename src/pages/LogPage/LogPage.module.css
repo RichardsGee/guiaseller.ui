@@ -30,10 +30,12 @@
   border-radius: 5px;
   background-color: var(--input-background-color);
   color: var(--text-color);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
 .searchInput:focus {
   border-color: var(--primary-color);
+  background-color: var(--container-color);
   outline: none;
 }
 
@@ -74,89 +76,4 @@
   background-color: var(--hover-color);
   color: var(--text-color);
   cursor: pointer;
-}
-
-/* Detalhes Expandíveis */
-.logDetails {
-  background-color: var(--input-background-color);
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 10px;
-  color: var(--text-color);
-  font-size: 0.9em;
-  display: none; /* Oculto inicialmente */
-}
-
-/* Estilo para Expandir/Colapsar */
-.logsTable tr.expanded + .logDetails {
-  display: table-row;
-}
-
-/* Estilo de Status com Pontos Coloridos */
-.statusDot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  margin-right: 8px;
-}
-
-.statusDot.success {
-  background-color: #4CAF50; /* Verde para sucesso */
-}
-
-.statusDot.pending {
-  background-color: #F39C12; /* Laranja para pendente */
-}
-
-.statusDot.error {
-  background-color: #E74C3C; /* Vermelho para erro */
-}
-
-/* Mensagem de Erro */
-.error {
-  color: #E74C3C;
-  font-weight: bold;
-  margin-top: 20px;
-}
-/* Campo de Busca */
-.searchInput {
-  width: 100%;
-  max-width: 300px;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid var(--border-color);
-  border-radius: 5px;
-  background-color: var(--input-background-color);
-  color: var(--text-color);
-  transition: border-color 0.3s ease;
-}
-
-.searchInput:focus {
-  border-color: var(--primary-color);
-  outline: none;
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .logsTable {
-    font-size: 14px;
-    display: block;
-    overflow-x: auto;
-  }
-
-  .logsTable th {
-    font-size: 14px;
-  }
-
-  .logDetails {
-    font-size: 12px;
-  }
-}
-/* Responsividade para o campo de busca */
-@media (max-width: 768px) {
-  .searchInput {
-    width: 100%; /* Ajusta a largura para telas menores */
-    max-width: none;
-  }
 }
