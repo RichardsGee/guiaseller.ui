@@ -55,7 +55,7 @@
     font-weight: 400;
 }
 .usernameClass {
-    font-size: 24px; /* Ou o tamanho de fonte que preferir */
+    font-size: 15px; /* Ou o tamanho de fonte que preferir */
     font-weight: bold; /* Ou qualquer outro estilo que desejar */
     color: va(--text-color); /* Cor do texto */
     text-align: center; /* Alinhamento do texto */
@@ -63,8 +63,8 @@
   
 
 .userInfo img {
-    width: 70px; /* Largura do quadrado */
-    height: 70px; /* Altura do quadrado */
+    width: 50px; /* Largura do quadrado */
+    height: 50px; /* Altura do quadrado */
     border-radius: 50%; /* Mantém a imagem circular */
     margin-top: 5px;
     margin-bottom: 10px; /* Espaçamento abaixo da imagem */
@@ -162,16 +162,22 @@
     transition: background-color 0.3s;
 }
 
-.disabledLink:hover {
-    background-color: transparent; /* Não muda o fundo ao passar o mouse */
-}
-
-.pendingMessage {
-    margin-left: 5px; /* Espaçamento à esquerda da mensagem */
-    color: #ffcc00; /* Cor para destacar a mensagem "Em breve" */
-    font-weight: bold; /* Negrito para maior destaque */
-    font-size: 12px; /* Tamanho da fonte menor que o texto normal */
-}
+.disabledLink {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    color: #aaaaaa; /* Cor desativada */
+    cursor: not-allowed; /* Cursor para indicar bloqueio */
+    opacity: 0.6;
+  }
+  
+  .pendingMessage {
+    margin-left: 5px;
+    color: #ffcc00; /* Destaque para texto */
+    font-weight: bold;
+    font-size: 12px;
+  }
+  
 
 .iaLogo {
     width: 16px; /* Ajuste o tamanho conforme necessário */
