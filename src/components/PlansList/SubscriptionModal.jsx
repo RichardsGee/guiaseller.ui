@@ -25,35 +25,45 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
     const formattedDate = today.toISOString().split('T')[0]; // Ex: "2024-11-22"
     setNextDueDate(formattedDate); // Definindo a data de vencimento para o dia de hoje
 
-    // Fetching the customerId (assuming an API call is made here)
-    const fetchCustomerId = async () => {
-      try {
-        if (user?.uid) {
-          console.log("userId enviado para a requisição:", user.uid); // Log do userId
-
-          // Requisição para a API com o customerId
-          const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${user.uid}`, {
-            headers: {
-              "Content-Type": "application/json"
-            }
-          });
-
-          console.log("Resposta da API:", response.data);
-
-          // Verificando se o usuário tem o customerId (ID do cliente)
-          if (response.data?.customerId) {
-            setCustomer(response.data.customerId); // Preenche o estado com o customerId
-            console.log("customerId encontrado:", response.data.customerId); // Log do customerId
-          }
-        }
-      } catch (error) {
-        console.error("Erro ao buscar o customerId:", error);
-      }
-    };
-
-    fetchCustomerId();
+    // Verificando se o customerId está armazenado no localStorage
+    const storedCustomerId = localStorage.getItem('customerId');
+    
+    if (storedCustomerId) {
+      // Se já existe, preenche diretamente o estado
+      setCustomer(storedCustomerId);
+      console.log('customerId recuperado do localStorage:', storedCustomerId);
+    } else if (user?.uid) {
+      // Se não estiver armazenado, faz a requisição para buscar o customerId
+      fetchCustomerId();
+    }
 
   }, [plan, user?.uid]); // O useEffect depende de `plan` e `user?.uid`
+
+  const fetchCustomerId = async () => {
+    try {
+      if (user?.uid) {
+        console.log("userId enviado para a requisição:", user.uid); // Log do userId
+
+        // Requisição para a API com o customerId
+        const response = await axios.get(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${user.uid}`, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        console.log("Resposta da API:", response.data);
+
+        // Verificando se o usuário tem o customerId (ID do cliente)
+        if (response.data?.customerId) {
+          setCustomer(response.data.customerId); // Preenche o estado com o customerId
+          localStorage.setItem('customerId', response.data.customerId); // Armazena o customerId no localStorage
+          console.log("customerId encontrado e salvo no localStorage:", response.data.customerId); // Log do customerId
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao buscar o customerId:", error);
+    }
+  };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
