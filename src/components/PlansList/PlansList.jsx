@@ -1,9 +1,19 @@
 import React, { useState } from 'react';
+import SubscriptionModal from './SubscriptionModal'; // Importando o modal
 import styles from './PlansList.module.css';
 
 const PlansList = () => {
   const [duration, setDuration] = useState(1);
   const [expandedPlan, setExpandedPlan] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState(null);
+
+  const cycleOptions = [
+    { value: 'MONTHLY', label: 'Mensal' },
+    { value: 'QUARTERLY', label: 'Trimestral' },
+    { value: 'SEMIANNUAL', label: 'Semestral' },
+    { value: 'ANNUAL', label: 'Anual' },
+  ];
 
   const plans = [
     {
@@ -27,12 +37,6 @@ const PlansList = () => {
         "1 Marketplace integrado",
         "10 tokens mensais",
       ],
-      subscribeLinks: {
-        1: "https://sandbox.asaas.com/c/h40acs28hbykozw5",
-        3: "https://sandbox.asaas.com/c/pro-3meses",
-        6: "https://sandbox.asaas.com/c/pro-6meses",
-        12: "https://sandbox.asaas.com/c/pro-12meses",
-      },
     },
     {
       id: 2,
@@ -55,12 +59,6 @@ const PlansList = () => {
         "2 Marketplaces integrados",
         "20 tokens mensais",
       ],
-      subscribeLinks: {
-        1: "https://sandbox.asaas.com/c/premium-link",
-        3: "https://sandbox.asaas.com/c/premium-3meses",
-        6: "https://sandbox.asaas.com/c/premium-6meses",
-        12: "https://sandbox.asaas.com/c/premium-12meses",
-      },
     },
     {
       id: 3,
@@ -77,12 +75,6 @@ const PlansList = () => {
         "5 Marketplaces integrados",
         "40 tokens mensais",
       ],
-      subscribeLinks: {
-        1: "https://sandbox.asaas.com/c/founder-link",
-        3: "https://sandbox.asaas.com/c/founder-3meses",
-        6: "https://sandbox.asaas.com/c/founder-6meses",
-        12: "https://sandbox.asaas.com/c/founder-12meses",
-      },
     },
   ];
 
@@ -92,6 +84,17 @@ const PlansList = () => {
 
   const toggleExpandPlan = (planId) => {
     setExpandedPlan(expandedPlan === planId ? null : planId);
+  };
+
+  const openModal = (plan) => {
+    if (plan) {
+      setSelectedPlan(plan);  // Definindo o plano selecionado
+      setIsModalOpen(true);  // Abrindo o modal
+    }
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -125,113 +128,55 @@ const PlansList = () => {
       </div>
 
       <ul className={styles.plansList}>
-        {/* Pro Container */}
-        <li
-          key="pro"
-          className={`${styles.planItem} ${expandedPlan === 1 ? styles.expanded : ''}`}
-          onClick={() => toggleExpandPlan(1)}
-        >
-          <h2 className={styles.planName}>Pro</h2>
-          <p className={styles.planPrice}>
-            {duration === 1 ? (
-              <>R$ {plans[0].basePrice},00</>
-            ) : (
-              <>
-                <span className={styles.oldPrice}>R$ {plans[0].basePrice * duration},00</span>
-                <br />
-                R$ {plans[0].prices[duration]},00
-              </>
-            )}
-          </p>
-          <div className={`${expandedPlan === 1 ? styles.expandedContent : ''} ${styles.planDetails}`}>
-            <h3 className={styles.resourceTitle}>Recursos:</h3>
-            <ul className={styles.resourceList}>
-              {plans[0].resources.map((resource, idx) => (
-                <li key={idx}>{resource}</li>
-              ))}
-            </ul>
-            <h3 className={styles.limitationTitle}>Limitações:</h3>
-            <ul className={styles.limitationList}>
-              {plans[0].limitations.map((limitation, idx) => (
-                <li key={idx}>{limitation}</li>
-              ))}
-            </ul>
-            <a href={plans[0].subscribeLinks[duration]} className={styles.subscribeButton} target="_blank" rel="noopener noreferrer">
-              Assinar
-            </a>
-          </div>
-        </li>
-
-        {/* Premium Container */}
-        <li
-          key="premium"
-          className={`${styles.planItem} ${styles.premiumContainer} ${expandedPlan === 2 ? styles.expanded : ''}`}
-          onClick={() => toggleExpandPlan(2)}
-        >
-          <h2 className={styles.planName}>Premium</h2>
-          <p className={styles.planPrice}>
-            {duration === 1 ? (
-              <>R$ {plans[1].basePrice},00</>
-            ) : (
-              <>
-                <span className={styles.oldPrice}>R$ {plans[1].basePrice * duration},00</span>
-                <br />
-                R$ {plans[1].prices[duration]},00
-              </>
-            )}
-          </p>
-          <div className={`${expandedPlan === 2 ? styles.expandedContent : ''} ${styles.planDetails}`}>
-            <h3 className={styles.resourceTitle}>Recursos:</h3>
-            <ul className={styles.resourceList}>
-              {plans[1].resources.map((resource, idx) => (
-                <li key={idx}>{resource}</li>
-              ))}
-            </ul>
-            <h3 className={styles.limitationTitle}>Limitações:</h3>
-            <ul className={styles.limitationList}>
-              {plans[1].limitations.map((limitation, idx) => (
-                <li key={idx}>{limitation}</li>
-              ))}
-            </ul>
-            <a href={plans[1].subscribeLinks[duration]} className={styles.subscribeButton} target="_blank" rel="noopener noreferrer">
-              Assinar
-            </a>
-          </div>
-          <span className={`${styles.planTag} ${styles.premiumTag}`}>Popular</span>
-        </li>
-
-        {/* Founder Container */}
-        <li
-          key="founder"
-          className={`${styles.planItem} ${styles.founderContainer} ${expandedPlan === 3 ? styles.expanded : ''}`}
-          onClick={() => toggleExpandPlan(3)}
-        >
-          <h2 className={styles.planName}>Fundador</h2>
-          <p className={styles.planPrice}>
-            <span className={styles.oldPrice}>R$ {plans[2].prices.original},00</span>
-            <br />
-            R$ {plans[2].prices.discounted},00
-          </p>
-          <div className={`${expandedPlan === 3 ? styles.expandedContent : ''} ${styles.planDetails}`}>
-            <h3 className={styles.resourceTitle}>Recursos:</h3>
-            <ul className={styles.resourceList}>
-              {plans[2].resources.map((resource, idx) => (
-                <li key={idx}>{resource}</li>
-              ))}
-            </ul>
-            <h3 className={styles.limitationTitle}>Limitações:</h3>
-            <ul className={styles.limitationList}>
-              {plans[2].limitations.map((limitation, idx) => (
-                <li key={idx}>{limitation}</li>
-              ))}
-            </ul>
-            <a href={plans[2].subscribeLinks[duration]} className={styles.subscribeButton} target="_blank" rel="noopener noreferrer">
-              Assinar
-            </a>
-          </div>
-          <span className={`${styles.planTag} ${styles.founderTag}`}>Vitalício</span>
-        </li>
+        {plans.map((plan) => (
+          <li
+            key={plan.id}
+            className={`${styles.planItem} ${expandedPlan === plan.id ? styles.expanded : ''}`}
+            onClick={() => toggleExpandPlan(plan.id)}
+          >
+            <h2 className={styles.planName}>{plan.name}</h2>
+            <p className={styles.planPrice}>
+              {duration === 1 ? (
+                <>R$ {plan.basePrice},00</>
+              ) : (
+                <>
+                  <span className={styles.oldPrice}>R$ {plan.basePrice * duration},00</span>
+                  <br />
+                  R$ {plan.prices[duration]},00
+                </>
+              )}
+            </p>
+            <div className={`${expandedPlan === plan.id ? styles.expandedContent : ''} ${styles.planDetails}`}>
+              <h3 className={styles.resourceTitle}>Recursos:</h3>
+              <ul className={styles.resourceList}>
+                {plan.resources.map((resource, idx) => (
+                  <li key={idx}>{resource}</li>
+                ))}
+              </ul>
+              <h3 className={styles.limitationTitle}>Limitações:</h3>
+              <ul className={styles.limitationList}>
+                {plan.limitations.map((limitation, idx) => (
+                  <li key={idx}>{limitation}</li>
+                ))}
+              </ul>
+              <button
+                className={styles.subscribeButton}
+                onClick={() => openModal(plan)}  // Passando o plano selecionado
+              >
+                Assinar
+              </button>
+            </div>
+          </li>
+        ))}
       </ul>
+
+      {/* Modal de Assinatura */}
+      <SubscriptionModal 
+        isOpen={isModalOpen} 
+        closeModal={closeModal} 
+        plan={selectedPlan}  // Passando o plano selecionado para o modal
+        cycleOptions={cycleOptions} 
+      />
     </div>
   );
 };
