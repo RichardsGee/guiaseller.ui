@@ -228,7 +228,7 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
             </div>
 
             <button type="submit" disabled={loading} className={styles.submitButton}>
-              {loading ? 'Processando...' : 'Assinar Agora'}
+              {loading ? 'Processando...' : 'Gerar Assinatura'}
             </button>
           </form>
         )}

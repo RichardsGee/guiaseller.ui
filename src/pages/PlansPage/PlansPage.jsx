@@ -21,6 +21,7 @@ const PlansPage = () => {
         <div className="contentContainer">
           <h1 className="title">Escolha Seu Plano</h1>
 
+
           {/* Aqui renderizamos o PlansList */}
           <PlansList />
         </div>

@@ -258,6 +258,18 @@
     font-weight: bold;
 }
 
+.assineTag {
+    margin-left: 10px; /* Espaço entre o texto e a tag */
+    color: white; /* Cor do texto */
+    background-color: #65B1FC; /* Cor de fundo */
+    padding: 2px 6px; /* Tamanho da tag */
+    border-radius: 5px; /* Bordas arredondadas */
+    font-size: 12px; /* Tamanho do texto */
+    font-weight: bold; /* Negrito */
+    animation: blink 1s infinite; /* Animação de piscar */
+  }
+  
+
 /* Responsividade */
 @media (max-width: 600px) {
     .sidebar {

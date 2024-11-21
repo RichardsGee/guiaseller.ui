@@ -123,7 +123,7 @@ function App() {
             element={<ProtectedRoute><StoresPage /></ProtectedRoute>} 
           />
           <Route 
-            path="/assinaturas" 
+            path="/assinatura" 
             element={<ProtectedRoute><AssinaturasPage /></ProtectedRoute>} 
           /> {/* Nova rota para Assinaturas */}
 

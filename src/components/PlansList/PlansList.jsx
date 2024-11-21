@@ -28,15 +28,14 @@ const PlansList = () => {
         12: Math.round(129 * 12 * 0.80),
       },
       resources: [
-        "Recurso 1",
-        "Recurso 2",
-        "Recurso 3",
-        "Recurso 4",
-        "Recurso 5",
+        "• Dashboard e Métricas",
+        "• Ferramentas",
+        "ㅤ",
       ],
       limitations: [
-        "1 Marketplace integrado",
-        "10 tokens mensais",
+        "• 1 Marketplace integrado",
+        "• 5 tokens mensais",
+          
       ],
     },
     {
@@ -50,15 +49,14 @@ const PlansList = () => {
         12: Math.round(169 * 12 * 0.80),
       },
       resources: [
-        "Recurso 1",
-        "Recurso 2",
-        "Recurso 3",
-        "Recurso 4",
-        "Recurso 5",
+        "• Dashboard e Métricas",
+        "• Ferramentas",
+        "• 5% desconto nos Tokens"
       ],
       limitations: [
-        "2 Marketplaces integrados",
-        "20 tokens mensais",
+        "• 2 Marketplaces integrados",
+        "• 10 tokens mensais",
+        
       ],
     },
     {
@@ -66,15 +64,13 @@ const PlansList = () => {
       name: 'Fundador',
       prices: { original: 9999, discounted: 4999 },
       resources: [
-        "Recurso 1",
-        "Recurso 2",
-        "Recurso 3",
-        "Recurso 4",
-        "Recurso 5",
+        "• Dashboard e Métricas",
+        "• Ferramentas",
+        "• 15% desconto nos Tokens"
       ],
       limitations: [
-        "5 Marketplaces integrados",
-        "40 tokens mensais",
+        "• Marketplaces integrados Ilimitado",
+        "• 15 tokens mensais",
       ],
     },
   ];

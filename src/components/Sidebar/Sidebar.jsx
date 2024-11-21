@@ -61,10 +61,8 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           {/* Seção de Admin, visível apenas para Admin */}
           {userLevel === 'Admin' && (
             <>
-              
               <li className={styles.menuCategoryTitle}>Admin</li>
               <li><Link to="/admin/dashboard"><DashboardIcon className={styles.sidebarIcon} />Admin Dashboard</Link></li>
-                            {/* Adicione outras opções de Admin aqui */}
               <hr />
             </>
           )}
@@ -72,9 +70,81 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           {/* Seção de Gerenciamento */}
           <li className={styles.menuCategoryTitle}>Gerenciamento</li>
           <li><Link to="/dashboard"><DashboardIcon className={styles.sidebarIcon} />Dashboard</Link></li>
-          <li><Link to="/vendas"><ShoppingCartIcon className={styles.sidebarIcon} />Vendas</Link></li>
-          <li><Link to="/produtos"><InventoryIcon className={styles.sidebarIcon} />Produtos</Link></li>
-          <li><Link to="/anuncios"><AnnouncementIcon className={styles.sidebarIcon} />Anúncios</Link></li>
+          <li>
+            {userLevel === 'basic' ? (
+              <span className={styles.disabledLink}>
+                <ShoppingCartIcon className={styles.sidebarIcon} />
+                Vendas <span className={styles.pendingMessage}>Assinante</span>
+              </span>
+            ) : (
+              <Link to="/vendas">
+                <ShoppingCartIcon className={styles.sidebarIcon} />
+                Vendas
+              </Link>
+            )}
+          </li>
+          <li>
+            {userLevel === 'basic' ? (
+              <span className={styles.disabledLink}>
+                <InventoryIcon className={styles.sidebarIcon} />
+                Produtos <span className={styles.pendingMessage}>Assinante</span>
+              </span>
+            ) : (
+              <Link to="/produtos">
+                <InventoryIcon className={styles.sidebarIcon} />
+                Produtos
+              </Link>
+            )}
+          </li>
+          <li>
+            {userLevel === 'basic' ? (
+              <span className={styles.disabledLink}>
+                <AnnouncementIcon className={styles.sidebarIcon} />
+                Anúncios <span className={styles.pendingMessage}>Assinante</span>
+              </span>
+            ) : (
+              <Link to="/anuncios">
+                <AnnouncementIcon className={styles.sidebarIcon} />
+                Anúncios
+              </Link>
+            )}
+          </li>
+          <li>
+            {userLevel === 'basic' ? (
+              <span className={styles.disabledLink}>
+                <IntegrationsIcon className={styles.sidebarIcon} />
+                Integrações <span className={styles.pendingMessage}>Assinante</span>
+              </span>
+            ) : (
+              <Link to="/integracoes">
+                <IntegrationsIcon className={styles.sidebarIcon} />
+                Integrações
+              </Link>
+            )}
+          </li>
+          <li>
+            {userLevel === 'basic' ? (
+              <span className={styles.disabledLink}>
+                <StoreIcon className={styles.sidebarIcon} />
+                Lojas <span className={styles.pendingMessage}>Assinante</span>
+              </span>
+            ) : (
+              <Link to="/lojas">
+                <StoreIcon className={styles.sidebarIcon} />
+                Lojas
+              </Link>
+            )}
+          </li>
+          <li>
+            <Link to="/planos" className={styles.planosLink}>
+              <WidgetsIcon className={styles.sidebarIcon} />
+              Planos
+              {userLevel === 'basic' && (
+                <span className={styles.assineTag}>Assinar</span>
+              )}
+            </Link>
+          </li>
+          <li><Link to="/assinatura"><AccountCircleIcon className={styles.sidebarIcon} />Assinatura</Link></li>
           <li>
             <span className={styles.disabledLink}>
               <MessageIcon className={styles.sidebarIcon} />
@@ -106,7 +176,19 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
               Perfil <span className={styles.pendingMessage}>(Em breve)</span>
             </span>
           </li>
-          <li><Link to="/lojas"><StoreIcon className={styles.sidebarIcon} />Lojas</Link></li>
+          <li>
+            {userLevel === 'basic' ? (
+              <span className={styles.disabledLink}>
+                <StoreIcon className={styles.sidebarIcon} />
+                Lojas <span className={styles.pendingMessage}>Assinante</span>
+              </span>
+            ) : (
+              <Link to="/lojas">
+                <StoreIcon className={styles.sidebarIcon} />
+                Lojas
+              </Link>
+            )}
+          </li>
 
           {/* Linha separadora */}
           <hr /> 
@@ -128,97 +210,6 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
           </li>
         </ul>
       </nav>
-
-      {/* Mostra o menu apenas se estiver aberto em dispositivos móveis */}
-      {isMenuOpen && (
-        <div className={`${styles.menu} non-interactive`}>
-          <div className={styles.userInfo}>
-            <img
-              src={userPhoto || "https://via.placeholder.com/80"}
-              alt="Foto do usuário"
-              className={styles.profileImage}
-            />
-            <h2>{username}</h2>
-            <p>{userEmail || "Nothing@gmail.com"}</p>
-            <UserLevel />
-            {isAlphaUser && (
-              <div className={styles.alphaContainer}>
-                <img src="/public/alpha.png" alt="Alpha" className={styles.alphaIcon} />
-              </div>
-            )}
-          </div>
-          
-          <ul>
-            {/* Seção de Admin, visível apenas para Admin */}
-            {userLevel === 'Admin' && (
-              <>
-                <hr />
-                <li className={styles.menuCategoryTitle}>Admin</li>
-                <li><Link to="/admin/dashboard"><DashboardIcon className={styles.sidebarIcon} />Admin Dashboard</Link></li>
-                {/* Adicione outras opções de Admin aqui */}
-              </>
-            )}
-
-            {/* Seção de Gerenciamento */}
-            <li className={styles.menuCategoryTitle}>Gerenciamento</li>
-            <li><Link to="/dashboard"><DashboardIcon className={styles.sidebarIcon} />Dashboard</Link></li>
-            <li><Link to="/vendas"><ShoppingCartIcon className={styles.sidebarIcon} />Vendas</Link></li>
-            <li><Link to="/produtos"><InventoryIcon className={styles.sidebarIcon} />Produtos</Link></li>
-            <li><Link to="/anuncios"><AnnouncementIcon className={styles.sidebarIcon} />Anúncios</Link></li>
-            <li>
-              <span className={styles.disabledLink}>
-                <MessageIcon className={styles.sidebarIcon} />
-                Mensagens <span className={styles.pendingMessage}>(Em breve)</span>
-              </span>
-            </li>
-
-            {/* Linha separadora */}
-            <hr /> 
-
-            {/* Seção de Ajustes */}
-            <li className={styles.menuCategoryTitle}>Ajustes</li>
-            <li>
-              <Link to="/integracoes">
-                <IntegrationsIcon className={styles.sidebarIcon} />
-                Integrações
-              </Link>
-            </li>
-            <li>
-              <Link to="/configuracoes">
-                <SettingsIcon className={styles.sidebarIcon} />
-                Configurações
-                {!isComplete && <span className={styles.completeAlert}>⚠️</span>}
-              </Link>
-            </li>
-            <li>
-              <span className={styles.disabledLink}>
-                <AccountCircleIcon className={styles.sidebarIcon} />
-                Perfil <span className={styles.pendingMessage}>(Em breve)</span>
-              </span>
-            </li>
-            <li><Link to="/lojas"><StoreIcon className={styles.sidebarIcon} />Lojas</Link></li>
-
-            {/* Linha separadora */}
-            <hr /> 
-
-            {/* Categoria Conteúdos */}
-            <li className={styles.menuCategoryTitle}>Conteúdos</li>
-            <li><Link to="/ferramentas"><WidgetsIcon className={styles.sidebarIcon} />Ferramentas</Link></li>
-            <li>
-              <span className={styles.disabledLink}>
-                <BookIcon className={styles.sidebarIcon} />
-                Ebooks <span className={styles.pendingMessage}>(Em breve)</span>
-              </span>
-            </li>
-            <li>
-              <Link to="/ferramentas-ia" className={styles.ferramentasIa}>
-                <WidgetsIcon className={styles.sidebarIcon} /> 
-                Ferramentas IA <span className={styles.iaHighlight}>IA</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      )}
     </>
   );
 }
