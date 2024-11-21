@@ -1,55 +1,162 @@
+/* Estilo Geral da Página */
 .logPageContainer {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
+  background-color: var(--background-color);
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho */
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 1.5em;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+/* Campo de Busca */
+.searchInput {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: var(--input-background-color);
+  color: var(--text-color);
+}
+
+.searchInput:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/* Tabela */
+.logsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.logsTable th,
+.logsTable td {
+  padding: 12px;
+  text-align: left;
+}
+
+.logsTable th {
+  background-color: var(--container-color);
+  color: var(--text-color);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.logsTable td {
+  border-bottom: 1px solid var(--border-color);
+  color: var(--secondary-text-color);
+}
+
+/* Estilo das linhas da tabela */
+.logsTable tr:nth-child(even) {
+  background-color: var(--secondary-color);
+}
+
+.logsTable tr:nth-child(odd) {
+  background-color: var(--third-color);
+}
+
+.logsTable tr:hover {
+  background-color: var(--hover-color);
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+/* Detalhes Expandíveis */
+.logDetails {
+  background-color: var(--input-background-color);
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  color: var(--text-color);
+  font-size: 0.9em;
+  display: none; /* Oculto inicialmente */
+}
+
+/* Estilo para Expandir/Colapsar */
+.logsTable tr.expanded + .logDetails {
+  display: table-row;
+}
+
+/* Estilo de Status com Pontos Coloridos */
+.statusDot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.statusDot.success {
+  background-color: #4CAF50; /* Verde para sucesso */
+}
+
+.statusDot.pending {
+  background-color: #F39C12; /* Laranja para pendente */
+}
+
+.statusDot.error {
+  background-color: #E74C3C; /* Vermelho para erro */
+}
+
+/* Mensagem de Erro */
+.error {
+  color: #E74C3C;
+  font-weight: bold;
+  margin-top: 20px;
+}
+/* Campo de Busca */
+.searchInput {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: var(--input-background-color);
+  color: var(--text-color);
+  transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
   .logsTable {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .logsTable th,
-  .logsTable td {
-    border: 1px solid var(--secondary-color);
-    padding: 8px;
-    text-align: left;
-  }
-  
-  .logsTable th {
-    background-color: var(--secondary-color);
-    font-weight: bold;
-  }
-  
-  .logsTable tr:nth-child(even) {
-    background-color: var(--secondary-color);
-  }
-  
-  .logsTable tr:hover {
-    background-color: var(--secondary-color);
-  }
-  
-  .toggleButton {
-    background-color: #007bff;
-    color: var(--secondary-color);
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
     font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  .toggleButton:hover {
-    background-color: #0056b3;
-  }
-  
-  .logDetails {
-    background-color: var(--secondary-color);
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-family: monospace;
+    display: block;
     overflow-x: auto;
   }
-  
+
+  .logsTable th {
+    font-size: 14px;
+  }
+
+  .logDetails {
+    font-size: 12px;
+  }
+}
+/* Responsividade para o campo de busca */
+@media (max-width: 768px) {
+  .searchInput {
+    width: 100%; /* Ajusta a largura para telas menores */
+    max-width: none;
+  }
+}

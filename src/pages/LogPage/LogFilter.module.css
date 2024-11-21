@@ -1,0 +1,35 @@
+.logContainer {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: var(--background-light);
+  }
+  
+  .eventTitle {
+    font-size: 18px;
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+  }
+  
+  .logDetails {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .logDetails li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--text-color);
+  }
+  
+  .logDetails strong {
+    color: var(--primary-color);
+  }
+  
+  .logError {
+    color: var(--error-color);
+    font-size: 14px;
+  }
+  
