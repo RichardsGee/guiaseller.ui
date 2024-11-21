@@ -3,10 +3,11 @@ import SubscriptionModal from './SubscriptionModal'; // Importando o modal
 import styles from './PlansList.module.css';
 
 const PlansList = () => {
-  const [duration, setDuration] = useState(1);
+  const [duration, setDuration] = useState(1); // Armazenando a duração do plano selecionado
   const [expandedPlan, setExpandedPlan] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [selectedPlan, setSelectedPlan] = useState(null); // Plano selecionado
+  const [selectedCycle, setSelectedCycle] = useState('MONTHLY'); // Ciclo de pagamento selecionado (mensal, trimestral, etc.)
 
   const cycleOptions = [
     { value: 'MONTHLY', label: 'Mensal' },
@@ -78,23 +79,27 @@ const PlansList = () => {
     },
   ];
 
-  const handleDurationChange = (months) => {
+  const handleDurationChange = (months, cycle) => {
     setDuration(months);
+    setSelectedCycle(cycle); // Atualiza o ciclo selecionado
   };
 
   const toggleExpandPlan = (planId) => {
     setExpandedPlan(expandedPlan === planId ? null : planId);
   };
 
-  const openModal = (plan) => {
-    if (plan) {
-      setSelectedPlan(plan);  // Definindo o plano selecionado
-      setIsModalOpen(true);  // Abrindo o modal
-    }
+  const openModal = (plan, cycle) => {
+    const planWithCycleValue = {
+      ...plan,
+      cycle,  // Passa o ciclo selecionado
+      value: plan.prices[duration],  // Passa o valor correto com base no ciclo
+    };
+    setSelectedPlan(planWithCycleValue); // Preenche as informações do plano selecionado
+    setIsModalOpen(true); // Abre o modal
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setIsModalOpen(false); // Fecha o modal
   };
 
   return (
@@ -102,25 +107,25 @@ const PlansList = () => {
       {/* Filtro de Duração dos Planos */}
       <div className={styles.durationButtons}>
         <button
-          onClick={() => handleDurationChange(1)}
+          onClick={() => handleDurationChange(1, 'MONTHLY')}
           className={`${styles.durationButton} ${duration === 1 ? styles.active : ''}`}
         >
           1 Mês
         </button>
         <button
-          onClick={() => handleDurationChange(3)}
+          onClick={() => handleDurationChange(3, 'QUARTERLY')}
           className={`${styles.durationButton} ${duration === 3 ? styles.active : ''}`}
         >
           3 Meses
         </button>
         <button
-          onClick={() => handleDurationChange(6)}
+          onClick={() => handleDurationChange(6, 'SEMIANNUAL')}
           className={`${styles.durationButton} ${duration === 6 ? styles.active : ''}`}
         >
           6 Meses
         </button>
         <button
-          onClick={() => handleDurationChange(12)}
+          onClick={() => handleDurationChange(12, 'ANNUAL')}
           className={`${styles.durationButton} ${duration === 12 ? styles.active : ''}`}
         >
           12 Meses
@@ -161,7 +166,7 @@ const PlansList = () => {
               </ul>
               <button
                 className={styles.subscribeButton}
-                onClick={() => openModal(plan)}  // Passando o plano selecionado
+                onClick={() => openModal(plan, selectedCycle)}  // Passando o ciclo de pagamento selecionado
               >
                 Assinar
               </button>
@@ -175,6 +180,7 @@ const PlansList = () => {
         isOpen={isModalOpen} 
         closeModal={closeModal} 
         plan={selectedPlan}  // Passando o plano selecionado para o modal
+        cycle={selectedCycle} // Passando o ciclo de pagamento para o modal
         cycleOptions={cycleOptions} 
       />
     </div>

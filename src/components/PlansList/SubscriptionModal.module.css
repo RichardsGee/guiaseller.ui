@@ -42,7 +42,7 @@
   
   label {
     font-size: 14px;
-    color: var(--text-color);
+    color: var(--background-color);
     display: block;
   }
   
@@ -74,4 +74,105 @@
     background-color: #ccc;
     cursor: not-allowed;
   }
-  
+  /* Estilos para o campo de valor */
+.valueContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currencySymbol {
+  position: absolute;
+  left: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.valueInput {
+  padding-left: 30px; /* Dá espaço para o símbolo R$ */
+  width: 100px;
+  padding: 5px;
+  text-align: right;
+  border: 1px solid #ccc;
+}
+/* Estilos para o título */
+.modalContainer h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.modalContainer h3 {
+  font-size: 18px;
+  font-weight: normal;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #555; /* Cor para o subtítulo da recorrência */
+}
+
+/* Estilos para os campos do formulário */
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  font-weight: bold;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Estilo para o campo não editável */
+.readOnlyInput {
+  background-color: #f4f4f4; /* Cor de fundo para indicar que é não editável */
+  cursor: not-allowed; /* Mostrar que o campo não pode ser editado */
+  text-align: center; /* Alinha o texto ao centro */
+}
+
+/* Placeholder */
+.formGroup input::placeholder {
+  color: #aaa; /* Cinza claro */
+  font-style: italic; /* Itálico para o placeholder */
+}
+
+/* Botão de Enviar */
+.submitButton {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submitButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+/* Estilo para o campo de ID do Cliente (não editável) */
+.readOnlyInput {
+  background-color: #f4f4f4; /* Cor de fundo para indicar que é não editável */
+  color: #333; /* Cor do texto */
+  font-size: 16px; /* Tamanho da fonte */
+  padding: 8px; /* Espaçamento interno */
+  width: 100%; /* Largura completa do campo */
+  border: 1px solid #ccc; /* Borda suave */
+  border-radius: 5px; /* Bordas arredondadas */
+  cursor: not-allowed; /* Cursor indicando que o campo não pode ser editado */
+  text-align: center; /* Centraliza o texto */
+  margin-bottom: 10px; /* Espaço abaixo do campo */
+}
+
+/* Adicionando um estilo de foco (não será visível por padrão, pois o campo é readonly) */
+.readOnlyInput:focus {
+  outline: none; /* Remove o foco, pois não pode ser editado */
+  border-color: #999; /* Cor de borda ao focar, mas não deve ser editável */
+}
