@@ -18,7 +18,7 @@ export const ferramentasData = [
   },
   {
     nome: 'Gerador de Descrições',
-    descricao: 'Gere descrições otimizadas para SEO.',
+    descricao: 'Gere descrições otimizadas.',
     image: geradorDescricoesImage,
     status: 'emBreve', // Define o status como desativado
     custo: '1 Token (24h)',
@@ -27,7 +27,7 @@ export const ferramentasData = [
   },
   {
     nome: 'Gerador de Palavras-chave',
-    descricao: 'Encontre palavras-chave estratégicas.',
+    descricao: 'Encontre palavras-chave.',
     image: geradorPalavrasChaveImage,
     status: 'emBreve', // Define o status como ativo
     custo: '1 Token (24h)',
@@ -37,7 +37,7 @@ export const ferramentasData = [
   },
   {
     nome: 'Análise de Concorrência',
-    descricao: 'Compare sua concorrência em tempo real.',
+    descricao: 'Compare anúncios da concorrência.',
     image: analisadorConcorrenciaImage,
     status: 'emBreve', // Define o status como em breve
     custo: '1 Token (24h)',

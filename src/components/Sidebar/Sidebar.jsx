@@ -74,7 +74,7 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             {userLevel === 'basic' ? (
               <span className={styles.disabledLink}>
                 <ShoppingCartIcon className={styles.sidebarIcon} />
-                Vendas <span className={styles.pendingMessage}>Assinante</span>
+                Vendas <span className={styles.pendingMessage}>🔒</span>
               </span>
             ) : (
               <Link to="/vendas">
@@ -87,7 +87,7 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             {userLevel === 'basic' ? (
               <span className={styles.disabledLink}>
                 <InventoryIcon className={styles.sidebarIcon} />
-                Produtos <span className={styles.pendingMessage}>Assinante</span>
+                Produtos <span className={styles.pendingMessage}>🔒</span>
               </span>
             ) : (
               <Link to="/produtos">
@@ -100,7 +100,7 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             {userLevel === 'basic' ? (
               <span className={styles.disabledLink}>
                 <AnnouncementIcon className={styles.sidebarIcon} />
-                Anúncios <span className={styles.pendingMessage}>Assinante</span>
+                Anúncios <span className={styles.pendingMessage}>🔒</span>
               </span>
             ) : (
               <Link to="/anuncios">
@@ -113,7 +113,7 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             {userLevel === 'basic' ? (
               <span className={styles.disabledLink}>
                 <IntegrationsIcon className={styles.sidebarIcon} />
-                Integrações <span className={styles.pendingMessage}>Assinante</span>
+                Integrações <span className={styles.pendingMessage}>🔒</span>
               </span>
             ) : (
               <Link to="/integracoes">
@@ -126,7 +126,7 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
             {userLevel === 'basic' ? (
               <span className={styles.disabledLink}>
                 <StoreIcon className={styles.sidebarIcon} />
-                Lojas <span className={styles.pendingMessage}>Assinante</span>
+                Lojas <span className={styles.pendingMessage}>🔒</span>
               </span>
             ) : (
               <Link to="/lojas">
@@ -176,20 +176,7 @@ function Sidebar({ userPhoto, username, userEmail, isComplete }) {
               Perfil <span className={styles.pendingMessage}>(Em breve)</span>
             </span>
           </li>
-          <li>
-            {userLevel === 'basic' ? (
-              <span className={styles.disabledLink}>
-                <StoreIcon className={styles.sidebarIcon} />
-                Lojas <span className={styles.pendingMessage}>Assinante</span>
-              </span>
-            ) : (
-              <Link to="/lojas">
-                <StoreIcon className={styles.sidebarIcon} />
-                Lojas
-              </Link>
-            )}
-          </li>
-
+          
           {/* Linha separadora */}
           <hr /> 
 
