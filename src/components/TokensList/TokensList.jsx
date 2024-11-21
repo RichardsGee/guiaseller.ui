@@ -7,7 +7,7 @@ const TokensList = ({ selectedQuantity }) => {
   // Exemplo de opções de compra com preços e horas de uso por plano
   const purchaseOptions = [
     { id: 1, quantity: 10, discount: 0, hours: { Pro: 0.5, Premium: 0.5, Fundador: 0.5 } },
-    { id: 2, quantity: 25, discount: 0, hours: { Pro: 1, Premium: 1, Fundador: 1 } },
+    { id: 2, quantity: 25, discount: 5, hours: { Pro: 1, Premium: 1, Fundador: 1 } },
     { id: 3, quantity: 50, discount: 10, hours: { Pro: 2, Premium: 2, Fundador: 2 }, popular: true },
     { id: 4, quantity: 100, discount: 15, hours: { Pro: 4, Premium: 4, Fundador: 4 } },
     { id: 5, quantity: 200, discount: 20, hours: { Pro: 12, Premium: 12, Fundador: 12 } }
@@ -27,19 +27,14 @@ const TokensList = ({ selectedQuantity }) => {
 
         {/* Exibição do preço original e o preço com desconto */}
         <p className={styles.tokenPrice}>
-          {selectedOption.discount > 0 ? (
-            <>
-              <span className={styles.originalPrice}>R$ {originalPrice.toFixed(2)}</span>
-              <span className={styles.discountedPrice}> R$ {discountedPrice.toFixed(2)}</span>
-            </>
-          ) : (
-            <>R$ {originalPrice.toFixed(2)}</>
-          )}
+          <span className={styles.originalPrice}>R$ {originalPrice.toFixed(2)}</span>
+          <br />
+          <span className={styles.discountedPrice}>R$ {discountedPrice.toFixed(2)}</span>
         </p>
 
-        {/* Desconto - Agora fica abaixo do preço */}
+        {/* Exibição do valor do desconto */}
         {selectedOption.discount > 0 && (
-          <p className={styles.discountTag}>Desconto de {selectedOption.discount}%</p>
+          <p className={styles.discountText}>Desconto de {selectedOption.discount}%</p>
         )}
 
         {/* Informações sobre Benefícios */}
@@ -51,11 +46,8 @@ const TokensList = ({ selectedQuantity }) => {
           </ul>
         </div>
 
-        {/* Botão de Compra */}
         <button className={styles.buyButton}>Comprar</button>
-
-        {/* Tag Popular */}
-        {selectedOption.popular && <span className={styles.popularTag}>Popular</span>}
+        {selectedOption.popular && <span className={styles.popularTag}>Popular</span>} {/* Tag Popular */}
       </li>
     </ul>
   );

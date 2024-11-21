@@ -3,53 +3,48 @@
     padding: 0;
     display: flex;
     gap: 20px;
-    justify-content: center; /* Centraliza os itens horizontalmente */
+    justify-content: center;
     flex-wrap: wrap;
 }
 
 .tokenItem {
-    padding: 20px; /* Ajustando o padding do card para ficar mais harmonioso */
+    padding: 30px; /* Aumentando o padding do card */
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra mais intensa */
     width: 250px; /* Largura do card */
-    height: auto; /* Ajusta a altura do card de acordo com o conteúdo */
+    height: 400px; /* Aumentando a altura do card */
     text-align: center;
     cursor: pointer;
     background-color: var(--secondary-color);
-    position: relative; /* Necessário para a tag "Popular" e o botão */
-    margin-top: 20px; /* Ajustando a margem superior */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Garante que os itens se alinhem bem dentro do card */
+    position: relative; /* Para a tag "Popular" */
+    margin-top: 50px; /* Aumentando a margem superior para empurrar o card para baixo */
 }
 
+/* Estilo para o token popular */
 .popular {
     border: 2px solid gold; /* Borda dourada para o token popular */
 }
 
 /* Nome do Token */
 .tokenName {
-    font-size: 20px;
+    font-size: 22px;
     color: var(--text-color);
-    margin-bottom: 15px; /* Aumentando a margem entre o nome e o preço */
+    margin-bottom: 10px;
 }
 
 /* Preço do Token */
 .tokenPrice {
-    font-size: 18px;
+    font-size: 20px;
     color: var(--primary-color);
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center; /* Centraliza os preços */
-    align-items: center; /* Alinha o preço */
+    margin-bottom: 10px;
 }
 
 /* Preço original riscado */
 .originalPrice {
-    font-size: 18px;
-    color: var(--gray-color); /* Cor mais suave para o preço original */
-    text-decoration: line-through; /* Risca o preço original */
-    margin-right: 10px; /* Espaçamento entre o preço original e o com desconto */
+    text-decoration: line-through;
+    color: gray;
+    font-size: 16px;
+    margin-bottom: 5px; /* Distância entre o preço original e o com desconto */
 }
 
 /* Preço com desconto */
@@ -58,19 +53,26 @@
     font-weight: bold;
 }
 
+/* Texto do desconto */
+.discountText {
+    color: var(--highlight-color);
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
 /* Ajustando o botão "Comprar" */
 .buyButton {
-    padding: 10px 20px;
+    padding: 10px 15px;
     border-radius: 5px;
     background-color: var(--third-color);
     color: var(--text-color);
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
-    position: relative;
-    z-index: 2; /* Garantindo que o botão fique acima de outros elementos */
-    margin-top: 15px; /* Distância entre o preço e o botão */
-    align-self: center; /* Alinha o botão ao centro */
+    position: absolute; /* Para posicionar à esquerda */
+    left: 10px; /* Distância da esquerda */
+    bottom: 20px; /* Distância da parte inferior (ajustado para baixo) */
 }
 
 .buyButton:hover {
@@ -107,15 +109,4 @@
 .usageInfo ul {
     list-style-type: disc; /* Estilo da lista */
     padding-left: 20px; /* Indentação para a lista */
-}
-
-/* Desconto */
-.discountTag {
-    color: var(--highlight-color); /* Usando a cor de destaque da plataforma */
-    font-weight: bold;
-    font-size: 14px;
-    margin-top: 10px; /* Distância do desconto para o preço */
-    margin-bottom: 15px; /* Distância do desconto para o botão */
-    position: relative;
-    text-align: center; /* Centraliza o texto da tag de desconto */
 }
