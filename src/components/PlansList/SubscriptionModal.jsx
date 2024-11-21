@@ -15,6 +15,15 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
   const [document, setDocument] = useState('');
   const [nextDueDate, setNextDueDate] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);  // Para controlar se o usuário precisa atualizar os dados
+
+  useEffect(() => {
+    // Limpar o customerId do localStorage ao sair da página
+    return () => {
+      localStorage.removeItem('customerId');
+      console.log('customerId removido do localStorage');
+    };
+  }, []); // O useEffect será chamado apenas quando o componente for desmontado
 
   useEffect(() => {
     if (plan) {
@@ -58,6 +67,9 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
           setCustomer(response.data.customerId); // Preenche o estado com o customerId
           localStorage.setItem('customerId', response.data.customerId); // Armazena o customerId no localStorage
           console.log("customerId encontrado e salvo no localStorage:", response.data.customerId); // Log do customerId
+        } else {
+          // Se não tiver customerId, o usuário precisa preencher os dados
+          setIsUpdating(true); // Muda para a tela de atualizar cadastro
         }
       }
     } catch (error) {
@@ -93,6 +105,34 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
     }
   };
 
+  const handleUpdateRegistration = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const updatedData = {
+      name,
+      phone,
+      document,
+      personType,
+    };
+
+    try {
+      // Aqui você pode enviar os dados para a API para atualizar o cadastro
+      console.log('Atualizando dados do usuário', updatedData);
+
+      // Simula a resposta da API (depois de atualizar)
+      localStorage.setItem('customerId', 'NEW_CUSTOMER_ID'); // Simula o preenchimento do customerId após atualização
+
+      setCustomer('NEW_CUSTOMER_ID'); // Preenche o estado do customerId com o novo ID
+      setIsUpdating(false); // Fechar a tela de atualização
+      alert('Cadastro atualizado com sucesso!');
+    } catch (error) {
+      alert('Erro ao atualizar o cadastro. Tente novamente.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (!isOpen || !plan) return null;
 
   // Traduzindo os ciclos para português
@@ -114,93 +154,84 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
         {/* Exibindo a recorrência */}
         <h3>{cycleLabels[cycle] || cycle}</h3> {/* Exibindo a recorrência (ex: Mensal, Trimestral, Anual) */}
         
-        <form onSubmit={handleFormSubmit}>
-          {/* ID do Cliente - Não editável */}
-          <div className={styles.formGroup}>
-            <label htmlFor="customer">ID do Cliente</label>
-            <input
-              id="customer"
-              type="text"
-              value={customer}  // Exibe o ID do Cliente
-              readOnly  // Torna o campo não editável
-              className={styles.readOnlyInput} // Classe para estilizar o campo não editável
-            />
-          </div>
+        {/* Exibindo a tela para atualizar cadastro, caso o customerId não exista */}
+        {isUpdating ? (
+          <form onSubmit={handleUpdateRegistration}>
+            <div className={styles.formGroup}>
+              <label htmlFor="name">Nome</label>
+              <input
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Digite seu nome"
+                required
+              />
+            </div>
 
-          {/* Tipo de faturamento */}
-          <div className={styles.formGroup}>
-            <label htmlFor="billingType">Escolha o Tipo de Faturamento</label>
-            <select
-              id="billingType"
-              value={billingType}
-              onChange={(e) => setBillingType(e.target.value)}
-              required
-            >
-              <option value="PIX">PIX</option>
-              <option value="BOLETO">Boleto</option>
-              <option value="CREDIT_CARD">Cartão de Crédito</option>
-            </select>
-          </div>
+            <div className={styles.formGroup}>
+              <label htmlFor="phone">Celular</label>
+              <input
+                id="phone"
+                type="text"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Digite seu celular"
+                required
+              />
+            </div>
 
-          {/* Tipo de Pessoa (Física ou Jurídica) */}
-          <div className={styles.formGroup}>
-            <label>Tipo de Pessoa</label>
-            <select
-              value={personType}
-              onChange={(e) => setPersonType(e.target.value)}
-              required
-            >
-              <option value="FISICA">Pessoa Física</option>
-              <option value="JURIDICA">Pessoa Jurídica</option>
-            </select>
-          </div>
+            <div className={styles.formGroup}>
+              <label htmlFor="document">
+                {personType === 'FISICA' ? 'CPF' : 'CNPJ'}
+              </label>
+              <input
+                id="document"
+                type="text"
+                value={document}
+                onChange={(e) => setDocument(e.target.value)}
+                placeholder={personType === 'FISICA' ? 'Digite seu CPF' : 'Digite seu CNPJ'}
+                required
+              />
+            </div>
 
-          {/* Nome do Cliente */}
-          <div className={styles.formGroup}>
-            <label htmlFor="name">Nome</label>
-            <input
-              id="name"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Digite seu nome"
-              required
-            />
-          </div>
+            <button type="submit" disabled={loading} className={styles.submitButton}>
+              {loading ? 'Processando...' : 'Atualizar Cadastro'}
+            </button>
+          </form>
+        ) : (
+          <form onSubmit={handleFormSubmit}>
+            <div className={styles.formGroup}>
+              <label htmlFor="customer">ID do Cliente</label>
+              <input
+                id="customer"
+                type="text"
+                value={customer}  // Exibe o ID do Cliente
+                readOnly  // Torna o campo não editável
+                className={styles.readOnlyInput} // Classe para estilizar o campo não editável
+              />
+            </div>
 
-          {/* Celular do Cliente */}
-          <div className={styles.formGroup}>
-            <label htmlFor="phone">Celular</label>
-            <input
-              id="phone"
-              type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="Digite seu celular"
-              required
-            />
-          </div>
+            {/* Tipo de faturamento */}
+            <div className={styles.formGroup}>
+              <label htmlFor="billingType">Escolha o Tipo de Faturamento</label>
+              <select
+                id="billingType"
+                value={billingType}
+                onChange={(e) => setBillingType(e.target.value)}
+                required
+              >
+                <option value="PIX">PIX</option>
+                <option value="BOLETO">Boleto</option>
+                <option value="CREDIT_CARD">Cartão de Crédito</option>
+              </select>
+            </div>
 
-          {/* CPF ou CNPJ */}
-          <div className={styles.formGroup}>
-            <label htmlFor="document">
-              {personType === 'FISICA' ? 'CPF' : 'CNPJ'}
-            </label>
-            <input
-              id="document"
-              type="text"
-              value={document}
-              onChange={(e) => setDocument(e.target.value)}
-              placeholder={personType === 'FISICA' ? 'Digite seu CPF' : 'Digite seu CNPJ'}
-              required
-            />
-          </div>
-
-          {/* Botão de Enviar */}
-          <button type="submit" disabled={loading} className={styles.submitButton}>
-            {loading ? 'Processando...' : 'Assinar Agora'}
-          </button>
-        </form>
+            <button type="submit" disabled={loading} className={styles.submitButton}>
+              {loading ? 'Processando...' : 'Assinar Agora'}
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
