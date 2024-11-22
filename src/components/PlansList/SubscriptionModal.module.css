@@ -176,3 +176,16 @@
   outline: none; /* Remove o foco, pois não pode ser editado */
   border-color: #999; /* Cor de borda ao focar, mas não deve ser editável */
 }
+/* Estilos para a barra de carregamento */
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.loadingText {
+  font-size: 18px;
+  color: #555;
+  font-weight: bold;
+}

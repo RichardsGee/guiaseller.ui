@@ -2,9 +2,11 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styles from './SubscriptionModal.module.css'; // Estilos específicos para o modal
 import { AuthContext } from '../../context/AuthContext'; // Importando o contexto de autenticação
+import { useNavigate } from 'react-router-dom'; // Importando o hook para navegação
 
 const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) => {
   const { user } = useContext(AuthContext);  // Pegando o user do contexto
+  const navigate = useNavigate(); // Instanciando o hook de navegação
   const [billingType, setBillingType] = useState('PIX');
   const [description, setDescription] = useState(''); // Nome do plano
   const [customer, setCustomer] = useState(''); // Estado para armazenar o customerId
@@ -114,6 +116,7 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
 
       console.log("Resposta da API:", response.data);
       setSuccessMessage('Assinatura criada com sucesso!');
+      navigate('/assinatura');  // Redireciona para /assinaturas
       closeModal();
     } catch (error) {
       setSuccessMessage('Erro ao criar assinatura. Tente novamente.');
@@ -296,10 +299,10 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
           </div>
         )}
         
-        {/* Exibindo GIF de carregamento */}
+        {/* Exibindo texto de carregamento */}
         {showLoading && (
           <div className={styles.loadingContainer}>
-            <img src="/path/to/loading.gif" alt="Carregando..." className={styles.loadingGif} />
+            <p className={styles.loadingText}>Atualizando Cadastro Aguarde</p>
           </div>
         )}
       </div>
