@@ -17,6 +17,7 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
   const [loading, setLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);  // Para controlar se o usuário precisa atualizar os dados
   const [showLoading, setShowLoading] = useState(false);  // Para mostrar o "Atualizando Cadastro"
+  const [successMessage, setSuccessMessage] = useState(''); // Mensagem de sucesso ou erro
 
   useEffect(() => {
     // Limpar o customerId do localStorage ao sair da página
@@ -78,6 +79,7 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
       }
     } catch (error) {
       console.error("Erro ao buscar o customerId:", error);
+      setSuccessMessage('Erro ao buscar os dados do usuário. Tente novamente.');
     }
   };
 
@@ -111,10 +113,10 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
       );
 
       console.log("Resposta da API:", response.data);
-      alert('Assinatura criada com sucesso!');
+      setSuccessMessage('Assinatura criada com sucesso!');
       closeModal();
     } catch (error) {
-      alert('Erro ao criar assinatura. Tente novamente.');
+      setSuccessMessage('Erro ao criar assinatura. Tente novamente.');
     } finally {
       setLoading(false);
     }
@@ -148,7 +150,7 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
 
       setCustomer(response.data.customerId); // Atualiza o estado do customerId com o novo ID
       setIsUpdating(false); // Fechar a tela de atualização
-      alert('Cadastro atualizado com sucesso!');
+      setSuccessMessage('Cadastro atualizado com sucesso!');
 
       // Agora, cria o cliente com o userId após o PUT bem-sucedido
       setTimeout(async () => {
@@ -171,17 +173,17 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
           );
 
           console.log("Resposta do POST /create-customer:", createCustomerResponse.data);
-          alert('Cliente criado com sucesso!');
+          setSuccessMessage('Cliente criado com sucesso!');
           setShowLoading(false);  // Remove o "Atualizando Cadastro"
         } catch (error) {
           console.error("Erro ao criar cliente:", error);
-          alert('Erro ao criar cliente. Tente novamente.');
+          setSuccessMessage('Erro ao criar cliente. Tente novamente.');
         }
       }, 1000);  // Delay de 1 segundo
 
     } catch (error) {
       console.error("Erro ao atualizar o cadastro:", error);
-      alert('Erro ao atualizar o cadastro. Tente novamente.');
+      setSuccessMessage('Erro ao atualizar o cadastro. Tente novamente.');
     } finally {
       setLoading(false);
     }
@@ -285,6 +287,20 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
               {loading ? 'Processando...' : 'Gerar Assinatura'}
             </button>
           </form>
+        )}
+
+        {/* Mensagem de sucesso ou erro */}
+        {successMessage && (
+          <div className={styles.successMessage}>
+            <p>{successMessage}</p>
+          </div>
+        )}
+        
+        {/* Exibindo GIF de carregamento */}
+        {showLoading && (
+          <div className={styles.loadingContainer}>
+            <img src="/path/to/loading.gif" alt="Carregando..." className={styles.loadingGif} />
+          </div>
         )}
       </div>
     </div>
