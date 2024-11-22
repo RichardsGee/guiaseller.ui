@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContext'; // Importando o context
 const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) => {
   const { user } = useContext(AuthContext);  // Pegando o user do contexto
   const [billingType, setBillingType] = useState('PIX');
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState(''); // Nome do plano
   const [customer, setCustomer] = useState(''); // Estado para armazenar o customerId
   const [value, setValue] = useState(0);
   const [name, setName] = useState('');  // Novo estado para o Nome
@@ -16,6 +16,7 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
   const [nextDueDate, setNextDueDate] = useState('');
   const [loading, setLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);  // Para controlar se o usuário precisa atualizar os dados
+  const [showLoading, setShowLoading] = useState(false);  // Para mostrar o "Atualizando Cadastro"
 
   useEffect(() => {
     // Limpar o customerId do localStorage ao sair da página
@@ -27,7 +28,7 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
 
   useEffect(() => {
     if (plan) {
-      setDescription(`${plan.name} Assinatura`);
+      setDescription(plan.name); // Nome do plano
       setValue(plan.value); // Atualiza o valor com o valor do plano
     }
     const today = new Date();
@@ -66,6 +67,9 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
         if (response.data?.customerId) {
           setCustomer(response.data.customerId); // Preenche o estado com o customerId
           localStorage.setItem('customerId', response.data.customerId); // Armazena o customerId no localStorage
+          setName(response.data.first_name);  // Preenche o nome com os dados da API
+          setPhone(response.data.celular);  // Preenche o telefone com os dados da API
+          setDocument(response.data.cnpj_cpf); // Preenche CPF ou CNPJ com os dados da API
           console.log("customerId encontrado e salvo no localStorage:", response.data.customerId); // Log do customerId
         } else {
           // Se não tiver customerId, o usuário precisa preencher os dados
@@ -82,24 +86,35 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
     setLoading(true);
 
     const subscriptionData = {
-      billingType,
-      cycle,
-      customer,
-      value,
-      nextDueDate,
-      personType,
-      document,
-      name,
-      phone,  // Adicionando nome e telefone aos dados da assinatura
+      userId: user.uid, // Passando o userId
+      value: value, // Passando o valor
+      nextDueDate: nextDueDate, // Passando a data de vencimento
+      cycle: cycle, // Passando o ciclo
+      description: description, // Passando o nome do plano
+      maxPayments: 12, // Definindo o número máximo de pagamentos
+      billingType: billingType, // Tipo de faturamento (PIX, Boleto, etc.)
     };
 
+    // Logando os dados que serão enviados para o servidor
+    console.log("Dados que serão enviados para criar a assinatura:", subscriptionData);
+
     try {
-      // Simula o envio dos dados para a API (substitua com a lógica real)
-      console.log('Enviando dados de assinatura', subscriptionData);
-      alert('Assinatura realizada com sucesso!');
+      // Requisição POST para criar a assinatura
+      const response = await axios.post(
+        'https://guiaseller-backend.dlmi5z.easypanel.host/subscription/create-subscription',  // URL para criar assinatura
+        subscriptionData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          }
+        }
+      );
+
+      console.log("Resposta da API:", response.data);
+      alert('Assinatura criada com sucesso!');
       closeModal();
     } catch (error) {
-      alert('Erro ao processar a assinatura. Tente novamente.');
+      alert('Erro ao criar assinatura. Tente novamente.');
     } finally {
       setLoading(false);
     }
@@ -108,6 +123,7 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
   const handleUpdateRegistration = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setShowLoading(true);  // Exibe o "Atualizando Cadastro"
 
     const updatedData = {
       nome_assinatura: name,   // Nome completo para a assinatura
@@ -133,6 +149,36 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
       setCustomer(response.data.customerId); // Atualiza o estado do customerId com o novo ID
       setIsUpdating(false); // Fechar a tela de atualização
       alert('Cadastro atualizado com sucesso!');
+
+      // Agora, cria o cliente com o userId após o PUT bem-sucedido
+      setTimeout(async () => {
+        try {
+          const createCustomerData = {
+            userId: user.uid,  // Passando o userId agora
+          };
+
+          console.log("Enviando dados para criar cliente:", createCustomerData);
+
+          // Requisição POST para criar o cliente
+          const createCustomerResponse = await axios.post(
+            'https://guiaseller-backend.dlmi5z.easypanel.host/users/create-customer', // URL para criação do cliente
+            createCustomerData, // Corpo com o userId
+            {
+              headers: {
+                "Content-Type": "application/json",
+              }
+            }
+          );
+
+          console.log("Resposta do POST /create-customer:", createCustomerResponse.data);
+          alert('Cliente criado com sucesso!');
+          setShowLoading(false);  // Remove o "Atualizando Cadastro"
+        } catch (error) {
+          console.error("Erro ao criar cliente:", error);
+          alert('Erro ao criar cliente. Tente novamente.');
+        }
+      }, 1000);  // Delay de 1 segundo
+
     } catch (error) {
       console.error("Erro ao atualizar o cadastro:", error);
       alert('Erro ao atualizar o cadastro. Tente novamente.');
