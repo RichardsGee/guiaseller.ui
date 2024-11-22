@@ -110,23 +110,31 @@ const SubscriptionModal = ({ isOpen, closeModal, plan, cycle, cycleOptions }) =>
     setLoading(true);
 
     const updatedData = {
-      name,
-      phone,
-      document,
-      personType,
+      nome_assinatura: name,   // Nome completo para a assinatura
+      cnpj_cpf: document,      // CPF ou CNPJ
+      celular: phone,          // Número de celular
     };
 
     try {
-      // Aqui você pode enviar os dados para a API para atualizar o cadastro
-      console.log('Atualizando dados do usuário', updatedData);
+      // Fazendo a requisição PUT para o backend para atualizar os dados
+      console.log("Enviando dados para atualizar cadastro:", updatedData);
+      
+      const response = await axios.put(`https://guiaseller-backend.dlmi5z.easypanel.host/users/${user.uid}`, updatedData, {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+
+      console.log("Resposta da API:", response.data);
 
       // Simula a resposta da API (depois de atualizar)
-      localStorage.setItem('customerId', 'NEW_CUSTOMER_ID'); // Simula o preenchimento do customerId após atualização
+      localStorage.setItem('customerId', response.data.customerId); // Simula o preenchimento do customerId após atualização
 
-      setCustomer('NEW_CUSTOMER_ID'); // Preenche o estado do customerId com o novo ID
+      setCustomer(response.data.customerId); // Atualiza o estado do customerId com o novo ID
       setIsUpdating(false); // Fechar a tela de atualização
       alert('Cadastro atualizado com sucesso!');
     } catch (error) {
+      console.error("Erro ao atualizar o cadastro:", error);
       alert('Erro ao atualizar o cadastro. Tente novamente.');
     } finally {
       setLoading(false);
