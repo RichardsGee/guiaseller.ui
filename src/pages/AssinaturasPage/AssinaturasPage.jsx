@@ -9,7 +9,7 @@ import styles from "./assinaturas.module.css";
 import "../../styles/styles.css";
 
 const AssinaturasPage = () => {
-  const { user, signOut } = useContext(AuthContext); // Acessando o usuário e o logout
+  const { user, signOut } = useContext(AuthContext);
   const username = user ? user.displayName || user.email : "Usuário Desconhecido";
   const userPhoto = user ? user.photoURL : null;
   const userEmail = user ? user.email : null;
@@ -22,31 +22,27 @@ const AssinaturasPage = () => {
     const fetchSubscriptions = async () => {
       try {
         if (user?.uid) {
-          console.log("userId enviado como parâmetro na URL:", user.uid); // Log para verificar o userId
-
           const response = await axios.get(
-            "https://guiaseller-backend.dlmi5z.easypanel.host/subscription", // URL do endpoint
+            `https://guiaseller-backend.dlmi5z.easypanel.host/subscription/${user.uid}`, // URL para obter assinaturas
             {
-              params: { userId: user.uid }, // Enviando userId como parâmetro
               headers: {
                 "Content-Type": "application/json",
               },
             }
           );
 
-          console.log("Dados de assinaturas recebidos:", response.data);
-          setSubscriptions(response.data);
-        } else {
-          console.log("Usuário não autenticado ou UID não disponível.");
+          // Exibe toda a resposta no log
+          console.log("Resposta completa da API:", response.data);
+
+          // Verifica se há dados na chave 'data' e armazena as assinaturas
+          if (response.data.data && response.data.data.length > 0) {
+            setSubscriptions(response.data.data); // Armazenando os dados da chave 'data'
+          } else {
+            setError("Nenhuma assinatura encontrada.");
+          }
         }
       } catch (error) {
-        console.error(
-          "Erro ao buscar assinaturas:",
-          error.response ? error.response.data : error
-        );
-        setError(
-          error.response?.data?.error || "Não foi possível carregar as assinaturas."
-        );
+        setError(error.response?.data?.error || "Não foi possível carregar as assinaturas.");
       } finally {
         setLoading(false);
       }
@@ -96,7 +92,7 @@ const AssinaturasPage = () => {
                     <tr>
                       <th>Nome do Plano</th>
                       <th>Valor</th>
-                      <th>Pagamento</th>
+                      <th>Data</th>
                       <th>Vencimento</th>
                       <th>Fatura</th>
                       <th>Status</th>
@@ -106,20 +102,13 @@ const AssinaturasPage = () => {
                     {subscriptions.length > 0 ? (
                       subscriptions.map((subscription, index) => (
                         <tr key={index} className={styles.assinaturaRow}>
-                          <td>{subscription.subscription}</td>
+                          <td>{subscription.description || "Desconhecido"}</td>
                           <td>R$ {subscription.value.toFixed(2)}</td>
-                          <td>{new Date(subscription.createdAt).toLocaleDateString()}</td>
+                          <td>{new Date(subscription.dateCreated).toLocaleDateString()}</td>
+                          <td>{new Date(subscription.dueDate).toLocaleDateString()}</td>
                           <td>
-                            {new Date(subscription.updatedAt).toLocaleDateString()}
-                            {isToday(subscription.updatedAt) && (
-                              <span className={styles.todayTag}>Vence Hoje</span>
-                            )}
-                            {isExpired(subscription.updatedAt) && (
-                              <span className={styles.expiredTag}>Vencido</span> // Exibe a tag de vencido
-                            )}
-                          </td>
-                          <td>
-                            {subscription.invoiceUrl && subscription.invoiceUrl !== "NADA" ? (
+                            {/* Exibe a fatura se o invoiceUrl estiver disponível */}
+                            {subscription.invoiceUrl ? (
                               <a
                                 href={subscription.invoiceUrl}
                                 target="_blank"
@@ -134,14 +123,16 @@ const AssinaturasPage = () => {
                           </td>
                           <td
                             className={`${styles.status} ${
-                              subscription.status === "ACTIVE"
+                              subscription.status === "PENDING"
                                 ? styles.awaitingPayment
                                 : subscription.status === "CANCELED"
                                 ? styles.canceled
-                                : styles.paid
+                                : subscription.status === "PAID"
+                                ? styles.paid
+                                : styles.unknown
                             }`}
                           >
-                            {subscription.status === "ACTIVE"
+                            {subscription.status === "PENDING"
                               ? "Aguardando Pagamento"
                               : subscription.status === "CANCELED"
                               ? "Cancelado"
