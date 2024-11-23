@@ -7,7 +7,8 @@
     text-align: center;
     margin-bottom: 20px;
   }
-  
+
+    
   .error {
     color: red;
     font-weight: bold;
@@ -30,7 +31,7 @@
   
   .assinaturasTable th {
     background-color: var(--background-color);
-    color: white;
+    color: var(--text-color);
     font-weight: bold;
   }
   

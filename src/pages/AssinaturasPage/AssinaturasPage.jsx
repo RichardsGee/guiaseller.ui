@@ -42,7 +42,7 @@ const AssinaturasPage = () => {
           }
         }
       } catch (error) {
-        setError(error.response?.data?.error || "Não foi possível carregar as assinaturas.");
+        setError(error.response?.data?.error || "");
       } finally {
         setLoading(false);
       }
