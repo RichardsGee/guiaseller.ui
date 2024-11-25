@@ -1,11 +1,11 @@
 /* Estilos para a seção de filtros */
-.filterContainer {
+.filtersContainer {
   display: flex;
+  justify-content: space-between;  /* Alinha os itens em ambas as extremidades */
   align-items: center;
-  justify-content: space-between;
   gap: 15px;
-  flex-wrap: wrap;
   margin-bottom: 20px;
+  width: 100%; /* Certifica que ocupa toda a largura disponível */
 }
 
 .importButton {
@@ -19,34 +19,45 @@
   /* Removido o efeito de hover */
 }
 
-.monthFilter {
-  display: flex;
-  align-items: center;
-}
-
-.monthFilter label {
-  font-weight: bold;
-  margin-right: 5px;
-}
-
-.monthFilter select {
-  padding: 5px;
-  border-radius: 4px;
-  font-size: 1em;
-  border: 1px solid var(--border-color);
-  background-color: var(--text-color); /* Fundo branco */
-  color: var(--secondary-color); /* Cor do texto */
-}
-
-/* Estilo sem efeito de hover para o select */
-.monthFilter select:focus {
-  outline: none;
-}
-
+/* Barra de busca */
 .filterWrapper {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 70%; /* Ajuste para dar mais espaço à busca */
+}
+
+/* Ajuste para o seletor de mês */
+.monthFilter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 30%; /* Ajuste para dar espaço ao seletor de mês */
+}
+
+.quantidadeText {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+}
+
+.monthSelect {
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 0.85em; /* Menor para um visual mais compacto */
+  border: 1px solid var(--border-color);
+  background-color: var(--text-color); /* Fundo branco */
+  color: var(--secondary-color); /* Cor do texto */
+  width: 120px; /* Largura compacta */
+  text-transform: uppercase; /* Meses em letras maiúsculas */
+  margin-left: 10px;
+}
+
+/* Estilo sem efeito de hover para o select */
+.monthSelect:focus {
+  outline: none;
 }
 
 .searchResults {
@@ -156,8 +167,6 @@
   color: #E74C3C; /* Vermelho para erro */
 }
 
-
-
 /* Responsividade */
 @media (max-width: 768px) {
   .filtersContainer {
@@ -179,5 +188,14 @@
   .faturamentoItem {
     margin-left: 0;
     margin-bottom: 10px;
+  }
+
+  .filtersRightContainer {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .quantidadeVendasContainer {
+    margin-top: 30px; /* Ajusta o espaço no mobile */
   }
 }

@@ -17,7 +17,7 @@ const OrdersList = ({ vendas }) => {
       <thead>
         <tr>
           <th>Data</th>
-          <th>ID</th>
+          <th>Item ID</th> {/* Alterado para "Item ID" */}
           <th>Comprador</th>
           <th>ID do Item</th>
           <th>Título do Item</th>
@@ -37,7 +37,7 @@ const OrdersList = ({ vendas }) => {
             <React.Fragment key={venda.id}>
               <tr onClick={() => toggleExpandVenda(venda.id)} className={`${styles.vendaRow} ${venda.status === "cancelled" ? styles.cancelledRow : ''}`}>
                 <td>{new Date(venda.date_created).toLocaleDateString()}</td>
-                <td>{venda.id}</td>
+                <td>{venda.order_items[0]?.item.id || 'N/A'}</td> {/* Exibindo o item id */}
                 <td>{venda.comprador_nickname}</td>
                 <td>{venda.order_items[0]?.item.id || 'N/A'}</td>
                 <td>{venda.order_items[0]?.item.title.slice(0, 60) || 'N/A'}...</td>
