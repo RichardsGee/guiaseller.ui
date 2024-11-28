@@ -1,0 +1,48 @@
+.detailsContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    background-color: var(--secondary-color);
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .detailsCard {
+    background-color: var(--background-color);
+    border-radius: 8px;
+    padding: 15px;
+    width: 45%;
+    min-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .detailsCard p {
+    margin: 8px 0;
+  }
+  
+  .detailsCard strong {
+    font-weight: bold;
+    color: var(--text-color);
+  }
+  
+  /* Cores específicas para os valores */
+  .positiveValue {
+    color: #2ECC71; /* Verde para valores positivos (ex: Valor Pago, Repasse positivo) */
+  }
+  
+  .negativeValue {
+    color: #E74C3C; /* Vermelho para valores negativos (ex: Taxa de Marketplace negativa, Repasse negativo) */
+  }
+  
+  /* Responsividade para telas menores */
+  @media (max-width: 768px) {
+    .detailsContainer {
+      flex-direction: column; /* Empilha os cards em telas pequenas */
+    }
+  
+    .detailsCard {
+      width: 100%; /* Cards ocupam toda a largura em dispositivos móveis */
+    }
+  }
+  

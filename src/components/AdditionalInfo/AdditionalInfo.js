@@ -1,4 +1,3 @@
-// src/components/AdditionalInfo.jsx
 import React, { useState } from 'react';
 import { Tag, Cancel, MonetizationOn, CheckCircle } from '@mui/icons-material';
 import styles from './AdditionalInfo.module.css';
@@ -13,11 +12,16 @@ function AdditionalInfo({ vendas = [], blurAdditional }) {
 
   const getTop3Products = () => {
     const productMap = {};
+
     filteredVendas.forEach((venda) => {
       const isCatalog = venda.tags.includes("catalog");
       const isCancelled = venda.status === "cancelled";
-      venda.order_items.forEach((item) => {
-        const productName = item.item.title;
+
+      // Verifique se order_items é um objeto, caso contrário, atribua um array vazio.
+      const orderItems = venda.order_items?.item ? [venda.order_items] : [];
+      
+      orderItems.forEach((item) => {
+        const productName = item.item?.title; // Acessando o nome do produto
         const quantity = item.quantity;
         const totalAmount = item.unit_price * quantity;
 
@@ -39,7 +43,7 @@ function AdditionalInfo({ vendas = [], blurAdditional }) {
     return Object.entries(productMap)
       .map(([name, data]) => ({ name, ...data }))
       .sort((a, b) => b.totalQuantity - a.totalQuantity)
-      .slice(0, 3);
+      .slice(0, 3); // Pega os 3 produtos mais vendidos
   };
 
   const top3Products = getTop3Products();
