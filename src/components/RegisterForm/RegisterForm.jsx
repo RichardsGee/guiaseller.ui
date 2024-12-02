@@ -8,13 +8,13 @@ import logo from '../../assets/logo.png'; // Importação do logo
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [username, setUsername] = useState('');
+    const [firstName, setFirstName] = useState('');
     const navigate = useNavigate();
 
     const onSignUp = async (e) => {
         e.preventDefault();
         try {
-            await handleSignUp({ email, password, username });
+            await handleSignUp({ email, password, firstName });
             navigate('/dashboard'); 
         } catch (error) {
             console.error("Error during sign up", error);
@@ -35,8 +35,8 @@ const SignUp = () => {
                             type='text'
                             placeholder='Username...'
                             required
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
                         />
                         <FaUser className={styles.icon} />
                     </div>

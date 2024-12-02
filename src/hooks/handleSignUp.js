@@ -8,6 +8,8 @@ const handleSignUp = async ({ firstName, lastName, email, password }) => {
     try {
         const userCredential = await createUserWithEmailAndPassword(
             auth,
+            firstName,
+            lastName || "",
             email,
             password
         );
