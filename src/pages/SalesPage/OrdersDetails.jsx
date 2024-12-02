@@ -25,12 +25,18 @@ const OrdersDetails = ({ venda }) => {
     { step: "4. Entregue", status: venda.status_detail === "delivered" }
   ];
 
+  const formatDateTime = (dateString) => {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+  };
+
   return (
     <div className={styles.detailsContainer}>
       {/* Exibindo as informações de forma organizada */}
       <div className={styles.detailsCard}>
         <p><strong>Anúncio:</strong> {venda.description || 'N/A'}</p> {/* Trocar "Descrição" por "Anúncio" */}
-        <p><strong>Data:</strong> {venda.expiration_date ? new Date(venda.expiration_date).toLocaleDateString() : 'N/A'}</p> {/* Alterar "Data de Expiração" para "Data" */}
+        <p><strong>Data:</strong> {formatDateTime(venda.date_created)}</p> {/* Alterar "Data de Expiração" para "Data" */}
         <p><strong>Status Detalhado:</strong> {venda.status_detail || 'N/A'}</p>
       </div>
 
