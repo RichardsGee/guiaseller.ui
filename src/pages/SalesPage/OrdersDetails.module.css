@@ -34,6 +34,46 @@
   .negativeValue {
     color: #E74C3C; /* Vermelho para valores negativos (ex: Taxa de Marketplace negativa, Repasse negativo) */
   }
+
+  /* Container para as etapas do termômetro de envio */
+.shippingStepsContainer {
+  margin-top: 20px;
+}
+
+.shippingSteps {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.step {
+  font-size: 1rem;
+  color: var(--text-color);
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: var(--background-color); /* Fundo para as etapas não concluídas */
+}
+
+.activeStep {
+  background-color: #2ECC71; /* Cor verde para as etapas concluídas */
+  color: white;
+}
+
+.arrow {
+  color: var(--text-color);
+  font-size: 1.2rem;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .shippingSteps {
+    flex-direction: column; /* Empilha as etapas em telas pequenas */
+    align-items: center;
+  }
+}
+
+  
   
   /* Responsividade para telas menores */
   @media (max-width: 768px) {

@@ -55,17 +55,18 @@ const OrdersList = ({ vendas }) => {
         {vendas.map((venda) => {
           const hasNotPaid = venda.tags.includes("not_paid");
           const hasPaid = venda.tags.includes("paid") && !hasNotPaid;
-          const isRefunded = venda.status === "refunded";
-          const hasDelivered = venda.tags.includes("delivered") && !hasNotPaid;
+          const isRefunded = venda.status === "refunded"; // Verifica se o status é "refunded"
+          const isShipped = venda.status_detail === "out_for_delivery" || venda.status_detail === "shipment_paid"; // Pedido a caminho ou envio pago
+          const isInWarehouse = venda.status_detail === "in_warehouse"; // Pedido está no armazém
+          const isPrinted = venda.status_detail === "printed"; // Pedido impresso
           const hasCatalog = venda.tags.includes("catalog");
           const isFullfield = venda.fullfield;
 
           const orderId = venda.payments ? venda.payments.order_id : 'N/A';
           const item = venda.order_items?.item || {};
 
-          const totalPago = venda.payments && venda.payments.total_paid_amount 
-            ? formatCurrency(venda.payments?.total_paid_amount)
-            : formatCurrency(venda.total_amount);
+          // Pegando diretamente o valor do total_amount
+          const totalPago = formatCurrency(venda.total_amount);
 
           const logisticIcon = getLogisticIcon(venda.Logistic);
 
@@ -96,9 +97,23 @@ const OrdersList = ({ vendas }) => {
                         <MoneyOff className={styles.notPaidIcon} />
                       </Tooltip>
                     )}
-                    <Tooltip title="Enviado" arrow>
-                      <LocalShippingOutlined className={hasDelivered ? styles.deliveredIcon : styles.iconInactive} />
-                    </Tooltip>
+                    {isShipped ? (
+                      <Tooltip title="Enviado" arrow>
+                        <LocalShippingOutlined className={styles.deliveredIcon} />
+                      </Tooltip>
+                    ) : isInWarehouse ? (
+                      <Tooltip title="Em Armazém" arrow>
+                        <LocalShippingOutlined className={styles.iconInactive} />
+                      </Tooltip>
+                    ) : isPrinted ? (
+                      <Tooltip title="Impresso" arrow>
+                        <LocalShippingOutlined className={styles.iconInactive} />
+                      </Tooltip>
+                    ) : (
+                      <Tooltip title="Não Enviado" arrow>
+                        <LocalShippingOutlined className={styles.iconInactive} />
+                      </Tooltip>
+                    )}
                     {isFullfield && (
                       <Tooltip title="Pedido Concluído" arrow>
                         <FlashOn className={styles.fullfieldIcon} />

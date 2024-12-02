@@ -17,6 +17,14 @@ const OrdersDetails = ({ venda }) => {
     return value < 0 ? styles.negativeValue : styles.positiveValue;
   };
 
+  // Passos do termômetro de envio
+  const shippingSteps = [
+    { step: "1. Em Preparação", status: venda.status_detail === "in_packing_list" || venda.status === "ready_to_ship" },
+    { step: "2. Pronto para Enviar", status: venda.status_detail === "ready_to_print" },
+    { step: "3. Enviado", status: venda.status_detail === "out_for_delivery" || venda.status_detail === "shipment_paid" },
+    { step: "4. Entregue", status: venda.status_detail === "delivered" }
+  ];
+
   return (
     <div className={styles.detailsContainer}>
       {/* Exibindo as informações de forma organizada */}
@@ -30,6 +38,20 @@ const OrdersDetails = ({ venda }) => {
         <p><strong>Valor Pago:</strong> <span className={getValueColor(valorPago)}>{formatCurrency(valorPago)}</span></p>
         <p><strong>Taxa de Marketplace:</strong> <span className={getValueColor(-taxaMarketplace)}>{formatCurrency(taxaMarketplace)}</span></p> {/* Garantir que a Taxa de Marketplace negativa seja vermelha */}
         <p><strong>Repasse:</strong> <span className={getValueColor(repasse)}>{formatCurrency(repasse)}</span></p> {/* Calculando o Repasse */}
+      </div>
+
+      {/* Termômetro de Envio */}
+      <div className={styles.shippingStepsContainer}>
+        <div className={styles.shippingSteps}>
+          {shippingSteps.map((step, index) => (
+            <React.Fragment key={index}>
+              <div className={`${styles.step} ${step.status ? styles.activeStep : ''}`}>
+                {step.step}
+              </div>
+              {index < shippingSteps.length - 1 && <span className={styles.arrow}> ⇾ </span>}
+            </React.Fragment>
+          ))}
+        </div>
       </div>
     </div>
   );
