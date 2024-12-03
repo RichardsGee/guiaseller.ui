@@ -120,17 +120,20 @@ const OrdersList = ({ vendas }) => {
                 </td>
 
                 <td className={styles.detailsColumn}>
-                  <div className={styles.detailsContainer}>
-                    {isPrinted && <div className={styles.printedDetail}>Impresso</div>}
-                    {isInWarehouse && <div className={styles.warehouseDetail}>Em Armazém</div>}
-                    {!isShipped && !isInWarehouse && !isPrinted && (
-                      <div className={styles.notShippedDetail}>Não Enviado</div>
-                    )}
-                    {isShipped && <div className={styles.shippedDetail}>Enviado</div>}
-                    {isRefunded && <div className={styles.refundedDetail}>Reembolsado</div>}
-                    {isFullfield && <div className={styles.fullfieldDetail}>Concluído</div>}
-                  </div>
-                </td>
+  <div className={styles.detailsContainer}>
+    {isPrinted && <div className={styles.printedDetail}>Impresso</div>}
+    {isInWarehouse && <div className={styles.warehouseDetail}>Em Armazém</div>}
+    {!isShipped && !isInWarehouse && !isPrinted && venda.status_detail !== "fulfilled" && venda.status_detail !== "receiver_absent" && (
+      <div className={styles.notShippedDetail}>Não Enviado</div>  // Exibe "Não Enviado" se o status não for "fulfilled" nem "receiver_absent"
+    )}
+    {isShipped && <div className={styles.shippedDetail}>Enviado</div>}
+    {venda.status_detail === "fulfilled" && <div className={styles.fullfieldDetail}>Concluído</div>}  {/* Exibe "Concluído" quando status_detail for "fulfilled" */}
+    {venda.status_detail === "receiver_absent" && <div className={styles.receiverAbsentDetail}>Comprador Ausente</div>}  {/* Exibe "Comprador Ausente" quando status_detail for "receiver_absent" */}
+    {isRefunded && <div className={styles.refundedDetail}>Reembolsado</div>}
+  </div>
+</td>
+
+
               </tr>
               {expandedVendaId === venda.id && (
                 <tr className={styles.vendaDetails}>
