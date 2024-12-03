@@ -1,0 +1,60 @@
+/* Container geral para as métricas */
+.metricContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas por linha */
+    gap: 20px; /* Espaçamento entre os cards */
+    margin-bottom: 40px;
+  }
+  
+  /* Card de métrica individual */
+  .metricCard {
+    background-color: var(--white);
+    padding: 20px;
+    border-radius: 12px; /* Bordas arredondadas */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: left; /* Alinhando o texto à esquerda */
+    position: relative;
+  }
+  
+  .metricCard h4 {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .metricCard p {
+    font-size: 1.2rem;
+    color: var(--text-muted-color);
+    margin-bottom: 10px;
+  }
+  
+  .metricCard .item {
+    font-size: 1rem;
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+  }
+  
+  /* Exibição das setas e variações */
+  .metricCard .trendIcon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+  }
+  
+  /* Responsividade para telas menores */
+  @media (max-width: 768px) {
+    .metricContainer {
+      grid-template-columns: 1fr 1fr; /* 2 colunas em telas menores */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .metricContainer {
+      grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
+    }
+  }
+  
