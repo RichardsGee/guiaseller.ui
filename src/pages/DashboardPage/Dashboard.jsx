@@ -20,7 +20,7 @@ function Dashboard() {
   const userId = user ? user.uid : null; // Coletando o userId
 
   const [salesData, setSalesData] = useState([]);
-  const [dateRange, setDateRange] = useState('30d');
+  const [dateRange, setDateRange] = useState('1d');
   const [blurChart, setBlurChart] = useState(false);
   const [blurAdditional, setBlurAdditional] = useState(false);
   const [blurTopBar, setBlurTopBar] = useState(false); // Estado para desfoque do TopBar
