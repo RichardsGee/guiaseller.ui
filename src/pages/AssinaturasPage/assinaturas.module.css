@@ -104,3 +104,33 @@
   margin-left: 8px;
   border-radius: 4px;
 }
+.awaitingPayment {
+  color: orange;
+}
+
+.canceled {
+  color: red;
+}
+
+.paid {
+  color: green;
+}
+
+.unknown {
+  color: gray;
+}
+
+.invoiceLink {
+  color: blue;
+  text-decoration: underline;
+}
+
+.emptyMessage {
+  text-align: center;
+  font-style: italic;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}

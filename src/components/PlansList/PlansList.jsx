@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import SubscriptionModal from './SubscriptionModal'; // Importando o modal
 import styles from './PlansList.module.css';
+import { AuthContext } from '../../context/AuthContext'; // Importando o contexto de autenticação
 
 const PlansList = () => {
+  const { user } = useContext(AuthContext); // Obter informações do usuário
   const [duration, setDuration] = useState(1); // Armazenando a duração do plano selecionado
   const [expandedPlan, setExpandedPlan] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null); // Plano selecionado
   const [selectedCycle, setSelectedCycle] = useState('MONTHLY'); // Ciclo de pagamento selecionado (mensal, trimestral, etc.)
+  const [hasActiveSubscription, setHasActiveSubscription] = useState(false); // Verificar se o usuário tem uma assinatura ativa
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
 
   const cycleOptions = [
     { value: 'MONTHLY', label: 'Mensal' },
@@ -35,7 +41,6 @@ const PlansList = () => {
       limitations: [
         "• 1 Marketplace integrado",
         "• 5 tokens mensais",
-          
       ],
     },
     {
@@ -56,7 +61,6 @@ const PlansList = () => {
       limitations: [
         "• 2 Marketplaces integrados",
         "• 10 tokens mensais",
-        
       ],
     },
     {
@@ -74,6 +78,45 @@ const PlansList = () => {
       ],
     },
   ];
+
+  useEffect(() => {
+    const fetchSubscriptions = async () => {
+      try {
+        if (user?.uid) {
+          const response = await axios.get(
+            `https://guiaseller-backend.dlmi5z.easypanel.host/subscription/${user.uid}`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          console.log("Resposta completa da API:", response.data);
+
+          // Verifica se há assinaturas ativas ou pagamentos pendentes
+          if (response.data.data && response.data.data.length > 0) {
+            const activeSubscription = response.data.data.find((sub) => {
+              // Se o pagamento estiver PENDENTE, desabilitar o botão
+              return sub.status === "PENDING"; // Verifica se o pagamento está pendente
+            });
+
+            setHasActiveSubscription(!!activeSubscription); // Se houver pagamento pendente, desabilita o botão
+          } else {
+            setHasActiveSubscription(false);
+          }
+        }
+      } catch (error) {
+        setError(error.response?.data?.error || "Erro ao verificar assinatura.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (user?.uid) {
+      fetchSubscriptions();
+    }
+  }, [user?.uid]);
 
   const handleDurationChange = (months, cycle) => {
     setDuration(months);
@@ -160,12 +203,16 @@ const PlansList = () => {
                   <li key={idx}>{limitation}</li>
                 ))}
               </ul>
-              <button
-                className={styles.subscribeButton}
-                onClick={() => openModal(plan, selectedCycle)}  // Passando o ciclo de pagamento selecionado
-              >
-                Assinar
-              </button>
+              <div className={styles.buttonWrapper}>
+                <button
+                  className={`${styles.subscribeButton} ${hasActiveSubscription ? styles.disabledButton : ''}`}
+                  onClick={() => openModal(plan, selectedCycle)}  // Passando o ciclo de pagamento selecionado
+                  disabled={hasActiveSubscription} // Desabilita o botão se já tiver uma assinatura ativa ou pagamento pendente
+                >
+                  {hasActiveSubscription ? 'Assinatura Ativa' : 'Assinar'}
+                </button>
+                {hasActiveSubscription && <span className={styles.subscriptionMessage}>Já possui uma assinatura</span>}
+              </div>
             </div>
           </li>
         ))}

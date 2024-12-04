@@ -53,20 +53,16 @@ const AssinaturasPage = () => {
     }
   }, [user?.uid]);
 
-  const isToday = (date) => {
-    const today = new Date();
-    const targetDate = new Date(date);
-    return (
-      today.getDate() === targetDate.getDate() &&
-      today.getMonth() === targetDate.getMonth() &&
-      today.getFullYear() === targetDate.getFullYear()
-    );
-  };
-
-  const isExpired = (date) => {
-    const today = new Date();
-    const targetDate = new Date(date);
-    return targetDate < today;
+  // Função de formatação de data para o formato "dia mês ano"
+  const formatDate = (dateString) => {
+    // Aqui usamos diretamente o valor da data como está no JSON
+    const [year, month, day] = dateString.split('-');
+    const months = [
+      'janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho',
+      'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'
+    ];
+    const monthName = months[parseInt(month) - 1]; // Meses começam com 0 em JavaScript
+    return `${day} ${monthName} ${year}`; // Retorna a data no formato "dia mês ano"
   };
 
   return (
@@ -92,9 +88,10 @@ const AssinaturasPage = () => {
                     <tr>
                       <th>Nome do Plano</th>
                       <th>Valor</th>
-                      <th>Data</th>
+                      <th>Data de Criação</th>
                       <th>Vencimento</th>
                       <th>Fatura</th>
+                      <th>Método de Pagamento</th>
                       <th>Status</th>
                     </tr>
                   </thead>
@@ -104,8 +101,8 @@ const AssinaturasPage = () => {
                         <tr key={index} className={styles.assinaturaRow}>
                           <td>{subscription.description || "Desconhecido"}</td>
                           <td>R$ {subscription.value.toFixed(2)}</td>
-                          <td>{new Date(subscription.dateCreated).toLocaleDateString()}</td>
-                          <td>{new Date(subscription.dueDate).toLocaleDateString()}</td>
+                          <td>{formatDate(subscription.dateCreated)}</td> {/* Exibe a data de criação */}
+                          <td>{formatDate(subscription.dueDate)}</td> {/* Exibe a data de vencimento */}
                           <td>
                             {/* Exibe a fatura se o invoiceUrl estiver disponível */}
                             {subscription.invoiceUrl ? (
@@ -121,13 +118,17 @@ const AssinaturasPage = () => {
                               "N/A"
                             )}
                           </td>
+                          <td>
+                            {/* Exibe o método de pagamento, se disponível */}
+                            {subscription.billingType || "Desconhecido"}
+                          </td>
                           <td
                             className={`${styles.status} ${
                               subscription.status === "PENDING"
                                 ? styles.awaitingPayment
                                 : subscription.status === "CANCELED"
                                 ? styles.canceled
-                                : subscription.status === "PAID"
+                                : subscription.status === "CONFIRMED"
                                 ? styles.paid
                                 : styles.unknown
                             }`}
@@ -136,7 +137,7 @@ const AssinaturasPage = () => {
                               ? "Aguardando Pagamento"
                               : subscription.status === "CANCELED"
                               ? "Cancelado"
-                              : subscription.status === "RECEIVED"
+                              : subscription.status === "CONFIRMED"
                               ? "Pago"
                               : "Desconhecido"}
                           </td>
@@ -144,7 +145,7 @@ const AssinaturasPage = () => {
                       ))
                     ) : (
                       <tr>
-                        <td colSpan="6" className={styles.emptyMessage}>
+                        <td colSpan="7" className={styles.emptyMessage}>
                           Nenhuma assinatura encontrada.
                         </td>
                       </tr>
