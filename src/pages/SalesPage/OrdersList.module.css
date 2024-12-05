@@ -185,32 +185,6 @@
   padding: 8px 12px; /* Tamanho padrão de padding */
   border-radius: 4px; /* Bordas arredondadas */
   font-size: 14px; /* Tamanho da fonte */
-  width: 150px; /* Largura fixa para a tag de detalhes */
-  height: 30px; /* Altura fixa para a tag de detalhes */
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Centraliza o texto dentro da tag */
-  text-overflow: ellipsis; /* Adiciona reticências para texto muito longo */
-  white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
-  overflow: hidden; /* Esconde o excesso de texto que não cabe */
-}
-
-/* Estilo para as tags de detalhes */
-.detailsColumn {
-  text-align: left;
-}
-
-.receiverAbsentDetail {
-  background-color: #f0b65f; /* Cor de fundo para "Comprador Ausente" - Laranja */
-  color: var(--background-color); /* Cor do texto */
-}
-
-
-.detailsContainer div {
-  margin: 5px 0;
-  padding: 8px 12px; /* Tamanho padrão de padding */
-  border-radius: 4px; /* Bordas arredondadas */
-  font-size: 14px; /* Tamanho da fonte */
   font-weight: 700;
   width: 150px; /* Largura fixa para a tag de detalhes */
   height: 20px; /* Altura fixa para a tag de detalhes */
@@ -220,41 +194,80 @@
   text-overflow: ellipsis; /* Adiciona reticências para texto muito longo */
   white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
   overflow: hidden; /* Esconde o excesso de texto que não cabe */
+  color: var(--text-color);
 }
 
-/* Cores específicas para cada tipo de status */
 .printedDetail {
   background-color: #9e9e9e; /* Cor para Impresso - Cinza */
   color: var(--background-color);
 }
-.printedDetail {
-  background-color: #9e9e9e; /* Cor para Impresso - Cinza */
-  color: var(--background-color);
-}
+
 .warehouseDetail {
   background-color: #5c8aeb; /* Cor para Em Armazém - Azul suave */
   color: var(--background-color);
 }
 
+.deliveredDetail {
+  background-color: #28a745; /* Verde para Entregue */
+  color: var(--background-color);
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.outForDeliveryDetail {
+  background-color: #2196f3; /* Azul para "Saiu para Entrega" */
+  color: var(--background-color);
+}
+
+.readyToShipDetail {
+  background-color: #4caf50; /* Verde para "Pronto para Enviar" */
+  color: var(--background-color);
+}
+
+.readyToPrintDetail {
+  background-color: #9c27b0; /* Roxo para "Pronto para Imprimir" */
+  color: var(--background-color);
+}
+
 .notShippedDetail {
-  background-color: #9e9e9e; /* Cor para Não Enviado - Amarelo suave */
+  background-color: #f0b65f; /* Laranja para "Não Enviado" */
   color: var(--background-color);
 }
 
 .shippedDetail {
-  background-color: #2ECC71; /* Cor para Enviado - Verde claro */
+  background-color: #2ECC71; /* Verde para "Enviado" */
   color: var(--background-color);
 }
 
 .refundedDetail {
-  background-color: #f44336; /* Cor para Reembolsado - Vermelho suave */
+  background-color: #f44336; /* Vermelho para "Reembolsado" */
   color: var(--background-color);
 }
 
-.fullfieldDetail {
-  background-color: #2e7d32; /* Cor para Concluído - Verde intenso */
+.receiverAbsentDetail {
+  background-color: #f0b65f; /* Laranja para "Comprador Ausente" */
   color: var(--background-color);
 }
+
+.shipmentPaidDetail {
+  background-color: #ffc107; /* Cor para "Pagamento do Envio Confirmado" - Amarelo */
+  color: var(--background-color);
+}
+
+.soonDeliverDetail {
+  background-color: #ff9800; /* Cor laranja para "Entrega Imminente" */
+  color: var(--background-color);
+
+}
+
+.creatingRouteDetail {
+  background-color: #4caf50; /* Cor verde para "A Caminho" */
+  color: var(--background-color);
+}
+
+
+
+
 
 /* Estilo para o placeholder quando não houver imagem */
 .vendasTable td .placeholder {
@@ -267,6 +280,15 @@
   font-size: 18px; /* Tamanho do ícone */
   border-radius: 4px; /* Bordas arredondadas */
 }
+
+.deliveredDetail {
+  background-color: #28a745; /* Verde, indicando que foi entregue */
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+
 
 /* Responsividade para telas menores que 768px */
 @media (max-width: 768px) {

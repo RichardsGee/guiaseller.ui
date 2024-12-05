@@ -108,11 +108,7 @@ const OrdersList = ({ vendas }) => {
                     <Tooltip title="Item no Catálogo" arrow>
                       <Tag className={hasCatalog ? styles.catalogIcon : styles.iconInactive} />
                     </Tooltip>
-                    {isRefunded && (
-                      <Tooltip title="Pedido Reembolsado" arrow>
-                        <div className={styles.refundedIcon}>Reembolsado</div>
-                      </Tooltip>
-                    )}
+                    
                     <div className={styles.logisticsContainer}>
                       {logisticText}
                     </div>
@@ -121,15 +117,39 @@ const OrdersList = ({ vendas }) => {
 
                 <td className={styles.detailsColumn}>
   <div className={styles.detailsContainer}>
-    {isPrinted && <div className={styles.printedDetail}>Impresso</div>}
-    {isInWarehouse && <div className={styles.warehouseDetail}>Em Armazém</div>}
-    {!isShipped && !isInWarehouse && !isPrinted && venda.status_detail !== "fulfilled" && venda.status_detail !== "receiver_absent" && (
-      <div className={styles.notShippedDetail}>Não Enviado</div>  // Exibe "Não Enviado" se o status não for "fulfilled" nem "receiver_absent"
-    )}
-    {isShipped && <div className={styles.shippedDetail}>Enviado</div>}
-    {venda.status_detail === "fulfilled" && <div className={styles.fullfieldDetail}>Concluído</div>}  {/* Exibe "Concluído" quando status_detail for "fulfilled" */}
-    {venda.status_detail === "receiver_absent" && <div className={styles.receiverAbsentDetail}>Comprador Ausente</div>}  {/* Exibe "Comprador Ausente" quando status_detail for "receiver_absent" */}
+    {/* Exibindo "Impresso" quando o status_detail for "printed" */}
+    {venda.status_detail === "printed" && <div className={styles.printedDetail}>Impresso</div>}
+
+    {/* Exibindo "Em Armazém" quando o status_detail for "in_warehouse" */}
+    {venda.status_detail === "in_warehouse" && <div className={styles.warehouseDetail}>Em Armazém</div>}
+
+    {/* Exibindo "Entregue" quando o status_detail for "delivered" e não for reembolsado */}
+    {venda.status_detail === "delivered" && !isRefunded && <div className={styles.deliveredDetail}>Entregue</div>}
+
+    {/* Exibindo "Saiu para Entrega" quando o status_detail for "out_for_delivery" */}
+    {venda.status_detail === "out_for_delivery" && <div className={styles.outForDeliveryDetail}>Saiu para Entrega</div>}
+
+    {/* Exibindo "Pronto para Enviar" quando o status_detail for "ready_to_ship" */}
+    {venda.status_detail === "ready_to_ship" && <div className={styles.readyToShipDetail}>Pronto para Enviar</div>}
+
+    {/* Exibindo "Pronto para Imprimir" quando o status_detail for "ready_to_print" */}
+    {venda.status_detail === "ready_to_print" && <div className={styles.readyToPrintDetail}>Pronto para Imprimir</div>}
+
+    {/* Exibindo "Pagamento do Envio Confirmado" quando o status_detail for "shipment_paid" */}
+    {venda.status_detail === "shipment_paid" && <div className={styles.shipmentPaidDetail}>Envio em Devolução</div>}
+     
+    {/* Exibindo "Entrega Imminente" quando o status_detail for "soon_deliver" */}
+    {venda.status_detail === "soon_deliver" && <div className={styles.soonDeliverDetail}>Entrega Imminente</div>}
+
+    {/* Exibindo "A Caminho" quando o status_detail for "creating_route" */}
+    {venda.status_detail === "creating_route" && <div className={styles.creatingRouteDetail}>A Caminho</div>}
+    
+    
+    {/* Exibindo "Reembolsado" caso o pedido tenha sido reembolsado */}
     {isRefunded && <div className={styles.refundedDetail}>Reembolsado</div>}
+
+    {/* Exibindo "Comprador Ausente" quando o status_detail for "receiver_absent" */}
+    {venda.status_detail === "receiver_absent" && <div className={styles.receiverAbsentDetail}>Comprador Ausente</div>}
   </div>
 </td>
 
